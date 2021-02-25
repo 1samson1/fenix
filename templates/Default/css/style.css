@@ -1,0 +1,509 @@
+/* FONTS ============================================ */
+
+@font-face{
+    font-family: Source Sans Pro;
+    src: url(../fonts/SourceSansPro-Regular.ttf);
+}
+
+@font-face{
+    font-family: Source Sans Pro;
+    font-weight: bold;
+    src: url(../fonts/SourceSansPro-Bold.ttf);
+}
+
+/* GLOBAL =========================================== */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    background: #efefef;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container{
+    max-width: 1100px;
+    width: 100%;
+    margin:0 auto;
+}
+
+/* HEADER =========================================== */
+
+header{    
+    background: #1969ff;
+    box-shadow: 1px 1px 4px 1px #777; 
+    position: relative;
+}
+
+.topmenu{
+    display: flex;
+    align-items: center;
+}
+
+.topmenu__link{
+    display: inline-block;
+    font-weight: bold;
+    color:#ffF;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 5px;
+    user-select: none;
+    transition: background .3s ease;
+}
+
+.topmenu__link:hover{
+    background: #eeeeee20;
+}
+
+.topmenu__center{
+    flex-grow:1;
+}
+
+.logo{
+    background: url(../img/logo.png) no-repeat center center;
+    background-size: contain;
+    width: 200px;
+    height: 70px;    
+    margin: 0 auto;
+    display: block;
+}
+/* HAMBURGER MENU ++++++++++++++++++++++++++++++++++++*/
+
+.menu-button{
+    display: none;
+    padding:0 10px;
+}
+
+.menu-icon-wrapper {    
+    /*   background: red; */
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-icon-wrapper:focus { 
+    outline:none;
+}
+
+.menu-icon {
+    position: relative;
+    width: 24px;
+    height: 3px;
+    background-color: #fff;    
+}
+
+.menu-icon::before {
+    position: absolute;
+    left: 0;
+    top: -7px;
+    content: "";
+    width: 24px;
+    height: 3px;
+    background-color: #fff;
+    transition: transform 0.2s ease-in, top 0.2s linear 0.2s;
+}
+
+.menu-icon::after {
+    position: absolute;
+    left: 0;
+    top: 7px;
+    content: "";
+    width: 24px;
+    height: 3px;
+    background-color: #fff;
+    transition: transform 0.2s ease-in, top 0.2s linear 0.2s;
+}
+
+.menu-icon.menu-icon-active {
+    background-color: transparent;
+}
+
+.menu-icon.menu-icon-active::before {
+    transform: rotate(45deg);
+    top: 0;
+    transition: top 0.2s linear, transform 0.2s ease-in 0.2s;
+}
+
+.menu-icon.menu-icon-active::after {
+    transform: rotate(-45deg);
+    top: 0;
+    transition: top 0.2s linear, transform 0.2s ease-in 0.2s;
+}
+
+/* LOGIN PANEL ++++++++++++++++++++++++++++++++++++++ */
+
+.bg-login-panel,.login-panel{
+    position: fixed;
+    display: none; 
+    width: 100%;
+    z-index: 2;   
+}
+
+.bg-login-panel{
+    left: 0;
+    top:0;    
+    height: 100%;
+    background: #00000050;      
+}
+
+.login-panel{    
+    overflow: hidden;
+    top:50%;
+    left: 50%;
+    max-width: 400px;    
+    background: #eee;
+    transform: translate(-50%,-50%);
+    box-shadow: 1px 1px 4px 1px #777;    
+}
+
+.close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: url(../img/close.png) no-repeat;   
+    background-size: contain;
+    width: 40px;
+    height: 40px;
+    transition: opacity .4s ease;
+}
+
+.close:hover{
+    opacity: 0.8;
+}
+
+.login-title{
+    padding: 25px;    
+    font-size: 2rem;
+}
+
+.login-block, .singin-form{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;     
+}
+
+.login-block{
+    padding: 15px;
+}
+
+.singin-form{     
+    padding: 15px 0;
+    border: solid #bbbbbb;    
+    border-width: 1px 0 1px 0;
+}
+
+#forgotpass{
+    text-decoration: none;
+    font-size: 1rem;
+    background: none;
+    border: 0;
+    display: flex;
+    color: #385185;    
+    margin: 20px 0 5px 0;    
+}
+
+#forgotpass:hover{
+    text-decoration: underline;
+}
+
+/* MAIN ============================================= */
+
+main{    
+    padding: 25px 0;
+}
+
+main .container{    
+    background: #fff;   
+    box-shadow: 1px 1px 4px 1px #777; 
+}
+
+.content{
+    padding: 7px;
+}
+
+.title-page{
+    font-size: 2rem;
+    font-weight: bold;
+    color:#777;
+    padding: 15px 40px;
+}
+
+/* MENU-SITE +++++++++++++++++++++++++++++++++++++++++*/
+
+.menu-site{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.menu-site__item{
+    width: 50%;
+    color: #000;
+    text-decoration: none;
+    padding: 7px;
+    display: flex;    
+    border-bottom: 1px solid #eee;
+    transition: background .3s ease;
+}
+
+.menu-site__item:hover{
+    background: #77777715;
+}
+
+.menu-site__item__title{    
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.menu-site__item__img{
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+}
+
+/* REGISTRATION +++++++++++++++++++++++++++++++++++++ */
+
+.reg-form{
+    display: flex;    
+    flex-direction: column;
+    padding: 15px 25px;
+}
+
+.form-reg-row{
+    display: flex;
+}
+
+.reg-form .form-input-large{
+    width: 50%;
+    margin:0 10px;
+    margin-bottom: 30px;
+}
+
+.reg-form .btn{
+    margin:0 10px;
+}
+
+/* FOOTER =========================================== */
+
+footer{
+    padding: 15px;
+    margin-top: auto;
+    background: #000;
+    color:#fff;    
+    
+}
+
+/* OTHER ============================================= */
+
+/* INPUT +++++++++++++++++++++++++++++++++++++++++++++ */
+.form-input{
+    position: relative;    
+    margin-bottom: 5px;
+}
+
+.form-input label{
+    position: absolute;
+    user-select: none;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #8e8e8e;    
+    height: 36px;
+    left: 8px;
+    top:5px;
+    line-height: 36px;
+    overflow: hidden;
+    pointer-events: none;    
+    right: 5px;
+    text-overflow: ellipsis;    
+    transform-origin: left;    
+    white-space: nowrap;  
+    transition:transform .3s ease;  
+}
+
+.form-input input{    
+    background: #fafafa;    
+    border: 1px solid #DBDBDB; 
+    font-size: 1rem;   
+    margin: 0;
+    outline: 0;
+    overflow: hidden;
+    padding: 14px 0 12px 8px;
+    text-overflow: ellipsis;    
+}
+
+.form-input input:focus{
+    outline: 1px solid #000;
+}
+
+.form-input-large, .form-input-large input{
+    width: 100%;
+}
+
+.form-input-active input{
+    border: 1px solid #a8a8a8 !important;
+    padding: 24px 0 2px 8px!important;
+}
+
+.form-input-active label{  
+    transform: scale(.83333) translateY(-10px) !important;
+}
+
+.form-input-password input{
+    padding-right: 37px !important;
+}
+
+.password-show{
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMiA0LjVDNS4yNSA0LjUgMS41IDkuNzUgMS41IDEyczMuNzUgNy41IDEwLjUgNy41IDEwLjUtNS4yNSAxMC41LTcuNVMxOC43NSA0LjUgMTIgNC41ek01LjU1MiAxNS4xMDNDNC4yODIgMTMuOTY2IDMuNSAxMi41ODMgMy41IDEyYzAtLjU4NC43ODEtMS45NjYgMi4wNTItMy4xMDNDNy4yMzEgNy4zOTUgOS40MzggNi41IDEyIDYuNWMyLjU2MiAwIDQuNzcuODk1IDYuNDQ4IDIuMzk3IDEuMjcgMS4xMzcgMi4wNTIgMi41MiAyLjA1MiAzLjEwMyAwIC41ODQtLjc4MSAxLjk2Ni0yLjA1MiAzLjEwM0MxNi43NjkgMTYuNjA1IDE0LjU2MiAxNy41IDEyIDE3LjVjLTIuNTYyIDAtNC43Ny0uODk1LTYuNDQ4LTIuMzk3ek0xMiAxNmE0IDQgMCAxMTAtOCA0IDQgMCAwMTAgOHptMi00YTIgMiAwIDExLTQgMCAyIDIgMCAwMTQgMHoiIGZpbGw9IiMwMDAiLz48L3N2Zz4=);
+    width: 25px;
+    height: 25px;
+    top:50%;
+    right: 8px;
+    opacity: .5;
+    transform: translateY(-50%);
+    transition: opacity .4s ease, background .3s ease;
+}
+
+.password-show:hover{
+    opacity: 1;
+}
+
+.password-show-hidden{
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yMC43MDcgMjAuNzA3YTEgMSAwIDAwMC0xLjQxNGwtMTYtMTZhMSAxIDAgMDAtMS40MTQgMS40MTRMNS4yMDUgNi42MkMyLjc4NSA4LjMzOCAxLjUgMTAuNjgzIDEuNSAxMmMwIDIuMjUgMy43NSA3LjUgMTAuNSA3LjUgMS45MTYgMCAzLjU5LS40MjMgNS4wMDYtMS4wOGwyLjI4NyAyLjI4N2ExIDEgMCAwMDEuNDE0IDB6bS01LjIyOC0zLjgxNGwtMS43NzQtMS43NzRBNCA0IDAgMDE4LjM4IDkuNzk0TDYuNjQ0IDguMDU4YTkuMzMyIDkuMzMyIDAgMDAtMS4wOS44NEM0LjI4IDEwLjAzNCAzLjUgMTEuNDE3IDMuNSAxMmMwIC41ODQuNzgxIDEuOTY2IDIuMDUyIDMuMTAzQzcuMjMxIDE2LjYwNSA5LjQzOCAxNy41IDEyIDE3LjVhOS45NyA5Ljk3IDAgMDAzLjQ4LS42MDd6bTQuODQxLS44MTVDMjEuNzUxIDE0LjYxIDIyLjUgMTMuMDA2IDIyLjUgMTJjMC0yLjI1LTMuNzUtNy41LTEwLjUtNy41LTEuMDQzIDAtMi4wMTUuMTI1LTIuOTEyLjM0NmwxLjcyMSAxLjcyYy4zODgtLjA0My43ODUtLjA2NiAxLjE5MS0uMDY2IDIuNTYyIDAgNC43Ny44OTUgNi40NDggMi4zOTcgMS4yNyAxLjEzNyAyLjA1MiAyLjUyIDIuMDUyIDMuMTAzIDAgLjUxLS41OTYgMS42My0xLjU5NSAyLjY2M2wxLjQxNSAxLjQxNXoiIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iLjgiLz48L3N2Zz4=) !important;
+}
+
+/* BUTTONS +++++++++++++++++++++++++++++++++++++++++ */
+.btn{
+    background-color: #1969FF;
+    display: block;
+    font-size: 1rem;
+    color: #fff;    
+    border: 0;;
+    padding: 12px;
+    margin-top: 7px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-large{
+    width: 100%;
+}
+
+.btn:hover{
+    background: #347AFD;
+}
+
+.btn:focus , .btn:active{
+    outline: 1px solid #000;
+}
+
+.btn:disabled{
+    background-color: #B2DFFC;
+}
+
+/* USER ICON ++++++++++++++++++++++++++++++++++++++ */
+
+.user-icon {    
+    background-color:transparent;
+}
+
+.user-icon::before {    
+    left: 7px;    
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;    
+}
+
+.user-icon::after {    
+    left: 4px;
+    top: 2px;    
+    width: 16px;
+    height: 7px;
+    border-radius: 50% 50% 0 0;
+}
+
+.user-icon.menu-icon-active::before,.user-icon.menu-icon-active::after {
+    top: 0;
+    left: 0;
+    border-radius: 0;
+    width: 24px;
+    height: 3px;
+    transition: all 0.1s linear, transform 0.2s ease-in 0.2s;
+}
+
+.user-icon.menu-icon-active::before{
+    transform: rotate(45deg);
+}
+
+.user-icon.menu-icon-active::after {
+    transform: rotate(-45deg);    
+}
+
+/* MEDIA ++++++++++++++++++++++++++++++++++++++++++ */
+
+@media (max-width: 720px) {
+    /* MENU-SITE ********************************** */
+    .menu-site__item{
+        width: 100%;
+    }
+
+    /* REGISTRATION ******************************* */
+    .form-reg-row{
+        display: block;
+    }
+
+    .reg-form .form-input-large{
+        width: 100%;
+    }
+
+    .reg-form .btn{
+        width: 100%;
+    }
+
+    /* HAMBURGER MENU ***************************** */
+    .menu-button{
+        display: block;        
+    }
+
+    .links-left{
+        transform: translateX(-100%);
+        left:0;
+    }
+
+    .links-right{
+        transform: translateX(100%);
+        right: 0;
+    }    
+
+    .links{
+        display: block;        
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        top:100%;
+        bottom:0;
+        z-index: 1;
+        height: calc(100vh - 100%);
+        min-width: 200px;
+        background-color: #1969ff;
+        transition: transform .5s ease;        
+    }
+
+    .links-active{
+        transform: translateX(0);
+    }   
+}

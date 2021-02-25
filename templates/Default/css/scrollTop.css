@@ -1,0 +1,27 @@
+/*---Кнопка на вверх---*/
+.scrollTop{
+	background:#1969FF;
+	width:50px;
+	height:50px;
+	bottom:0px;
+    margin-left:-50px;
+	left:100%;
+	transition: none;
+	overflow: hidden;
+	position: relative;
+}
+
+.scrollTop::before{
+	display: block;
+	content: '';
+	position: absolute;
+	width: 34px;
+	height: 24px;
+	top: 13px;
+	left: 8px;
+	background: url(../img/up.png) no-repeat center center;
+}
+
+.scrollTop:hover{
+    background: #347AFD;
+}

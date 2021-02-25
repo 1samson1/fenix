@@ -1,0 +1,14 @@
+.slider{
+    overflow: hidden;
+    border-bottom: 2px solid #ddd;    
+}
+
+.slides{
+    display: flex;
+    transition:transform 1s ease;
+}
+
+.slider img{
+    display: block;
+    width: 100%;
+}

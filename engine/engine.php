@@ -1,5 +1,5 @@
 <?php 
-    switch ($_GET['mode']) {
+    switch ($_GET['do']) {
         case 'main':
             include_once ENGINE_DIR.'/modules/main.php';
             break;
@@ -20,4 +20,9 @@
             echo "404 file not found";
             break;
     }
+
+    $tpl->load_tpl('base.html');
+    $tpl->set('{TEMPLATE}', $config['host_url'].'/templates/'.$config['template']);
+    $tpl->print();
+    
 ?>
