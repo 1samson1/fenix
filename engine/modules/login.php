@@ -1,28 +1,23 @@
 <?php
-    /*require_once "config.php";*/
+    require_once ENGINE_DIR.'/includes/checkFeild.php';	
+	require_once ENGINE_DIR.'/includes/errors.php';	
 
-	if(isset($_POST['do_logined'])){
-        if($_POST['login' == '']){
-            $errors[] = 'Вы не ввели логин';
-        }
-        if($_POST['password'] == ''){
-			$errors[] = 'Вы не ввели пароль';
-        }
-        if(empty($errors)){
-            $login_user = 'SELECT * FROM `users` WHERE `login` = \''.$_POST['login'].'\'';
+	if(isset($_POST['do_login'])){
 
-            $access = mysqli_query($conection,$login_user) or $errors[] = 'Запрос к бд не удался!';
-            
-            if($row = mysqli_fetch_assoc($access)){
-                if (password_verify($_POST['password'], $row['password'])) {
-                    $_SESSION['logined'] = $row;
+        $alerts->set_error_if(!CheckField::login($_POST['login']), 'Ошибка регистрации', 'Некорректный логин', 201);
+
+		$alerts->set_error_if(!CheckField::pass($_POST['password']), 'Ошибка регистрации', 'Вы не ввели пароль', 203);  
+
+        if(!isset($alerts->alerts_array[0])){
+
+            $db->check_user($_POST['login']);
+            if($user = $db->get_row()){
+                if (CheckField::confirm_hash($_POST['password'], $user['password'])) {
+                    #Code...
                 }
-                else {
-                    $errors[] = 'Неправильный пароль от учётной записи';
-                }
-            }
-            else $errors[] = 'Пользователя с таким именем нет!';
+                else $alerts->set_error('Ошибка регистрации', 'Неправильный пароль от учётной записи', 205);
+                
+            } else $alerts->set_error('Ошибка регистрации', 'Пользователя с таким именем нет!', 206);
         }
     }    
 ?>
-

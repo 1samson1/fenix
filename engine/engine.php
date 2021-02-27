@@ -1,15 +1,14 @@
 <?php 
+
+    require_once ENGINE_DIR.'/modules/login.php';
+
     switch ($_GET['do']) {
         case 'main':
             include_once ENGINE_DIR.'/modules/main.php';
             break;
 
-        case 'register':
-            include_once ENGINE_DIR.'/modules/register.php';
-            break;
-
-        case 'login':
-            include_once ENGINE_DIR.'/modules/main.php';
+        case 'registration':
+            include_once ENGINE_DIR.'/modules/registration.php';
             break;
         
         case 'user':
@@ -17,12 +16,25 @@
             break;
         
         default:
-            echo "404 file not found";
+            $alerts->set_error('Oшибка', 'Такой страницы или файла не существует!', 404);
             break;
     }
 
+    include_once ENGINE_DIR.'/modules/head.php';
+
+    include_once ENGINE_DIR.'/modules/alerts.php';
+
     $tpl->load_tpl('base.html');
+
+    if(!isset($tpl->data['{content}']))
+        $tpl->set('{content}','');
+
     $tpl->set('{TEMPLATE}', $config['host_url'].'/templates/'.$config['template']);
+
+    $tpl->set('{head}', $head);
+
+    $tpl->set('{registration-link}', '/registration/');
+
     $tpl->print();
     
 ?>

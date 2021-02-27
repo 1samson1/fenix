@@ -1,6 +1,6 @@
-<div class="title-page">Регистрация</div>               
-<form action="" class="reg-form" method="POST">
-    <div class="form-reg-row">
+<div class="container-reg">
+    <div class="title-page">Регистрация</div>               
+    <form action="" class="reg-form" method="POST">
         <div class="form-input form-input-large">
             <input type="text" name="login" id="login" required>                        
             <label for="login">Логин</label>                                            
@@ -8,9 +8,7 @@
         <div class="form-input form-input-large">
             <input type="email" name="email" id="email" required>                        
             <label for="email">E-mail</label>                                            
-        </div>                        
-    </div>
-    <div class="form-reg-row">
+        </div>     
         <div class="form-input form-input-large">
             <input type="text" name="name" id="name" required>                        
             <label for="name">Имя</label>                                            
@@ -19,8 +17,6 @@
             <input type="text" name="surname" id="surname" required>                        
             <label for="surname">Фамилия</label>                                            
         </div>
-    </div>                    
-    <div class="form-reg-row">
         <div class="form-input form-input-password form-input-large">
             <input type="password" name="password" id="password" required>                        
             <label for="password">Пароль</label>         
@@ -31,7 +27,7 @@
             <label for="repassword">Подтверждение пароля</label>     
             <div class="password-show"></div>                                       
         </div>
-    </div>
-    <input type="submit" value="Зарегистрироваться" class="btn">
-</form>
+        <input type="submit" name="do_reg" value="Зарегистрироваться" class="btn">
+    </form>
+</div>
             

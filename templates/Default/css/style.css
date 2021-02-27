@@ -58,10 +58,11 @@ header{
     margin: 5px;
     user-select: none;
     transition: background .3s ease;
+    border-radius: 5px;
 }
 
 .topmenu__link:hover{
-    background: #eeeeee20;
+    background: #eeeeee27;
 }
 
 .topmenu__center{
@@ -162,6 +163,7 @@ header{
     top:50%;
     left: 50%;
     max-width: 400px;    
+    border-radius: 10px;
     background: #eee;
     transform: translate(-50%,-50%);
     box-shadow: 1px 1px 4px 1px #777;    
@@ -204,12 +206,12 @@ header{
     border-width: 1px 0 1px 0;
 }
 
-#forgotpass{
+#forgotpass{    
     text-decoration: none;
     font-size: 1rem;
     background: none;
     border: 0;
-    display: flex;
+    visibility: hidden;
     color: #385185;    
     margin: 20px 0 5px 0;    
 }
@@ -224,13 +226,11 @@ main{
     padding: 25px 0;
 }
 
-main .container{    
+main .container-main, .container-reg{    
     background: #fff;   
     box-shadow: 1px 1px 4px 1px #777; 
-}
-
-.content{
-    padding: 7px;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .title-page{
@@ -240,11 +240,42 @@ main .container{
     padding: 15px 40px;
 }
 
+
+/* ALERTS +++++++++++++++++++++++++++++++++++++++++++ */
+
+.alert-success, .alert-error{
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 10px;
+    color:#fff;
+    box-shadow: 1px 1px 4px 1px #777; 
+    transition: opacity .3s ease;
+    border:1px solid #00000030;
+}
+
+.alert-success:hover, .alert-error:hover{
+    opacity: 0.85;
+}
+
+.alert-success b, .alert-error b{
+    display: block;
+    margin-bottom: 5px;
+}
+
+.alert-success{
+    background: #5DB759;
+}
+
+.alert-error{
+    background: #D7544E;
+}
+
 /* MENU-SITE +++++++++++++++++++++++++++++++++++++++++*/
 
 .menu-site{
     display: flex;
     flex-wrap: wrap;
+    padding: 7px;
 }
 
 .menu-site__item{
@@ -275,24 +306,23 @@ main .container{
 
 /* REGISTRATION +++++++++++++++++++++++++++++++++++++ */
 
+.container-reg{
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.container-reg .form-input{
+    margin: 7px 0;
+}
+
+.container-reg .title-page{
+    text-align: center;
+}
+
 .reg-form{
     display: flex;    
     flex-direction: column;
     padding: 15px 25px;
-}
-
-.form-reg-row{
-    display: flex;
-}
-
-.reg-form .form-input-large{
-    width: 50%;
-    margin:0 10px;
-    margin-bottom: 30px;
-}
-
-.reg-form .btn{
-    margin:0 10px;
 }
 
 /* FOOTER =========================================== */
@@ -462,17 +492,7 @@ footer{
     }
 
     /* REGISTRATION ******************************* */
-    .form-reg-row{
-        display: block;
-    }
-
-    .reg-form .form-input-large{
-        width: 100%;
-    }
-
-    .reg-form .btn{
-        width: 100%;
-    }
+    
 
     /* HAMBURGER MENU ***************************** */
     .menu-button{

@@ -4,7 +4,7 @@ AddDefaultCharset UTF-8
 
 RewriteEngine on
 
-RewriteRule ^([A-z0-9-]+)/?$ index.php?mode=$1 [QSA,L]
+RewriteRule ^([A-z0-9-]+)/?$ index.php?do=$1 [QSA,L]
 RewriteRule ^$ index.php?do=main [QSA,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
