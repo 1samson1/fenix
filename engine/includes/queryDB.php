@@ -14,7 +14,7 @@
         
         public function check_user($login){
             return $this->query('
-                SELECT `users`.*, `groups`.`group_name` FROM `users`
+                SELECT `users`.*, `groups`.`group_name`, `groups`.`id` AS `group_id` FROM `users`
                     INNER JOIN `groups` ON `users`.`group_id` = `groups`.`id` 
                     WHERE `login` = "'.htmlspecialchars($login).'"
             ;');
@@ -37,34 +37,16 @@
 
         /*............... Query for work user's token ................*/
 
-        public function add_token($user_id, $token, $info){            
+        public function add_token($user_id, $token){            
             return $this->query('
-                INSERT INTO `user_tokens` (`user_id`,`token`,`info` ,`date`) 
-                    VALUES ('.$user_id.',"'.$token.'","'.$info.'","'.time().'")
+                INSERT INTO `user_tokens` (`user_id`, `token`, `date`) 
+                    VALUES ('.$user_id.',"'.$token.'","'.time().'")
             ;');
-        }
+        }  
 
-        public function get_user_token($token){
+        public function get_user_by_token($token){
             return $this->query('
-                SELECT 
-                    `users`.`id`,
-                    `users`.`group_id`,
-                    `users`.`name`,
-                    `users`.`surname`,
-                    `users`.`login` ,
-                    `users`.`email`,
-                    `users`.`miss_user`,
-                    `groups`.`name` AS `group_name` 
-                FROM `user_tokens` 
-                    INNER JOIN `users` ON `user_tokens`.`user_id` = `users`.`id`
-                    INNER JOIN `groups` ON `users`.`group_id` = `groups`.`id`
-                    WHERE `token` = "'.htmlspecialchars( $token).'"
-            ;');
-        }
-
-        public function get_user_token_all($token){
-            return $this->query('
-                SELECT `users`.*, `groups`.`name` AS `group_name` FROM `user_tokens` 
+                SELECT `users`.*, `groups`.`group_name`, `groups`.`id` AS `group_id` FROM `user_tokens` 
                     INNER JOIN `users` ON `user_tokens`.`user_id` = `users`.`id`
                     INNER JOIN `groups` ON `users`.`group_id` = `groups`.`id`
                     WHERE `token` = "'.htmlspecialchars( $token).'"

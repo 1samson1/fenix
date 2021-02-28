@@ -3,29 +3,33 @@
 	require_once ENGINE_DIR.'/includes/checkFeild.php';	
 	require_once ENGINE_DIR.'/includes/errors.php';	
 
-	if(isset($_POST['do_reg'])){
+	if(!$_COOKIE['user_token']){
 
-		$alerts->set_error_if(!CheckField::login($_POST['login']), 'Ошибка регистрации', 'Некорректный логин', 201);
+		if(isset($_POST['do_reg'])){
 
-		$alerts->set_error_if(!CheckField::email($_POST['email']), 'Ошибка регистрации', 'Некорректный email', 202);
+			$alerts->set_error_if(!CheckField::login($_POST['login']), 'Ошибка регистрации', 'Некорректный логин', 201);
 
-		$alerts->set_error_if(!CheckField::pass($_POST['password']), 'Ошибка регистрации', 'Вы не ввели пароль', 203);
+			$alerts->set_error_if(!CheckField::email($_POST['email']), 'Ошибка регистрации', 'Некорректный email', 202);
 
-		$alerts->set_error_if(!CheckField::confirm_pass($_POST['password'],$_POST['repassword']), 'Ошибка регистрации', 'Пароль не совпадает с формой подтверждения', 204);
+			$alerts->set_error_if(!CheckField::pass($_POST['password']), 'Ошибка регистрации', 'Вы не ввели пароль', 203);
 
-		if(!isset($alerts->alerts_array[0])){
+			$alerts->set_error_if(!CheckField::confirm_pass($_POST['password'],$_POST['repassword']), 'Ошибка регистрации', 'Пароль не совпадает с формой подтверждения', 204);
 
-			if($db->reg_user($config['reg_user_group'], $_POST['name'], $_POST['surname'], $_POST['login'], $_POST['email'], $_POST['password'])){
-				$alerts->set_success('Регистрация прошла успешно', 'Вы успешно зарегистрированы.');
-			}
-			else{
-				$alerts->set_error_if($db->error, 'Ошибка регистрации', Error_info::reg_user($db->error_num), $db->error_num);
+			if(!isset($alerts->alerts_array[0])){
+
+				if($db->reg_user($config['reg_user_group'], $_POST['name'], $_POST['surname'], $_POST['login'], $_POST['email'], $_POST['password'])){
+					$alerts->set_success('Регистрация прошла успешно', 'Вы успешно зарегистрированы.');
+				}
+				else{
+					$alerts->set_error_if($db->error, 'Ошибка регистрации', Error_info::reg_user($db->error_num), $db->error_num);
+				}
 			}
 		}
+		
+		$head['title'] = 'Регистрация';
+		$tpl->load_tpl('registration.html');    
+		$tpl->save('{content}');
 	}
-	
-	$head['title'] = 'Регистрация';
-	$tpl->load_tpl('registration.html');    
-    $tpl->save('{content}');
+	else $alerts->set_error('Ошибка', 'Вы уже авторизированы!', 233);
 
 ?>

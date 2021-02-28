@@ -8,6 +8,8 @@
         'reg_user_group' => 2,
 		
 		'registration_on' => true,
+
+        'life_time_token' => 31536000,
 		
 		'timezone' => 'Europe/Moscow',
 

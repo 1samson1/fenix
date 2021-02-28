@@ -1,0 +1,41 @@
+<div class="user-dock">
+    <div class="menu-button">
+        <div class="menu-icon-wrapper" tabindex="0">                                
+            <div class="user-icon menu-icon"></div>                                
+        </div>
+    </div>
+    [not-group]
+    <div class="links links-right">
+        <a id="login-link" class="topmenu__link">Вход</a> 
+        <a href="{registration-link}" class="topmenu__link">Регистрация</a>
+    </div> 
+    <div class="singin">
+        <div class="bg-login-panel"></div>
+        <div class="login-panel">
+            <div class="close"></div>
+            <div class="login-block">
+                <div class="login-title">Вход</div>
+                <form action="" class="singin-form" method="POST">
+                    <div class="form-input form-input-large">
+                        <input type="text" name="login" id="lg-login" required>                        
+                        <label for="lg-login">Логин</label>                                            
+                    </div>
+                    <div class="form-input form-input-password form-input-large">
+                        <input type="password" name="password" id="lg-password" required>
+                        <label for="lg-password">Пароль</label>
+                        <div class="password-show"></div>
+                    </div>
+                    <input type="submit" name="do_login" value="Войти" class="btn btn-large">                                    
+                </form>
+                <a id="forgotpass" href="#">Забыли пароль?</a>
+            </div>
+        </div>
+    </div>
+    [/not-group]
+    [group]
+    <div class="links links-right">
+        <a id="" class="topmenu__link">{login}</a> 
+        <a href="{logout}" class="topmenu__link">выход</a> 
+    </div>
+    [/group]
+</div>

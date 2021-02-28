@@ -40,7 +40,26 @@
                 $this->template = file_get_contents($file_path);
             }
             else die('fatal error!');
+
+            $this->template = preg_replace_callback('/\[(not-)?group=?([0-9]*)?\](.*)\[\/(not-)?group\]/sU', array(&$this, 'check_group'), $this->template);
         }    
+
+        public function check_group($matches){
+            if($matches[1]){
+                if($_SESSION['user']['group_id']) return '';
+                else return $matches[3];
+            }
+            else {
+                if($matches[2]){
+                    if($_SESSION['user']['group_id'] == $matches[2]) return $matches[3];
+                    else return '';
+                }
+                else {
+                    if(!$_SESSION['user']['group_id']) return '';
+                    else return $matches[3];
+                }
+            }
+        }
 
         public function replace_tags($template){
             foreach($this->data as $tag => $value){
@@ -71,15 +90,16 @@
             $this->copy_template .= $this->replace_all($this->template);            
         }
 
-
         public function save($tag){
+            $this->template = $this->replace_all($this->template);       
             $this->data[$tag] = $this->template;
             $this->clear();
         }
 
         public function save_copy($tag){
             $this->template = $this->copy_template;
-            $this->save($tag);
+            $this->data[$tag] = $this->template;
+            $this->clear();
         }
 
         public function clear(){
