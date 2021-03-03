@@ -3,7 +3,7 @@
 	require_once ENGINE_DIR.'/includes/checkFeild.php';	
 	require_once ENGINE_DIR.'/includes/errors.php';	
 
-	if(!$_COOKIE['user_token']){
+	if(!$_COOKIE['user_token'] && $config['registration_on']){
 
 		if(isset($_POST['do_reg'])){
 
@@ -30,6 +30,6 @@
 		$tpl->load_tpl('registration.html');    
 		$tpl->save('{content}');
 	}
-	else $alerts->set_error('Ошибка', 'Вы уже авторизированы!', 233);
+	else $alerts->set_error('Ошибка', 'Регистрация не доступна', 233);
 
 ?>

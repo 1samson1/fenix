@@ -34,8 +34,15 @@
     [/not-group]
     [group]
     <div class="links links-right">
-        <a id="" class="topmenu__link">{login}</a> 
-        <a href="{logout}" class="topmenu__link">выход</a> 
+        <a id="user-panel" class="topmenu__link" tabindex="1">
+            <img src="{foto}" alt="avatar" srcset="">
+            <span>{login}</span>
+        </a>
+        <div class="user-options">
+            [admin]<a href="{admin-link}" class="user-option topmenu__link">Админпанель</a>[/admin]
+            <a href="" class="user-option topmenu__link">Профиль</a>
+            <a href="{logout}" class="user-option topmenu__link">Выход</a>
+        </div>       
     </div>
     [/group]
 </div>

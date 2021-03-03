@@ -8,6 +8,11 @@ $(function () {
         $('body').css('overflow','')
     })
 
+    $('.form-input input').each(function () {
+        if($(this).val()){
+            $(this).parent().addClass('form-input-active')
+        }
+    })
     $('.form-input input').on('focus',function () {        
         $(this).parent().addClass('form-input-active')
     })
@@ -34,6 +39,19 @@ $(function () {
         if(this.opened){     
             $(this).children('.menu-icon').removeClass('menu-icon-active')
             $(this).parent().parent().children(".links").removeClass('links-active')
+            this.opened = false
+        }
+    })
+
+    $('#user-panel').opened = false
+    $('#user-panel').on('click',function () {
+        this.opened = !this.opened
+        $(this).parent().children('.user-options').toggleClass('user-options-open')
+        
+    })    
+    $('#user-panel').on('blur',function () {   
+        if(this.opened){
+            $(this).parent().children('.user-options').removeClass('user-options-open')
             this.opened = false
         }
     })

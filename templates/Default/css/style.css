@@ -142,6 +142,10 @@ header{
     transition: top 0.2s linear, transform 0.2s ease-in 0.2s;
 }
 
+.links{
+    position: relative;
+}
+
 /* LOGIN PANEL ++++++++++++++++++++++++++++++++++++++ */
 
 .bg-login-panel,.login-panel{
@@ -218,6 +222,47 @@ header{
 
 #forgotpass:hover{
     text-decoration: underline;
+}
+
+/* USER PANEL ======================================= */
+
+#user-panel{
+    display: flex;
+    align-items: center;
+}
+
+#user-panel img{
+    border-radius: 50%;
+    margin-right: 7px;
+    width: 30px;
+    height: 30px;
+}
+
+#user-panel:focus{
+    outline: none;
+    background: #eeeeee27;
+}
+
+.user-options{    
+    display: flex;
+    flex-direction: column;
+    background: #1969ff;
+    position: absolute;
+    top: calc(100% + 15px);
+    right: 0;
+    border-radius: 5px;
+    box-shadow: 1px 1px 4px 1px #777; 
+    z-index: 2;
+    transition: transform .4s ease;
+    transform: scaleY(0);
+}
+
+.user-options-open{
+    transform: scaleY(1);
+}
+
+.user-option{
+    margin: 0;
 }
 
 /* MAIN ============================================= */
@@ -526,4 +571,24 @@ footer{
     .links-active{
         transform: translateX(0);
     }   
+
+    /* USER PANEL ********************************** */
+
+    #user-panel{
+        background: #eeeeee27;;
+        border-radius: none;
+        margin: 0;
+    }
+
+    .user-options{
+        position: static;
+        margin: 5px;
+        box-shadow: none;
+        border-radius: none;
+        transform: scaleY(1);
+    }
+
+    .user-option{
+        border-radius: 5px;
+    }
 }

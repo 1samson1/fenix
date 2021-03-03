@@ -29,7 +29,6 @@
                 }
                 return;
             }
-            
             $this->data_block[$block] = $value;
         }
 
@@ -41,22 +40,22 @@
             }
             else die('fatal error!');
 
-            $this->template = preg_replace_callback('/\[(not-)?group=?([0-9]*)?\](.*)\[\/(not-)?group\]/sU', array(&$this, 'check_group'), $this->template);
+            $this->template = preg_replace_callback('/\[((not-)group|group)=?([0-9]*)?\](.*)\[\/\1\]/s', array(&$this, 'check_group'), $this->template);
         }    
 
         public function check_group($matches){
-            if($matches[1]){
+            if($matches[2]){
                 if($_SESSION['user']['group_id']) return '';
-                else return $matches[3];
+                else return $matches[4];
             }
             else {
-                if($matches[2]){
-                    if($_SESSION['user']['group_id'] == $matches[2]) return $matches[3];
+                if($matches[3]){
+                    if($_SESSION['user']['group_id'] == $matches[3]) return $matches[4];
                     else return '';
                 }
                 else {
                     if(!$_SESSION['user']['group_id']) return '';
-                    else return $matches[3];
+                    else return $matches[4];
                 }
             }
         }
@@ -80,8 +79,8 @@
         }
 
         public function replace_all($template){
-            $template = $this->replace_block($template);    
             $template = $this->replace_tags($template);    
+            $template = $this->replace_block($template);    
 
             return $template;
         }

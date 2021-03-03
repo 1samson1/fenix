@@ -1,8 +1,9 @@
-<?php
-	setcookie('user_token', '', time()-360);
+<?php	
+	setcookie('user_token', '');
+	setcookie( session_name(), "");
 	session_unset();
 	session_destroy();
-	$db->remove_token($_COOKIE['user_token']);
+	$db->remove_token($_COOKIE['user_token']);		
 	header('Location: /');
 	die();
 ?>

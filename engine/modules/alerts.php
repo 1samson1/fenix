@@ -9,15 +9,14 @@
 
             if($alert['type'] == 'success'){
                 $tpl->set_block('/\[error\](.*)\[\/error\]/s','');
+                $tpl->set('[success]', '');
+                $tpl->set('[/success]', '');
             }
             else {
                 $tpl->set_block('/\[success\](.*)\[\/success\]/s','');
+                $tpl->set('[error]', '');
+                $tpl->set('[/error]', '');
             }
-            
-            $tpl->set('[error]', '');
-            $tpl->set('[/error]', '');
-            $tpl->set('[success]', '');
-            $tpl->set('[/success]', '');
 
             $tpl->copy_tpl();
         }

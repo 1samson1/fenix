@@ -1,44 +1,15 @@
-<?php
-    require_once ENGINE_DIR.'/includes/checkFeild.php';    
+<?php 
+    $tpl->load_tpl('login.html');
 
-    if(!$_COOKIE['user_token']){
-        if(isset($_POST['do_login'])){
+    if(isset($_SESSION['user'])){
+        $tpl->set('{login}', $_SESSION['user']['login']);
 
-            $alerts->set_error_if(!CheckField::login($_POST['login']), 'Ошибка авторизации', 'Некорректный логин', 201);
+        if($_SESSION['user']['foto'])$foto = $config['host_url'].'/'.$_SESSION['user']['foto'];
+        else $foto = '{TEMPLATE}/img/noavatar.png';
+        $tpl->set('{foto}', $foto);
 
-            $alerts->set_error_if(!CheckField::pass($_POST['password']), 'Ошибка авторизации', 'Вы не ввели пароль', 203);  
-
-            if(!isset($alerts->alerts_array[0])){
-
-                $db->check_user($_POST['login']);
-                if($user = $db->get_row()){
-                    if (CheckField::confirm_hash($_POST['password'], $user['password'])) {
-                        unset($user['password']);
-                        $token = $db->hash(time());
-                        $db->add_token($user['id'], $token);
-                        
-                        if(!$db->error){
-                            setcookie('user_token', $token, time() + $config['life_time_token']);
-                            $_SESSION['user']= $user;
-                        }
-                        else $alerts->set_error('Ошибка авторизации', 'Не удалось выдать токен', 207);
-                    }
-                    else $alerts->set_error('Ошибка авторизации', 'Неправильный пароль от учётной записи', 205);
-                    
-                } else $alerts->set_error('Ошибка авторизации', 'Пользователя с таким именем нет!', 206);
-            }
-        }
+        $tpl->set('{logout}','/logout/');
     }
-    else{
-        $db->get_user_by_token($_COOKIE['user_token']);
-        if($user = $db->get_row()){
-            $_SESSION['user']= $user;
-            $tpl->set('{login}', $_SESSION['user']['login']);
-        } 
-        else {
-            $alerts->set_error('Ошибка авторизации', 'Недействительный токен', 208);
-            unset($_SESSION['user']);
-            setcookie('user_token', '', time()-360);
-        }
-    }    
+
+    $tpl->save('{login}');
 ?>

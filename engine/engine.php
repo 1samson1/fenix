@@ -1,6 +1,5 @@
-<?php 
-
-    require_once ENGINE_DIR.'/modules/login.php';
+<?php   
+    require_once ENGINE_DIR.'/modules/auth.php';
 
     switch ($_GET['do']) {
         case 'main':
@@ -12,8 +11,7 @@
             break;
 
         case 'logout':
-            include_once ENGINE_DIR.'/modules/logout.php';
-            include_once ENGINE_DIR.'/modules/main.php';
+            include_once ENGINE_DIR.'/modules/logout.php';           
             break;
         
         case 'user':
@@ -23,36 +21,20 @@
         default:
             $alerts->set_error('Oшибка', 'Такой страницы или файла не существует!', 404);
             break;
-    }
+    }    
 
     include_once ENGINE_DIR.'/modules/head.php';
+
+    /* LOAD ALERTS TEMPLATE ======================================== */
 
     include_once ENGINE_DIR.'/modules/alerts.php';
 
     /* LOAD LOGIN TEMPLATE ========================================= */
 
-    $tpl->load_tpl('login.html');
-
-    if(isset($_SESSION['user'])){
-        $tpl->set('{login}', $_SESSION['user']['login']);
-        $tpl->set('{logout}','/logout/');
-    }
-
-    $tpl->save('{login}');
+    include_once ENGINE_DIR.'/modules/login.php';
 
     /* LOAD BASE TEMPLATE ========================================= */
 
-    $tpl->load_tpl('base.html');
+    require_once ENGINE_DIR.'/modules/base.php';
 
-    if(!isset($tpl->data['{content}']))
-        $tpl->set('{content}','');
-
-    $tpl->set('{TEMPLATE}', $config['host_url'].'/templates/'.$config['template']);
-
-    $tpl->set('{head}', $head);
-
-    $tpl->set('{registration-link}', '/registration/');
-
-    $tpl->print();
-    
 ?>
