@@ -18,11 +18,9 @@
 
     $tpl = new Template(); // Создание экземпляра шаблонизатора
 
-    require_once ENGINE_DIR.'/includes/alerts.php';// Подключает файл класса шаблонизатора
+    require_once ENGINE_DIR.'/includes/alerts.php';// Подключает файл класса уведомлений
 
     $alerts = new Alerts();
-
-    $tpl->dir = ROOT_DIR.'/templates/'.$config['template'];
 
     define('TEMPLATE_DIR', $tpl->dir); // Задание директории шаблонов
 

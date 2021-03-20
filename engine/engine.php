@@ -1,5 +1,10 @@
 <?php   
+
+    /* LOAD AUTHORIZATION FILE ======================================== */
+
     require_once ENGINE_DIR.'/modules/auth.php';
+
+    /* BAD ROURER  ======================================== */
 
     switch ($_GET['do']) {
         case 'main':
@@ -14,14 +19,17 @@
             include_once ENGINE_DIR.'/modules/logout.php';           
             break;
         
-        case 'user':
+        case 'profile':
             include_once ENGINE_DIR.'/modules/profile.php';
             break;
         
         default:
             $alerts->set_error('Oшибка', 'Такой страницы или файла не существует!', 404);
+            $head['title'] = 'Страница не найдена!';
             break;
-    }    
+    }  
+    
+    /* LOAD HEAD FILE ======================================== */
 
     include_once ENGINE_DIR.'/modules/head.php';
 

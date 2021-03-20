@@ -20,9 +20,17 @@
             ;');
         }
 
-        public function update_user_data($user_id, $name, $surname, $login, $email, $pass){
+        public function update_user($user_id, $name, $surname, $login, $email, $pass, $foto=false, $delete_foto=false){
             $pass = isset($pass[0])?', `users`.`password` = "'.$this->hash(htmlspecialchars($pass)).'"' :'';
-            
+            if($delete_foto){
+                $foto = ', `users`.`foto` = ""';
+            }
+            else if($foto){
+                $foto = ', `users`.`foto` = "'.$foto.'"';
+            }
+            else{
+                $foto = '';
+            }
             return $this->query('
                 UPDATE `users`
                     SET  
@@ -31,6 +39,7 @@
                         `users`.`login` = "'.htmlspecialchars($login).'",
                         `users`.`email` = "'.htmlspecialchars($email).'" 
                         '.$pass.'
+                        '.$foto.'
                     WHERE `users`.`id` = "'.$user_id.'"
             ;');
         }
@@ -63,7 +72,7 @@
         public function remove_token_all($user_id,$token){
             return $this->query('
                 DELETE FROM `user_tokens`
-                    WHERE `user_id` = "'.htmlspecialchars( $user_id).'" AND `token` != "'.$token.'"
+                    WHERE `user_id` = "'.htmlspecialchars( $user_id).'" AND `token` != "'.htmlspecialchars($token).'"
             ;');
         }
 

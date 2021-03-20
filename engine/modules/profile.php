@@ -1,100 +1,83 @@
 <?php
-	$find_user = 'SELECT `users`.`id` , `users`.`login` , `users`.`password` , `users`.`email` , `users`.`name` , `users`.`foto` , `users`.`date_reg` , `user_groups`.`group_name` FROM `users` JOIN `user_groups` ON `users`.`user_group` = `user_groups`.`id` WHERE `users`.`id` = '.$_GET['id'];
+	require_once ENGINE_DIR.'/includes/files.php';
+	require_once ENGINE_DIR.'/includes/checkFeild.php';	
+	require_once ENGINE_DIR.'/includes/errors.php';	
 
-	$access = mysqli_query($conection,$find_user);
-	if($access){
-		if($row = mysqli_fetch_assoc($access)){
-			$user_info['login'] = $row['login'];
-			$user_info['name'] = $row['name'];
-			$user_info['email'] = $row['email'];
-			$user_info['foto'] = $row['foto'];
-			$user_info['user_num_group'] = $row['user_group'];
-			$user_info['user_group'] = $row['group_name'];
-			$user_info['date_reg'] = $row['date_reg'];
-        }
-        else $errors[] = 'Пользователя с таким id нет!';
-	}
-	else $errors[] = 'Ошибка попробуйте снова.';
-	
-	// Save edit profile in Data Base
+	$db->check_user($_GET['param1']);
+	if($user = $db->get_row()){
+		/* edit user */
 
-	if (isset($_POST['save_profile'])) {
-		if($_SESSION['logined']['user_group'] == 1 || $_SESSION['logined']['id'] == $row['id'])
-		{
-			if($_POST['email'] == '' || !preg_match('/^\S+@([a-z0-9]+\.[a-z0-9]+|[a-z0-9]+\.[a-z0-9]+\.[a-z0-9]+)$/',$_POST['email']))
-			{
-				$errors_save[] = 'Вы ввели некорректный email!';
-			}
+		if(isset($_POST['do_save_profile'])){
+			if($_SESSION['user']['group_id'] == 1 || $_SESSION['user']['id'] == $row['id']){
 
-			if(empty($errors_save)){				
-				///////////////////////////// UPLOAD FILE AVATAR ON SERVER ////////////////////
-				if(!empty($_FILES['foto']['name']) && $_FILES['foto']['size'] < $max_size_upload_img && !isset($_POST['delete_foto'])){
-					if($_FILES['foto']['error'] == 0){
-						$type = getimagesize($_FILES['foto']['tmp_name']);						
-						if($type && ($type['mime'] == 'image/png' || $type['mime'] == 'image/gif' || $type['mime'] == 'image/jpeg')){
-							preg_match('/\.\w+$/', $_FILES['foto']['name'],$matches);
-							$fotopath = 'uploads/avatars/foto_'.$row['id'].$matches[0];
-						}						
-						else{
-							$errors_save[] = 'Файл не является изображением!';
-						}						
-					}
-					else{
-						$errors_save[] = 'Ошибка загрузки файла на сервер!';
-					}
-				}
-				//////////////////////////// CREATE QUERY ON DATA BASE //////////////////////
-				$edit_profile = 'UPDATE `users` SET ';
+				$alerts->set_error_if(!CheckField::login($_POST['login']), 'Ошибка изменения данных пользователя', 'Некорректный логин', 201);
 
-				$edit_profile .= '`email` = \''.htmlspecialchars($_POST['email']).'\', `name` = \''.htmlspecialchars($_POST['name']).'\'';
+				$alerts->set_error_if(!CheckField::email($_POST['email']), 'Ошибка изменения данных пользователя', 'Некорректный email', 202);
 
-				if(!empty($fotopath)){
-					$edit_profile .= ', `foto` = \''.$fotopath.'\'';
-				}
-				if(isset($_POST['delete_foto'])){
-					$edit_profile .= ', `foto` = \'\'';					
-				}
-				if(!empty($_POST['newpassword'])){
-					if($_POST['newpassword'] == $_POST['newpassword_reset'] && password_verify($_POST['lastpassword'],$row['password'])){
-						$edit_profile .= ', `password` = \''.password_hash($_POST['newpassword'], PASSWORD_DEFAULT).'\'';
-						$pass_save = true;
-					}
-					else{
-						$errors_save[] = 'Вы ввели неверный старый пароль!';
-					}
-				}
-
-				$edit_profile .= ' WHERE `id` = '.$_GET['id'];				
-				///////////////////////// SEND QUERY ON SERVER //////////////////////////
-				if(empty($errors_save)){					
-					$access_edit = mysqli_query($conection, $edit_profile) or $errors_save[] = 'Запрос к бд не удался!';
-				}				
-				/////////////////// IF QUERY IS DONE /////////////////////////////////
-				if($access_edit){
-					$complete = 'Данные профиля обновлены!';
-					$user_info['name'] = $_SESSION['logined']['name'] = $_POST['name'];
-					$user_info['email'] = $_SESSION['logined']['email'] = $_POST['email'];
+				if(isset($_POST['password'][0]) || isset($_POST['repassword'][0]) || isset($_POST['lastpassword'][0])){
+					$alerts->set_error_if(!CheckField::confirm_hash($_POST['password'],$user['password']), 'Ошибка изменения данных пользователя', 'Пароль не совпадает с предыдущим', 212);
 					
-					if(!empty($fotopath)){
-						$user_info['foto'] = $_SESSION['logined']['foto'] = $fotopath;
-						if(file_exists($row['foto'])){
-							unlink($row['foto']);
-						}
-						move_uploaded_file($_FILES['foto']['tmp_name'], $fotopath);
-					}
-					if(isset($_POST['delete_foto'])){
-						unlink($row['foto']);
-						$user_info['foto'] = $_SESSION['logined']['foto'] ='';
-					}
+					$alerts->set_error_if(!CheckField::confirm_pass($_POST['password'],$_POST['repassword']), 'Ошибка изменения данных пользователя', 'Пароль не совпадает с формой подтверждения', 204);
+				}
+				
+				$foto = new Upload_Image('foto', 'foto_'.$user['id'], 'avatars');
 
-					if(isset($pass_save))
-						$_SESSION['logined']['password'] = $_POST['newpassword'];
-				}
-				else{
-					$errors_save[] = 'Ошибка обновления данных профиля попробуйте снова.';
-				}
+				$alerts->alerts_array = array_merge($alerts->alerts_array, $foto->errors);
+
+				if(!isset($alerts->alerts_array[0])){
+
+					if($db->update_user($user['id'], $_POST['name'], $_POST['surname'], $_POST['login'], $_POST['email'], $_POST['password'], $foto->filepath, isset($_POST['delete_foto']))){
+						$alerts->set_success('Данные профиля обновлены', 'Данные профиля успешно обновлены!');
+						$user['name'] = $_POST['name'];
+						$user['surname'] = $_POST['surname'];
+						$user['login'] = $_POST['login'];
+						$user['email'] = $_POST['email'];
+
+						if(isset($_POST['delete_foto'])){
+							delete_file($user['foto']);
+							$user['foto'] = '';
+						}
+											 
+						if($foto->filepath){
+							delete_file($user['foto']);
+							$foto->save();
+							$user['foto'] = $foto->filepath;
+						}
+					}
+					else $alerts->set_error_if($db->error, 'Ошибка изменения данных пользователя', Error_info::reg_user($db->error_num), $db->error_num);
+				}	
 			}
+			else $alerts->set_error('Oшибка редактирования профиля', 'Невозможно изменить данные пользователя, нет доступа', 218);
 		}
+
+		/* close edit user */
+
+		$head['title'] = 'Профиль '.$user['login'];
+		$tpl->set('{login}',$user['login']);
+		$tpl->set('{email}', $user['email']);
+		$tpl->set('{name}', $user['name']);
+		$tpl->set('{surname}', $user['surname']);
+		$tpl->set('{date-reg}', date('d.m.Y', $user['date_reg']));
+		$tpl->set('{group}',$user['group_name']);
+
+        if($user['foto'])$foto = $config['host_url'].'/'.$user['foto'];
+        else $foto = '{TEMPLATE}/img/noavatar.png';
+        $tpl->set('{foto}', $foto);
+
+		$tpl->set('{logout_all}','/logout/?exit=all');
+
+		if($_SESSION['user']['id'] == $user['id'] || $_SESSION['user']['group_id'] == 1){
+			$tpl->set('[user]', '');
+			$tpl->set('[/user]', '');
+		}
+		else $tpl->set_block('/\[user\](.*)\[\/user\]/s','');
+
+		$tpl->load_tpl('profile.html');    
+    	$tpl->save('{content}');
 	}
+	else {
+		$alerts->set_error('Oшибка', 'Такого пользователя не существует!', 218);
+		$head['title'] = 'Профиль не найден';
+	}	
 	
 ?>

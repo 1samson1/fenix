@@ -3,7 +3,7 @@ jQuery( document ).ready(function($){
 	speed = 500,
 	$scrollTop = $("<a/>")
 	  .addClass('scrollTop')
-	  .attr({href:'#', style:'display:none; z-index:9999; position:fixed;'})
+	  .attr({href:'#', style:'display:none; z-index:1; position:fixed;'})
 	  .appendTo('body');		
 
 	$scrollTop.click(function(e){

@@ -6,6 +6,12 @@
         public $copy_template = null;
         public $data = array();
         public $data_block = array();
+
+        public function __construct(){
+            global $config;
+
+            $this->dir = ROOT_DIR.'/templates/'.$config['template'];
+        }
         
         public function set($tag,$value){        
             if( is_array($value ) ) {
@@ -40,7 +46,7 @@
             }
             else die('fatal error!');
 
-            $this->template = preg_replace_callback('/\[((not-)group|group)=?([0-9]*)?\](.*)\[\/\1\]/s', array(&$this, 'check_group'), $this->template);
+            $this->template = preg_replace_callback('/\[((not-)group|group)=?([0-9]*)?\](.*)\[\/\1\]/s', array(&$this, 'check_group'), $this->template);            
         }    
 
         public function check_group($matches){
@@ -58,7 +64,7 @@
                     else return $matches[4];
                 }
             }
-        }
+        }   
 
         public function replace_tags($template){
             foreach($this->data as $tag => $value){

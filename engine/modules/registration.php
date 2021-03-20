@@ -20,9 +20,7 @@
 				if($db->reg_user($config['reg_user_group'], $_POST['name'], $_POST['surname'], $_POST['login'], $_POST['email'], $_POST['password'])){
 					$alerts->set_success('Регистрация прошла успешно', 'Вы успешно зарегистрированы.');
 				}
-				else{
-					$alerts->set_error_if($db->error, 'Ошибка регистрации', Error_info::reg_user($db->error_num), $db->error_num);
-				}
+				else $alerts->set_error_if($db->error, 'Ошибка регистрации', Error_info::reg_user($db->error_num), $db->error_num);
 			}
 		}
 		

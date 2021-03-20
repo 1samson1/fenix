@@ -26,7 +26,7 @@ body{
     background: #efefef;
     width: 100%;
     min-height: 100vh;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 
 .container{
@@ -41,11 +41,15 @@ header{
     background: #1969ff;
     box-shadow: 1px 1px 4px 1px #777; 
     position: relative;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
 }
 
 .topmenu{
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .topmenu__link{
@@ -67,13 +71,17 @@ header{
 
 .topmenu__center{
     flex-grow:1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .logo{
     background: url(../img/logo.png) no-repeat center center;
     background-size: contain;
     width: 200px;
-    height: 70px;    
+    height: 60px;    
     margin: 0 auto;
     display: block;
 }
@@ -236,6 +244,7 @@ header{
     margin-right: 7px;
     width: 30px;
     height: 30px;
+    border:1px solid #eee;
 }
 
 #user-panel:focus{
@@ -248,12 +257,13 @@ header{
     flex-direction: column;
     background: #1969ff;
     position: absolute;
-    top: calc(100% + 15px);
+    top: calc(100% + 10px);
     right: 0;
     border-radius: 5px;
     box-shadow: 1px 1px 4px 1px #777; 
     z-index: 2;
     transition: transform .4s ease;
+    transform-origin: center top;
     transform: scaleY(0);
 }
 
@@ -271,7 +281,7 @@ main{
     padding: 25px 0;
 }
 
-main .container-main, .container-reg{    
+main .container-main, .container-reg, .container-profile{    
     background: #fff;   
     box-shadow: 1px 1px 4px 1px #777; 
     border-radius: 10px;
@@ -347,6 +357,9 @@ main .container-main, .container-reg{
     width: 100px;
     height: 100px;
     margin-right: 10px;
+    border-radius: 50%;
+    border:3px solid #eee;
+    box-shadow: 1px 1px 4px 1px #777; 
 }
 
 /* REGISTRATION +++++++++++++++++++++++++++++++++++++ */
@@ -370,6 +383,74 @@ main .container-main, .container-reg{
     padding: 15px 25px;
 }
 
+/* PROFILE +++++++++++++++++++++++++++++++++++++ */
+
+.container-profile{
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.plofile-info{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.profile-foto{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border:5px solid #eee;
+    box-shadow: 1px 1px 4px 1px #777; 
+}
+
+.profile-data{
+    padding-left: 15px;
+}
+
+.profile-name{
+    font-weight: bold;
+    font-size: 1.7rem;
+    padding-bottom: 15px;
+}
+
+.profile-field {
+    display: inline;
+    font-size: 1.3rem;
+    color:#5a5a5a;
+}
+
+.profile-field span{
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.profile-field:nth-child(2n){
+    margin-left: 25px;
+}
+
+.profile-title-section{
+    background: #1969ff;
+    width: 100%;
+    padding: 15px;    
+    color: #FFF;
+    text-align: center;
+    font-size: 1.4em;
+}
+
+.profile-edit, .profile-security{
+    padding: 5px;
+}
+
+.title-edit{
+    width: 100%;
+    text-align: center;
+    border-bottom: 2px solid #888;
+    margin-bottom: 5px;
+    font-size: 1.4em;
+    padding-bottom: 5px;
+}
+
 /* FOOTER =========================================== */
 
 footer{
@@ -381,6 +462,10 @@ footer{
 }
 
 /* OTHER ============================================= */
+
+.dettach-transition{
+    transition:none;
+}
 
 /* INPUT +++++++++++++++++++++++++++++++++++++++++++++ */
 .form-input{
@@ -461,6 +546,22 @@ footer{
     background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yMC43MDcgMjAuNzA3YTEgMSAwIDAwMC0xLjQxNGwtMTYtMTZhMSAxIDAgMDAtMS40MTQgMS40MTRMNS4yMDUgNi42MkMyLjc4NSA4LjMzOCAxLjUgMTAuNjgzIDEuNSAxMmMwIDIuMjUgMy43NSA3LjUgMTAuNSA3LjUgMS45MTYgMCAzLjU5LS40MjMgNS4wMDYtMS4wOGwyLjI4NyAyLjI4N2ExIDEgMCAwMDEuNDE0IDB6bS01LjIyOC0zLjgxNGwtMS43NzQtMS43NzRBNCA0IDAgMDE4LjM4IDkuNzk0TDYuNjQ0IDguMDU4YTkuMzMyIDkuMzMyIDAgMDAtMS4wOS44NEM0LjI4IDEwLjAzNCAzLjUgMTEuNDE3IDMuNSAxMmMwIC41ODQuNzgxIDEuOTY2IDIuMDUyIDMuMTAzQzcuMjMxIDE2LjYwNSA5LjQzOCAxNy41IDEyIDE3LjVhOS45NyA5Ljk3IDAgMDAzLjQ4LS42MDd6bTQuODQxLS44MTVDMjEuNzUxIDE0LjYxIDIyLjUgMTMuMDA2IDIyLjUgMTJjMC0yLjI1LTMuNzUtNy41LTEwLjUtNy41LTEuMDQzIDAtMi4wMTUuMTI1LTIuOTEyLjM0NmwxLjcyMSAxLjcyYy4zODgtLjA0My43ODUtLjA2NiAxLjE5MS0uMDY2IDIuNTYyIDAgNC43Ny44OTUgNi40NDggMi4zOTcgMS4yNyAxLjEzNyAyLjA1MiAyLjUyIDIuMDUyIDMuMTAzIDAgLjUxLS41OTYgMS42My0xLjU5NSAyLjY2M2wxLjQxNSAxLjQxNXoiIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iLjgiLz48L3N2Zz4=) !important;
 }
 
+.form-inputs-inline{
+    display: flex;
+}
+
+.form-inputs-inline .form-input:nth-child(2n){
+    margin-left: 5px;
+}
+
+/* FILE INPUT ************************************** */
+
+.form-input-file{
+    padding: 14px 8px;
+    border: 1px solid #DBDBDB; 
+    margin-bottom: 5px;
+}
+
 /* BUTTONS +++++++++++++++++++++++++++++++++++++++++ */
 .btn{
     background-color: #1969FF;
@@ -471,6 +572,7 @@ footer{
     padding: 12px;
     margin-top: 7px;
     text-decoration: none;
+    text-align: center;
     cursor: pointer;
 }
 
@@ -487,8 +589,69 @@ footer{
 }
 
 .btn:disabled{
-    background-color: #B2DFFC;
+    opacity: 0.5;
 }
+
+.btn-green{
+    background-color: #14A76C !important;
+}
+
+.btn-green:hover{
+    background-color: #1bbd7c !important;
+}
+
+.btn-red{
+    background-color: #DC3545 !important;
+}
+
+.btn-red:hover{
+    background-color: #ff5264 !important;
+}
+
+/* CHECKBOX +++++++++++++++++++++++++++++++++++++++ */
+
+.checkbox {
+    position: relative;
+    font-size: 1rem;
+    display: block;
+    padding:0 1.2rem;
+}
+
+.check-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+}
+
+.label-check{
+    padding-left: .3rem;
+}
+
+.check {
+    transition: box-shadow 0.5s ease , background 0.5s ease;   
+    position: absolute;
+    margin-left: -1.2rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    background: #77777725;   
+    border:0.1rem solid #1969ff;
+    box-sizing: border-box;     
+}
+
+.check-input:checked + .check {
+    border:0.2rem solid #1969ff;
+    background: #1969ff url("data:image/svg+xml;charset=UTF-8,%3c?xml version='1.0' ?%3e%3csvg id='Layer_1' style='enable-background:new 0 0 512 512;' version='1.1' viewBox='0 0 512 512' xml:space='preserve' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3e%3cg%3e%3cpolygon class='st0' fill='%23FFF' points='434.8,49 174.2,309.7 76.8,212.3 0,289.2 174.1,463.3 196.6,440.9 196.6,440.9 511.7,125.8 434.8,49 '/%3e%3c/g%3e%3c/svg%3e");       
+}
+
+.check-input:focus + .check {    
+    box-shadow: 0 0 0 0.05rem #B2DFFC;
+} 
+
+.check-input:disabled + .check {
+    opacity: 0.7;
+} 
 
 /* USER ICON ++++++++++++++++++++++++++++++++++++++ */
 
@@ -531,13 +694,32 @@ footer{
 /* MEDIA ++++++++++++++++++++++++++++++++++++++++++ */
 
 @media (max-width: 720px) {
+    /* GLOBAL ************************************ */
+
+    header{
+        position: fixed;
+        width: 100%;
+        z-index: 1;
+    }
+
+    main{
+        padding-top: 85px;
+    }
+    
     /* MENU-SITE ********************************** */
     .menu-site__item{
         width: 100%;
     }
-
-    /* REGISTRATION ******************************* */
     
+    /* INPUTS ************************************* */
+
+    .form-inputs-inline{
+        display: block;
+    }
+
+    .form-inputs-inline .form-input:nth-child(2n){
+        margin-left: 0;
+    }
 
     /* HAMBURGER MENU ***************************** */
     .menu-button{
@@ -545,12 +727,12 @@ footer{
     }
 
     .links-left{
-        transform: translateX(-100%);
+        transform-origin: left center;
         left:0;
     }
 
     .links-right{
-        transform: translateX(100%);
+        transform-origin: right center;
         right: 0;
     }    
 
@@ -565,11 +747,12 @@ footer{
         height: calc(100vh - 100%);
         min-width: 200px;
         background-color: #1969ff;
+        transform: scaleX(0);
         transition: transform .5s ease;        
     }
 
     .links-active{
-        transform: translateX(0);
+        transform: scaleX(1);
     }   
 
     /* USER PANEL ********************************** */
@@ -590,5 +773,15 @@ footer{
 
     .user-option{
         border-radius: 5px;
+    }
+
+    /* PROFILE **************************************** */
+
+    .profile-field{
+        display: block;
+    }
+
+    .profile-field:nth-child(2n){
+        margin-left: 0;
     }
 }
