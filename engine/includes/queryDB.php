@@ -76,5 +76,13 @@
             ;');
         }
 
+        /*////////////////// Query for static page  ////////////////////*/
+
+        public function get_static($url){
+            return $this->query('
+                SELECT * FROM `static` WHERE `static`.`url` = "'.htmlspecialchars($url).'"
+            ;');
+        }
+
     }
 ?>

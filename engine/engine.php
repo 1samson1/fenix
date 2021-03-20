@@ -23,6 +23,10 @@
             include_once ENGINE_DIR.'/modules/profile.php';
             break;
         
+        case 'static':
+            include_once ENGINE_DIR.'/modules/static.php';
+            break;
+        
         default:
             $alerts->set_error('Oшибка', 'Такой страницы или файла не существует!', 404);
             $head['title'] = 'Страница не найдена!';
