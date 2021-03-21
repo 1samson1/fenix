@@ -487,6 +487,7 @@ main .container-main, .container-reg, .container-profile{
 
 .static-body{
     padding: 7px 10px;
+    font-size: 1.2rem;
 }
 
 .static-body img{
