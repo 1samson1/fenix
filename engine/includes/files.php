@@ -44,7 +44,7 @@
     }
 
 	function delete_file($path){
-		if(file_exists(ROOT_DIR.'/'.$path)){
+		if($path and file_exists(ROOT_DIR.'/'.$path)){
 			unlink(ROOT_DIR.'/'.$path);
 		}
 	}

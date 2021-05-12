@@ -20,7 +20,6 @@
                         if(!$db->error){
                             setcookie('user_token', $token, time() + $config['life_time_token'], '/');
                             $_SESSION['user']= $user;
-                            header('Location: /');
                         }
                         else $alerts->set_error('Ошибка авторизации', 'Не удалось выдать токен', 207);
                     }
@@ -36,8 +35,7 @@
             $_SESSION['user']= $user;
             $tpl->set('{login}', $_SESSION['user']['login']);
         } 
-        else {
-            /* $alerts->set_error('Ошибка авторизации', 'Недействительный токен', 208); */
+        else {            
             setcookie('user_token', '', 0, '/');
             unset($_SESSION['user']);
         }

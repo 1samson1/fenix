@@ -76,6 +76,22 @@
             ;');
         }
 
+        /*////////////////// Query for recdoc page  ////////////////////*/
+
+        public function get_specialties(){
+            return $this->query('
+                SELECT * FROM `specialties`
+            ;');
+        }
+        
+        public function get_doctors_by_specialty($id){
+            return $this->query('
+                SELECT `doctors`.*, `specialties`.`title` AS `specialty` FROM `doctors` 
+                    INNER JOIN `specialties` ON `specialties`.`id` = `doctors`.`specialty_id`
+                    WHERE `doctors`.`specialty_id` = '.htmlspecialchars($id).'
+            ;');
+        }
+
         /*////////////////// Query for static page  ////////////////////*/
 
         public function get_static($url){

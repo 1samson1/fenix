@@ -26,6 +26,14 @@
         case 'static':
             include_once ENGINE_DIR.'/modules/static.php';
             break;
+
+        case 'news':
+            include_once ENGINE_DIR.'/modules/news.php';
+            break;
+
+        case 'recdoc':
+            include_once ENGINE_DIR.'/modules/recdoc.php';
+            break;
         
         default:
             $alerts->set_error('Oшибка', 'Такой страницы или файла не существует!', 404);

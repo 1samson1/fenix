@@ -13,9 +13,7 @@
 
 /* GLOBAL =========================================== */
 
-* {
-    padding: 0;
-    margin: 0;
+* {   
     box-sizing: border-box;
     font-family: 'Source Sans Pro', sans-serif;
 }
@@ -26,7 +24,8 @@ body{
     background: #efefef;
     width: 100%;
     min-height: 100vh;
-    /* overflow-x: hidden; */
+    padding: 0;
+    margin: 0;
 }
 
 .container{
@@ -43,6 +42,7 @@ table{
     color:#333333;
     width:100%;
     outline: 1px solid #729ea5;
+    border-radius: 5px;
 }
 table th {
     font-size:17px;
@@ -311,9 +311,10 @@ header{
 
 main{    
     padding: 25px 0;
+    margin: auto 0;
 }
 
-main .container-main, .container-reg, .container-profile{    
+main .container-fill{    
     background: #fff;   
     box-shadow: 1px 1px 4px 1px #777; 
     border-radius: 10px;
@@ -330,7 +331,7 @@ main .container-main, .container-reg, .container-profile{
 
 /* ALERTS +++++++++++++++++++++++++++++++++++++++++++ */
 
-.alert-success, .alert-error{
+.alert{
     margin-bottom: 25px;
     padding: 20px;
     border-radius: 10px;
@@ -340,20 +341,20 @@ main .container-main, .container-reg, .container-profile{
     border:1px solid #00000030;
 }
 
-.alert-success:hover, .alert-error:hover{
+.alert:hover{
     opacity: 0.85;
 }
 
-.alert-success b, .alert-error b{
+.alert b{
     display: block;
     margin-bottom: 5px;
 }
 
-.alert-success{
+.alert[data-alert-type="success"]{
     background: #5DB759;
 }
 
-.alert-error{
+.alert[data-alert-type="error"]{
     background: #D7544E;
 }
 
@@ -483,7 +484,104 @@ main .container-main, .container-reg, .container-profile{
     padding-bottom: 5px;
 }
 
+/* RECDOC +++++++++++++++++++++++++++++++++++++++++++ */
+
+.instruction-recdoc{
+    padding:3px  22px;
+}
+
+/* SPECIALTIES ************************************* */
+
+.specialties-recdoc{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 7px;
+}
+
+.specialty-recdoc__item{
+    width: 50%;
+    color: #000;
+    text-decoration: none;
+    padding: 7px;
+    display: flex;    
+    border-bottom: 1px solid #eee;
+    transition: background .3s ease;
+}
+
+.specialty-recdoc__item:hover{
+    background: #77777715;
+}
+
+.specialty-recdoc__item__title{    
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.specialty-recdoc__item__img{
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+    border-radius: 50%;
+    border:3px solid #eee;
+    box-shadow: 1px 1px 4px 1px #777; 
+}
+
+/* DOCTORS ************************************* */
+
+.doctors-recdoc{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 7px;
+}
+
+.doctor-recdoc__item{
+    width: 50%;
+    color: #000;
+    text-decoration: none;
+    padding: 7px;
+    display: flex;    
+    border-bottom: 1px solid #eee;
+    transition: background .3s ease;
+    position: relative;
+}
+
+.doctor-recdoc__item:hover{
+    background: #77777715;
+}
+
+.doctor-recdoc__item__title{    
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.doctor-recdoc__item__img{
+    width: 150px;
+    height: 150px;
+    margin-right: 10px;
+    border-radius: 50%;
+    border:5px solid #eee;
+    box-shadow: 1px 1px 4px 1px #777; 
+}
+
+.doctor-recdoc__item__content{
+    padding-bottom: 45px;
+}
+
+.recording{
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+
+}
+
 /* STATIC +++++++++++++++++++++++++++++++++++++++++++ */
+
+.container-static{
+    max-width: 750px;
+    margin: 0 auto;
+}
 
 .static-body{
     padding: 7px 10px;
@@ -617,6 +715,8 @@ footer{
     text-decoration: none;
     text-align: center;
     cursor: pointer;
+    transition: background .3s ease;
+    user-select: none;
 }
 
 .btn-large{
@@ -816,6 +916,16 @@ footer{
 
     .user-option{
         border-radius: 5px;
+    }
+
+    /* SPECIALTIES-RECDOC ******************************* */
+    .specialty-recdoc__item{
+        width: 100%;
+    }
+
+    /* DOCTORS-RECDOC ******************************* */
+    .doctor-recdoc__item{
+        width: 100%;
     }
 
     /* PROFILE **************************************** */

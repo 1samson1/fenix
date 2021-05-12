@@ -6,17 +6,7 @@
         foreach ($alerts->alerts_array as $alert) {            
             $tpl->set('{alert-title}', $alert['title']);
             $tpl->set('{alert-text}', $alert['text']);
-
-            if($alert['type'] == 'success'){
-                $tpl->set_block('/\[error\](.*)\[\/error\]/s','');
-                $tpl->set('[success]', '');
-                $tpl->set('[/success]', '');
-            }
-            else {
-                $tpl->set_block('/\[success\](.*)\[\/success\]/s','');
-                $tpl->set('[error]', '');
-                $tpl->set('[/error]', '');
-            }
+            $tpl->set('{alert-type}', $alert['type']);
 
             $tpl->copy_tpl();
         }

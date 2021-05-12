@@ -1,0 +1,40 @@
+<div class="container-fill container-recdoc">
+    <div class="title-page">Запись к врачу</div>
+    [step=1]
+    <div class="instruction-recdoc">Для записи к врачу нужно выбрать специальность врача, к которому Вы бы хотели записаться.</div>
+    <div class="specialties-recdoc">
+        {specialties}         
+    </div>
+    [/step=1]
+    [step=2]
+    <div class="instruction-recdoc">Выберите нужного Вам врача, для записи на приём.</div>
+    <div class="doctors-recdoc">
+        {doctors}
+    </div>   
+    [/step=2]
+    [step=3]
+        <div class="instruction-recdoc">Выберите дату и время приёма для записи к врачу.</div>        
+        <input type="hidden" name="date" class="daterec" />
+        <script>
+            $('.daterec').datepicker({
+                inline:true,
+                minHours:9,
+                maxHours:17,
+                minutesStep:30,
+                minDate: new Date(),
+                maxDate: new Date(new Date().setDate(new Date().getDate() + 28)),
+                onRenderCell: function (date, cellType) {
+                    if (cellType == 'day') {
+                        var day = date.getDay(),
+                            isDisabled = [0,6].indexOf(day) != -1;
+
+            
+                        return {
+                            disabled: isDisabled
+                        }
+                    }
+                }
+            })
+        </script>    
+    [/step=3]
+</div>

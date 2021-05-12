@@ -6,6 +6,8 @@
         public $copy_template = null;
         public $data = array();
         public $data_block = array();
+        public $data_block_param = array();
+
 
         public function __construct(){
             global $config;
@@ -14,28 +16,15 @@
         }
         
         public function set($tag,$value){        
-            if( is_array($value ) ) {
-                if( count($value ) ) {
-                    foreach ($value as $key => $key_var ) {
-                        $this->set( $key, $key_var );
-                    }
-                }
-                return;
-            }
-            
             $this->data[$tag] = $value;
         }
 
         public function set_block($block,$value){    
-            if( is_array($value ) ) {
-                if( count($value ) ) {
-                    foreach ($value as $key => $key_var ) {
-                        $this->set_block( $key, $key_var );
-                    }
-                }
-                return;
-            }
             $this->data_block[$block] = $value;
+        }
+
+        public function set_block_param($block,$param){    
+            $this->data_block_param[$block] = $param;
         }
 
         public function load_tpl($tpl_name){
@@ -46,25 +35,27 @@
             }
             else die('fatal error!');
 
-            $this->template = preg_replace_callback('/\[((not-)group|group)=?([0-9]*)?\](.*)\[\/\1\]/s', array(&$this, 'check_group'), $this->template);            
-        }    
-
-        public function check_group($matches){
-            if($matches[2]){
-                if($_SESSION['user']['group_id']) return '';
-                else return $matches[4];
-            }
-            else {
-                if($matches[3]){
-                    if($_SESSION['user']['group_id'] == $matches[3]) return $matches[4];
-                    else return '';
-                }
-                else {
-                    if(!$_SESSION['user']['group_id']) return '';
-                    else return $matches[4];
-                }
-            }
-        }   
+            $this->template = preg_replace_callback(
+                '/\[((not-)group|group)=?([0-9]*)?\](.*)\[\/\1\]/s',
+                function ($matches){
+                    if($matches[2]){
+                        if($_SESSION['user']['group_id']) return '';
+                        else return $matches[4];
+                    }
+                    else {
+                        if($matches[3]){
+                            if($_SESSION['user']['group_id'] == $matches[3]) return $matches[4];
+                            else return '';
+                        }
+                        else {
+                            if(!$_SESSION['user']['group_id']) return '';
+                            else return $matches[4];
+                        }
+                    }
+                },
+                $this->template
+            );            
+        }  
 
         public function replace_tags($template){
             foreach($this->data as $tag => $value){
@@ -84,12 +75,32 @@
             return $template;
         }
 
-        public function replace_all($template){
-            $template = $this->replace_tags($template);    
-            $template = $this->replace_block($template);    
+        public function replace_block_param($template){
+            foreach($this->data_block_param as $block => $param){
+                $this->block_param = $param;
+                $template = preg_replace_callback(
+                    $block, 
+                    function ($matches) use ($param){
+                        if ($matches[1] == $param){
+                            return $matches[2];
+                        }
+                        return '';
+                    },
+                    $template
+                );            
+                unset($this->data_block_param[$block]);
+            }
 
             return $template;
         }
+
+        public function replace_all($template){
+            $template = $this->replace_tags($template);    
+            $template = $this->replace_block($template);    
+            $template = $this->replace_block_param($template);    
+
+            return $template;
+        }        
         
         public function copy_tpl(){
             $this->copy_template .= $this->replace_all($this->template);            

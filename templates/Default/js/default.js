@@ -1,7 +1,7 @@
 $(function () {
 
     /* LOGIN PANEL SCRIPTS +++++++++++++++++++++++++++++++++++++++++++++++++++ */
-    $('#login-link').on('click',function () {
+    $('.login-link').on('click',function () {
         $('.bg-login-panel, .login-panel').fadeIn(500)
         $('body').css('overflow','hidden')
     })
@@ -68,5 +68,5 @@ $(function () {
         setTimeout(function () {
             dettach.removeClass('dettach-transition')
         },200)
-    })    
+    }) 
 })
