@@ -1,40 +1,42 @@
+
+[step=1]
 <div class="container-fill container-recdoc">
     <div class="title-page">Запись к врачу</div>
-    [step=1]
     <div class="instruction-recdoc">Для записи к врачу нужно выбрать специальность врача, к которому Вы бы хотели записаться.</div>
     <div class="specialties-recdoc">
         {specialties}         
     </div>
-    [/step=1]
-    [step=2]
+</div>
+[/step=1]
+[step=2]
+<div class="container-fill container-recdoc">
+    <div class="title-page">Запись к врачу</div>
     <div class="instruction-recdoc">Выберите нужного Вам врача, для записи на приём.</div>
     <div class="doctors-recdoc">
         {doctors}
     </div>   
-    [/step=2]
-    [step=3]
-        <div class="instruction-recdoc">Выберите дату и время приёма для записи к врачу.</div>        
-        <input type="hidden" name="date" class="daterec" />
-        <script>
-            $('.daterec').datepicker({
-                inline:true,
-                minHours:9,
-                maxHours:17,
-                minutesStep:30,
-                minDate: new Date(),
-                maxDate: new Date(new Date().setDate(new Date().getDate() + 28)),
-                onRenderCell: function (date, cellType) {
-                    if (cellType == 'day') {
-                        var day = date.getDay(),
-                            isDisabled = [0,6].indexOf(day) != -1;
-
-            
-                        return {
-                            disabled: isDisabled
-                        }
-                    }
-                }
-            })
-        </script>    
-    [/step=3]
 </div>
+[/step=2]
+[step=3]
+<div class="container-fill container-recording">
+    <div class="title-page">Запись к врачу</div>
+    <div class="doctor-recdoc">      
+        <img src="{doctor-foto}" alt="" class="doctor-recdoc__img">
+        <div class="doctor-recdoc__content">
+            <div class="doctor-recdoc__title">{doctor-name}</div>
+            <div class="doctor-recdoc__text">
+                <div><b>Специальность: </b>{doctor-specialty}</div>
+                <div><b>Кабинет: </b>{doctor-kabinet}</div>
+            </div>
+        </div>            
+    </div>        
+    <div class="instruction-recdoc">Выберите дату и время приёма для записи к врачу.</div>
+    <form action="" class="form-recording" method="post">
+        <div class="form-picker">
+            <input type="hidden" name="date" class="daterec"/>
+            <input type="hidden" name="time" class="timerec"/>
+        </div>
+        <input class="btn btn-large" type="submit" value="Записаться">     
+    </form>     
+</div>      
+[/step=3]

@@ -44,15 +44,15 @@
       -ms-flex-pack: center;
           justify-content: center;
   height: 32px;
-  z-index: 1; }
+  z-index: 0; }
   .datepicker--cell.-focus- {
     background: #f0f0f0; }
   .datepicker--cell.-current- {
-    color: #4EB5E6; }
+    color: #1969ff; }
     .datepicker--cell.-current-.-focus- {
       color: #4a4a4a; }
     .datepicker--cell.-current-.-in-range- {
-      color: #4EB5E6; }
+      color: #1969ff; }
   .datepicker--cell.-in-range- {
     background: rgba(92, 196, 239, 0.1);
     color: #4a4a4a;
@@ -81,12 +81,12 @@
   .datepicker--cell.-selected- {
     color: #fff;
     border: none;
-    background: #5cc4ef; }
+    background: #1969ff; }
     .datepicker--cell.-selected-.-current- {
       color: #fff;
-      background: #5cc4ef; }
+      background: #1969ff; }
     .datepicker--cell.-selected-.-focus- {
-      background: #45bced; }
+      background: #3a7fff; }
   .datepicker--cell:empty {
     cursor: default; }
 

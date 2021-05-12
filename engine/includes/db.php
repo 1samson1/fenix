@@ -48,6 +48,11 @@
             return mysqli_fetch_assoc($query);
         } 
 
+        public function get_row_noassoc($query = '') {
+            if ($query == '') $query = $this->query;    
+            return mysqli_fetch_row($query);
+        } 
+
         public function get_array($query = ''){
             if ($query == '') $query = $this->query;    
 

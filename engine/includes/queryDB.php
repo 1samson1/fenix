@@ -92,6 +92,21 @@
             ;');
         }
 
+        public function get_doctor_by_id($id){
+            return $this->query('
+                SELECT `doctors`.*, `specialties`.`title` AS `specialty` FROM `doctors` 
+                    INNER JOIN `specialties` ON `specialties`.`id` = `doctors`.`specialty_id`
+                    WHERE `doctors`.`id` = '.htmlspecialchars($id).'
+            ;');
+        }
+
+        public function get_doctor_schedule_by_id($id){
+            return $this->query('
+                SELECT  `Sun`, `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat` FROM `schedule` 
+                   WHERE `schedule`.`id_doctor` = '.htmlspecialchars($id).'
+            ;');
+        }
+
         /*////////////////// Query for static page  ////////////////////*/
 
         public function get_static($url){
