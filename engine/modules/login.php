@@ -3,6 +3,8 @@
 
     if(isset($_SESSION['user'])){
         $tpl->set('{login}', $_SESSION['user']['login']);
+        $tpl->set('{name}', $_SESSION['user']['name']);
+        $tpl->set('{surname}', $_SESSION['user']['surname']);
 
         if($_SESSION['user']['foto'])$foto = $config['host_url'].'/'.$_SESSION['user']['foto'];
         else $foto = '{TEMPLATE}/img/noavatar.png';

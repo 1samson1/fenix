@@ -107,6 +107,13 @@
             ;');
         }
 
+        public function recording($doctor_id, $user_id, $date, $time){
+            return $this->query('
+                INSERT INTO `recdoctor` (`time`, `doctor_id`, `user_id`) 
+                    VALUES ('.strtotime($time,strtotime($date)).', '.htmlspecialchars($doctor_id).', '.htmlspecialchars($user_id).')
+            ;');
+        }
+
         /*////////////////// Query for static page  ////////////////////*/
 
         public function get_static($url){

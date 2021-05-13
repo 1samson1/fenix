@@ -1,4 +1,3 @@
-
 [step=1]
 <div class="container-fill container-recdoc">
     <div class="title-page">Запись к врачу</div>
@@ -30,13 +29,33 @@
             </div>
         </div>            
     </div>        
-    <div class="instruction-recdoc">Выберите дату и время приёма для записи к врачу.</div>
+    <div class="instruction-recdoc center">Выберите дату и время приёма для записи к врачу.</div>
     <form action="" class="form-recording" method="post">
         <div class="form-picker">
             <input type="hidden" name="date" class="daterec"/>
             <input type="hidden" name="time" class="timerec"/>
         </div>
-        <input class="btn btn-large" type="submit" value="Записаться">     
+        <input class="btn btn-large" name="rec" type="submit" value="Записаться">     
     </form>     
 </div>      
 [/step=3]
+[step=4]
+<div class="container-fill container-recording">
+    <div class="title-page">Вы успешно записаны на приём!</div>
+    <div class="doctor-recdoc">      
+        <img src="{doctor-foto}" alt="" class="doctor-recdoc__img">
+        <div class="doctor-recdoc__content">
+            <div class="doctor-recdoc__title">{doctor-name}</div>
+            <div class="doctor-recdoc__text">
+                <div><b>Специальность: </b>{doctor-specialty}</div>
+                <div><b>Кабинет: </b>{doctor-kabinet}</div>
+                <div><b>Дата и время приёма: </b>{datetime-recdoc}</div>
+            </div>
+        </div>            
+    </div>  
+    <div class="success-recdoc">
+        <div class="title-success-recdoc center">Ждём Вас!</div>
+        <div class="icon-success-recdoc center"></div>
+    </div>   
+</div>
+[/step=4]

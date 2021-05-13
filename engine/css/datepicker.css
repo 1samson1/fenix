@@ -173,9 +173,10 @@
   border: 1px solid #dbdbdb;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
-  box-sizing: content-box;
+  box-sizing: border-box;
   font-family: Tahoma, sans-serif;
   font-size: 18px;
+  height: 100%;
   color: #4a4a4a;
   width: 250px;
   position: absolute;

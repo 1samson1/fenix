@@ -34,6 +34,11 @@ body{
     margin:0 auto;
 }
 
+.center{
+    text-align: center;
+    margin: 0 auto;
+}
+
 table tr:nth-child(2n+1){
     background: #f3f8f8;
 }
@@ -588,7 +593,7 @@ main .container-fill{
 .doctor-recdoc__title{    
     font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 35px;
 }
 
 .doctor-recdoc__img{
@@ -609,6 +614,23 @@ main .container-fill{
     height: 272px;
     justify-content: center;
     margin: 5px 0;
+}
+
+.success-recdoc{
+    padding: 10px 10px 30px 10px;
+}
+
+.title-success-recdoc{
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.icon-success-recdoc{
+    background: url(../img/ok.png) no-repeat;
+    background-size: contain;
+    width: 100px;
+    height: 100px;
 }
 
 /* STATIC +++++++++++++++++++++++++++++++++++++++++++ */

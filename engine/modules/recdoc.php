@@ -1,8 +1,38 @@
 <?php     
     require_once ENGINE_DIR.'/includes/functions.php';
+    require_once ENGINE_DIR.'/includes/checkFeild.php';	
 
+    function checkRecording(){
+        if(isset($_POST['rec'])){
+            global $alerts,$db;
+            
+            $alerts->set_error_if(!CheckField::empty($_POST['date']), 'Ошибка!', 'Вы не ввели дату!', 248);
 
-    if(isset($_GET['doctor'])){
+            $alerts->set_error_if(!CheckField::empty($_POST['time']), 'Ошибка!', 'Вы не ввели время!', 249);
+            
+            if(!isset($alerts->alerts_array[0])){
+                if($db->recording($_GET['doctor'], $_SESSION['user']['id'], $_POST['date'], $_POST['time'])){
+					return true;
+				}
+				else $alerts->set_error_if($db->error, 'Ошибка записи на приём!', 'Выбраная дата занята!', $db->error_num);
+            }
+        }
+        return false;
+    }
+
+    if (checkRecording()){
+        $step = 4;
+        $db->get_doctor_by_id($_GET['doctor']);
+        
+        if ($doctor = $db->get_row()) {
+            $tpl->set('{doctor-name}', $doctor['name']);
+            $tpl->set('{doctor-foto}', $config['host_url'].'/'.$doctor['foto']);
+            $tpl->set('{doctor-specialty}', $doctor['specialty']);
+            $tpl->set('{doctor-kabinet}', $doctor['kabinet']);
+            $tpl->set('{datetime-recdoc}', $_POST['date'].' '.$_POST['time']);
+        }
+    }
+    else if(isset($_GET['doctor'])){
         $step = 3;
 
         $db->get_doctor_by_id($_GET['doctor']);
@@ -15,6 +45,7 @@
 
             $db->get_doctor_schedule_by_id($_GET['doctor']);
             if ($schedule = $db->get_row_noassoc()){
+
                 $endlines = "
                 <script>
                     $('.daterec').datepicker({
@@ -22,7 +53,7 @@
                         minHours:9,
                         maxHours:17,
                         minutesStep:30,
-                        minDate: new Date(),
+                        minDate:new Date(new Date().setDate(new Date().getDate() + 1)),
                         maxDate: new Date(new Date().setDate(new Date().getDate() + 42)),
                         onRenderCell: function (date, cellType) {
                             if (cellType == 'day') {
@@ -34,11 +65,20 @@
                                 }
                             }
                         }
-                    })            
+                    })   
+                    $('.timerec').timepicker()         
                 </script> 
                 ";
             }
+            else {
+                $alerts->set_error('Oшибка', 'Для доктора не существует графика работы!', 283);
+                showSpecialties();
+            }	
         }
+        else {
+            $alerts->set_error('Oшибка', 'Такого доктора не существует!', 282);
+            showSpecialties();
+        }	
     }
     else if(isset($_GET['specialty'])){
         $step = 2;
@@ -59,6 +99,11 @@
         $tpl->save_copy('{doctors}');
     }
     else{
+        showSpecialties();
+    }
+
+    function showSpecialties(){
+        global $step,$tpl,$db;
         $step = 1;
         $tpl->load_tpl('specialties.html');
     

@@ -8,7 +8,7 @@
 		/* edit user */
 
 		if(isset($_POST['do_save_profile'])){
-			if($_SESSION['user']['group_id'] == 1 || $_SESSION['user']['id'] == $row['id']){
+			if($_SESSION['user']['group_id'] == 1 || $_SESSION['user']['id'] == $user['id']){
 
 				$alerts->set_error_if(!CheckField::login($_POST['login']), 'Ошибка изменения данных пользователя', 'Некорректный логин', 201);
 

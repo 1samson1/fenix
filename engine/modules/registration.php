@@ -11,7 +11,7 @@
 
 			$alerts->set_error_if(!CheckField::email($_POST['email']), 'Ошибка регистрации', 'Некорректный email', 202);
 
-			$alerts->set_error_if(!CheckField::pass($_POST['password']), 'Ошибка регистрации', 'Вы не ввели пароль', 203);
+			$alerts->set_error_if(!CheckField::empty($_POST['password']), 'Ошибка регистрации', 'Вы не ввели пароль', 203);
 
 			$alerts->set_error_if(!CheckField::confirm_pass($_POST['password'],$_POST['repassword']), 'Ошибка регистрации', 'Пароль не совпадает с формой подтверждения', 204);
 

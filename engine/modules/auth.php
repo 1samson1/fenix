@@ -6,7 +6,7 @@
 
             $alerts->set_error_if(!CheckField::login($_POST['login']), 'Ошибка авторизации', 'Некорректный логин', 201);
 
-            $alerts->set_error_if(!CheckField::pass($_POST['password']), 'Ошибка авторизации', 'Вы не ввели пароль', 203);  
+            $alerts->set_error_if(!CheckField::empty($_POST['password']), 'Ошибка авторизации', 'Вы не ввели пароль', 203);  
 
             if(!isset($alerts->alerts_array[0])){
 
