@@ -114,6 +114,30 @@
             ;');
         }
 
+        /*////////////////// Query for news ////////////////////*/
+
+        public function get_short_news($count, $begin=0){
+            return $this->query('
+                SELECT 
+                    `users`.`login` AS `autor`, 
+                    `news`.`id`,
+                    `news`.`title`,
+                    `news`.`url`,
+                    `news`.`date`,
+                    `news`.`short_news` AS `body` 
+                FROM `news` 
+                    INNER JOIN `users` ON `news`.`autor` = `users`.`id`
+                    ORDER BY `news`.`date` DESC
+                    LIMIT '.$begin.', '.$count.'
+            ;');
+        }
+
+        public function get_full_news($url){
+            return $this->query('
+                SELECT * FROM `static` WHERE `static`.`url` = "'.htmlspecialchars($url).'"
+            ;');
+        }
+
         /*////////////////// Query for static page  ////////////////////*/
 
         public function get_static($url){

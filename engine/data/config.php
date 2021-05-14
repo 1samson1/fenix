@@ -16,5 +16,7 @@
 		'timezone' => 'Europe/Moscow',
 
         'template' => 'Default',
+        
+        'count_news_on_page' => 10,
     )
 ?>

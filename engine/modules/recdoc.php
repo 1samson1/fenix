@@ -6,9 +6,9 @@
         if(isset($_POST['rec'])){
             global $alerts,$db;
             
-            $alerts->set_error_if(!CheckField::empty($_POST['date']), 'Ошибка!', 'Вы не ввели дату!', 248);
+            $alerts->set_error_if(!CheckField::empty($_POST['date']), 'Ошибка!', 'Вы не выбрали дату!', 248);
 
-            $alerts->set_error_if(!CheckField::empty($_POST['time']), 'Ошибка!', 'Вы не ввели время!', 249);
+            $alerts->set_error_if(!CheckField::empty($_POST['time']), 'Ошибка!', 'Вы не выбрали время!', 249);
             
             if(!isset($alerts->alerts_array[0])){
                 if($db->recording($_GET['doctor'], $_SESSION['user']['id'], $_POST['date'], $_POST['time'])){
