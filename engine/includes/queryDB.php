@@ -145,6 +145,30 @@
             ;');
         }
 
+        /*////////////////// Query for comments  ////////////////////*/
+
+        public function add_comment($news_id, $user_id, $text, $date){
+            return $this->query('
+                INSERT INTO `comments` (`news_id`, `user_id`, `text`, `date`) 
+                    VALUES ('.htmlspecialchars($news_id).', '.htmlspecialchars($user_id).', "'.$text.'", '.$date.')
+            ;');
+        }
+
+        public function get_comments_by_news_id($id){
+            return $this->query('
+                SELECT 
+                    `comments`.`id`,
+                    `users`.`name`, 
+                    `users`.`surname`, 
+                    `users`.`foto`, 
+                    `comments`.`text`,
+                    `comments`.`date`
+                FROM `comments` 
+                    INNER JOIN `users` ON `comments`.`user_id` = `users`.`id`
+                    WHERE `comments`.`news_id` = '.htmlspecialchars($id).'
+            ;');
+        }
+
         /*////////////////// Query for static page  ////////////////////*/
 
         public function get_static($url){

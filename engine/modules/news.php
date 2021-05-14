@@ -4,6 +4,8 @@
         
         $db->get_full_news($_GET['param1']);
         if($news_item = $db->get_row()){
+            require_once ENGINE_DIR.'/modules/comments.php';	
+            
             $tpl->load_tpl('fullnews.html');
 
             $tpl->set('{title}', $news_item['title']);
@@ -13,6 +15,7 @@
             
             $tpl->save('{content}');
             $head['title'] = $news_item['title'];
+
         }
         else {
             $alerts->set_error('Oшибка', 'Такой новости не существует!', 404);

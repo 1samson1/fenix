@@ -641,7 +641,7 @@ main .container-fill{
 }
 
 .date-news, .autor-news{
-    background-size: contain;
+    background-size: 1em;;
     padding-left: 1.3em;
 }
 
@@ -707,6 +707,60 @@ main .container-fill{
     border-top: 1px solid #00000030;
     border-bottom: 1px solid #00000030;
     padding: 7px 0;
+}
+
+/* COMMENTS +++++++++++++++++++++++++++++++++++++++++++ */
+
+.container-comments{
+    padding: 15px 20px;
+}
+
+.title-comments{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.comment{
+    display: flex;    
+    background: #00000010;
+    border-radius: 7px;
+    padding: 7px;
+    box-shadow: 1px 1px 4px 1px #aaa; 
+    margin-bottom: 15px;
+}
+
+.content-commnent{
+    width: 100%;
+}
+
+.foto-comment{
+    width: 70px;
+    height: 70px;
+    margin-right: 10px;
+    border-radius: 50%;
+    border:5px solid #eee;
+    box-shadow: 1px 1px 4px 1px #777; 
+}
+
+.autor-commnent{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.info-commnent{
+    padding-top: 4px;
+    border-top: 1px solid #00000030;    
+}
+
+.text-comment{
+    padding: 10px 0;
+}
+
+.date-comment{
+    background: url(../img/alarm.svg) no-repeat left center;
+    background-size: 1em;
+    padding-left: 1.3em;
 }
 
 /* STATIC +++++++++++++++++++++++++++++++++++++++++++ */
