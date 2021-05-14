@@ -1,6 +1,23 @@
 <?php 
 
     if(isset($_GET['param1'])){
+        
+        $db->get_full_news($_GET['param1']);
+        if($news_item = $db->get_row()){
+            $tpl->load_tpl('fullnews.html');
+
+            $tpl->set('{title}', $news_item['title']);
+            $tpl->set('{body}', $news_item['body']);
+            $tpl->set('{date}', date('d.m.Y', $news_item['date']));
+            $tpl->set('{autor}', $news_item['autor']);
+            
+            $tpl->save('{content}');
+            $head['title'] = $news_item['title'];
+        }
+        else {
+            $alerts->set_error('Oшибка', 'Такой новости не существует!', 404);
+		    $head['title'] = 'Новость не найдена';
+        }
 
     }
     else{
@@ -12,7 +29,7 @@
             $tpl->set('{body}', $news_item['body']);
             $tpl->set('{date}', date('d.m.Y', $news_item['date']));
             $tpl->set('{autor}', $news_item['autor']);
-            $tpl->set('{news-link}', '/news/'.$news_item['url']);
+            $tpl->set('{news-link}', '/news/'.$news_item['id'].'/');
     
             $tpl->copy_tpl();
         }

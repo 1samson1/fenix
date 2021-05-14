@@ -119,10 +119,9 @@
         public function get_short_news($count, $begin=0){
             return $this->query('
                 SELECT 
-                    `users`.`login` AS `autor`, 
                     `news`.`id`,
+                    `users`.`login` AS `autor`, 
                     `news`.`title`,
-                    `news`.`url`,
                     `news`.`date`,
                     `news`.`short_news` AS `body` 
                 FROM `news` 
@@ -132,9 +131,17 @@
             ;');
         }
 
-        public function get_full_news($url){
+        public function get_full_news($id){
             return $this->query('
-                SELECT * FROM `static` WHERE `static`.`url` = "'.htmlspecialchars($url).'"
+                SELECT 
+                    `news`.`id`,
+                    `users`.`login` AS `autor`, 
+                    `news`.`title`,
+                    `news`.`date`,
+                    `news`.`full_news` AS `body` 
+                FROM `news` 
+                    INNER JOIN `users` ON `news`.`autor` = `users`.`id`
+                    WHERE `news`.`id` = '.htmlspecialchars($id).'
             ;');
         }
 
