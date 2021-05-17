@@ -34,6 +34,10 @@
 
         $tpl->copy_tpl();
     }
-    
+
+    if(!$tpl->copy_template){
+        $tpl->append('Пока комментариев нет. Вы можете стать первым.');
+    }
+        
     $tpl->save_copy('{comments}');
 ?>

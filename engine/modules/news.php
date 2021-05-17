@@ -24,9 +24,14 @@
 
     }
     else{
+
+        require_once ENGINE_DIR.'/modules/pagination.php';
+
+        $pagination = new Pagination('news', '/news/', $config['count_news_on_page']);
+
         $tpl->load_tpl('shortnews.html');
     
-        $db->get_short_news($config['count_news_on_page']);
+        $db->get_short_news($config['count_news_on_page'], $pagination->get_begin_item());
         while($news_item = $db->get_row()){
             $tpl->set('{title}', $news_item['title']);
             $tpl->set('{body}', $news_item['body']);
@@ -38,7 +43,9 @@
         }
     
         $tpl->save_copy('{news}');
-    
+
+        $pagination->gen_tpl();
+
         $tpl->load_tpl('news.html');    
         $tpl->save('{content}');
         $head['title'] = 'Новости';

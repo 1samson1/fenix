@@ -123,7 +123,7 @@
     
     $tpl->load_tpl('recdoc.html');
     $tpl->set_block_param('/\[step=(.+)\](.*)\[\/step=\1\]/Us', $step);
-    $tpl->template .= $endlines;
+    $tpl->append($endlines);
     $tpl->save('{content}');
     $head['title'] = 'Запись к врачу';
 ?>

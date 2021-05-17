@@ -44,7 +44,7 @@
         }
 
         public function get_row($query = '') {
-            if ($query == '') $query = $this->query;    
+            if ($query == '') $query = $this->query; 
             return mysqli_fetch_assoc($query);
         } 
 
@@ -64,6 +64,14 @@
 
         public function hash($value){
             return password_hash($value, PASSWORD_DEFAULT);
+        }
+
+        public function ecran($value){
+            return addslashes(stripslashes($value));
+        }
+
+        public function ecran_html($value){
+            return htmlspecialchars(addslashes(stripslashes($value)));
         }
 
         public function bool_to_sql($bool){

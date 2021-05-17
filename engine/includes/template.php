@@ -7,6 +7,7 @@
         public $data = array();
         public $data_block = array();
         public $data_block_param = array();
+        public $endlines = null;
 
 
         public function __construct(){
@@ -33,7 +34,7 @@
             if (file_exists($file_path)){
                 $this->template = file_get_contents($file_path);
             }
-            else die('fatal error!');
+            else die('Fatal error! No such file template!');
 
             $this->template = preg_replace_callback(
                 '/\[((not-)group|group)=?([0-9]*)?\](.*)\[\/\1\]/s',
@@ -101,6 +102,10 @@
 
             return $template;
         }        
+
+        public function append($value){
+            $this->endlines = $value;
+        }
         
         public function copy_tpl(){
             $this->copy_template .= $this->replace_all($this->template);            
@@ -108,12 +113,14 @@
 
         public function save($tag){
             $this->template = $this->replace_all($this->template);       
+            $this->template .= $this->endlines;
             $this->data[$tag] = $this->template;
             $this->clear();
         }
 
         public function save_copy($tag){
             $this->template = $this->copy_template;
+            $this->template .= $this->endlines;
             $this->data[$tag] = $this->template;
             $this->clear();
         }
@@ -121,6 +128,7 @@
         public function clear(){
             $this->template = null;
             $this->copy_template = null;
+            $this->endlines = null;
         }
         
         public function print(){
