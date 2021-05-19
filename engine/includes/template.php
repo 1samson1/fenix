@@ -10,10 +10,13 @@
         public $endlines = null;
 
 
-        public function __construct(){
+        public function __construct($dir = false){
             global $config;
 
-            $this->dir = ROOT_DIR.'/templates/'.$config['template'];
+            if($dir){
+                $this->dir = $dir;
+            }
+            else $this->dir = ROOT_DIR.'/templates/'.$config['template'];
         }
         
         public function set($tag,$value){        

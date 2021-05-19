@@ -4,35 +4,35 @@
 
     require_once ENGINE_DIR.'/modules/auth.php';
 
-    /* BAD ROURER  ======================================== */
+    /* BAD ROUTER  ======================================== */
 
     switch ($_GET['do']) {
         case 'main':
-            include_once ENGINE_DIR.'/modules/main.php';
+            require_once ENGINE_DIR.'/modules/main.php';
             break;
 
         case 'registration':
-            include_once ENGINE_DIR.'/modules/registration.php';
+            require_once ENGINE_DIR.'/modules/registration.php';
             break;
 
         case 'logout':
-            include_once ENGINE_DIR.'/modules/logout.php';           
+            require_once ENGINE_DIR.'/modules/logout.php';           
             break;
         
         case 'profile':
-            include_once ENGINE_DIR.'/modules/profile.php';
+            require_once ENGINE_DIR.'/modules/profile.php';
             break;
         
         case 'static':
-            include_once ENGINE_DIR.'/modules/static.php';
+            require_once ENGINE_DIR.'/modules/static.php';
             break;
 
         case 'news':
-            include_once ENGINE_DIR.'/modules/news.php';
+            require_once ENGINE_DIR.'/modules/news.php';
             break;
 
         case 'recdoc':
-            include_once ENGINE_DIR.'/modules/recdoc.php';
+            require_once ENGINE_DIR.'/modules/recdoc.php';
             break;
         
         default:
@@ -43,15 +43,15 @@
     
     /* LOAD HEAD FILE ======================================== */
 
-    include_once ENGINE_DIR.'/modules/head.php';
+    require_once ENGINE_DIR.'/modules/head.php';
 
     /* LOAD ALERTS TEMPLATE ======================================== */
 
-    include_once ENGINE_DIR.'/modules/alerts.php';
+    require_once ENGINE_DIR.'/modules/alerts.php';
 
     /* LOAD LOGIN TEMPLATE ========================================= */
 
-    include_once ENGINE_DIR.'/modules/login.php';
+    require_once ENGINE_DIR.'/modules/login.php';
 
     /* LOAD BASE TEMPLATE ========================================= */
 

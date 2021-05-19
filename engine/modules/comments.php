@@ -28,7 +28,7 @@
         $tpl->set('{name}', $comment['name']);
         $tpl->set('{surname}', $comment['surname']);
 
-        if($comment['foto'])$foto = $config['host_url'].'/'.$comment['foto'];
+        if($comment['foto'])$foto = '/'.$comment['foto'];
         else $foto = '{TEMPLATE}/img/noavatar.png';
         $tpl->set('{foto}', $foto);
 

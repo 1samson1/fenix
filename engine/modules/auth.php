@@ -33,7 +33,6 @@
         $db->get_user_by_token($_COOKIE['user_token']);
         if($user = $db->get_row()){
             $_SESSION['user']= $user;
-            $tpl->set('{login}', $_SESSION['user']['login']);
         } 
         else {            
             setcookie('user_token', '', 0, '/');

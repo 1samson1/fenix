@@ -1,21 +1,27 @@
 /* FONTS ============================================ */
 
 @font-face{
-    font-family: Source Sans Pro;
-    src: url(../fonts/SourceSansPro-Regular.ttf);
+    font-family: Roboto;
+    src: url(../fonts/Roboto-Regular.ttf);
 }
 
 @font-face{
-    font-family: Source Sans Pro;
+    font-family: Roboto;
     font-weight: bold;
-    src: url(../fonts/SourceSansPro-Bold.ttf);
+    src: url(../fonts/Roboto-Bold.ttf);
+}
+
+@font-face{
+    font-family: Roboto;
+    font-style: italic;    
+    src: url(../fonts/Roboto-Italic.ttf);
 }
 
 /* GLOBAL =========================================== */
 
 * {   
     box-sizing: border-box;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 body{
@@ -274,6 +280,7 @@ header{
 #user-panel{
     display: flex;
     align-items: center;
+    text-transform: none;
 }
 
 #user-panel img{
@@ -282,6 +289,7 @@ header{
     width: 30px;
     height: 30px;
     border:1px solid #eee;
+    background: #fff;
 }
 
 #user-panel:focus{
@@ -780,7 +788,6 @@ main .container-fill{
 
 .static-body{
     padding: 7px 10px;
-    font-size: 1.2rem;
 }
 
 .static-body img{
@@ -791,10 +798,8 @@ main .container-fill{
 
 footer{
     padding: 15px;
-    margin-top: auto;
     background: #000;
     color:#fff;    
-    
 }
 
 /* OTHER ============================================= */
@@ -969,9 +974,9 @@ footer{
     cursor: pointer;
     transition: background .3s ease;
     user-select: none;
-    box-shadow: 1px 1px 3px 1px #aaa; 
-    text-align: center;
+    box-shadow: 1px 1px 3px 1px #aaa;    
     line-height: 1rem;
+    outline: none;
 }
 
 .btn-large{
@@ -982,20 +987,12 @@ footer{
     display: inline-block;    
 }
 
-.btn-radius{
-    border-radius: 50%;
-}
-
-.btn-radius:focus{
-    outline: none !important; 
-}
-
 .btn:hover{
     background: #347AFD;
 }
 
 .btn:focus , .btn:active{
-    outline: 1px solid #000;
+    background: #0057fa;
 }
 
 .btn:disabled{
@@ -1070,17 +1067,18 @@ footer{
 }
 
 .user-icon::before {    
-    left: 7px;    
-    width: 10px;
-    height: 10px;
+    left: 6px;    
+    width: 12px;
+    height: 12px;
     border-radius: 50%;    
+    top:-9px;
 }
 
 .user-icon::after {    
-    left: 4px;
-    top: 2px;    
-    width: 16px;
-    height: 7px;
+    left: 3px;
+    top: 3px;    
+    width: 18px;
+    height: 8px;
     border-radius: 50% 50% 0 0;
 }
 

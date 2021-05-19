@@ -26,7 +26,7 @@
         
         if ($doctor = $db->get_row()) {
             $tpl->set('{doctor-name}', $doctor['name']);
-            $tpl->set('{doctor-foto}', $config['host_url'].'/'.$doctor['foto']);
+            $tpl->set('{doctor-foto}', '/'.$doctor['foto']);
             $tpl->set('{doctor-specialty}', $doctor['specialty']);
             $tpl->set('{doctor-kabinet}', $doctor['kabinet']);
             $tpl->set('{datetime-recdoc}', $_POST['date'].' '.$_POST['time']);
@@ -39,7 +39,7 @@
         
         if ($doctor = $db->get_row()) {
             $tpl->set('{doctor-name}', $doctor['name']);
-            $tpl->set('{doctor-foto}', $config['host_url'].'/'.$doctor['foto']);
+            $tpl->set('{doctor-foto}', '/'.$doctor['foto']);
             $tpl->set('{doctor-specialty}', $doctor['specialty']);
             $tpl->set('{doctor-kabinet}', $doctor['kabinet']);
 
@@ -88,7 +88,7 @@
         
         while ($doctor = $db->get_row()) {
             $tpl->set('{doctor-name}', $doctor['name']);
-            $tpl->set('{doctor-foto}', $config['host_url'].'/'.$doctor['foto']);
+            $tpl->set('{doctor-foto}', '/'.$doctor['foto']);
             $tpl->set('{doctor-specialty}', $doctor['specialty']);
             $tpl->set('{doctor-kabinet}', $doctor['kabinet']);
             $tpl->set('{doctor-link}', addGetParam('doctor',$doctor['id']));
@@ -111,7 +111,7 @@
         
         while ($specialty = $db->get_row()) {
             $tpl->set('{specialty-title}', $specialty['title']);
-            $tpl->set('{specialty-image}', $config['host_url'].'/'.$specialty['image']);
+            $tpl->set('{specialty-image}', '/'.$specialty['image']);
             $tpl->set('{specialty-description}', $specialty['description']);
             $tpl->set('{specialty-link}', addGetParam('specialty',$specialty['id']));
     

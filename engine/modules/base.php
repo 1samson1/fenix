@@ -4,11 +4,11 @@
     if(!isset($tpl->data['{content}']))
         $tpl->set('{content}','');
 
-    $tpl->set('{TEMPLATE}', $config['host_url'].'/templates/'.$config['template']);
+    $tpl->set('{TEMPLATE}', '/templates/'.$config['template']);
 
     $tpl->set('{head}', $head);
 
-    if($_SESSION['user']['id'] == $user['id'] || $_SESSION['user']['group_id'] == 1){
+    if($_SESSION['user']['id'] == $user['id'] || $_SESSION['user']['group_id'] == $config['admin_group']){
         $tpl->set('[user]', '');
         $tpl->set('[/user]', '');
     }

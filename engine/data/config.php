@@ -5,6 +5,8 @@
 
         'host_url' => "http://".$_SERVER['HTTP_HOST'],
         
+        'admin_group' => 1,
+
         'reg_user_group' => 2,
 		
 		'registration_on' => true,

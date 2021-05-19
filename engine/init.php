@@ -18,11 +18,11 @@
 
     $tpl = new Template(); // Создание экземпляра шаблонизатора
 
+    define('TEMPLATE_DIR', $tpl->dir); // Задание директории шаблонов
+
     require_once ENGINE_DIR.'/includes/alerts.php';// Подключает файл класса уведомлений
 
     $alerts = new Alerts();
-
-    define('TEMPLATE_DIR', $tpl->dir); // Задание директории шаблонов
 
     require_once ENGINE_DIR.'/engine.php'; // Подключает файл движка
     

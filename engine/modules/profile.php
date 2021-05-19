@@ -8,7 +8,7 @@
 		/* edit user */
 
 		if(isset($_POST['do_save_profile'])){
-			if($_SESSION['user']['group_id'] == 1 || $_SESSION['user']['id'] == $user['id']){
+			if($_SESSION['user']['group_id'] == $config['admin_group'] || $_SESSION['user']['id'] == $user['id']){
 
 				$alerts->set_error_if(!CheckField::login($_POST['login']), 'Ошибка изменения данных пользователя', 'Некорректный логин', 201);
 
@@ -60,7 +60,7 @@
 		$tpl->set('{date-reg}', date('d.m.Y', $user['date_reg']));
 		$tpl->set('{group}',$user['group_name']);
 
-        if($user['foto'])$foto = $config['host_url'].'/'.$user['foto'];
+        if($user['foto'])$foto = '/'.$user['foto'];
         else $foto = '{TEMPLATE}/img/noavatar.png';
         $tpl->set('{foto}', $foto);
 
