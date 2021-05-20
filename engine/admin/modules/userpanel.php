@@ -16,4 +16,3 @@
 
     $tpl->save('{user-panel}');
 ?>
-

@@ -2,6 +2,8 @@
     class Template{
 
         public $dir = '';
+        public $repeat = null;
+        public $repeat_block = null;
         public $template = null;
         public $copy_template = null;
         public $data = array();
@@ -27,38 +29,26 @@
             $this->data_block[$block] = $value;
         }
 
+        public function set_repeat_block($block){
+            if(preg_match($block, $this->template, $matches)){
+                $this->repeat = $block;
+                $this->repeat_block = $matches[1];
+            }
+        }
+
         public function set_block_param($block,$param){    
             $this->data_block_param[$block] = $param;
         }
 
-        public function load_tpl($tpl_name){
-            $file_path = $this->dir."/".$tpl_name;
+        public function load_tpl($tpl_name, $dir = false){
 
-            if (file_exists($file_path)){
-                $this->template = file_get_contents($file_path);
-            }
+            if($dir) $file_path = $dir."/".$tpl_name;
+            else $file_path = $this->dir."/".$tpl_name;
+            
+            if (file_exists($file_path)) $this->template = file_get_contents($file_path);
             else die('Fatal error! No such file template!');
 
-            $this->template = preg_replace_callback(
-                '/\[((not-)group|group)=?([0-9]*)?\](.*)\[\/\1\]/s',
-                function ($matches){
-                    if($matches[2]){
-                        if($_SESSION['user']['group_id']) return '';
-                        else return $matches[4];
-                    }
-                    else {
-                        if($matches[3]){
-                            if($_SESSION['user']['group_id'] == $matches[3]) return $matches[4];
-                            else return '';
-                        }
-                        else {
-                            if(!$_SESSION['user']['group_id']) return '';
-                            else return $matches[4];
-                        }
-                    }
-                },
-                $this->template
-            );            
+            $this->check_group();       
         }  
 
         public function replace_tags($template){
@@ -114,6 +104,10 @@
             $this->copy_template .= $this->replace_all($this->template);            
         }
 
+        public function copy_repeat_block(){
+            $this->copy_template .= $this->replace_all($this->repeat_block);            
+        }
+
         public function save($tag){
             $this->template = $this->replace_all($this->template);       
             $this->template .= $this->endlines;
@@ -128,6 +122,13 @@
             $this->clear();
         }
 
+        public function save_repeat_block(){
+            $this->template = preg_replace($this->repeat, $this->copy_template, $this->template);
+            $this->repeat = null;
+            $this->repeat_block = null;
+            $this->copy_template = null;
+        }
+
         public function clear(){
             $this->template = null;
             $this->copy_template = null;
@@ -137,6 +138,29 @@
         public function print(){
             $this->template = $this->replace_all($this->template);
             echo $this->template;
+        }
+
+        private function check_group(){
+            $this->template = preg_replace_callback(
+                '/\[((not-)group|group)=?([0-9]*)?\](.*)\[\/\1\]/s',
+                function ($matches){
+                    if($matches[2]){
+                        if($_SESSION['user']['group_id']) return '';
+                        else return $matches[4];
+                    }
+                    else {
+                        if($matches[3]){
+                            if($_SESSION['user']['group_id'] == $matches[3]) return $matches[4];
+                            else return '';
+                        }
+                        else {
+                            if(!$_SESSION['user']['group_id']) return '';
+                            else return $matches[4];
+                        }
+                    }
+                },
+                $this->template
+            );     
         }
     }
 ?>

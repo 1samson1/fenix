@@ -6,7 +6,7 @@
 
     require_once ENGINE_DIR.'/data/config.php'; // Подключаем глобальный конфиг
     
-    ini_set('date.timezone', $config['timezone']);
+    ini_set('date.timezone', $config['timezone']); // Инициализания часового пояса
 
     require_once ENGINE_DIR.'/includes/queryDB.php'; // Подключаем файл класса базы данных
     
@@ -18,20 +18,24 @@
 
     define('SKIN_DIR', $tpl->dir); // Задание директории шаблонов
     
-    require_once ENGINE_DIR.'/includes/alerts.php';// Подключает файл класса уведомлений
+    require_once ENGINE_DIR.'/includes/alerts.php'; // Подключает файл класса уведомлений
 
-    $alerts = new Alerts();    
-
-    require_once ADMIN_DIR.'/modules/auth.php';    
+    $alerts = new Alerts(); // Создание экземпляра менеджера уведомлений
+    
+    require_once ADMIN_DIR.'/modules/auth.php'; // Подключает файл авторизации
+    
+    require_once ADMIN_DIR.'/data/modules.php'; // Подключает файл класса модулей
+    
+    require_once ADMIN_DIR.'/includes/modules.php'; // Подключает файл класса модулей
 
     if(!$is_logined){
         require_once (ADMIN_DIR . '/modules/login.php');
     }
     else{
 
-        if (file_exists( ADMIN_DIR . '/modules/' . $_GET['mod'] . '.php')) {
-    
-            require_once (ADMIN_DIR . '/modules/' . $_GET['mod'] . '.php');
+        if (Modules::check($_GET['mod'], $modules)) {
+
+            Modules::load(ADMIN_DIR . '/modules', $_GET['mod']);
             
         } else{
             

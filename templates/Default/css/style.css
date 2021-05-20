@@ -99,7 +99,7 @@ header{
     display: inline-block;
     font-weight: bold;
     color:#ffF;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     text-decoration: none;
     padding: 10px 15px;
     margin: 5px;

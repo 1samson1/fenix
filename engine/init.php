@@ -1,9 +1,5 @@
 <?php
 
-    if(!defined("ENGINE_DIR")){
-        define("ENGINE_DIR",dirname(__FILE__));
-    }     
-    
     session_start();
     
     require_once ENGINE_DIR.'/data/config.php'; // Подключаем глобальный конфиг
