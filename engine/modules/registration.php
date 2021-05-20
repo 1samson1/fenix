@@ -25,7 +25,7 @@
 		}
 		
 		$head['title'] = 'Регистрация';
-		$tpl->load_tpl('registration.html');    
+		$tpl->load('registration.html');    
 		$tpl->save('{content}');
 	}
 	else $alerts->set_error('Ошибка', 'Регистрация не доступна', 233);

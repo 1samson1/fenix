@@ -1,5 +1,5 @@
 <?php 
-    $tpl->load_tpl('login.html');
+    $tpl->load('login.html');
 
     if(isset($_SESSION['user'])){
         $tpl->set('{login}', $_SESSION['user']['login']);

@@ -1,7 +1,7 @@
 <?php 
     require_once ENGINE_DIR.'/includes/functions.php';
 
-    $tpl->load_tpl('userpanel.html');
+    $tpl->load('userpanel.html');
 
     if(isset($_SESSION['user'])){
         $tpl->set('{login}', $_SESSION['user']['login']);

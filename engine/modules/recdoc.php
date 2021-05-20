@@ -82,7 +82,7 @@
     }
     else if(isset($_GET['specialty'])){
         $step = 2;
-        $tpl->load_tpl('doctors.html');
+        $tpl->load('doctors.html');
     
         $db->get_doctors_by_specialty($_GET['specialty']);
         
@@ -105,7 +105,7 @@
     function showSpecialties(){
         global $step,$tpl,$db;
         $step = 1;
-        $tpl->load_tpl('specialties.html');
+        $tpl->load('specialties.html');
     
         $db->get_specialties();
         
@@ -121,7 +121,7 @@
         $tpl->save_copy('{specialties}');
     }
     
-    $tpl->load_tpl('recdoc.html');
+    $tpl->load('recdoc.html');
     $tpl->set_block_param('/\[step=(.+)\](.*)\[\/step=\1\]/Us', $step);
     $tpl->append($endlines);
     $tpl->save('{content}');

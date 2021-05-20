@@ -13,11 +13,11 @@
         }
     }
 
-    $tpl->load_tpl('addcomments.html');
+    $tpl->load('addcomments.html');
     $tpl->save('{addcomments}');
 
     /* Block comments ================================================= */
-    $tpl->load_tpl('comments.html');
+    $tpl->load('comments.html');
 
     $db->get_comments_by_news_id($_GET['param1']);
     

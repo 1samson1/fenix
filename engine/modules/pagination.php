@@ -51,7 +51,7 @@
 
             if ( $this->count_pages > 1) {
 
-                $tpl->load_tpl('navigation.html');
+                $tpl->load('navigation.html');
 
                 if($this->active > 1){
                     $tpl->set('[prev-link]', '');

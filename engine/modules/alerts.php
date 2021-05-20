@@ -1,7 +1,7 @@
 <?php 
     if(isset($alerts->alerts_array[0])){
 
-        $tpl->load_tpl('alerts.html');
+        $tpl->load('alerts.html');
 
         foreach ($alerts->alerts_array as $alert) {            
             $tpl->set('{alert-title}', $alert['title']);

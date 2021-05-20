@@ -40,7 +40,7 @@
             $this->data_block_param[$block] = $param;
         }
 
-        public function load_tpl($tpl_name, $dir = false){
+        public function load($tpl_name, $dir = false){
 
             if($dir) $file_path = $dir."/".$tpl_name;
             else $file_path = $this->dir."/".$tpl_name;

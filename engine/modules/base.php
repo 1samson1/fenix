@@ -1,5 +1,5 @@
 <?php
-    $tpl->load_tpl('base.html');
+    $tpl->load('base.html');
 
     if(!isset($tpl->data['{content}']))
         $tpl->set('{content}','');

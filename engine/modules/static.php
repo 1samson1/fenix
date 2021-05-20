@@ -1,7 +1,7 @@
 <?php 
     $db->get_static($_GET['param1']);
     if($static = $db->get_row()){
-        $tpl->load_tpl('static.html');    
+        $tpl->load('static.html');    
         $tpl->set('{title}', $static['title']);
         $tpl->set('{static}', $static['template']);
         $tpl->save('{content}');

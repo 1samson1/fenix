@@ -6,7 +6,7 @@
         if($news_item = $db->get_row()){
             require_once ENGINE_DIR.'/modules/comments.php';	
             
-            $tpl->load_tpl('fullnews.html');
+            $tpl->load('fullnews.html');
 
             $tpl->set('{title}', $news_item['title']);
             $tpl->set('{body}', $news_item['body']);
@@ -29,7 +29,7 @@
 
         $pagination = new Pagination('news', '/news/', $config['count_news_on_page']);
 
-        $tpl->load_tpl('shortnews.html');
+        $tpl->load('shortnews.html');
     
         $db->get_short_news($config['count_news_on_page'], $pagination->get_begin_item());
         while($news_item = $db->get_row()){
@@ -46,7 +46,7 @@
 
         $pagination->gen_tpl();
 
-        $tpl->load_tpl('news.html');    
+        $tpl->load('news.html');    
         $tpl->save('{content}');
         $head['title'] = 'Новости';
     }

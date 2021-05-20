@@ -1,5 +1,5 @@
 <?php 
-    $tpl->load_tpl('main.html'); 
+    $tpl->load('main.html'); 
     
     $tpl->set_repeat_block('/\[modules\](.*)\[\/modules\]/sU');
     

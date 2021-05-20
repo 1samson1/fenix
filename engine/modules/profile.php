@@ -66,7 +66,7 @@
 
 		$tpl->set('{logout_all}','/logout/?exit=all');
 
-		$tpl->load_tpl('profile.html');    
+		$tpl->load('profile.html');    
     	$tpl->save('{content}');
 	}
 	else {
