@@ -1,6 +1,52 @@
 <div class="container-fill">
     <div class="panel-header">Настройки системы</div>
-    <div class="panel-body">
-        
-    </div>
+    
+    <form action="" method="POST">
+        <div class="form-groups-w60">
+            <div class="form-group">
+                <label for="admin_group">Регистрировать новых пользователей в группе:</label>
+                <select name="save_con[admin_group]" class="right" id="admin_group">
+                    {groups}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="registration_on">Разрешить регистрацию пользователей на сайте:</label>
+                <div class="switch">
+                    <input type="checkbox" id="registration_on" name="save_con[registration_on]" class="switch-input" {registration_on}>
+                    <label for="registration_on" class="switch-label"></label>
+                </div> 
+            </div>
+            <div class="form-group">
+                <label for="timezone">Часовой пояс:</label>
+                <select name="save_con[timezone]" class="right" id="timezone">
+                    {timezones}                    
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="max_size_upload_img">Максимальный размер загружаемого изображения (в байтах):</label>
+                <input type="text" id="max_size_upload_img" name="save_con[max_size_upload_img]" class="form-control form-control-text-center" value="{max_size_upload_img}">
+            </div>
+            <div class="form-group">
+                <label for="template">Шаблон сайта по умолчанию:</label>
+                <select name="save_con[template]" class="right" id="template">
+                    {templates}                
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="count_news_on_page">Количество новостей на страницу:</label>
+                <input type="text" id="count_news_on_page" name="save_con[count_news_on_page]" class="form-control form-control-text-center" value="{count_news_on_page}">
+            </div>
+            <div class="panel-footer">
+                <input type="submit" value="Сохранить" class="btn" name="save">
+            </div>
+        </div>
+    </form>
 </div>
+
+<!-- 
+<label class="checkbox">
+    <input type="checkbox" class="check-input" name="delete_foto">
+    <span class="check"></span>
+    <span class="label-check">Удалить фото</span>
+</label>
+<input type="text" class="form-control"> -->

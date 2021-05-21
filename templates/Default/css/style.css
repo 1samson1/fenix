@@ -415,7 +415,7 @@ main .container-fill{
     max-width: 600px;   
 }
 
-.container-reg .form-input{
+.container-reg .form-control{
     margin: 7px 0;
 }
 
@@ -866,12 +866,12 @@ footer{
 }
 
 /* INPUT +++++++++++++++++++++++++++++++++++++++++++++ */
-.form-input{
+.form-control{
     position: relative;    
     margin-bottom: 5px;
 }
 
-.form-input label{
+.form-control label{
     position: absolute;
     user-select: none;
     font-size: 1rem;
@@ -890,7 +890,7 @@ footer{
     transition:transform .3s ease;  
 }
 
-.form-input input{    
+.form-control input{    
     background: #fafafa;    
     border: 1px solid #DBDBDB; 
     font-size: 1rem;   
@@ -901,24 +901,24 @@ footer{
     text-overflow: ellipsis;    
 }
 
-.form-input input:focus{
+.form-control input:focus{
     outline: 1px solid #000;
 }
 
-.form-input-large, .form-input-large input{
+.form-control-large, .form-control-large input{
     width: 100%;
 }
 
-.form-input-active input{
+.form-control-active input{
     border: 1px solid #a8a8a8 !important;
     padding: 24px 0 2px 8px!important;
 }
 
-.form-input-active label{  
+.form-control-active label{  
     transform: scale(.83333) translateY(-10px) !important;
 }
 
-.form-input-password input{
+.form-control-password input{
     padding-right: 37px !important;
 }
 
@@ -944,17 +944,17 @@ footer{
     background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yMC43MDcgMjAuNzA3YTEgMSAwIDAwMC0xLjQxNGwtMTYtMTZhMSAxIDAgMDAtMS40MTQgMS40MTRMNS4yMDUgNi42MkMyLjc4NSA4LjMzOCAxLjUgMTAuNjgzIDEuNSAxMmMwIDIuMjUgMy43NSA3LjUgMTAuNSA3LjUgMS45MTYgMCAzLjU5LS40MjMgNS4wMDYtMS4wOGwyLjI4NyAyLjI4N2ExIDEgMCAwMDEuNDE0IDB6bS01LjIyOC0zLjgxNGwtMS43NzQtMS43NzRBNCA0IDAgMDE4LjM4IDkuNzk0TDYuNjQ0IDguMDU4YTkuMzMyIDkuMzMyIDAgMDAtMS4wOS44NEM0LjI4IDEwLjAzNCAzLjUgMTEuNDE3IDMuNSAxMmMwIC41ODQuNzgxIDEuOTY2IDIuMDUyIDMuMTAzQzcuMjMxIDE2LjYwNSA5LjQzOCAxNy41IDEyIDE3LjVhOS45NyA5Ljk3IDAgMDAzLjQ4LS42MDd6bTQuODQxLS44MTVDMjEuNzUxIDE0LjYxIDIyLjUgMTMuMDA2IDIyLjUgMTJjMC0yLjI1LTMuNzUtNy41LTEwLjUtNy41LTEuMDQzIDAtMi4wMTUuMTI1LTIuOTEyLjM0NmwxLjcyMSAxLjcyYy4zODgtLjA0My43ODUtLjA2NiAxLjE5MS0uMDY2IDIuNTYyIDAgNC43Ny44OTUgNi40NDggMi4zOTcgMS4yNyAxLjEzNyAyLjA1MiAyLjUyIDIuMDUyIDMuMTAzIDAgLjUxLS41OTYgMS42My0xLjU5NSAyLjY2M2wxLjQxNSAxLjQxNXoiIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iLjgiLz48L3N2Zz4=) !important;
 }
 
-.form-inputs-inline{
+.form-controls-inline{
     display: flex;
 }
 
-.form-inputs-inline .form-input:nth-child(2n){
+.form-controls-inline .form-control:nth-child(2n){
     margin-left: 5px;
 }
 
 /* FILE INPUT ************************************** */
 
-.form-input-file{
+.form-control-file{
     padding: 14px 8px;
     border: 1px solid #DBDBDB; 
     margin-bottom: 5px;
@@ -1121,11 +1121,11 @@ footer{
     
     /* INPUTS ************************************* */
 
-    .form-inputs-inline{
+    .form-controls-inline{
         display: block;
     }
 
-    .form-inputs-inline .form-input:nth-child(2n){
+    .form-controls-inline .form-control:nth-child(2n){
         margin-left: 0;
     }
 

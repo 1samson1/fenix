@@ -13,9 +13,9 @@
 
         'life_time_token' => 31536000,
 
-        'max_size_upload_img' => 2097152,
-		
 		'timezone' => 'Europe/Moscow',
+		
+        'max_size_upload_img' => 2097152,
 
         'template' => 'Default',
         

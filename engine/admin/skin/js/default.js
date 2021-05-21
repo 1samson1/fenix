@@ -36,4 +36,6 @@ $(function () {
             dettach.removeClass('dettach-transition')
         },200)
     }) 
+
+    $('select').niceSelect();
 })

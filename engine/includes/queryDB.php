@@ -186,5 +186,14 @@
             ;');
         }
 
+        /*////////////////// Query for adminpanel ////////////////////*/
+
+        public function get_groups(){
+            return $this->query('
+                SELECT * FROM `groups`
+            ;');
+        }
+
+
     }
 ?>

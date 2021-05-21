@@ -1,5 +1,5 @@
 <?php
-	require_once ENGINE_DIR.'/includes/files.php';
+	require_once ENGINE_DIR.'/includes/upload.php';
 	require_once ENGINE_DIR.'/includes/checkFeild.php';	
 	require_once ENGINE_DIR.'/includes/errors.php';	
 
