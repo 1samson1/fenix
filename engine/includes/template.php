@@ -123,10 +123,12 @@
         }
 
         public function save_repeat_block(){
+            $this->template .= $this->endlines;
             $this->template = preg_replace($this->repeat, $this->copy_template, $this->template);
             $this->repeat = null;
             $this->repeat_block = null;
             $this->copy_template = null;
+            $this->endlines = null;
         }
 
         public function clear(){

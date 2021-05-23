@@ -48,6 +48,33 @@ body{
     margin-bottom: 20px; 
 }
 
+.red{
+    color:#f00 !important;
+}
+
+.yellow{
+    color: #ffc400 !important;
+}
+
+.green{
+    color:#14A76C !important;
+}
+
+.black{
+    color: #000 !important;
+}
+
+/* LINKS */
+
+.link{
+    color:#1969ff;
+}
+
+.link-btn{
+    color:#000;
+    text-decoration: none;
+}
+
 /* HEADER ======================================= */
 
 header{
@@ -184,7 +211,34 @@ main{
     margin-top: 0;
 }
 
-/* LOGINPANEL ++++++++++++++++++++++++++++++++++++++
+/* LIST ++++++++++++++++++++++++++++++++++++++++++++ */
+
+table.list{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.list th{
+    background: #fff;
+    border-bottom: 1px solid #aaa;
+}
+
+table.list tr:hover{
+    background: #00000010;
+    transition: background .3s ease;
+}
+
+table.list tr:nth-child(2n+1){
+    background: #00000010;
+}
+
+table.list th, table.list td{
+    padding: 7px;
+    text-align: left;
+    word-break: break-all;
+}
+
+/* LOGINPANEL ++++++++++++++++++++++++++++++++++++++ */
 
 .login-panel{
     margin: 0 auto;
@@ -273,6 +327,7 @@ main{
 footer{    
     background: #000;
     color:#fff;    
+    margin-top: auto;
 }
 
 footer> .container{ 
@@ -386,18 +441,30 @@ footer> .container{
 
 /* INPUTS +++++++++++++++++++++++++++++++++++++ */
 
+.form-groups-w20 .form-group{
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;    
+}
+
+.form-groups-w20 .form-group>label:nth-child(1){
+    display: inline-block;
+    font-weight: bold;
+    flex:20% 0 1;
+    margin-right: 10px;
+}
+
 .form-groups-w60 .form-group{
     display: flex;
     align-items: center;
     padding: 5px 10px;
-    border-bottom: 1px solid #aaa;
+    border-bottom: 1px solid #ddd;
 }
 
 .form-groups-w60 .form-group>label:nth-child(1){
     display: inline-block;
-    max-width: 60%;
     font-weight: bold;
-    width: 100%;
+    flex:60% 1 1;
     margin-right: 10px;
 }
 
@@ -465,7 +532,7 @@ footer> .container{
 /* BUTTONS +++++++++++++++++++++++++++++++++++++++++ */
 .btn{
     background-color: #1969FF;
-    display: block;
+    display: inline-block;
     font-size: 1rem;
     color: #fff;    
     border: 0;
@@ -673,6 +740,18 @@ footer> .container{
     .links-active{
         transform: scaleX(1);
     }   
+
+    /* FORM-GROUPS ********************************* */
+
+    .form-groups-w60 .form-group, .form-groups-w60 .form-group>label:nth-child(1){
+        display: block;
+    }
+
+    .form-groups-w60 .form-group input:not(.switch),
+    .form-groups-w60 .form-group> div,
+    .form-groups-w60 .form-group> div ul{
+        width: 100%;
+    }
 
     /* USER PANEL ********************************** */
 

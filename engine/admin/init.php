@@ -28,7 +28,7 @@
     
     require_once ADMIN_DIR.'/includes/modules.php'; // Подключает файл класса модулей
 
-    if(!$is_logined){
+    if(!$_SESSION['user']['is_admin']){
         require_once (ADMIN_DIR . '/modules/login.php');
     }
     else{

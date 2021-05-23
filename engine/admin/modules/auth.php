@@ -37,7 +37,7 @@
 
                                 setcookie('user_token', $token, time() + $config['life_time_token'], '/');
                                 $_SESSION['user']= $user;
-                                $is_logined = true;
+                                $_SESSION['user']['is_admin'] = true;
 
                             }else $alerts->set_error('Ошибка авторизации', 'Не удалось выдать токен!', 207);
 
@@ -54,7 +54,7 @@
         if($user = $db->get_row()){
             if($user['group_id'] == $config['admin_group']){
                 $_SESSION['user']= $user;
-                $is_logined = true;
+                $_SESSION['user']['is_admin'] = true;
             }
             else logout();
         } 

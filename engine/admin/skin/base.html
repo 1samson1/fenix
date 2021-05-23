@@ -6,10 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Админпанель</title>    
     <script src="/engine/js/jquery-3.5.1.min.js"></script>
+    <script src="/engine/js/tinymce/tinymce.min.js"></script>
     <link rel="stylesheet" href="{SKIN}/css/style.css">    
     <link rel="stylesheet" href="{SKIN}/css/nice-select.css">    
     <script src="{SKIN}/js/default.js"></script>
     <script src="{SKIN}/js/jquery.nice-select.js"></script>
+    <script>
+        $(function(){     
+            tinymce.init({
+                selector: 'textarea',
+                language:"ru",
+                mode : "textareas",
+                width:"100%",
+                height:600,
+                plugins:"link, image, paste, media, table",
+                statusbar:false,
+                branding: false,  
+                paste_as_text:true
+            });  
+        });
+    </script>
 </head>
 <body>
     <header>

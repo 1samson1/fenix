@@ -6,7 +6,7 @@
 
     $tpl->set('{SKIN}', ADMIN_URL.'/skin');
 
-    if(!$is_logined){
+    if(!$_SESSION['user']['is_admin'] ){
         $tpl->set_block('/\[admin\](.*)\[\/admin\]/sU','');
     }
     else{

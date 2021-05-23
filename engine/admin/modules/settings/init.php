@@ -1,4 +1,25 @@
 <?php 
+    require_once MODULE_DIR.'/save_conf.php';
+
+    if(isset($_POST['save'])){
+        if($_SESSION['user']['is_admin']){
+            $save_conf = new Save_conf(ENGINE_DIR.'/data/config.php');
+    
+            $save_conf->set_int_option('reg_user_group', $_POST['save_conf']['reg_user_group']);
+            $save_conf->set_bool_option('registration_on', isset($_POST['save_conf']['registration_on']));
+            $save_conf->set_str_option('timezone', $_POST['save_conf']['timezone']);
+            $save_conf->set_int_option('max_size_upload_img', $_POST['save_conf']['max_size_upload_img']);
+            $save_conf->set_str_option('template', $_POST['save_conf']['template']);
+            $save_conf->set_int_option('count_news_on_page', $_POST['save_conf']['count_news_on_page']);
+    
+            $save_conf->save();
+    
+            $alerts->set_success('Изменения сохранены!', 'Настройки системы были сохранины!');
+        }
+        else $alerts->set_error('Ошибка доступа!', 'У вас не достаточно прав!' , 356);
+    }
+
+
     $tpl->load('main.html', MODULE_SKIN_DIR);
 
     /* Select group registration users */

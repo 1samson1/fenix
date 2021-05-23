@@ -79,9 +79,6 @@
     left: 0 !important;
     right: 0 !important;
 }
-.nice-select.right {
-    float: right;
-}
 .nice-select.right .list {
     left: auto;
     right: 0;
@@ -154,6 +151,9 @@
     text-align: left;
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
 }
 .nice-select .option:hover,
 .nice-select .option.focus,

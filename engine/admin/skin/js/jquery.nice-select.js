@@ -66,10 +66,8 @@
         .attr('tabindex', $select.attr('disabled') ? null : '0')
         .html('<span class="current"></span><ul class="list"></ul>')
       );
-
       
-      var $dropdown = $select.next();
-      console.log($dropdown.offset().top); 
+      var $dropdown = $select.next();      
       
       var $options = $select.find('option');
       var $selected = $select.find('option:selected');
@@ -99,8 +97,6 @@
       var $dropdown = event.data.children('.list'),
           $lenghtTop = $(event.data).offset().top - $(this).scrollTop(),
           $lenghtBotton = $(this).height() - $lenghtTop - $(event.data).outerHeight();
-
-          console.log($lenghtTop);
 
       if($lenghtBotton < $lenghtTop && $dropdown.outerHeight() >= $lenghtBotton -40){
         $dropdown.addClass('listup');

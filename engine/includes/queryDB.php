@@ -194,6 +194,18 @@
             ;');
         }
 
+        public function get_statics(){
+            return $this->query('
+                SELECT `title`, `url`, `date_edit`, `date` FROM `static`
+            ;');
+        }
+
+        public function add_static($url, $title, $template, $date_edit, $date){
+            return $this->query('
+                INSERT INTO `static` (`url`, `title`, `template`, `date_edit`, `date`) 
+                    VALUES ("'.$this->ecran_html($url).'", "'.$this->ecran_html($title).'", "'.$this->ecran($template).'", '.$this->ecran_html($date_edit).', '.$this->ecran_html($date).')
+            ;');
+        }
 
     }
 ?>
