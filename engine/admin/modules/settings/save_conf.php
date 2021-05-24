@@ -13,30 +13,17 @@
         }
 
         public function set_str_option($key, $value){
-            global $config;
-            
             $this->file = preg_replace("/(\"|')".$key."(\"|')\s*=>\s*(.+),/m", "'{$key}' => '{$value}',", $this->file);
-            
-            $config[$key] = $value;
         }
 
         public function set_int_option($key, $value){
-            global $config;
-
             $value = intval($value);
             $this->file = preg_replace("/(\"|')".$key."(\"|')\s*=>\s*(.+),/m", "'{$key}' => {$value},", $this->file);
-        
-            $config[$key] = $value;
         }
 
-        public function set_bool_option($key, $value){
-            global $config;
-            
-            $config[$key] = $value;
-
+        public function set_bool_option($key, $value){            
             $value = $value ? 'true' : 'false';
             $this->file = preg_replace("/(\"|')".$key."(\"|')\s*=>\s*(.+),/m", "'{$key}' => {$value},", $this->file);
-        
         }
 
         public function save(){

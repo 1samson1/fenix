@@ -218,3 +218,9 @@
 .nice-select .list::-webkit-scrollbar-thumb:horizontal {
     min-width: var(--scrollbar-minlength);
 }
+
+@media (max-width: 720px) {    
+    .nice-select .list {
+        width: 100%;
+    }
+}

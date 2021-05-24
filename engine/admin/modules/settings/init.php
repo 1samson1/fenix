@@ -12,11 +12,11 @@
             $save_conf->set_str_option('template', $_POST['save_conf']['template']);
             $save_conf->set_int_option('count_news_on_page', $_POST['save_conf']['count_news_on_page']);
     
-            $save_conf->save();
-    
-            $alerts->set_success('Изменения сохранены!', 'Настройки системы были сохранины!');
+            $save_conf->save();    
+            
+            return showSuccess('Изменения сохранены!','Настройки системы были сохранины!', MODULE_URL);
         }
-        else $alerts->set_error('Ошибка доступа!', 'У вас не достаточно прав!' , 356);
+        else return showError('Ошибка доступа!', 'У вас не достаточно прав!', MODULE_URL);
     }
 
 

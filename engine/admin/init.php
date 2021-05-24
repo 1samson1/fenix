@@ -23,10 +23,12 @@
     $alerts = new Alerts(); // Создание экземпляра менеджера уведомлений
     
     require_once ADMIN_DIR.'/modules/auth.php'; // Подключает файл авторизации
-    
+
     require_once ADMIN_DIR.'/data/modules.php'; // Подключает файл класса модулей
     
     require_once ADMIN_DIR.'/includes/modules.php'; // Подключает файл класса модулей
+
+    require_once ADMIN_DIR.'/modules/msg.php'; // Подключает файл системных сообщений
 
     if(!$_SESSION['user']['is_admin']){
         require_once (ADMIN_DIR . '/modules/login.php');

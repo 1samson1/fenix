@@ -196,7 +196,13 @@
 
         public function get_statics(){
             return $this->query('
-                SELECT `title`, `url`, `date_edit`, `date` FROM `static`
+                SELECT `id`, `title`, `url`, `date_edit`, `date` FROM `static`
+            ;');
+        }
+
+        public function get_static_by_id($id){
+            return $this->query('
+                SELECT `id`, `title`, `url`, `template` FROM `static` WHERE `id` = '.$this->ecran($id).'
             ;');
         }
 
@@ -204,6 +210,25 @@
             return $this->query('
                 INSERT INTO `static` (`url`, `title`, `template`, `date_edit`, `date`) 
                     VALUES ("'.$this->ecran_html($url).'", "'.$this->ecran_html($title).'", "'.$this->ecran($template).'", '.$this->ecran_html($date_edit).', '.$this->ecran_html($date).')
+            ;');
+        }
+
+        public function edit_static($id, $url, $title, $template, $date_edit){
+            return $this->query('
+                UPDATE `static` 
+                    SET  
+                        `url` = "'.$this->ecran_html($url).'",
+                        `title` = "'.$this->ecran_html($title).'",
+                        `template` = "'.$this->ecran($template).'",
+                        `date_edit` = "'.$this->ecran_html($date_edit).'"
+                    WHERE `id` = "'.$id.'"
+            ;');
+        }
+
+        public function remove_static($id){
+            return $this->query('
+                DELETE FROM `static`
+                    WHERE `id` = "'.$this->ecran_html( $id).'"
             ;');
         }
 

@@ -790,6 +790,10 @@ main .container-fill{
     padding: 7px 10px;
 }
 
+.static-body p{
+    margin-top: 0;
+}
+
 .static-body img{
     max-width: 100%;
 }

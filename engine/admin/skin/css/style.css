@@ -223,13 +223,14 @@ table.list th{
     border-bottom: 1px solid #aaa;
 }
 
-table.list tr:hover{
-    background: #00000010;
-    transition: background .3s ease;
-}
 
 table.list tr:nth-child(2n+1){
     background: #00000010;
+}
+
+table.list tr:hover{
+    background: #00000020;
+    transition: background .3s ease;
 }
 
 table.list th, table.list td{
@@ -254,6 +255,53 @@ table.list th, table.list td{
 
 .body-welcome{
     padding: 10px 0;
+}
+
+/* MSG ++++++++++++++++++++++++++++++++++++++++ */
+
+.msg{
+    display: flex;
+    flex-direction: row;
+}
+
+.msg[data-type-msg="success"] .msg-color{
+    background: #14A76C;
+    width: 10px;
+}
+
+.msg[data-type-msg="confirm"] .msg-color{
+    background: #ffc400;
+    width: 10px;
+}
+
+.msg[data-type-msg="error"] .msg-color{
+    background: #DC3545;
+    width: 10px;
+}
+
+.msg .panels{
+    width: 100%;
+}
+
+.msg .panel-header{
+    font-weight: bold;
+}
+
+.msg .panel-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 120px;
+    text-align: center;
+}
+
+.msg .panel-footer{
+    display: flex;
+    justify-content: center;
+}
+
+.msg .panel-footer .btn{
+    margin: 0 7%;
 }
 
 /* MODULES ++++++++++++++++++++++++++++++++++++++ */
@@ -748,8 +796,7 @@ footer> .container{
     }
 
     .form-groups-w60 .form-group input:not(.switch),
-    .form-groups-w60 .form-group> div,
-    .form-groups-w60 .form-group> div ul{
+    .form-groups-w60 .form-group> div{
         width: 100%;
     }
 

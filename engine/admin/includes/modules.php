@@ -16,7 +16,7 @@
 
             define('MODULE_DIR', $path.'/'.$name);
             define('MODULE_SKIN_DIR', MODULE_DIR.'/skin');
-            define('MODULE_URL', ADMIN_URL.'/modules/'.$name);
+            define('MODULE_URL', '/admin/?mod='.$name);
 
             require_once ($path.'/'.$name. '/init.php');
         }
