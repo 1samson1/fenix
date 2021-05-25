@@ -232,5 +232,66 @@
             ;');
         }
 
+        public function get_users(){
+            return $this->query('
+                SELECT 
+                    `users`.`id`,
+                    `users`.`login`,
+                    `groups`.`group_name`,
+                    `groups`.`id` AS `group_id`,
+                    `users`.`surname`,
+                    `users`.`name`,
+                    `users`.`date_reg`
+                FROM `users`
+                    INNER JOIN `groups` ON `users`.`group_id` = `groups`.`id` 
+                    ORDER BY `group_id`, `users`.`date_reg` DESC, `users`.`login`
+            ;');
+        }
+
+        public function get_user_by_id($id){
+            return $this->query('
+                SELECT 
+                    `users`.*,
+                    `groups`.`group_name`,
+                    `groups`.`id` AS `group_id`
+                FROM `users`
+                    INNER JOIN `groups` ON `users`.`group_id` = `groups`.`id`
+                    WHERE `users`.`id` = "'.$this->ecran_html($id).'"
+            ;');
+        }       
+
+        public function edit_user($user_id, $group_id, $name, $surname, $login, $email, $pass, $foto=false, $delete_foto=false){
+            $pass = isset($pass[0])?', `users`.`password` = "'.$this->hash($this->ecran_html($pass)).'"' :'';
+            if($delete_foto){
+                $foto = ', `users`.`foto` = ""';
+            }
+            else if($foto){
+                $foto = ', `users`.`foto` = "'.$foto.'"';
+            }
+            else{
+                $foto = '';
+            }
+
+            return $this->query('
+                UPDATE `users`
+                    SET  
+                        `users`.`name` = "'.$this->ecran_html($name).'",
+                        `users`.`surname` = "'.$this->ecran_html($surname).'",
+                        `users`.`login` = "'.$this->ecran_html($login).'",
+                        `users`.`email` = "'.$this->ecran_html($email).'",
+                        `users`.`group_id` = "'.$this->ecran_html($group_id).'" 
+                        '.$pass.'
+                        '.$foto.'
+                    WHERE `users`.`id` = "'.$user_id.'"
+            ;');
+        }
+
+        public function remove_user($id){
+            return $this->query('
+                DELETE FROM `users`
+                    WHERE `id` = "'.$this->ecran_html( $id).'"
+            ;');
+        }
+
     }
 ?>

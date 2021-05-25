@@ -1,0 +1,62 @@
+<div class="container-fill">
+    <div class="panel-header">Пользователи</div>
+    <form action="" method="POST" enctype="multipart/form-data">
+        <div class="panel-body">
+            <div class="form-groups-w20">
+                <div class="wrapper">
+                    <img src="{foto}" class="cicle" alt="">
+                    <div class="wrapper-right">
+                        <div class="form-group">
+                            <label for="edit_login">Логин:</label>
+                            <input type="text" name="login" id="edit_login" class="form-control form-control-large" value="{login}" required>
+                        </div>            
+                        <div class="form-group">
+                            <label for="edit_email">E-mail:</label>
+                            <input type="email" name="email" id="edit_email" class="form-control form-control-large" value="{email}" required>
+                        </div>            
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="edit_group">Группа:</label>
+                    <select name="group" class="right wide" id="edit_group" required>
+                        {groups}
+                    </select>
+                </div>            
+                <div class="form-group">
+                    <label for="edit_surname">Фамилия:</label>
+                    <input type="text" name="surname" id="edit_surname" class="form-control form-control-large"  value="{surname}">
+                </div>            
+                <div class="form-group">
+                    <label for="edit_name">Имя:</label>
+                    <input type="text" name="name" id="edit_name" class="form-control form-control-large"  value="{name}">
+                </div>
+                <div class="form-group">   
+                    <label>Фото</label> 
+                    <div class="edit_foto form-control-large">
+                        <input type="file" class="form-control form-control-large" name="foto" accept="image/*">
+                        <label class="checkbox">
+                            <input type="checkbox" class="check-input" name="delete_foto">
+                            <span class="check"></span>
+                            <span class="label-check">Удалить фото</span>
+                        </label>
+                    </div>
+                </div>  
+                <div class="form-group">
+                    <label for="edit_lastpassword">Старый пароль:</label>
+                    <input type="password" name="lastpassword" id="edit_lastpassword" class="form-control form-control-large">
+                </div>
+                <div class="form-group">
+                    <label for="edit_password">Пароль:</label>
+                    <input type="password" name="password" id="edit_password" class="form-control form-control-large">
+                </div>
+                <div class="form-group">
+                    <label for="edit_repassword">Подтверждение пароля:</label>
+                    <input type="password" name="repassword" id="edit_repassword" class="form-control form-control-large">
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" class="btn" name="edit_user" value="Сохранить">
+        </div>
+    </form>
+</div>

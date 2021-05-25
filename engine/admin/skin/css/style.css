@@ -576,7 +576,6 @@ footer> .container{
     padding-left: 2.3rem;
 }
 
-
 /* BUTTONS +++++++++++++++++++++++++++++++++++++++++ */
 .btn{
     background-color: #1969FF;
@@ -738,6 +737,30 @@ footer> .container{
 
 .user-icon.menu-icon-active::after {
     transform: rotate(-45deg);    
+}
+
+/* WRAPPER ++++++++++++++++++++++++++++++++++++ */
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper .wrapper-right{
+    flex:25% 1 1;
+}
+
+/* CICLE ++++++++++++++++++++++++++++++++++++ */
+
+.cicle{
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-right: 5%;
+    border:5px solid #eee;
+    box-shadow: 1px 1px 4px 1px #777; 
+    background: #fff;
 }
 
 /* MEDIA QUERY ================================ */

@@ -1,7 +1,6 @@
 <?php
 
     require_once ENGINE_DIR.'/includes/functions.php';
-
     require_once ENGINE_DIR.'/includes/checkFeild.php';
     
     if($_GET['action'] == 'delete'){
