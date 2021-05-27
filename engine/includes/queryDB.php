@@ -293,10 +293,6 @@
             ;');
         }
 
-
-
-
-
         public function get_news(){
             return $this->query('
                 SELECT 
@@ -339,6 +335,29 @@
         public function remove_news($id){
             return $this->query('
                 DELETE FROM `news`
+                    WHERE `id` = "'.$this->ecran_html( $id).'"
+            ;');
+        }
+
+        public function get_comments(){
+            return $this->query('
+                SELECT 
+                    `comments`.`id`,
+                    `users`.`login` AS `autor`,
+                    `news`.`title` AS `news`,
+                    `news`.`id` AS `news_id`,
+                    `comments`.`text`,
+                    `comments`.`date`
+                FROM `comments`
+                    INNER JOIN `news` ON `news`.`id` = `comments`.`news_id`
+                    INNER JOIN `users` ON `users`.`id` = `comments`.`user_id`
+                    ORDER BY `comments`.`date` DESC
+            ;');
+        }
+
+        public function remove_comment($id){
+            return $this->query('
+                DELETE FROM `comments`
                     WHERE `id` = "'.$this->ecran_html( $id).'"
             ;');
         }

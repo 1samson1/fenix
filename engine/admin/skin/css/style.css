@@ -224,6 +224,18 @@ table.list th{
     border-bottom: 1px solid #aaa;
 }
 
+table.list td{
+    vertical-align: top;    
+    border-bottom: 1px solid #aaa;
+}
+
+table.list td img{
+    max-width: 100%;
+}
+
+table.list td p{
+    margin-top:0;
+}
 
 table.list tr:nth-child(2n+1){
     background: #00000010;
