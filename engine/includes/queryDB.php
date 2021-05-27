@@ -202,7 +202,7 @@
 
         public function get_static_by_id($id){
             return $this->query('
-                SELECT `id`, `title`, `url`, `template` FROM `static` WHERE `id` = '.$this->ecran($id).'
+                SELECT `id`, `title`, `url`, `template` FROM `static` WHERE `id` = '.$this->ecran_html($id).'
             ;');
         }
 
@@ -244,7 +244,7 @@
                     `users`.`date_reg`
                 FROM `users`
                     INNER JOIN `groups` ON `users`.`group_id` = `groups`.`id` 
-                    ORDER BY `group_id`, `users`.`date_reg` DESC, `users`.`login`
+                    ORDER BY `group_id` ASC
             ;');
         }
 
@@ -282,7 +282,7 @@
                         `users`.`group_id` = "'.$this->ecran_html($group_id).'" 
                         '.$pass.'
                         '.$foto.'
-                    WHERE `users`.`id` = "'.$user_id.'"
+                    WHERE `users`.`id` = "'.$this->ecran_html($user_id).'"
             ;');
         }
 
@@ -292,6 +292,57 @@
                     WHERE `id` = "'.$this->ecran_html( $id).'"
             ;');
         }
+
+
+
+
+
+        public function get_news(){
+            return $this->query('
+                SELECT 
+                    `news`.`id`,
+                    `news`.`title`,
+                    `users`.`login` AS `autor`,
+                    `news`.`date_edit`,
+                    `news`.`date`
+                FROM `news`
+                    INNER JOIN `users` ON `news`.`autor` = `users`.`id`
+                    ORDER BY `news`.`date` DESC
+            ;');
+        }
+
+        public function get_news_by_id($id){
+            return $this->query('
+                SELECT `id`, `title`, `short_news`, `full_news` FROM `news` WHERE `id` = '.$this->ecran_html($id).'
+            ;');
+        }
+
+        public function add_news($autor, $title, $short_news, $full_news, $date_edit, $date){
+            return $this->query('
+                INSERT INTO `news` (`autor`, `title`, `short_news`, `full_news`, `date_edit`, `date`) 
+                    VALUES ("'.$this->ecran_html($autor).'", "'.$this->ecran_html($title).'", "'.$this->ecran($short_news).'", "'.$this->ecran($full_news).'", '.$this->ecran_html($date_edit).', '.$this->ecran_html($date).')
+            ;');
+        }
+
+        public function edit_news($id, $title, $short_news, $full_news, $date_edit){
+            return $this->query('
+                UPDATE `news` 
+                    SET                          
+                        `title` = "'.$this->ecran_html($title).'",
+                        `short_news` = "'.$this->ecran($short_news).'",
+                        `full_news` = "'.$this->ecran($full_news).'",
+                        `date_edit` = "'.$this->ecran_html($date_edit).'"
+                    WHERE `id` = "'.$this->ecran_html($id).'"
+            ;');
+        }
+
+        public function remove_news($id){
+            return $this->query('
+                DELETE FROM `news`
+                    WHERE `id` = "'.$this->ecran_html( $id).'"
+            ;');
+        }
+
 
     }
 ?>

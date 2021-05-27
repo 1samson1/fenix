@@ -107,10 +107,3 @@
     }
 
 ?>
-
-<!-- if($_SESSION['user']['is_admin']){
-
-    return showSuccess('Изменения сохранены!','Настройки системы были сохранины!', MODULE_URL);
-}
-else return showError('Ошибка доступа!', 'У вас не достаточно прав!', MODULE_URL); -->
-

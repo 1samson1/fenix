@@ -205,6 +205,7 @@ main{
 
 .panel-body{
     padding: 5px 10px;
+    overflow-x: auto;
 }
 
 .panel-footer .btn{
@@ -235,8 +236,7 @@ table.list tr:hover{
 
 table.list th, table.list td{
     padding: 7px;
-    text-align: left;
-    word-break: break-all;
+    text-align: left;    
 }
 
 /* LOGINPANEL ++++++++++++++++++++++++++++++++++++++ */

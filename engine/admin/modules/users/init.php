@@ -41,7 +41,7 @@
 
                 if(!isset($alerts->alerts_array[0])){
 
-                    if($db->edit_user($user['id'], $user['group_id'], $_POST['name'], $_POST['surname'], $_POST['login'], $_POST['email'], $_POST['password'], $foto->filepath, isset($_POST['delete_foto']))){
+                    if($db->edit_user($user['id'], $_POST['group'], $_POST['name'], $_POST['surname'], $_POST['login'], $_POST['email'], $_POST['password'], $foto->filepath, isset($_POST['delete_foto']))){
                         
                         if(isset($_POST['delete_foto'])){
                             delete_file($user['foto']);
