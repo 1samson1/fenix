@@ -60,7 +60,7 @@
 		$tpl->set('{date-reg}', date('d.m.Y', $user['date_reg']));
 		$tpl->set('{group}',$user['group_name']);
 
-        if($user['foto'])$foto = '/'.$user['foto'];
+        if($user['foto']) $foto = '/'.$user['foto'];
         else $foto = '{TEMPLATE}/img/noavatar.png';
         $tpl->set('{foto}', $foto);
 

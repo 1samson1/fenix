@@ -68,7 +68,7 @@
             $tpl->set('{surname}', $user['surname']);
             $tpl->set('{name}', $user['name']);
             
-            if($user['foto'])$foto = '/'.$user['foto'];
+            if($user['foto']) $foto = '/'.$user['foto'];
             else $foto = '{SKIN}/img/noavatar.png';
             $tpl->set('{foto}', $foto);
 

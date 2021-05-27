@@ -194,6 +194,8 @@
             ;');
         }
 
+        /* Module static */
+
         public function get_statics(){
             return $this->query('
                 SELECT `id`, `title`, `url`, `date_edit`, `date` FROM `static`
@@ -231,6 +233,8 @@
                     WHERE `id` = "'.$this->ecran_html( $id).'"
             ;');
         }
+
+        /* Module users*/
 
         public function get_users(){
             return $this->query('
@@ -293,6 +297,8 @@
             ;');
         }
 
+        /* Module news*/
+
         public function get_news(){
             return $this->query('
                 SELECT 
@@ -339,6 +345,8 @@
             ;');
         }
 
+        /* Module comments*/
+
         public function get_comments(){
             return $this->query('
                 SELECT 
@@ -362,6 +370,49 @@
             ;');
         }
 
+        /* Module specialties */
 
+        public function get_specialties_mod(){
+            return $this->query('
+                SELECT `id`, `title` FROM `specialties`        
+            ;');
+        }
+
+        public function get_specialty_by_id($id){
+            return $this->query('
+                SELECT `id`, `title`, `description`, `image` FROM `specialties` WHERE `id` = '.$this->ecran_html($id).'
+            ;');
+        }
+
+        public function add_specialty($title, $description){
+            return $this->query('
+                INSERT INTO `specialties` (`title`, `description`) 
+                    VALUES ("'.$this->ecran_html($title).'", "'.$this->ecran($description).'")
+            ;');
+        }
+
+        public function edit_specialty($id, $title, $description, $image){
+            if($image){
+                $image = ', `image` = "'.$image.'"';
+            }
+            else{
+                $image = '';
+            }
+            return $this->query('
+                UPDATE `specialties` 
+                    SET                          
+                        `title` = "'.$this->ecran_html($title).'",
+                        `description` = "'.$this->ecran($description).'"
+                        '.$image.'
+                    WHERE `id` = "'.$this->ecran_html($id).'"
+            ;');
+        }
+
+        public function remove_specialty($id){
+            return $this->query('
+                DELETE FROM `specialties`
+                    WHERE `id` = "'.$this->ecran_html( $id).'"
+            ;');
+        }
     }
 ?>

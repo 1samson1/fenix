@@ -30,5 +30,23 @@
             "image" => "skin/img/icon.png",
             "description" => "Создание и редактирование новостей на сайте",
         ),
+        array(
+            "name" => "specialties",
+            "verbose_name" => "Специальности врачей",
+            "image" => "skin/img/icon.png",
+            "description" => "Создание и редактирование специальностей врачей",
+        ),
+        array(
+            "name" => "doctors",
+            "verbose_name" => "Врачи",
+            "image" => "skin/img/icon.png",
+            "description" => "Управление врачами, создание и редактирование их профилей",
+        ),
+        array(
+            "name" => "recdoc",
+            "verbose_name" => "Записи на приём",
+            "image" => "skin/img/icon.png",
+            "description" => "Просмотр записей на приём к врачам",
+        ),
     );
 ?>

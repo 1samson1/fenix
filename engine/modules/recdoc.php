@@ -26,7 +26,11 @@
         
         if ($doctor = $db->get_row()) {
             $tpl->set('{doctor-name}', $doctor['name']);
-            $tpl->set('{doctor-foto}', '/'.$doctor['foto']);
+
+            if($doctor['foto']) $foto = '/'.$doctor['foto'];
+            else $foto = '{TEMPLATE}/img/noimage.jpg';
+            $tpl->set('{doctor-foto}', $foto);
+
             $tpl->set('{doctor-specialty}', $doctor['specialty']);
             $tpl->set('{doctor-kabinet}', $doctor['kabinet']);
             $tpl->set('{datetime-recdoc}', $_POST['date'].' '.$_POST['time']);
@@ -39,7 +43,11 @@
         
         if ($doctor = $db->get_row()) {
             $tpl->set('{doctor-name}', $doctor['name']);
-            $tpl->set('{doctor-foto}', '/'.$doctor['foto']);
+
+            if($doctor['foto']) $foto = '/'.$doctor['foto'];
+            else $foto = '{TEMPLATE}/img/noimage.jpg';
+            $tpl->set('{doctor-foto}', $foto);
+
             $tpl->set('{doctor-specialty}', $doctor['specialty']);
             $tpl->set('{doctor-kabinet}', $doctor['kabinet']);
 
@@ -88,7 +96,11 @@
         
         while ($doctor = $db->get_row()) {
             $tpl->set('{doctor-name}', $doctor['name']);
-            $tpl->set('{doctor-foto}', '/'.$doctor['foto']);
+
+            if($doctor['foto']) $foto = '/'.$doctor['foto'];
+            else $foto = '{TEMPLATE}/img/noimage.jpg';
+            $tpl->set('{doctor-foto}', $foto);
+            
             $tpl->set('{doctor-specialty}', $doctor['specialty']);
             $tpl->set('{doctor-kabinet}', $doctor['kabinet']);
             $tpl->set('{doctor-link}', addGetParam('doctor',$doctor['id']));
@@ -111,7 +123,11 @@
         
         while ($specialty = $db->get_row()) {
             $tpl->set('{specialty-title}', $specialty['title']);
-            $tpl->set('{specialty-image}', '/'.$specialty['image']);
+
+            if($specialty['image']) $image = '/'.$specialty['image'];
+            else $image = '{TEMPLATE}/img/noimage.jpg';
+            $tpl->set('{specialty-image}', $image);
+            
             $tpl->set('{specialty-description}', $specialty['description']);
             $tpl->set('{specialty-link}', addGetParam('specialty',$specialty['id']));
     
