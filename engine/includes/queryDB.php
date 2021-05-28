@@ -471,5 +471,23 @@
                     WHERE `id` = "'.$this->ecran_html( $id).'"
             ;');
         }
+
+        /* Module recdoc */
+
+        public function get_recdoc(){
+            return $this->query('
+                SELECT 
+                    `users`.`name`,
+                    `users`.`surname`,
+                    `doctors`.`name` AS `doctor_name`,
+                    `specialties`.`title` AS `doctor_specialty`,
+                    `recdoctor`.`time`
+                FROM `recdoctor`
+                    INNER JOIN `users` ON `recdoctor`.`user_id` = `users`.`id`
+                    INNER JOIN `doctors` ON `recdoctor`.`doctor_id` = `doctors`.`id`
+                    INNER JOIN `specialties` ON `specialties`.`id` = `doctors`.`specialty_id`
+                    ORDER BY `recdoctor`.`time` DESC
+            ;');
+        }
     }
 ?>
