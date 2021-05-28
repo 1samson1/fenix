@@ -60,6 +60,7 @@
     .datepicker--cell.-in-range-.-focus- {
       background-color: rgba(92, 196, 239, 0.2); }
   .datepicker--cell.-disabled- {
+    font-weight: normal;
     cursor: default;
     color: #aeaeae; }
     .datepicker--cell.-disabled-.-focus- {
@@ -118,7 +119,8 @@
   font-size: .8em; }
 
 .datepicker--cell-day {
-  width: 14.28571%; }
+  width: 14.28571%;
+  font-weight: bold; }
 
 .datepicker--cells-months {
   height: 170px; }

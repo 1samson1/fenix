@@ -204,8 +204,7 @@ main{
 }
 
 .panel-body{
-    padding: 5px 10px;
-    overflow-x: auto;
+    padding: 5px 10px;    
 }
 
 .panel-footer .btn{
@@ -213,6 +212,10 @@ main{
 }
 
 /* LIST ++++++++++++++++++++++++++++++++++++++++++++ */
+
+.list-container{
+    overflow-x: auto;
+}
 
 table.list{
     width: 100%;
@@ -530,6 +533,18 @@ footer> .container{
 
 .form-groups-w60 .switch{
     min-width: 250px;
+}
+
+.form-flex-wrap{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-wrap: wrap;
+    flex:80% 1 0;
+}
+
+.form-flex-wrap .form-group{
+    margin-top: 20px;
 }
 
 .form-control{

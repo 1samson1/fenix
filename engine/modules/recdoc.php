@@ -51,37 +51,29 @@
             $tpl->set('{doctor-specialty}', $doctor['specialty']);
             $tpl->set('{doctor-kabinet}', $doctor['kabinet']);
 
-            $db->get_doctor_schedule_by_id($_GET['doctor']);
-            if ($schedule = $db->get_row_noassoc()){
-
-                $endlines = "
-                <script>
-                    $('.daterec').datepicker({
-                        inline:true,
-                        minHours:9,
-                        maxHours:17,
-                        minutesStep:30,
-                        minDate:new Date(new Date().setDate(new Date().getDate() + 1)),
-                        maxDate: new Date(new Date().setDate(new Date().getDate() + 42)),
-                        onRenderCell: function (date, cellType) {
-                            if (cellType == 'day') {
-                                var day = date.getDay(),days = ".json_encode($schedule)."
-                                    isDisabled = days[day] == '0';
-                    
-                                return {
-                                    disabled: isDisabled
-                                }
+            $endlines = "
+            <script>
+                $('.daterec').datepicker({
+                    inline:true,
+                    minHours:9,
+                    maxHours:17,
+                    minutesStep:30,
+                    minDate:new Date(new Date().setDate(new Date().getDate() + 1)),
+                    maxDate: new Date(new Date().setDate(new Date().getDate() + 42)),
+                    onRenderCell: function (date, cellType) {
+                        if (cellType == 'day') {
+                            var day = date.getDay(),days = [".$doctor['sun'].",".$doctor['mon'].",".$doctor['tue'].",".$doctor['wed'].",".$doctor['thu'].",".$doctor['fri'].",".$doctor['sat']."]
+                                isDisabled = days[day] == 0;
+                
+                            return {
+                                disabled: isDisabled
                             }
                         }
-                    })   
-                    $('.timerec').timepicker()         
-                </script> 
-                ";
-            }
-            else {
-                $alerts->set_error('Oшибка', 'Для доктора не существует графика работы!', 283);
-                showSpecialties();
-            }	
+                    }
+                })   
+                $('.timerec').timepicker()         
+            </script> 
+            ";
         }
         else {
             $alerts->set_error('Oшибка', 'Такого доктора не существует!', 282);

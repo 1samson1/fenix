@@ -5,7 +5,7 @@
         public $error_num;
         public $connect;
         public $query;
-        public $queries;
+        public $queries = null;
 
         public function __construct(){
             $this->connect = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME) or die("Нет подключения к БД");
@@ -29,12 +29,15 @@
             $this->error_num = mysqli_errno($this->connect);
         }
 
-        public function form_queries($query) {
+        public function add_query($query) {
+            if($this->queries) $this->queries .= 'START TRANSACTION;';
             $this->queries .= $query;
         }
         
         public function confirm_queries() {
+            $this->queries .= 'COMMIT;';
             $this->multi_query($this->queries);
+            $this->queries = null;
         }
 
         public function num_rows($query = '') {

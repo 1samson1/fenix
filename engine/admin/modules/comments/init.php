@@ -6,7 +6,7 @@
     if($_GET['action'] == 'delete'){
 
         if($db->remove_comment($_GET['delete'])){
-            showSuccess('Комментарий удалён!','Выбраная комментарий успешно удалён!', MODULE_URL);
+            showSuccess('Комментарий удалён!','Выбраный комментарий успешно удалён!', MODULE_URL);
         }
         else showError('Ошибка удаления!', 'Неизвестная ошибка!', MODULE_URL);
 

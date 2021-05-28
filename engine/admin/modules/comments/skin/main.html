@@ -1,33 +1,35 @@
 <div class="container-fill">
     <div class="panel-header">Комментарии</div>
     <div class="panel-body">
-        <table class="list">
-            <thead>
-                <tr>
-                    <th>Автор:</th>
-                    <th>Текст:</th>
-                    <th>Новость:</th>
-                    <th>Дата публикации:</th>
-                    <th>Действия:</th>
-                </tr>
-            </thead>
-            <tbody>
-                [comments]
-                <tr>
-                    <td>{autor}</td>
-                    <td>{text}</td>
-                    <td><a href="{url-news}" class="link">{news}</a></td>
-                    <td>{date}</td>
-                    <td>
-                        <a href="{delete-link}" class="link-btn red" title="Удалить">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                            </svg>
-                        </a>
-                    </td>
-                </tr>
-                [/comments]
-            </tbody>
-        </table>
+        <div class="list-container">
+            <table class="list">
+                <thead>
+                    <tr>
+                        <th>Автор:</th>
+                        <th>Текст:</th>
+                        <th>Новость:</th>
+                        <th>Дата публикации:</th>
+                        <th>Действия:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    [comments]
+                    <tr>
+                        <td>{autor}</td>
+                        <td>{text}</td>
+                        <td><a href="{url-news}" class="link">{news}</a></td>
+                        <td>{date}</td>
+                        <td>
+                            <a href="{delete-link}" class="link-btn red" title="Удалить">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                    [/comments]
+                </tbody>
+            </table>
+        </div>
     </div>    
 </div>

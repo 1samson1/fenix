@@ -1,0 +1,110 @@
+<div class="container-fill">
+    <div class="panel-header">Врачи</div>
+    <form action="" method="POST" enctype="multipart/form-data">
+        <div class="panel-body">
+            <div class="form-groups-w20">
+                <div class="form-group">
+                    <label for="add_name">ФИО:</label>
+                    <input type="text" name="name" id="add_name" class="form-control form-control-large" value="{name}" required>
+                </div>
+                <div class="form-group">
+                    <label for="add_specialty">Специальность:</label>
+                    <select name="specialty" class="right wide" id="add_specialty" required>
+                        {specialties}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="add_kabinet">Кабинет:</label>
+                    <input type="text" name="kabinet" id="add_kabinet" class="form-control form-control-large" value="{kabinet}" required>
+                </div>   
+                <div class="form-group">
+                    <label for="add_kabinet">График работы:</label>
+                    <div class="form-flex-wrap">
+                        <div class="form-group">
+                            <label for="add_mon">Понедельник:</label>
+                            <div class="form-control-large">
+                                <label class="checkbox">
+                                    <input type="checkbox" class="check-input" id="add_mon" name="mon" {mon}>
+                                    <span class="check"></span>    
+                                    <span class="label-check"></span>                        
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add_tue">Вторник:</label>
+                            <div class="form-control-large">
+                                <label class="checkbox">
+                                    <input type="checkbox" class="check-input" id="add_tue" name="tue" {tue}>
+                                    <span class="check"></span>  
+                                    <span class="label-check"></span>                             
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add_wed">Среда:</label>
+                            <div class="form-control-large">
+                                <label class="checkbox">
+                                    <input type="checkbox" class="check-input" id="add_wed" name="wed" {wed}>
+                                    <span class="check"></span>
+                                    <span class="label-check"></span>                               
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add_thu">Четверг:</label>
+                            <div class="form-control-large">
+                                <label class="checkbox">
+                                    <input type="checkbox" class="check-input" id="add_thu" name="thu" {thu}>
+                                    <span class="check"></span>
+                                    <span class="label-check"></span>                               
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add_fri">Пятница:</label>
+                            <div class="form-control-large">
+                                <label class="checkbox">
+                                    <input type="checkbox" class="check-input" id="add_fri" name="fri" {fri}>
+                                    <span class="check"></span> 
+                                    <span class="label-check"></span>                              
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add_sat">Суббота:</label>
+                            <div class="form-control-large">
+                                <label class="checkbox">
+                                    <input type="checkbox" class="check-input" id="add_sat" name="sat" {sat}>
+                                    <span class="check"></span> 
+                                    <span class="label-check"></span>                              
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add_sun">Воскресенье:</label>
+                            <div class="form-control-large">
+                                <label class="checkbox">
+                                    <input type="checkbox" class="check-input" id="add_sun" name="sun" {sun}>
+                                    <span class="check"></span>
+                                    <span class="label-check"></span>                               
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">   
+                    <label>Картинка:</label> 
+                    <div class="wrapper">
+                        <div class="form-control-large">
+                            <input type="file" class="form-control form-control-large" name="foto" accept="image/*">
+                        </div>                        
+                        <img src="{foto}" class="cicle" alt="">
+                    </div>
+                </div> 
+            </div>            
+        </div>
+        <div class="panel-footer">
+            <input type="submit" class="btn" name="edit_doctor" value="Сохранить">
+        </div>
+    </form>
+</div>
