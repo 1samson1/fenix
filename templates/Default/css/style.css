@@ -652,13 +652,17 @@ main .container-fill{
     margin-bottom: 20px !important;
 }
 
-.date-news, .autor-news{
-    background-size: 1em;;
+.date-news, .comments-news, .autor-news{
+    background-size: 1em;
     padding-left: 1.3em;
 }
 
 .date-news{
     background: url(../img/alarm.svg) no-repeat left center;
+}
+
+.comments-news{
+    background: url(../img/chat-dots.svg) no-repeat left center;
 }
 
 .autor-news{

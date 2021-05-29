@@ -4,6 +4,8 @@
     if(!isset($tpl->data['{content}']))
         $tpl->set('{content}','');
 
+    $tpl->set('{head}', $head);
+
     $tpl->set('{SKIN}', ADMIN_URL.'/skin');
 
     if(!$_SESSION['user']['is_admin'] ){

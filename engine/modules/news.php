@@ -12,6 +12,7 @@
             $tpl->set('{body}', $news_item['body']);
             $tpl->set('{date}', date('d.m.Y', $news_item['date']));
             $tpl->set('{autor}', $news_item['autor']);
+            $tpl->set('{count_comments}', $news_item['count_comments']);
             
             $tpl->save('{content}');
             $head['title'] = $news_item['title'];
@@ -37,6 +38,7 @@
             $tpl->set('{body}', $news_item['body']);
             $tpl->set('{date}', date('d.m.Y', $news_item['date']));
             $tpl->set('{autor}', $news_item['autor']);
+            $tpl->set('{count_comments}', $news_item['count_comments']);
             $tpl->set('{news-link}', '/news/'.$news_item['id'].'/');
     
             $tpl->copy_tpl();

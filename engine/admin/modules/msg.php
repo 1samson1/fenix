@@ -1,6 +1,8 @@
 <?php 
     function showSuccess($title, $text, $url){
-        global $tpl;
+        global $tpl, $head;
+
+        $head['title'] = $title;
 
         $tpl->load('success.html');
 
@@ -12,7 +14,9 @@
     }
 
     function showError($title, $text, $url){
-        global $tpl;
+        global $tpl, $head;
+
+        $head['title'] = $title;
 
         $tpl->load('error.html');
 
@@ -24,7 +28,9 @@
     }
 
     function showConfirm($title, $text, $url_yes, $url_no){
-        global $tpl;
+        global $tpl, $head;
+
+        $head['title'] = $title;
 
         $tpl->load('confirm.html');
 

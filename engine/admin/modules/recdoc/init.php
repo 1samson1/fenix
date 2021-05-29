@@ -1,4 +1,6 @@
 <?php
+    
+    $head['title'] = 'Записи на приём к врачам';
 
     require_once ENGINE_DIR.'/includes/functions.php';
     require_once ENGINE_DIR.'/includes/checkFeild.php';
@@ -22,8 +24,6 @@
 
     $tpl->save_repeat_block();
 
-    $tpl->save('{content}');
-
-    
+    $tpl->save('{content}');   
 
 ?>

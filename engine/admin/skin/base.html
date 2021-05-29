@@ -1,36 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    {head}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Админпанель</title>    
-    <script src="/engine/js/jquery-3.5.1.min.js"></script>
-    <script src="/engine/js/tinymce/tinymce.min.js"></script>
-    <link rel="stylesheet" href="{SKIN}/css/style.css">    
-    <link rel="stylesheet" href="{SKIN}/css/nice-select.css">    
-    <script src="{SKIN}/js/default.js"></script>
-    <script src="{SKIN}/js/jquery.nice-select.js"></script>
-    <script>
-        $(function(){     
-            tinymce.init({
-                selector: 'textarea',
-                language:"ru",
-                mode : "textareas",
-                width:"100%",
-                height:500,                
-                plugins: ["advlist autolink lists link image charmap anchor searchreplace visualblocks visualchars media nonbreaking table emoticons paste spellchecker codesample hr fullscreen"],
-                statusbar:false,
-                menubar:false,
-                relative_urls:false,
-                branding: false,  
-                paste_as_text:true,
-                image_dimensions: false,
-		        toolbar1: "formatselect fontselect fontsizeselect | link anchor unlink | image dlaudio | codesample hr visualblocks code | spellchecker removeformat searchreplace fullscreen",
-		        toolbar2: "undo redo | copy paste pastetext | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | subscript superscript | table bullist numlist | forecolor backcolor",
-            });  
-        });
-    </script>
 </head>
 <body>
     <header>

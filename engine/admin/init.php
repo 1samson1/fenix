@@ -46,6 +46,10 @@
         }
     }
 
+    /* LOAD HEAD FILE ======================================== */
+
+    require_once ADMIN_DIR.'/modules/head.php';
+
     /* LOAD ALERTS TEMPLATE ======================================== */
 
     require_once ADMIN_DIR.'/modules/alerts.php';

@@ -1,5 +1,7 @@
 <?php
 
+    $head['title'] = 'Комментарии';
+
     require_once ENGINE_DIR.'/includes/functions.php';
     require_once ENGINE_DIR.'/includes/checkFeild.php';
     
@@ -13,7 +15,7 @@
     }
     elseif(isset($_GET['delete'])){
 
-        showConfirm('Удаление страницы', 'Вы действительно хотите удалить выбранный комментарий?', addGetParam('action','delete'), MODULE_URL);
+        showConfirm('Удаление комментария', 'Вы действительно хотите удалить выбранный комментарий?', addGetParam('action','delete'), MODULE_URL);
     
     }    
     else{

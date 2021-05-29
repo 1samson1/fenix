@@ -116,8 +116,9 @@
                     `users`.`login` AS `autor`, 
                     `news`.`title`,
                     `news`.`date`,
-                    `news`.`short_news` AS `body` 
-                FROM `news` 
+                    `news`.`short_news` AS `body`,
+                    (SELECT COUNT(*) FROM `comments` WHERE `comments`.`news_id` = `news`.`id`) AS `count_comments`
+                FROM `news`
                     INNER JOIN `users` ON `news`.`autor` = `users`.`id`
                     ORDER BY `news`.`date` DESC
                     LIMIT '.$begin.', '.$count.'
@@ -131,8 +132,9 @@
                     `users`.`login` AS `autor`, 
                     `news`.`title`,
                     `news`.`date`,
-                    `news`.`full_news` AS `body` 
-                FROM `news` 
+                    `news`.`full_news` AS `body`,
+                    (SELECT COUNT(*) FROM `comments` WHERE `comments`.`news_id` = `news`.`id`) AS `count_comments`
+                FROM `news`
                     INNER JOIN `users` ON `news`.`autor` = `users`.`id`
                     WHERE `news`.`id` = '.$this->ecran_html($id).'
             ;');

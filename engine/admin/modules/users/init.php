@@ -1,5 +1,7 @@
 <?php
 
+    $head['title'] = 'Пользователи';    
+
     require_once ENGINE_DIR.'/includes/functions.php';
     require_once ENGINE_DIR.'/includes/checkFeild.php';
     require_once ENGINE_DIR.'/includes/upload.php';
@@ -19,20 +21,22 @@
     }
     elseif(isset($_GET['id'])){
 
+        $head['title'] = 'Редактирование пользователя';  
+
         $db->get_user_by_id($_GET['id']);
 
         if($user = $db->get_row()){
 
             if(isset($_POST['edit_user'])){
     
-                $alerts->set_error_if(!CheckField::login($_POST['login']), 'Ошибка изменения данных пользователя', 'Некорректный логин', 201);
+                $alerts->set_error_if(!CheckField::login($_POST['login']), 'Ошибка изменения данных пользователя!', 'Некорректный логин!', 201);
 
-                $alerts->set_error_if(!CheckField::email($_POST['email']), 'Ошибка изменения данных пользователя', 'Некорректный email', 202);
+                $alerts->set_error_if(!CheckField::email($_POST['email']), 'Ошибка изменения данных пользователя!', 'Некорректный email!', 202);
 
-                if(isset($_POST['password'][0]) || isset($_POST['repassword'][0]) || isset($_POST['lastpassword'][0])){
-                    $alerts->set_error_if(!CheckField::confirm_hash($_POST['password'],$user['password']), 'Ошибка изменения данных пользователя', 'Пароль не совпадает с предыдущим', 212);
+                if(isset($_POST['password'][0]) || isset($_POST['repassword'][0])){
                     
-                    $alerts->set_error_if(!CheckField::confirm_pass($_POST['password'],$_POST['repassword']), 'Ошибка изменения данных пользователя', 'Пароль не совпадает с формой подтверждения', 204);
+                   $alerts->set_error_if(!CheckField::confirm_pass($_POST['password'],$_POST['repassword']), 'Ошибка изменения данных пользователя!', 'Пароль не совпадает с формой подтверждения!', 204);
+                
                 }
                 
                 $foto = new Upload_Image('foto', 'foto_'.$user['id'], 'avatars');
@@ -85,6 +89,8 @@
 
     }
     elseif($_GET['action'] == 'addnew'){
+
+        $head['title'] = 'Добавление пользователя';  
 
         if(isset($_POST['add_user'])){
 

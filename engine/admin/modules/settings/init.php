@@ -1,4 +1,7 @@
 <?php 
+    
+    $head['title'] = 'Настройки системы';
+
     require_once MODULE_DIR.'/save_conf.php';
 
     if(isset($_POST['save'])){

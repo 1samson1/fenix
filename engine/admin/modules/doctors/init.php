@@ -1,5 +1,7 @@
 <?php
 
+    $head['title'] = 'Врачи';
+
     require_once ENGINE_DIR.'/includes/functions.php';
     require_once ENGINE_DIR.'/includes/checkFeild.php';
     require_once ENGINE_DIR.'/includes/upload.php';
@@ -18,6 +20,8 @@
     
     }
     elseif(isset($_GET['id'])){
+
+        $head['title'] = 'Редактирование врача';
 
         $db->get_doctor_by_id($_GET['id']);
 
@@ -100,6 +104,8 @@
 
     }
     elseif($_GET['action'] == 'addnew'){
+        
+        $head['title'] = 'Добавление врача';
 
         if(isset($_POST['add_doctor'])){
 
