@@ -181,7 +181,7 @@ header> .container{
     transform: scaleY(0);
 }
 
-.user-options-open{
+.opener.open> .user-options{
     transform: scaleY(1);
 }
 
@@ -707,17 +707,17 @@ footer> .container{
     transition: transform 0.2s ease-in, top 0.2s linear 0.2s;
 }
 
-.menu-icon.menu-icon-active {
+.opener.open .menu-icon {
     background-color: transparent;
 }
 
-.menu-icon.menu-icon-active::before {
+.opener.open .menu-icon::before {
     transform: rotate(45deg);
     top: 0;
     transition: top 0.2s linear, transform 0.2s ease-in 0.2s;
 }
 
-.menu-icon.menu-icon-active::after {
+.opener.open .menu-icon::after {
     transform: rotate(-45deg);
     top: 0;
     transition: top 0.2s linear, transform 0.2s ease-in 0.2s;
@@ -749,7 +749,7 @@ footer> .container{
     border-radius: 50% 50% 0 0;
 }
 
-.user-icon.menu-icon-active::before,.user-icon.menu-icon-active::after {
+.opener.open .user-icon::before,.opener.open .user-icon::after {
     top: 0;
     left: 0;
     border-radius: 0;
@@ -758,11 +758,11 @@ footer> .container{
     transition: all 0.1s linear, transform 0.2s ease-in 0.2s;
 }
 
-.user-icon.menu-icon-active::before{
+.opener.open .user-icon::before{
     transform: rotate(45deg);
 }
 
-.user-icon.menu-icon-active::after {
+.opener.open .user-icon::after {
     transform: rotate(-45deg);    
 }
 
@@ -790,6 +790,14 @@ footer> .container{
 
 /* MEDIA QUERY ================================ */
 @media (max-width: 720px) {
+
+    /* GLOBAL ************************************ */
+
+    header{
+        position: fixed;
+        width: 100%;
+        z-index: 10;
+    }
 
     /* TOPMENU ********************************* */
 
@@ -833,7 +841,7 @@ footer> .container{
         transition: transform .5s ease;        
     }
 
-    .links-active{
+    .opener.open> .links{
         transform: scaleX(1);
     }   
 

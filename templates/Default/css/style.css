@@ -78,6 +78,22 @@ table th,table td{
     border:none;
 }
 
+.red{
+    color:#f00 !important;
+}
+
+.yellow{
+    color: #ffc400 !important;
+}
+
+.green{
+    color:#14A76C !important;
+}
+
+.black{
+    color: #000 !important;
+}
+
 /* HEADER =========================================== */
 
 header{    
@@ -177,17 +193,17 @@ header{
     transition: transform 0.2s ease-in, top 0.2s linear 0.2s;
 }
 
-.menu-icon.menu-icon-active {
+.opener.open .menu-icon {
     background-color: transparent;
 }
 
-.menu-icon.menu-icon-active::before {
+.opener.open .menu-icon::before {
     transform: rotate(45deg);
     top: 0;
     transition: top 0.2s linear, transform 0.2s ease-in 0.2s;
 }
 
-.menu-icon.menu-icon-active::after {
+.opener.open .menu-icon::after {
     transform: rotate(-45deg);
     top: 0;
     transition: top 0.2s linear, transform 0.2s ease-in 0.2s;
@@ -203,7 +219,7 @@ header{
     position: fixed;
     display: none; 
     width: 100%;
-    z-index: 2;   
+    z-index: 15;   
 }
 
 .bg-login-panel{
@@ -312,7 +328,7 @@ header{
     transform: scaleY(0);
 }
 
-.user-options-open{
+.opener.open> .user-options{
     transform: scaleY(1);
 }
 
@@ -1094,7 +1110,7 @@ footer{
     border-radius: 50% 50% 0 0;
 }
 
-.user-icon.menu-icon-active::before,.user-icon.menu-icon-active::after {
+.opener.open .user-icon::before,.opener.open .user-icon::after {
     top: 0;
     left: 0;
     border-radius: 0;
@@ -1103,11 +1119,11 @@ footer{
     transition: all 0.1s linear, transform 0.2s ease-in 0.2s;
 }
 
-.user-icon.menu-icon-active::before{
+.opener.open .user-icon::before{
     transform: rotate(45deg);
 }
 
-.user-icon.menu-icon-active::after {
+.opener.open .user-icon::after {
     transform: rotate(-45deg);    
 }
 
@@ -1119,7 +1135,7 @@ footer{
     header{
         position: fixed;
         width: 100%;
-        z-index: 1;
+        z-index: 10;
     }
 
     main{
@@ -1171,7 +1187,7 @@ footer{
         transition: transform .5s ease;        
     }
 
-    .links-active{
+    .opener.open> .links{
         transform: scaleX(1);
     }   
 

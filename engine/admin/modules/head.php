@@ -11,6 +11,7 @@ $head = <<<HTML
 <link rel="stylesheet" href="{SKIN}/css/style.css">    
 <link rel="stylesheet" href="{SKIN}/css/nice-select.css">    
 <script src="{SKIN}/js/default.js"></script>
+<script src="{SKIN}/js/opener.js"></script>
 <script src="{SKIN}/js/jquery.nice-select.js"></script>
 <script>
     $(function(){     
@@ -29,7 +30,7 @@ $head = <<<HTML
             image_dimensions: false,
             toolbar1: "formatselect fontselect fontsizeselect | link anchor unlink | image dlaudio | codesample hr visualblocks code | spellchecker removeformat searchreplace fullscreen",
             toolbar2: "undo redo | copy paste pastetext | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | subscript superscript | table bullist numlist | forecolor backcolor",
-        });  
+        });
     });
 </script>
 HTML;

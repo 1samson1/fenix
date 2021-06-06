@@ -1,48 +1,58 @@
-<div class="user-dock">
+
+[not-group]
+<div class="opener user-dock">
     <div class="menu-button">
         <div class="menu-icon-wrapper" tabindex="0">                                
             <div class="user-icon menu-icon"></div>                                
         </div>
     </div>
-    [not-group]
     <div class="links links-right">
         <a class="login-link topmenu__link">Вход</a> 
         <a href="{registration-link}" class="topmenu__link">Регистрация</a>
     </div> 
-    <div class="singin">
-        <div class="bg-login-panel"></div>
-        <div class="login-panel">
-            <div class="close"></div>
-            <div class="login-block">
-                <div class="login-title">Вход</div>
-                <form action="" class="singin-form" method="POST">
-                    <div class="form-control form-control-large">
-                        <input type="text" name="login" id="lg-login" required>                        
-                        <label for="lg-login">Логин</label>                                            
-                    </div>
-                    <div class="form-control form-control-password form-control-large">
-                        <input type="password" name="password" id="lg-password" required>
-                        <label for="lg-password">Пароль</label>
-                        <div class="password-show"></div>
-                    </div>
-                    <input type="submit" name="do_login" value="Войти" class="btn btn-large">                                    
-                </form>
-                <a id="forgotpass" href="#">Забыли пароль?</a>
-            </div>
+</div>
+<div class="singin">
+    <div class="bg-login-panel"></div>
+    <div class="login-panel">
+        <div class="close"></div>
+        <div class="login-block">
+            <div class="login-title">Вход</div>
+            <form action="" class="singin-form" method="POST">
+                <div class="form-control form-control-large">
+                    <input type="text" name="login" id="lg-login" required>                        
+                    <label for="lg-login">Логин</label>                                            
+                </div>
+                <div class="form-control form-control-password form-control-large">
+                    <input type="password" name="password" id="lg-password" required>
+                    <label for="lg-password">Пароль</label>
+                    <div class="password-show"></div>
+                </div>
+                <input type="submit" name="do_login" value="Войти" class="btn btn-large">                                    
+            </form>
+            <a id="forgotpass" href="#">Забыли пароль?</a>
         </div>
     </div>
-    [/not-group]
-    [group]
-    <div class="links links-right">
-        <a id="user-panel" class="topmenu__link" tabindex="1">
-            <img src="{foto}" alt="avatar" srcset="">
-            <span>{surname} {name}</span>
-        </a>
-        <div class="user-options">
-            [admin]<a href="{admin-link}" class="user-option topmenu__link">Админпанель</a>[/admin]
-            <a href="{profile-link}" class="user-option topmenu__link">Профиль</a>
-            <a href="{logout}" class="user-option topmenu__link">Выход</a>
-        </div>       
-    </div>
-    [/group]
 </div>
+[/not-group]
+[group]  
+<div class="opener user-dock">
+    <div class="menu-button">
+        <div class="menu-icon-wrapper" tabindex="0">                                
+            <div class="user-icon menu-icon"></div>                                
+        </div>
+    </div>  
+    <div class="links links-right">
+        <div class="opener">
+            <a id="user-panel" class="opener-toggle topmenu__link" tabindex="1">
+                <img src="{foto}" alt="avatar" srcset="">
+                <span>{surname} {name}</span>
+            </a>
+            <div class="user-options">
+                [admin]<a href="{admin-link}" class="user-option topmenu__link">Админпанель</a>[/admin]
+                <a href="{profile-link}" class="user-option topmenu__link">Профиль</a>
+                <a href="{logout}" class="user-option topmenu__link">Выход</a>
+            </div>       
+        </div>
+    </div>
+</div>
+[/group]
