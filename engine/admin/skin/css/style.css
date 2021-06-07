@@ -829,11 +829,39 @@ footer> .container{
         z-index: 10;
     }
 
+    main{
+        padding-top: 85px;
+    }
+
     /* TOPMENU ********************************* */
 
     .to-site span{
         display: none;
     }    
+
+    /* LIST ********************************** */
+
+    table.list tr{
+        border-bottom: 1px solid #aaa;
+    }
+
+    table.list td{
+        display: flex;
+        width: 100%;
+        border-bottom: 0;
+    }
+
+    table.list td::before{
+        content: attr(data-list-colname);
+        display: block;
+        flex: 33% 0 0;
+        margin-right: 7px;
+        font-weight: bold;
+    }
+
+    table.list th{
+        display: none;
+    }
 
     /* MODULES ********************************** */
 
