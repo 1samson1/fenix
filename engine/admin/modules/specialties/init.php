@@ -1,6 +1,6 @@
 <?php
     
-    $head['title'] = 'Специальности врачей';
+    $crumbs->add($head['title'] = 'Специальности врачей', MODULE_URL);
 
     require_once ENGINE_DIR.'/includes/functions.php';
     require_once ENGINE_DIR.'/includes/checkFeild.php';
@@ -21,7 +21,7 @@
     }
     elseif(isset($_GET['id'])){
 
-        $head['title'] = 'Редактирование специальности';
+        $crumbs->add($head['title'] = 'Редактирование специальности', '');
 
         $db->get_specialty_by_id($_GET['id']);
 
@@ -70,7 +70,7 @@
     }
     elseif($_GET['action'] == 'addnew'){
 
-        $head['title'] = 'Добавление специальности';
+        $crumbs->add($head['title'] = 'Добавление специальности', '');
 
         if(isset($_POST['add_specialty'])){
 

@@ -258,10 +258,29 @@ table.list th, table.list td{
     max-width: 400px;
 }
 
+/* BREADCRUMBS ++++++++++++++++++++++++++++++++++++++ */
+
+.title-page{
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.crumbs a{
+    color:#1969ff;
+}
+
+.crumbs span:not(:first-child)::before{
+    display: inline-block;
+    padding-right: .5rem;
+    padding-left: .5rem;
+    color: #6c757d;
+    content: "/";
+}
+
 /* WELCOME ++++++++++++++++++++++++++++++++++++++ */
 
 .title-welcome{
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     font-weight: bold;
 }
 

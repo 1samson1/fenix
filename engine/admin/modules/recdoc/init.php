@@ -1,6 +1,6 @@
 <?php
     
-    $head['title'] = 'Записи на приём к врачам';
+    $crumbs->add($head['title'] = 'Записи на приём к врачам', MODULE_URL);
 
     require_once ENGINE_DIR.'/includes/functions.php';
     require_once ENGINE_DIR.'/includes/checkFeild.php';

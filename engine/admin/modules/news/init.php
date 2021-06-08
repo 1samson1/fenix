@@ -1,6 +1,6 @@
 <?php
 
-    $head['title'] = 'Новости';
+    $crumbs->add($head['title'] = 'Новости', MODULE_URL);
 
     require_once ENGINE_DIR.'/includes/functions.php';
     require_once ENGINE_DIR.'/includes/checkFeild.php';
@@ -20,7 +20,7 @@
     }
     elseif(isset($_GET['id'])){
         
-        $head['title'] = 'Редактирование новости';
+        $crumbs->add($head['title'] = 'Редактирование новости', '');
 
         $db->get_news_by_id($_GET['id']);
 
@@ -57,7 +57,7 @@
     }
     elseif($_GET['action'] == 'addnew'){
 
-        $head['title'] = 'Добавление новости';
+        $crumbs->add($head['title'] = 'Добавление новости', '');
 
         if(isset($_POST['add_news'])){
             $alerts->set_error_if(!CheckField::empty($_POST['title']), 'Ошибка добавления!', 'Вы не ввели название страницы!', 564);

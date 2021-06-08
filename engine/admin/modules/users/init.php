@@ -1,6 +1,6 @@
 <?php
 
-    $head['title'] = 'Пользователи';    
+    $crumbs->add($head['title'] = 'Пользователи', MODULE_URL);
 
     require_once ENGINE_DIR.'/includes/functions.php';
     require_once ENGINE_DIR.'/includes/checkFeild.php';
@@ -21,7 +21,7 @@
     }
     elseif(isset($_GET['id'])){
 
-        $head['title'] = 'Редактирование пользователя';  
+        $crumbs->add($head['title'] = 'Редактирование пользователя', '');
 
         $db->get_user_by_id($_GET['id']);
 
@@ -90,7 +90,7 @@
     }
     elseif($_GET['action'] == 'addnew'){
 
-        $head['title'] = 'Добавление пользователя';  
+        $crumbs->add($head['title'] = 'Добавление пользователя', '');  
 
         if(isset($_POST['add_user'])){
 

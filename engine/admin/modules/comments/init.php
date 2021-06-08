@@ -1,6 +1,6 @@
 <?php
 
-    $head['title'] = 'Комментарии';
+    $crumbs->add($head['title'] = 'Комментарии', MODULE_URL);
 
     require_once ENGINE_DIR.'/includes/functions.php';
     require_once ENGINE_DIR.'/includes/checkFeild.php';

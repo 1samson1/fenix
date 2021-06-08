@@ -1,6 +1,8 @@
 <?php
 
-    define("ADMIN_URL", '/engine/admin');
+    define("ADMIN_URL", '/admin/');
+
+    define("ADMIN_URL_STATIC", '/engine/admin');
 
     session_start();
 
@@ -28,6 +30,10 @@
     
     require_once ADMIN_DIR.'/includes/modules.php'; // Подключает файл класса модулей
 
+    require_once ADMIN_DIR.'/includes/breadcrumbs.php'; // Подключает файл класса хлебныхкрошек
+
+    $crumbs = new BreadCrumbs('Главная', ADMIN_URL);
+
     require_once ADMIN_DIR.'/modules/msg.php'; // Подключает файл системных сообщений
 
     if(!$_SESSION['user']['is_admin']){
@@ -49,6 +55,10 @@
     /* LOAD HEAD FILE ======================================== */
 
     require_once ADMIN_DIR.'/modules/head.php';
+
+    /* LOAD BREADCRUMBS TEMPLATE ======================================== */
+
+    require_once ADMIN_DIR.'/modules/breadcrumbs.php';
 
     /* LOAD ALERTS TEMPLATE ======================================== */
 

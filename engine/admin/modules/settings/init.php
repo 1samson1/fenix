@@ -1,6 +1,6 @@
 <?php 
     
-    $head['title'] = 'Настройки системы';
+    $crumbs->add($head['title'] = 'Настройки системы', MODULE_URL);
 
     require_once MODULE_DIR.'/save_conf.php';
 
