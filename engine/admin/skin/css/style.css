@@ -192,7 +192,7 @@ header> .container{
 /* MAIN ======================================= */
 
 main{
-    margin: auto 0;
+    margin: 0;
 }
 
 /* PANELS  ++++++++++++++++++++++++++++++++++++++ */
@@ -225,8 +225,7 @@ table.list th{
 }
 
 table.list td{
-    vertical-align: top;    
-    border-bottom: 1px solid #aaa;
+    vertical-align: top;
 }
 
 table.list td img{
@@ -235,6 +234,10 @@ table.list td img{
 
 table.list td p{
     margin-top:0;
+}
+
+table.list tr{
+    border-bottom: 1px solid #aaa;
 }
 
 table.list tr:nth-child(2n+1){
@@ -265,8 +268,12 @@ table.list th, table.list td{
     font-weight: bold;
 }
 
+.crumbs{
+    padding: 10px;
+}
+
 .crumbs a{
-    color:#1969ff;
+    color:#000;
 }
 
 .crumbs span:not(:first-child)::before{
@@ -277,11 +284,14 @@ table.list th, table.list td{
     content: "/";
 }
 
+.crumbs span:last-child{
+    color:#808080;
+}
+
 /* WELCOME ++++++++++++++++++++++++++++++++++++++ */
 
 .title-welcome{
-    font-size: 1.1rem;
-    font-weight: bold;
+    font-size: 1.1rem;    
 }
 
 .body-welcome{
