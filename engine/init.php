@@ -4,7 +4,7 @@
     
     require_once ENGINE_DIR.'/data/config.php'; // Подключаем глобальный конфиг
     
-    ini_set('date.timezone', $config['timezone']);
+    ini_set('date.timezone', $config['timezone']); // Инициализания часового пояса
 
     require_once ENGINE_DIR.'/includes/queryDB.php'; // Подключаем файл класса базы данных
     

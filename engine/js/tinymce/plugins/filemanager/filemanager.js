@@ -102,7 +102,7 @@ class FileManager{
     }
 
     uploadFile(file){
-        let url = '/upload.php'
+        let url = '/api/upload/'
         let formData = new FormData()
 
         let preview = this.createPreview(file)

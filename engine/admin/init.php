@@ -47,7 +47,7 @@
             
         } else{
             
-            require_once (ADMIN_DIR . '/modules/main.php');
+            require_once ADMIN_DIR . '/modules/main.php';
     
         }
     }
