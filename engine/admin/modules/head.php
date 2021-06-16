@@ -21,14 +21,14 @@ $head = <<<HTML
             mode : "textareas",
             width:"100%",
             height:500,                
-            plugins: ["advlist autolink lists link image charmap anchor searchreplace visualblocks visualchars media nonbreaking table emoticons paste spellchecker codesample hr fullscreen"],
+            plugins: ["advlist autolink lists link image filemanager charmap anchor searchreplace visualblocks visualchars media nonbreaking table emoticons paste spellchecker codesample hr fullscreen"],
             statusbar:false,
             menubar:false,
             relative_urls:false,
             branding: false,  
             paste_as_text:true,
             image_dimensions: false,
-            toolbar1: "formatselect fontselect fontsizeselect | link anchor unlink | image dlaudio | codesample hr visualblocks code | spellchecker removeformat searchreplace fullscreen",
+            toolbar1: "formatselect fontselect fontsizeselect | link anchor unlink | image filemanager | codesample hr visualblocks code | spellchecker removeformat searchreplace fullscreen",
             toolbar2: "undo redo | copy paste pastetext | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | subscript superscript | table bullist numlist | forecolor backcolor",
         });
     });
