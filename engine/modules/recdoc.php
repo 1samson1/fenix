@@ -14,7 +14,7 @@
                 if($db->recording($_GET['doctor'], $_SESSION['user']['id'], $_POST['date'], $_POST['time'])){
 					return true;
 				}
-				else $alerts->set_error_if($db->error, 'Ошибка записи на приём!', 'Выбраная дата занята!', $db->error_num);
+				else $alerts->set_error('Ошибка записи на приём!', 'Выбраная дата занята!', $db->error_num);
             }
         }
         return false;

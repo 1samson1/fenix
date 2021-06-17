@@ -44,7 +44,7 @@
 							$user['foto'] = $foto->filepath;
 						}
 					}
-					else $alerts->set_error_if($db->error, 'Ошибка изменения данных пользователя', Error_info::reg_user($db->error_num), $db->error_num);
+					else $alerts->set_error('Ошибка изменения данных пользователя', Error_info::reg_user($db->error_num), $db->error_num);
 				}	
 			}
 			else $alerts->set_error('Oшибка редактирования профиля', 'Невозможно изменить данные пользователя, нет доступа', 218);

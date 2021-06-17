@@ -9,7 +9,7 @@
             if($db->add_comment($_GET['param1'], $_SESSION['user']['id'], $_POST['text'], time())){
                 $alerts->set_success('Комментарий добавлен!', 'Ваш комментарий успешно добавлен!');
             }
-            else $alerts->set_error_if($db->error, 'Ошибка добавления комментария!', 'Неизвестная ошибка!', $db->error_num);
+            else $alerts->set_error('Ошибка добавления комментария!', 'Неизвестная ошибка!', $db->error_num);
         }
     }
 

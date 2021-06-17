@@ -3,7 +3,7 @@
         public $response;
         public $errors;          
 
-        public function set_response($value){  
+        public function set($value){  
             $this->response = $value;
         }
 
