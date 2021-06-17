@@ -6,14 +6,23 @@ if(!$head['title']){
 
 $head = <<<HTML
 <title>{$head['title']}</title>  
+
 <script src="/engine/js/jquery-3.5.1.min.js"></script>
-<script src="/engine/js/tinymce/tinymce.min.js"></script>
+
 <link rel="stylesheet" href="{SKIN}/css/style.css">    
-<link rel="stylesheet" href="{SKIN}/css/nice-select.css">    
 <script src="{SKIN}/js/default.js"></script>
+
 <script src="{SKIN}/js/opener.js"></script>
+
+<link rel="stylesheet" href="{SKIN}/css/nice-select.css">    
 <script src="{SKIN}/js/jquery.nice-select.js"></script>
+
+<script src="/engine/js/tinymce/tinymce.min.js"></script>
+
+<link rel="stylesheet" href="/engine/css/filemanager.css">    
+<script src="/engine/js/filemanager.js"></script>
 <script>
+    var fm = new FileManager()
     $(function(){     
         tinymce.init({
             selector: 'textarea',

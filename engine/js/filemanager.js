@@ -2,10 +2,15 @@ class FileManager{
 
     constructor(){
         this.generate = false
+        this.files = []
     }
 
     
-    open() {
+    open(insertEditor) {
+
+        this.insertEditor = insertEditor
+        
+        $('body').css('overflow','hidden')
         
         if(!this.generate){
             
@@ -15,6 +20,11 @@ class FileManager{
         else{
             this.$template.show()
         }
+    }
+
+    close(){
+        $('body').css('overflow','')
+        this.$template.hide()
     }
 
     generateHTML() {
@@ -40,8 +50,8 @@ class FileManager{
                     </div>
                     <div class="fm-previews"></div>
                     <div class="fm-actions">
-                        <button class="fm-btn fm-btn-secondary">Отмена</button>
-                        <button class="fm-btn">Вставить</button>
+                        <button class="fm-btn fm-btn-secondary fm-cansel">Отмена</button>
+                        <button class="fm-btn fm-insert">Вставить</button>
                     </div>
                     
                 `)
@@ -78,8 +88,7 @@ class FileManager{
             event.preventDefault()
             event.data.drop_area.removeClass('drop-area-droped')
             
-            let dt = event.originalEvent.dataTransfer
-            let files = dt.files
+            let files = event.originalEvent.dataTransfer.files
 
             event.data.fm.handleFiles(files)
         })
@@ -89,10 +98,15 @@ class FileManager{
         })
 
         $($window).on('click', '.fm-header__close', this, function (event) {
-            $(event.data.$template).hide()
+            event.data.close()
         })
 
-        
+        $($window).on('click', '.fm-cansel', this, function (event) {
+            event.data.close()
+        })
+        $($window).on('click', '.fm-insert', this, function (event) {
+            event.data.insert()
+        })
     }
 
     handleFiles(files){
@@ -115,12 +129,13 @@ class FileManager{
         .then( response => response.json())
         .then(json => {
             preview.status.addClass('fm-success')
-            console.log(json)
+            this.files.push({
+                preview,
+                url:json.response,
+            })
         })
         .catch(() => { 
             preview.status.addClass('fm-error')
-            console.log('error')
-            /* Ошибка. Информируем пользователя */
         })
     }
 
@@ -149,8 +164,16 @@ class FileManager{
 
 
         return {
+            view:preview,
             title,
             status
         }
+    }
+
+    insert(){
+        this.files.forEach((file) => {
+            this.insertEditor('<p><img src="/'+file.url+'" alt="" /></p>')
+        })
+        this.close()
     }
 }
