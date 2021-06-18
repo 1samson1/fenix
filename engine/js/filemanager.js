@@ -3,6 +3,7 @@ class FileManager{
     constructor(){
         this.generate = false
         this.files = []
+        this.file_id = 0
     }
 
     
@@ -25,6 +26,7 @@ class FileManager{
     close(){
         $('body').css('overflow','')
         this.$template.hide()
+        this.clear()
     }
 
     generateHTML() {
@@ -135,12 +137,20 @@ class FileManager{
         }))
         .then( json => {
             preview.status.addClass('fm-success')
+            preview.view.addClass('fm-selected')
+            preview.view.on('click', {fm:this, id:this.file_id} , function(event){
+                event.data.fm.toggleFile( event.data.id )
+            })
             this.files.push({
+                id:this.file_id,
                 preview,
                 url:json.response,
+                insert:true
             })
+            this.file_id++
         })
         .catch( error => { 
+            console.log(error)
             preview.status.attr('data-fm-error', error.text)
             preview.status.addClass('fm-error')
         })
@@ -179,10 +189,32 @@ class FileManager{
 
     insert(){
         this.files.forEach((file) => {
-            this.insertEditor('<p><img src="/'+file.url+'" alt="" /></p>')
+            if(file.insert){
+                this.insertEditor('<p><img src="/'+file.url+'" alt="" /></p>')
+            }
         })
         this.close()
     }
+
+    toggleFile(id){
+        let file = this.files.find( file => {
+            return file.id === id
+        })        
+        file.insert = !file.insert
+        if(file.insert)
+            file.preview.view.addClass('fm-selected')
+        else
+            file.preview.view.removeClass('fm-selected')
+    }
+
+    clear(){
+        this.files.forEach(file => {
+            file.preview.view.removeClass('fm-selected');
+            file.insert = false;
+        })
+    }
+
+
 }
 
 var fm = new FileManager()

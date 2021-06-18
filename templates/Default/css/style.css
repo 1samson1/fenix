@@ -702,6 +702,10 @@ main .container-fill{
     padding: 7px 0;
 }
 
+.body-short-news img{
+    max-width: 100%;
+}
+
 .info-short-news{
     display: flex;
     justify-content: space-between;  
@@ -730,6 +734,10 @@ main .container-fill{
 .body-full-news{
     border-top: 1px solid #00000030;
     padding: 7px 0;
+}
+
+.body-full-news img{
+    max-width: 100%;
 }
 
 .info-full-news{
