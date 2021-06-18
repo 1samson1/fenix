@@ -127,14 +127,21 @@ class FileManager{
             body: formData
         })
         .then( response => response.json())
-        .then(json => {
+        .then(json => new Promise((resolve, reject) => {
+            if(json.errors){
+                return reject(json.errors[0])
+            }
+            return resolve(json)
+        }))
+        .then( json => {
             preview.status.addClass('fm-success')
             this.files.push({
                 preview,
                 url:json.response,
             })
         })
-        .catch(() => { 
+        .catch( error => { 
+            preview.status.attr('data-fm-error', error.text)
             preview.status.addClass('fm-error')
         })
     }
@@ -177,3 +184,5 @@ class FileManager{
         this.close()
     }
 }
+
+var fm = new FileManager()

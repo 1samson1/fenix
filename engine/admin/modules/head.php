@@ -22,7 +22,6 @@ $head = <<<HTML
 <link rel="stylesheet" href="/engine/css/filemanager.css">    
 <script src="/engine/js/filemanager.js"></script>
 <script>
-    var fm = new FileManager()
     $(function(){     
         tinymce.init({
             selector: 'textarea',
