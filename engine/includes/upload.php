@@ -10,17 +10,25 @@
 
 			$this->file = $_FILES[$file_name];
 			
-            if(!empty($this->file['name'])){
-				if(!$file_newname) $file_newname = time().'_'.$this->file['name'];
+            if(!empty($this->file['name'])){				
 
 				if($this->file['size'] < $config['max_size_upload_img']){
 					if($this->file['error'] == 0){
-						$type = getimagesize($this->file['tmp_name']);				
-						if($type && ($type['mime'] == 'image/png' || $type['mime'] == 'image/gif' || $type['mime'] == 'image/jpeg')){
-							preg_match('/\.\w+$/', $this->file['name'],$matches);
+						$type = getimagesize($this->file['tmp_name']);	
 
-							if($dir_save) $this->filepath = 'uploads/'.$dir_save.'/'.$file_newname.$row['id'].$matches[0];
-							else $this->filepath = 'uploads/images/'.$file_newname.$row['id'].$matches[0];
+						if($type && ($type['mime'] == 'image/png' || $type['mime'] == 'image/gif' || $type['mime'] == 'image/jpeg')){
+							
+							if($file_newname) {
+								preg_match('/\.\w+$/', $this->file['name'],$matches);
+								$file_newname = $file_newname.$matches[0];
+							}
+							else{
+								$file_newname = time().'_'.$this->file['name'];
+							}
+
+							if(!$dir_save) $dir_save = 'images';
+
+							$this->filepath = 'uploads/'.$dir_save.'/'.$file_newname;
 														
 						}						
 						else$this->set_error('Файл не является изображением!', 255);						

@@ -87,7 +87,7 @@
     
         $db->get_statics();
         
-        $tpl->set_repeat_block('/\[statics\](.*)\[\/statics\]/sU');
+        $tpl->set_repeat_block('statics');
         
         while($static = $db->get_row()){
         

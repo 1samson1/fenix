@@ -87,7 +87,7 @@
     
         $db->get_news();
         
-        $tpl->set_repeat_block('/\[news\](.*)\[\/news\]/sU');
+        $tpl->set_repeat_block('doctors');
         
         while($news = $db->get_row()){
         

@@ -9,7 +9,7 @@
 
     $db->get_recdoc();
     
-    $tpl->set_repeat_block('/\[recdoc\](.*)\[\/recdoc\]/sU');
+    $tpl->set_repeat_block('recdoc');
     
     while($recdoc = $db->get_row()){
     

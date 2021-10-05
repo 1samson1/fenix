@@ -30,11 +30,15 @@
         }
 
         public function add_query($query) {
-            if($this->queries) $this->queries .= 'START TRANSACTION;';
             $this->queries .= $query;
         }
+
+        public function add_query_begin($query){
+            $this->queries = $query.$this->queries;
+        }
         
-        public function confirm_queries() {
+        public function send_queries() {
+            $this->queries = 'START TRANSACTION;'.$this->queries;
             $this->queries .= 'COMMIT;';
             $this->multi_query($this->queries);
             $this->queries = null;
@@ -70,19 +74,23 @@
         }
 
         public function ecran($value){
-            return addslashes(stripslashes($value));
+            return mysqli_real_escape_string($this->connect, addslashes(stripslashes($value)));
         }
 
         public function ecran_html($value){
-            return htmlspecialchars(addslashes(stripslashes($value)));
+            return $this->ecran(htmlspecialchars($value));
         }
 
         public function bool_to_sql($bool){
-            return $bool?1:0;
+            return $bool ? 1 : 0;
+        }   
+
+        public function str_to_sql($str){
+            return $str ? $str : '';
         }   
 		
-		public function set_charset(){
-            return mysqli_set_charset($this->connect, "utf8");    
+		public function set_charset($charset="utf8"){
+            return mysqli_set_charset($this->connect, $charset);    
         }  
 		
 		public function __destruct(){

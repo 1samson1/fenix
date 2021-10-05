@@ -100,7 +100,7 @@
 
         $db->get_specialties_mod();
         
-        $tpl->set_repeat_block('/\[specialties\](.*)\[\/specialties\]/sU');
+        $tpl->set_repeat_block('specialties');
         
         while($specialty = $db->get_row()){
         

@@ -59,7 +59,7 @@
                     $tpl->set('{first-page}', $this->url);
                     $tpl->set('{prev-page}', $this->active == 2? $this->url: $this->url.'/page/'.($this->active - 1) );
                 }
-                else $tpl->set_block('/\[prev-link\](.*)\[\/prev-link\]/s','');
+                else $tpl->set_block('prev-link','', 's');
 
                 if($this->active < $this->count_pages){
                     $tpl->set('[next-link]', '');
@@ -67,7 +67,7 @@
                     $tpl->set('{next-page}', $this->url.'/page/'.($this->active + 1));
                     $tpl->set('{last-page}', $this->url.'/page/'.$this->count_pages);
                 }
-                else $tpl->set_block('/\[next-link\](.*)\[\/next-link\]/s','');
+                else $tpl->set_block('next-link','', 's');
                 
                 for ($i = $this->start; $i <= $this->end; $i++) {
                     if ($i == $this->active){

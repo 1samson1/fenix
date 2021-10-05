@@ -153,7 +153,7 @@
     
         $db->get_doctors();
         
-        $tpl->set_repeat_block('/\[doctors\](.*)\[\/doctors\]/sU');
+        $tpl->set_repeat_block('doctors');
         
         while($doctor = $db->get_row()){
         

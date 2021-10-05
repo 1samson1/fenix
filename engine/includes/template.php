@@ -1,4 +1,7 @@
 <?php
+
+    require_once ENGINE_DIR.'/includes/functions.php'; 
+
     class Template{
 
         public $dir = '';
@@ -21,15 +24,20 @@
             else $this->dir = ROOT_DIR.'/templates/'.$config['template'];
         }
         
-        public function set($tag,$value){        
+        public function set($tag,$value=''){        
             $this->data[$tag] = $value;
         }
 
-        public function set_block($block,$value){    
+        public function set_block($block, $value, $flags="sU"){    
+            $block = '/\['.$block.'\](.*)\[\/'.$block.'\]/'.$flags;
+
             $this->data_block[$block] = $value;
         }
 
-        public function set_repeat_block($block){
+        public function set_repeat_block($block, $flags="sU"){
+
+            $block = '/\['.$block.'\](.*)\[\/'.$block.'\]/'.$flags;
+
             if(preg_match($block, $this->template, $matches)){
                 $this->repeat = $block;
                 $this->repeat_block = $matches[1];
@@ -48,13 +56,15 @@
             if (file_exists($file_path)) $this->template = file_get_contents($file_path);
             else die('Fatal error! No such file template!');
 
-            $this->check_group();       
-        }  
+            $this->check_group();
+        }
 
         public function replace_tags($template){
             foreach($this->data as $tag => $value){
-                $template = str_replace($tag, $value, $template);
-                unset($this->data_block[$tag]);
+                if( strpos($template, $tag)  !== false ){
+                    $template = str_replace($tag, $value, $template);
+                    unset($this->data[$tag]);
+                }                
             }
 
             return $template;
@@ -109,6 +119,9 @@
         }
 
         public function save($tag){
+            if( strpos( $this->template, "{custom" ) !== false ) {	
+                $this->custom();
+            }
             $this->template = $this->replace_all($this->template);       
             $this->template .= $this->endlines;
             $this->data[$tag] = $this->template;
@@ -124,17 +137,21 @@
 
         public function save_repeat_block(){
             $this->template .= $this->endlines;
-            $this->template = preg_replace($this->repeat, $this->copy_template, $this->template);
+            if($this->repeat){
+                $this->template = preg_replace($this->repeat, $this->copy_template, $this->template);
+            }
             $this->repeat = null;
             $this->repeat_block = null;
             $this->copy_template = null;
             $this->endlines = null;
+            $this->temp = null;
         }
 
         public function clear(){
             $this->template = null;
             $this->copy_template = null;
             $this->endlines = null;
+            $this->temp = null;
         }
         
         public function print(){
@@ -163,6 +180,14 @@
                 },
                 $this->template
             );     
+        }
+
+        private function custom(){
+            $this->template = preg_replace_callback(
+                '/\{custom(.+?)\}/is',
+                'custom',
+                $this->template
+            );
         }
     }
 ?>

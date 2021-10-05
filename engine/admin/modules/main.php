@@ -4,7 +4,7 @@
 
     $tpl->load('main.html'); 
     
-    $tpl->set_repeat_block('/\[modules\](.*)\[\/modules\]/sU');
+    $tpl->set_repeat_block('modules');
     
     foreach($modules as $module){
 

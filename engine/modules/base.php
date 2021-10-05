@@ -12,11 +12,11 @@
         $tpl->set('[user]', '');
         $tpl->set('[/user]', '');
     }
-    else $tpl->set_block('/\[user\](.*)\[\/user\]/s','');
+    else $tpl->set_block('user','', 's');
 
     if(isset($_SESSION['user'])){
         if($_SESSION['user']['group_id']  != 1){
-            $tpl->set_block('/\[admin\](.*)\[\/admin\]/sU','');
+            $tpl->set_block('admin','');
         }
         else{
             $tpl->set('{admin-link}', '/admin/');

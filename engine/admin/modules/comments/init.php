@@ -24,7 +24,7 @@
     
         $db->get_comments();
         
-        $tpl->set_repeat_block('/\[comments\](.*)\[\/comments\]/sU');
+        $tpl->set_repeat_block('comments');
         
         while($comment = $db->get_row()){
         

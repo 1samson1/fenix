@@ -9,7 +9,7 @@
     $tpl->set('{SKIN}', ADMIN_URL_STATIC.'/skin');
 
     if(!$_SESSION['user']['is_admin'] ){
-        $tpl->set_block('/\[admin\](.*)\[\/admin\]/sU','');
+        $tpl->set_block('admin','');
     }
     else{
         $tpl->set('[admin]', '');

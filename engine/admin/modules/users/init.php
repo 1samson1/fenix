@@ -104,7 +104,7 @@
 
 			if(!isset($alerts->alerts_array[0])){
 
-				if($db->reg_user($_POST['group'], $_POST['login'], $_POST['name'], $_POST['surname'], $_POST['login'], $_POST['email'], $_POST['password'])){
+				if($db->reg_user($_POST['group'], $_POST['name'], $_POST['surname'], $_POST['login'], $_POST['email'], $_POST['password'])){
 					
                    return showSuccess('Пользователь добавлен!','Успешно добавлен пользователь!', MODULE_URL);
 
@@ -130,7 +130,7 @@
 
         $db->get_users();
         
-        $tpl->set_repeat_block('/\[users\](.*)\[\/users\]/sU');
+        $tpl->set_repeat_block('users');
         
         while($user = $db->get_row()){
         
