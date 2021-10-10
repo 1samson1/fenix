@@ -165,11 +165,11 @@
             ;');
         }
 
-        /*////////////////// Query for pagination  ////////////////////*/
+        /*////////////////// Query for pagination  ////////////////////*/         
 
-        public function count_pages($table){
+         public function count_pages_for_news(){
             return $this->query('
-                SELECT count(*) as `count` FROM `'.$table.'`
+                SELECT count(*) as `count` FROM `news`
             ;');
         }
 

@@ -74,7 +74,7 @@
         }
 
         public function ecran($value){
-            return mysqli_real_escape_string($this->connect, addslashes(stripslashes($value)));
+            return mysqli_real_escape_string($this->connect, stripslashes($value));
         }
 
         public function ecran_html($value){

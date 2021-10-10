@@ -19,6 +19,6 @@
 
         'template' => 'Default',
         
-        'count_news_on_page' => 5,
+        'count_news_on_page' => 10,
     )
 ?>

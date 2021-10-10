@@ -28,7 +28,13 @@
 
         require_once ENGINE_DIR.'/modules/pagination.php';
 
-        $pagination = new Pagination('news', '/news/', $config['count_news_on_page']);
+        $pagination = new Pagination(
+            function() use ($db){
+                $db->count_pages_for_news();
+            },
+            '/news/',
+            $config['count_news_on_page']
+        );
 
         $tpl->load('shortnews.html');
     

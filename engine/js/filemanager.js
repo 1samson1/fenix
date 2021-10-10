@@ -1,5 +1,14 @@
 class FileManager{
 
+    static instance    
+
+    static init(){
+        if(this.instance == undefined)
+            return this.instance = new this()
+        
+        return this.instance
+    }
+
     constructor(){
         this.generate = false
         this.files = []
@@ -216,5 +225,3 @@ class FileManager{
 
 
 }
-
-var fm = new FileManager()
