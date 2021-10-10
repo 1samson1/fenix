@@ -40,10 +40,13 @@
         }
 
 		public function save(){
-			if(file_exists(dirname(ROOT_DIR.'/'.$this->filepath))){
+			$path =ROOT_DIR.'/'.$this->filepath;
 
-				move_uploaded_file($this->file['tmp_name'], ROOT_DIR.'/'.$this->filepath);
+			if(!file_exists(dirname($path))){
+				mkdir(dirname($path));
 			}
+
+			move_uploaded_file($this->file['tmp_name'], $path);			
 		}
 
 		public function set_error($text, $number){            
