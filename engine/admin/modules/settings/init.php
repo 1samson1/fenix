@@ -14,6 +14,7 @@
             $save_conf->set_int_option('max_size_upload_img', $_POST['save_conf']['max_size_upload_img']);
             $save_conf->set_str_option('template', $_POST['save_conf']['template']);
             $save_conf->set_int_option('count_news_on_page', $_POST['save_conf']['count_news_on_page']);
+            $save_conf->set_int_option('count_comments_on_page', $_POST['save_conf']['count_comments_on_page']);
     
             $save_conf->save();    
             
@@ -64,6 +65,10 @@
     /* Сount news on page */
     
     $tpl->set('{count_news_on_page}', $config['count_news_on_page']);
+
+    /* Сount comments on page */
+    
+    $tpl->set('{count_comments_on_page}', $config['count_comments_on_page']);
 
     $tpl->save('{content}');
 

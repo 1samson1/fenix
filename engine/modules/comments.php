@@ -3,7 +3,12 @@
 
     if(isset($_POST['addcomment'])){
 
-        $alerts->set_error_if(!CheckField::empty($_POST['text']), 'Ошибка добавления комментария!', 'Вы не ввели текст комментария!', 246);
+        $alerts->set_error_if(
+            !CheckField::empty($_POST['text']),
+            'Ошибка добавления комментария!',
+            'Вы не ввели текст комментария!',
+            246
+        );
 
         if(!isset($alerts->alerts_array[0])){
             if($db->add_comment($_GET['param1'], $_SESSION['user']['id'], $_POST['text'], time())){
@@ -17,9 +22,22 @@
     $tpl->save('{addcomments}');
 
     /* Block comments ================================================= */
+
+    $pagination = new Pagination(
+        function() use ($db){
+            $db->count_comments_for_news($_GET['param1']);
+        },
+        '/news/'.$_GET['param1'].'/',
+        $config['count_comments_on_page']
+    );
+
     $tpl->load('comments.html');
 
-    $db->get_comments_by_news_id($_GET['param1']);
+    $db->get_comments_by_news_id(
+        $_GET['param1'],
+        $config['count_comments_on_page'],
+        $pagination->get_begin_item()
+    );
     
     while ($comment = $db->get_row()) {
 
@@ -36,8 +54,12 @@
     }
 
     if(!$tpl->copy_template){
-        $tpl->append('Пока комментариев нет. Вы можете стать первым.');
+        $tpl->append('Пока нет комментариев. Вы можете стать первым.');
     }
         
     $tpl->save_copy('{comments}');
+
+    $tpl->set('{count_comments}', $pagination->count_items);
+
+    $pagination->gen_tpl();
 ?>

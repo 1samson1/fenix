@@ -132,8 +132,7 @@
                     `users`.`login` AS `autor`, 
                     `news`.`title`,
                     `news`.`date`,
-                    `news`.`full_news` AS `body`,
-                    (SELECT COUNT(*) FROM `comments` WHERE `comments`.`news_id` = `news`.`id`) AS `count_comments`
+                    `news`.`full_news` AS `body`
                 FROM `news`
                     INNER JOIN `users` ON `news`.`autor` = `users`.`id`
                     WHERE `news`.`id` = '.$this->ecran_html($id).'
@@ -149,7 +148,7 @@
             ;');
         }
 
-        public function get_comments_by_news_id($id){
+        public function get_comments_by_news_id($news_id, $count, $begin=0){
             return $this->query('
                 SELECT 
                     `comments`.`id`,
@@ -160,16 +159,23 @@
                     `comments`.`date`
                 FROM `comments` 
                     INNER JOIN `users` ON `comments`.`user_id` = `users`.`id`
-                    WHERE `comments`.`news_id` = '.$this->ecran_html($id).'
+                    WHERE `comments`.`news_id` = '.$this->ecran_html($news_id).'
                     ORDER BY `comments`.`date` DESC
+                    LIMIT '.$begin.', '.$count.'
             ;');
         }
 
         /*////////////////// Query for pagination  ////////////////////*/         
 
-         public function count_pages_for_news(){
+         public function count_news(){
             return $this->query('
                 SELECT count(*) as `count` FROM `news`
+            ;');
+        }
+
+         public function count_comments_for_news($news_id){
+            return $this->query('
+                SELECT count(*) as `count` FROM `comments` WHERE `news_id` = "'.$this->ecran_html($news_id).'"
             ;');
         }
 

@@ -2,6 +2,7 @@
 
     class Pagination{
         public $count_pages;
+        public $count_items;
         public $count_items_on_page;
         public $active;  
         public $start;
@@ -19,10 +20,12 @@
 
             call_user_func($counter);
             if($table = $db->get_row()){
+
+                $this->count_items = $table['count'];
                 
                 // Вычисление количества страниц
-                if($table['count'] % $this->count_items_on_pages == 0) $this->count_pages = floor($table['count'] / $this->count_items_on_pages);
-                else $this->count_pages = floor($table['count'] / $this->count_items_on_pages) + 1; 
+                if($this->count_items % $this->count_items_on_pages == 0) $this->count_pages = floor($this->count_items / $this->count_items_on_pages);
+                else $this->count_pages = floor($this->count_items / $this->count_items_on_pages) + 1; 
 
                 if ( $this->count_pages > 1) {
 

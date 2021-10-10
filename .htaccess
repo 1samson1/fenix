@@ -7,6 +7,7 @@ RewriteEngine on
 RewriteRule ^admin/?$ admin.php [QSA,L]
 RewriteRule ^api/([A-z0-9-]+)/?$ engine/api/init.php?do=$1 [QSA,L]
 
+RewriteRule ^([A-z0-9-]+)/([A-z0-9-]+)/page/([0-9]+)?/?$ index.php?do=$1&param1=$2&page=$3  [QSA,L]
 RewriteRule ^([A-z0-9-]+)/page/([0-9]+)?/?$ index.php?do=$1&page=$2 [QSA,L]
 RewriteRule ^([A-z0-9-]+)/([A-z0-9-]+)/?$ index.php?do=$1&param1=$2 [QSA,L]
 RewriteRule ^([A-z0-9-]+)/?$ index.php?do=$1 [QSA,L]

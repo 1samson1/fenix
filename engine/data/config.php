@@ -20,5 +20,7 @@
         'template' => 'Default',
         
         'count_news_on_page' => 10,
+
+        'count_comments_on_page' => 20,
     )
 ?>

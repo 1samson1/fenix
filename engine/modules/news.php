@@ -1,5 +1,7 @@
 <?php 
 
+    require_once ENGINE_DIR.'/modules/pagination.php';
+
     if(isset($_GET['param1'])){
         
         $db->get_full_news($_GET['param1']);
@@ -12,7 +14,6 @@
             $tpl->set('{body}', $news_item['body']);
             $tpl->set('{date}', date('d.m.Y', $news_item['date']));
             $tpl->set('{autor}', $news_item['autor']);
-            $tpl->set('{count_comments}', $news_item['count_comments']);
             
             $tpl->save('{content}');
             $head['title'] = $news_item['title'];
@@ -26,11 +27,9 @@
     }
     else{
 
-        require_once ENGINE_DIR.'/modules/pagination.php';
-
         $pagination = new Pagination(
             function() use ($db){
-                $db->count_pages_for_news();
+                $db->count_news();
             },
             '/news/',
             $config['count_news_on_page']
