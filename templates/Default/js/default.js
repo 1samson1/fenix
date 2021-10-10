@@ -11,23 +11,24 @@ $(function () {
     })
     
     /* FORM INPUTS SCRIPTS +++++++++++++++++++++++++++++++++++++++++++++++++++ */
-    $('.form-control input').each(function () {
-        if($(this).val()){
-            $(this).parent().addClass('form-control-active')
-        }
-    })
-    $('.form-control input').on('focus',function () {        
-        $(this).parent().addClass('form-control-active')
-    })
-    $('.form-control input').on('blur',function () {
-        if(!$(this).val()){
-            $(this).parent().removeClass('form-control-active')
-        }
-    })
 
-    $('.form-control .password-show').on('click',function () {        
+    $('.form-control').each(function () {
+        if($(this).val()){
+            $(this).parent().addClass('form-group-active')
+        }
+    })
+    $('.form-control').on('focus',function () {        
+        $(this).parent().addClass('form-group-active')
+    })
+    $('.form-control').on('blur',function () {
+        if(!$(this).val()){
+            $(this).parent().removeClass('form-group-active')
+        }
+    })
+    
+    $('.form-group-password .password-show').on('click',function () {        
         $(this).toggleClass('password-show-hidden')
-        let input = $(this).parent().children('input')
+        let input = $(this).siblings('.form-control')
         let type = input.attr('type') == 'password'? 'text' : 'password'
         input.attr('type', type)
     })

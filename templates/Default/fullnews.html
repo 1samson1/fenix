@@ -1,17 +1,19 @@
-<div class="container-fill container-news full-news">
-    <div class="title-full-news">{title}</div>
-    <div class="body-full-news">{body}</div>
-    <div class="info-full-news">
-        <div class="date-news"> {date}</div>
-        <div class="autor-news">{autor}</div>        
+<div class="container-news">
+    <div class="container-fill full-news">
+        <div class="title-full-news">{title}</div>
+        <div class="body-full-news">{body}</div>
+        <div class="info-full-news">
+            <div class="date-news"> {date}</div>
+            <div class="autor-news">{autor}</div>        
+        </div>
     </div>
-</div>
-
-{addcomments}
-
-<div class="container-fill container-news container-comments">
-    <div class="title-comments">Комментарии ({count_comments}):</div>
-    <div id="comments" class="comments">
-        {comments}
+    
+    {addcomments}
+    
+    <div class="container-fill container-comments">
+        <div class="title-comments">Комментарии ({count_comments}):</div>
+        <div id="comments" class="comments">
+            {comments}
+        </div>
     </div>
 </div>

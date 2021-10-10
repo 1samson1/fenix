@@ -52,7 +52,7 @@
 
 		/* close edit user */
 
-		$head['title'] = 'Профиль '.$user['login'];
+		$head['title'] = 'Личный кабинет '.$user['login'];
 		$tpl->set('{login}',$user['login']);
 		$tpl->set('{email}', $user['email']);
 		$tpl->set('{name}', $user['name']);

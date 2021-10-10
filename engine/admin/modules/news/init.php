@@ -59,7 +59,7 @@
 
         $crumbs->add($head['title'] = 'Добавление новости', '');
 
-        if(isset($_POST['add_news'])){
+        if(isset($_POST['add'])){
             $alerts->set_error_if(!CheckField::empty($_POST['title']), 'Ошибка добавления!', 'Вы не ввели название страницы!', 564);
             
             $alerts->set_error_if(!CheckField::empty($_POST['short_news']), 'Ошибка добавления!', 'Вы не ввели короткое описание новости!', 575);
@@ -87,12 +87,13 @@
     
         $db->get_news();
         
-        $tpl->set_repeat_block('doctors');
+        $tpl->set_repeat_block('news');
         
         while($news = $db->get_row()){
         
             $tpl->set('{title}', $news['title']);
             $tpl->set('{autor}', $news['autor']);
+            $tpl->set('{url}', '/news/'.$news['id'].'/');
             $tpl->set('{date_edit}', date('Y.m.d H:i',$news['date_edit']));
             $tpl->set('{date}', date('Y.m.d H:i',$news['date']));
             $tpl->set('{edit-link}',  addGetParam('id', $news['id']));

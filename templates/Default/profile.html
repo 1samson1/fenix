@@ -1,78 +1,93 @@
-<div class="container-fill container-profile">
-    <div class="profile-title-section">Профиль</div>
-    <div class="plofile-info">
-        <img src="{foto}" alt="" srcset="" class="profile-foto">
-        <div class="profile-data">
-            <div class="profile-name">{name} {surname}</div>  
-            <div class="profile-fields">
-                <div  class="profile-field"><span>Логин:</span>{login}</div>
-                <div  class="profile-field"><span>E-mail:</span>{email}</div>
-            </div>
-            <div class="profile-fields">
-                <div  class="profile-field"><span>Группа:</span>{group}</div>
-            </div>
-            <div class="profile-fields">
-                <div  class="profile-field"><span>Дата регистрации:</span>{date-reg}</div>
+<div class="container-profile">
+<div class="container-fill">
+    <div class="container-header">Профиль</div>
+    <div class="container-body">
+        <div class="plofile-info">
+            <img src="{foto}" alt="" srcset="" class="profile-foto">
+            <div class="profile-data">
+                <div class="profile-name">{name} {surname}</div>  
+                <div class="profile-fields">
+                    <div  class="profile-field"><span>Логин:</span>{login}</div>
+                    <div  class="profile-field"><span>E-mail:</span>{email}</div>
+                </div>
+                <div class="profile-fields">
+                    <div  class="profile-field"><span>Группа:</span>{group}</div>
+                </div>
+                <div class="profile-fields">
+                    <div  class="profile-field"><span>Дата регистрации:</span>{date-reg}</div>
+                </div>
             </div>
         </div>
     </div>
+</div>
+
     [user]
-    <div class="profile-title-section">Редактировать профиль</div>
-    <form method="post" class="profile-edit" enctype="multipart/form-data">
-        <div class="title-edit">Информация</div>
-        <div class="form-controls-inline">
-            <div class="form-control form-control-large">
-                <input type="text" name="login" id="pf-login" required value="{login}">                        
-                <label for="pf-login">Логин</label>                                            
-            </div>
-            <div class="form-control form-control-large">
-                <input type="email" name="email" id="pf-email" required value="{email}">                        
-                <label for="pf-email">E-mail</label>                                            
+    <div class="container-fill">
+        <div class="container-header">Редактировать профиль</div>
+        <div class="container-body">
+            <form method="post" class="profile-edit" enctype="multipart/form-data">
+                <div class="title-section">Информация</div>
+                <div class="form-groups-inline">
+                    <div class="form-group form-group-large">
+                        <input class="form-control" type="text" name="login" id="pf-login" required value="{login}">                        
+                        <label for="pf-login">Логин</label>                                            
+                    </div>
+                    <div class="form-group form-group-large">
+                        <input class="form-control" type="email" name="email" id="pf-email" required value="{email}">                        
+                        <label for="pf-email">E-mail</label>                                            
+                    </div>
+                </div>
+                <div class="form-groups-inline">
+                    <div class="form-group form-group-large">
+                        <input class="form-control" type="text" name="name" id="pf-name" value="{name}">                        
+                        <label for="pf-name">Имя</label>                                            
+                    </div>
+                    <div class="form-group form-group-large">
+                        <input class="form-control" type="text" name="surname" id="pf-surname" value="{surname}">                        
+                        <label for="pf-surname">Фамилия</label>                                            
+                    </div>        
+                </div>
+                <div class="title-section">Фото</div>
+                <div class="form-group-file form-group-large">
+                    <input class="form-control" type="file" class="" name="foto" accept="image/*">
+                </div>
+                <label class="checkbox delete-foto">
+                    <input type="checkbox" class="check-input" name="delete_foto">
+                    <span class="check"></span>
+                    <span class="label-check">Удалить фото</span>
+                </label>
+                <div class="title-section">Смена пароля</div>
+                <div class="form-group form-group-password form-group-large">
+                    <input class="form-control" type="password" name="lastpassword" id="lastpassword">                        
+                    <label for="lastpassword">Старый пароль</label>         
+                    <div class="password-show"></div>                                   
+                </div>
+                <div class="form-groups-inline">
+                    <div class="form-group form-group-password form-group-large">
+                        <input class="form-control" type="password" name="password" id="password">                        
+                        <label for="password">Новый пароль</label>         
+                        <div class="password-show"></div>                                   
+                    </div>
+                    <div class="form-group form-group-password form-group-large">
+                        <input class="form-control" type="password" name="repassword" id="repassword">                        
+                        <label for="repassword">Подтверждение пароля</label>     
+                        <div class="password-show"></div>                                       
+                    </div>
+                </div>
+                <input type="submit" name="do_save_profile" value="Сохранить изменения" class="btn btn-large btn-green">  
+            </form>
+        </div>
+    </div>
+
+    <div class="container-fill">
+        <div class="container-header">Безопасность</div>
+        <div class="container-body">
+            <div class="profile-security">
+                <div class="title-section">Управление сеансами</div>
+                <span>Завершить все сеансы, кроме текущего.</span>
+                <a href="{logout_all}" class="btn btn-red btn-large">Завершить все сеансы</a>
             </div>
         </div>
-        <div class="form-controls-inline">
-            <div class="form-control form-control-large">
-                <input type="text" name="name" id="pf-name" value="{name}">                        
-                <label for="pf-name">Имя</label>                                            
-            </div>
-            <div class="form-control form-control-large">
-                <input type="text" name="surname" id="pf-surname" value="{surname}">                        
-                <label for="pf-surname">Фамилия</label>                                            
-            </div>        
-        </div>
-        <div class="title-edit">Фото</div>
-        <div class="form-control-file">
-            <input type="file" class="" name="foto" accept="image/*">
-        </div>
-        <label class="checkbox">
-            <input type="checkbox" class="check-input" name="delete_foto">
-            <span class="check"></span>
-            <span class="label-check">Удалить фото</span>
-        </label>
-        <div class="title-edit">Смена пароля</div>
-        <div class="form-control form-control-password form-control-large">
-            <input type="password" name="lastpassword" id="lastpassword">                        
-            <label for="lastpassword">Старый пароль</label>         
-            <div class="password-show"></div>                                   
-        </div>
-        <div class="form-controls-inline">
-            <div class="form-control form-control-password form-control-large">
-                <input type="password" name="password" id="password">                        
-                <label for="password">Новый пароль</label>         
-                <div class="password-show"></div>                                   
-            </div>
-            <div class="form-control form-control-password form-control-large">
-                <input type="password" name="repassword" id="repassword">                        
-                <label for="repassword">Подтверждение пароля</label>     
-                <div class="password-show"></div>                                       
-            </div>
-        </div>
-        <input type="submit" name="do_save_profile" value="Сохранить изменения" class="btn btn-large btn-green">  
-    </form>
-    <div class="profile-title-section">Безопасность</div>
-    <div class="profile-security">
-        <p>Завершить все сеансы, кроме текущего.</p>
-        <a href="{logout_all}" class="btn btn-red btn-large">Завершить все сеансы</a>
     </div>
     [/user]
 </div>
