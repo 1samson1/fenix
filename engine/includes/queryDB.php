@@ -76,6 +76,29 @@
             ;');
         }
 
+        /*............... Query for lostpassword ................*/
+
+        public function get_user_by_email_or_login($lostpassword){
+            return $this->query('
+                SELECT * FROM `users` 
+                    WHERE `login` = "'.$this->ecran_html($lostpassword).'" or `email` = "'.$this->ecran_html($lostpassword).'"
+            ;');
+        }
+
+        public function add_lostpassword($user_id, $token){
+            return $this->query('
+                INSERT INTO `lostpassword` (`user_id`, `token`) 
+                    VALUES ('.$user_id.',"'.$token.'")
+            ;');
+        }
+
+        public function remove_lostpassword($user_id){
+            return $this->query('
+                DELETE FROM `lostpassword`
+                    WHERE `user_id` = "'.$this->ecran_html($user_id).'"
+            ;');
+        }
+
         /*////////////////// Query for recdoc page  ////////////////////*/
 
         public function get_specialties(){
