@@ -2,8 +2,6 @@
     // Глобальный конфиг для всего
 
     $config = array(
-
-        'host_url' => "http://".$_SERVER['HTTP_HOST'],
         
         'admin_group' => 1,
 

@@ -43,9 +43,13 @@ body{
 .container-header{
     padding: 15px;
     font-size: 1.3rem;
-    font-weight: bold;
-    color:#000;
-    padding: 15px;
+    font-weight: bold;    
+    color: #777;    
+}
+
+.container-body{
+    padding: 10px;
+    padding-top: 0;
 }
 
 .link{
@@ -490,6 +494,17 @@ main{
     margin-top: 5px;
 }
 
+/* LOSTPASSWORD ++++++++++++++++++++++++++++++++ */
+
+.container-lostpassword{
+    max-width: 600px;  
+    margin: 0 auto;
+}
+
+.lostpassword-text{
+    margin: 15px 0;
+}
+
 /* PROFILE +++++++++++++++++++++++++++++++++++++ */
 
 .container-profile{
@@ -538,11 +553,6 @@ main{
 
 .profile-field:nth-child(2n){
     margin-left: 25px;
-}
-
-.profile-edit, .profile-security{
-    padding: 10px;
-    padding-top: 0;
 }
 
 .profile-edit .btn, .profile-security .btn{
@@ -812,10 +822,11 @@ main{
     padding: 15px 20px;
 }
 
-.title-comments{
+.title-comments{    
     font-size: 1.3rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+    font-weight: bold;    
+    color: #777;   
+    margin-bottom: 15px;
 }
 
 .comment{
@@ -990,7 +1001,7 @@ footer{
 
 .form-control{    
     background: #fafafa;    
-    border: 2px solid #DBDBDB; 
+    border: 2px solid #e6e6e6; 
     font-size: 1rem;   
     margin: 0;
     outline: 0;

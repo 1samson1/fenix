@@ -15,6 +15,10 @@
             require_once ENGINE_DIR.'/modules/registration.php';
             break;
 
+        case 'lostpassword':
+            require_once ENGINE_DIR.'/modules/lostpassword.php';           
+            break;
+
         case 'logout':
             require_once ENGINE_DIR.'/modules/logout.php';           
             break;
