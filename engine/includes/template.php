@@ -54,7 +54,7 @@
             else $file_path = $this->dir."/".$tpl_name;
             
             if (file_exists($file_path)) $this->template = file_get_contents($file_path);
-            else die('Fatal error! No such file template!');
+            else die("Fatal error! No such file ( $tpl_name ) template!");
 
             $this->check_group();
         }
