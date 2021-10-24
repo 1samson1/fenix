@@ -2,3 +2,5 @@ uploads/avatars/**
 uploads/doctors/**
 uploads/images/**
 todo
+engine/js/tinymce/*
+!engine/js/tinymce/plugins/filemanager/
