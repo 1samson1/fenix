@@ -505,6 +505,10 @@ main{
     margin: 15px 0;
 }
 
+.lostpassword-text:first-child{
+    margin-top: 0;
+}
+
 /* PROFILE +++++++++++++++++++++++++++++++++++++ */
 
 .container-profile{

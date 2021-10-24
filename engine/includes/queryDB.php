@@ -85,10 +85,27 @@
             ;');
         }
 
-        public function add_lostpassword($user_id, $token){
+        public function get_lostpassword($token){
             return $this->query('
-                INSERT INTO `lostpassword` (`user_id`, `token`) 
-                    VALUES ('.$user_id.',"'.$token.'")
+                SELECT * FROM `lostpassword`
+                    INNER JOIN `users` ON `lostpassword`.`user_id` = `users`.`id`
+                    WHERE `token` = "'.$this->ecran_html($token).'"
+            ;');
+        }
+
+        public function change_password($user_id, $password){
+            return $this->query('
+                UPDATE `users`
+                    SET
+                        `users`.`password` = "'.$this->hash($this->ecran_html($password)).'"
+                    WHERE `users`.`id` = '.$user_id.'
+            ;');
+        }
+
+        public function add_lostpassword($user_id, $token, $date){
+            return $this->query('
+                INSERT INTO `lostpassword` (`user_id`, `token`, `date`) 
+                    VALUES ('.$user_id.',"'.$token.'", "'.$date.'")
             ;');
         }
 

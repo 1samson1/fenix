@@ -20,7 +20,7 @@
                     $data
                 );
             }
-            else die('Fatal error! No such file template!');
+            else die("Fatal error! No such file ( $tpl_name ) template!");
 
         }
 
@@ -30,7 +30,7 @@
                 function ($matches) use ($data){
                     return $this->replace_block(
                         $matches[1],
-                        explode(' ', trim($matches[2])),
+                        $this->split(' ', trim($matches[2])),
                         $matches[3],
                         $data
                     );
@@ -42,7 +42,7 @@
                 '/\{([^\{\}]*)\}/m',
                 function ($matches) use ($data){
                     return $this->replace(
-                        explode(' ',  trim($matches[1]) ),
+                        $this->split(' ',  trim($matches[1]) ),
                         $data
                     );
                 },
@@ -67,9 +67,9 @@
                     }
 
                     if($this->if(
-                        $this->explode_or($data, $params[0]),
+                        $this->split_or($data, $params[0]),
                         $operator,
-                        $this->explode_or($data, $params[2])
+                        $this->split_or($data, $params[2])
                     )){
                         return $body;
                     }
@@ -77,7 +77,7 @@
                 
                 case 'for':
                     return $this->for_in(
-                        $this->explode_dot($data, $params[2]),
+                        $this->split_dot($data, $params[2]),
                         $params[0],
                         $body
                     );
@@ -103,9 +103,16 @@
                     unset($this->data_block[$params[1]]);
 
                     return $tpl;
+                
+                case 'filter':
+                    return $this->filter(
+                        $params[3],
+                        $this->split_dot($data, $params[1]),
+                        array_slice($params, 4)
+                    );
 
                 default:
-                    return $this->explode_dot($data, $params[0]);
+                    return $this->split_dot($data, $params[0]);
             }
         }
 
@@ -114,8 +121,17 @@
                 case '=':
                     return $first == $second;
 
-                case '!=':
-                    return $first != $second;
+                case '>':
+                    return $first > $second;
+
+                case '>=':
+                    return $first >= $second;
+
+                case '<':
+                    return $first < $second;
+
+                case '<=':
+                    return $first <= $second;
 
                 case 'equal':
                     return $first == true;
@@ -142,12 +158,22 @@
             $this->data_block[$block] = $body;
         }
 
-        public function explode_or($data, $keyset){
-            if (strpos($keyset, '"') !== false or strpos($keyset, "'") !== false){
-                return str_replace(array('"', "'"), '', $keyset);
+        public function filter($filter, $value, $params){
+            switch ($filter) {
+                case 'date':
+                    return date(
+                        substr($params[0], 1, -1),
+                        $value
+                    );
+            }
+        }
+
+        public function split_or($data, $keyset){
+            if (strpos($keyset, '"') !== false){
+                return str_replace('"', '', $keyset);
             }
 
-            $value = $this->explode_dot($data, $keyset);
+            $value = $this->split_dot($data, $keyset);
 
             if($value === null){
                 return $keyset;
@@ -156,7 +182,7 @@
             return $value;
         }
 
-        public function explode_dot($data, $keyset){
+        public function split_dot($data, $keyset){
             if(strpos($keyset, '.' ) === false)
                 return isset($data[$keyset]) ? $data[$keyset]: null;
 
@@ -165,14 +191,44 @@
             $temp = $data;
 
             foreach ($keylist as $key){
-                if(!isset($temp[$key])){
+                if($key === 'length')
+                    return count($temp);
+
+                if(!isset($temp[$key]))
                     return null;
-                }
+                
                 $temp = $temp[$key];
                 
             }
 
             return $temp;
+        }
+
+        public function split($separator, $string){
+            $tok = strtok($string, $separator);   
+            $long_tok = null;
+            $parts = array();
+        
+            while ($tok !== false) {
+                if(strpos( $tok, '"') === false or substr_count($tok, '"') > 1){
+                    if( $long_tok === null )
+                        $parts[]= $tok;
+                    else
+                        $long_tok .= ' '.$tok;
+                }
+                else{
+                    if( $long_tok === null ){
+                        $long_tok = $tok;
+                    }
+                    else{
+                        $parts[]= $long_tok.' '.$tok;
+                        $long_tok = null;
+                    }
+                }
+                $tok = strtok($separator);
+            }
+    
+            return $parts;
         }
 
         public static function set_headers($headers){
