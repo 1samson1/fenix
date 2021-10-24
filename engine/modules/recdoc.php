@@ -1,6 +1,7 @@
 <?php     
     require_once ENGINE_DIR.'/includes/functions.php';
-    require_once ENGINE_DIR.'/includes/checkFeild.php';	
+    require_once ENGINE_DIR.'/includes/checkFeild.php';
+    require_once ENGINE_DIR."/includes/mail.php";
 
     function checkRecording(){
         if(isset($_POST['rec'])){
@@ -12,6 +13,7 @@
             
             if(!isset($alerts->alerts_array[0])){
                 if($db->recording($_GET['doctor'], $_SESSION['user']['id'], $_POST['date'], $_POST['time'])){
+                    
 					return true;
 				}
 				else $alerts->set_error('Ошибка записи на приём!', 'Выбраная дата занята!', $db->error_num);
@@ -25,6 +27,17 @@
         $db->get_doctor_by_id($_GET['doctor']);
         
         if ($doctor = $db->get_row()) {
+            $mail = new Mail('recording.html', array(
+                'title' => $head['title'],
+                'user' =>  $_SESSION['user'],
+                'doctor' => $doctor,
+                'recdoc-datatime' => $_POST['date'].' '.$_POST['time'],
+            ));
+            $mail->send(
+                $_SESSION['user']['email'],
+                $head['title']
+            );
+
             $tpl->set('{doctor-name}', $doctor['name']);
 
             if($doctor['foto']) $foto = '/'.$doctor['foto'];

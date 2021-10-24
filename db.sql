@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Июн 17 2021 г., 18:45
+-- Время создания: Окт 24 2021 г., 17:53
 -- Версия сервера: 10.3.13-MariaDB-log
--- Версия PHP: 7.2.22
+-- Версия PHP: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -33,7 +33,7 @@ CREATE TABLE `comments` (
   `news_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date` int(11) NOT NULL,
+  `date` int(11) UNSIGNED NOT NULL,
   `parent` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -44,7 +44,8 @@ CREATE TABLE `comments` (
 INSERT INTO `comments` (`id`, `news_id`, `user_id`, `text`, `date`, `parent`) VALUES
 (1, 1, 12, '<p>Хорошая новость</p>', 1564163134, NULL),
 (2, 2, 56, '<p>Ну значит запишусь после каникул.</p>', 1651354654, NULL),
-(11, 2, 12, '<p><img src=\"https://drasler.ru/wp-content/uploads/2019/05/%D0%9A%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D1%81%D1%82%D0%BE%D0%BB-%D1%82%D0%B8%D0%B3%D1%80-5.jpg\" alt=\"\" /></p>', 1622133007, NULL);
+(11, 2, 12, '<p><img src=\"https://drasler.ru/wp-content/uploads/2019/05/%D0%9A%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D1%81%D1%82%D0%BE%D0%BB-%D1%82%D0%B8%D0%B3%D1%80-5.jpg\" alt=\"\" /></p>', 1622133007, NULL),
+(30, 2, 12, '<p>hfghfdgh</p>', 1633884227, NULL);
 
 -- --------------------------------------------------------
 
@@ -105,6 +106,19 @@ INSERT INTO `groups` (`id`, `group_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `lostpassword`
+--
+
+CREATE TABLE `lostpassword` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `token` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `news`
 --
 
@@ -123,9 +137,9 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `autor`, `title`, `short_news`, `full_news`, `date_edit`, `date`) VALUES
-(1, 12, 'В нашей клинике появился лазерный хирургический аппарат', '<p style=\"text-align: justify;\">В нашей клинике появился лазерный хирургический аппарат. Предназначен он для лечения сосудистой патологии нижних конечностей (варикозная болезнь), заболеваний прямой кишки (геморрой) и патологии лор органов.</p>', '<p style=\"text-align: justify;\">В нашей клинике появился лазерный хирургический аппарат. Предназначен он для лечения сосудистой патологии нижних конечностей (варикозная болезнь), заболеваний прямой кишки (геморрой) и патологии лор органов. Принцип действия аппарата: вена обжигается лазерным излучением изнутри, после чего происходит полное её склеивание. Спустя определённого периода времени вена перестаёт существовать.</p>\r\n<p style=\"text-align: justify;\">Уникальность прибора в том, что длина волны лазера составляет 1940 нм. Это абсолютно новое течение в лазерной хирургии. Данные операции относятся к разряду малоинвазивных. Выполняются без разрезов под местным обезболивающим, имеют меньший болевой синдром и малую травматичность. После такой операции пациенты очень быстро восстанавливаются и возвращаются к привычной жизни.</p>', 1622126059, 1432874149),
+(1, 12, 'В нашей клинике появился лазерный хирургический аппарат', '<p style=\"text-align: justify;\">В нашей клинике появился лазерный хирургический аппарат. Предназначен он для лечения сосудистой патологии нижних конечностей (варикозная болезнь), заболеваний прямой кишки (геморрой) и патологии лор органов.</p>', '<p style=\"text-align: justify;\">В нашей клинике появился лазерный хирургический аппарат. Предназначен он для лечения сосудистой патологии нижних конечностей (варикозная болезнь), заболеваний прямой кишки (геморрой) и патологии лор органов. Принцип действия аппарата: вена обжигается лазерным излучением изнутри, после чего происходит полное её склеивание. Спустя определённого периода времени вена перестаёт существовать.</p>\r\n<p><img src=\"/uploads/images/1634059780_IMG_1100.jpg\" alt=\"\" /></p>\r\n<p style=\"text-align: justify;\">Уникальность прибора в том, что длина волны лазера составляет 1940 нм. Это абсолютно новое течение в лазерной хирургии. Данные операции относятся к разряду малоинвазивных. Выполняются без разрезов под местным обезболивающим, имеют меньший болевой синдром и малую травматичность. После такой операции пациенты очень быстро восстанавливаются и возвращаются к привычной жизни.</p>', 1634059789, 1432874149),
 (2, 12, 'Как будут работать больницы и поликлиники с 1 по 10 мая 2021 года', '<p style=\"text-align: justify;\">Так как Указом Президента РФ общая продолжительность майских праздников составит 10 дней (с 1 по 10 мая), больницы и поликлиники изменят график работы. Уже известно, что больницы и поликлиники не будут полноценно работать все майские праздники, в том числе с 4 по 7 мая. Но продолжат работу все пункты вакцинации, а в поликлиниках организуют дежурные группы специалистов.</p>', '<p style=\"text-align: justify;\">Так как Указом Президента РФ общая продолжительность майских праздников составит 10 дней (с 1 по 10 мая), больницы и поликлиники изменят график работы. Уже известно, что больницы и поликлиники не будут полноценно работать все майские праздники, в том числе с 4 по 7 мая. Но продолжат работу все пункты вакцинации, а в поликлиниках организуют дежурные группы специалистов.</p>\r\n<p style=\"text-align: justify;\">Минтруд выпустил рекомендации о нерабочих днях с 4 по 7 мая.</p>\r\n<p style=\"text-align: justify;\"><span style=\"font-size: 14pt;\"><strong>График работы больниц и поликлиник в майские праздники 2021 года</strong></span></p>\r\n<p style=\"text-align: justify;\">Несмотря на увеличенную продолжительность майских праздников, в сфере здравоохранения продолжат работу:</p>\r\n<ul style=\"text-align: justify;\">\r\n<li>дежурные группы медиков, которые будут принимать пациентов в экстренных ситуациях в поликлиниках;</li>\r\n<li>стационары больниц, где пациенты проходят лечение;</li>\r\n<li>сотрудники скорой и неотложной помощи;</li>\r\n<li>пункты вакцинации от коронавируса.</li>\r\n</ul>\r\n<p style=\"text-align: justify;\">Таким образом, попасть на плановый прием к медицинским специалистам будет нельзя с 1 по 10 мая. Но экстренную и неотложную помощь можно получить даже в праздники.</p>\r\n<p style=\"text-align: justify;\">В каждом регионе есть круглосуточные телефоны горячих линий, где можно получить информацию о графике работы медиков в определенных больницах и поликлиниках. Также отметим, что коммерческие медицинские центры и клиники могут работать даже в нерабочие, выходные и праздничные дни мая, так как это зависит от решения руководителя.</p>\r\n<p style=\"text-align: justify;\">Еще раз напомним текст Указа президента Путина о майских праздниках 2021 года:</p>\r\n<p style=\"text-align: justify;\">В целях сохранения тенденции сокращения распространения новой коронавирусной инфекции (COVID-19), укрепления здоровья граждан Российской Федерации и в соответствии со статьей 80 Конституции Российской Федерации постановляю:</p>\r\n<ol>\r\n<li style=\"text-align: justify;\">Установить с 4 по 7 мая 2021 г. включительно нерабочие дни с сохранением за работниками заработной платы.</li>\r\n<li style=\"text-align: justify;\">Органам публичной власти, иным органам и организациям определить количество служащих и работников, обеспечивающих с 1 по 10 мая 2021 г. включительно функционирование этих органов и организаций.</li>\r\n<li style=\"text-align: justify;\">Настоящий Указ вступает в силу со дня его официального опубликования.</li>\r\n</ol>', 1622126075, 1619670949),
-(52, 12, 'Тест новости с редактором название', '<p>Тест новости с редактором короткое</p>', '<p>Тест новости с редактором полное</p>', 1622125021, 1622126377);
+(52, 12, 'Тест новости с редактором название', '<p>Тест новости с редактором короткое</p>', '<p>Тест новости с редактором полное</p>\r\n<p>&nbsp;</p>', 1633879956, 1622126377);
 
 -- --------------------------------------------------------
 
@@ -136,7 +150,7 @@ INSERT INTO `news` (`id`, `autor`, `title`, `short_news`, `full_news`, `date_edi
 CREATE TABLE `recdoctor` (
   `doctor_id` int(11) UNSIGNED NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
-  `time` int(11) NOT NULL
+  `time` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -175,6 +189,9 @@ INSERT INTO `recdoctor` (`doctor_id`, `user_id`, `time`) VALUES
 (6, 12, 1621576800),
 (7, 12, 1622192400),
 (7, 12, 1622442600),
+(3, 12, 1635143400),
+(3, 12, 1635404400),
+(3, 12, 1635494400),
 (5, 56, 1621492200),
 (6, 56, 1621924200);
 
@@ -212,7 +229,7 @@ INSERT INTO `specialties` (`id`, `title`, `description`, `image`) VALUES
 --
 
 CREATE TABLE `static` (
-  `id` int(11) NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
   `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `template` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -246,7 +263,7 @@ CREATE TABLE `users` (
   `name` varchar(120) COLLATE utf8mb4_unicode_ci DEFAULT '',
   `surname` varchar(120) COLLATE utf8mb4_unicode_ci DEFAULT '',
   `foto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '',
-  `date_reg` int(11) NOT NULL
+  `date_reg` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -254,7 +271,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `group_id`, `login`, `password`, `email`, `name`, `surname`, `foto`, `date_reg`) VALUES
-(12, 1, 'Admin', '$2y$10$trgPL1fnnglSY3djNwS5wuI55DDOo5Sk.ZLU4Q/MxCiGVU2duyqwy', 'ya@ya.ru', 'Админ', 'Админ', 'uploads/avatars/foto_12.jpg', 1575825604),
+(12, 1, 'Admin', '$2y$10$fH6ureik3Qyk73WPvyJctuELc03pJXYe4eA.9jKZhAA4CScuez8uW', 'ya.ya@ya.ru', 'Админ', 'Админ', 'uploads/avatars/foto_12.png', 1575825604),
 (13, 2, 'tyt', '$2y$10$OgfHEu39yMaikUhK0.vUd.gXGZZB6VgQsvX0w2NrCD6GSLAVTabGW', 'rgdf@f', '', '', '', 1575825604),
 (14, 2, 'hypop', '$2y$10$CKfQJ7FZ4xpTJH4YXFVMeOuqVrv3Yj/KJf2cXgopZcWKeSnbFMBj6', 'hty@tr', '', '', '', 1575825604),
 (15, 2, 'test2', '$2y$10$trgPL1fnnglSY3djNwS5wuI55DDOo5Sk.ZLU4Q/MxCiGVU2duyqwy', 'test@test.test', 'Тестовый', 'Тестов', '', 1575825604),
@@ -370,7 +387,13 @@ INSERT INTO `user_tokens` (`id`, `user_id`, `token`, `date`) VALUES
 (150, 12, '$2y$10$9mk2tg5gWk8g/7AlRCqAV.iq5s8AUP7sbTFLryqWW9HxmnXD57Xxm', 1623856520),
 (151, 12, '$2y$10$.PeHaU.dEuhJNijDZ/DLM.L3HF.w8MlFJ0DSuBQwGGhdACZ8BXGmC', 1623869276),
 (152, 12, '$2y$10$UYrMLYOwqvLBoKr6pNnTteQn3p/zbMglZ9N.mnpGIF1danpZnoViy', 1623930117),
-(153, 12, '$2y$10$wswn3TLDRss2CAe0DtWCb.vfldu0JrunTw2IampCyUcxkh/WSGFsK', 1623933217);
+(153, 12, '$2y$10$wswn3TLDRss2CAe0DtWCb.vfldu0JrunTw2IampCyUcxkh/WSGFsK', 1623933217),
+(154, 12, '$2y$10$463VR5LuDDG/7iyN7zaf7OWn/ht72DxZ3PIjo.c0TC3MpC7T3vnIO', 1624017024),
+(156, 12, '$2y$10$vNqFqPAYt9zBgsrrETAeEuBMQ69a6EiEoLAL7OdfhojwhrJ1cDYg6', 1629134699),
+(163, 12, '$2y$10$mfmw1s9uFByPCTVjcdbb8eBUJfTO7Lxo7M2xvcE1Ubz6N57L30NZK', 1633718781),
+(165, 12, '$2y$10$RCPLcs961Xp2AtViNzw9SuhrHNy33f7sNMK9j53s/pnvITMCj86.S', 1633869748),
+(166, 12, '$2y$10$qSghGSEPnjC1X7ug61mXZukdvi1.0MH1oqT0nPd/QsnJbEaEgSnii', 1633875692),
+(168, 12, '$2y$10$H0s4419E93kV/AUbA8ejPumiHIwlDcQoD.liQUGWJCxdyewFydKCy', 1634059206);
 
 --
 -- Индексы сохранённых таблиц
@@ -396,6 +419,14 @@ ALTER TABLE `doctors`
 --
 ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `lostpassword`
+--
+ALTER TABLE `lostpassword`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `token` (`token`),
+  ADD KEY `fk_users_lostpassword` (`user_id`);
 
 --
 -- Индексы таблицы `news`
@@ -450,7 +481,7 @@ ALTER TABLE `user_tokens`
 -- AUTO_INCREMENT для таблицы `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT для таблицы `doctors`
@@ -465,10 +496,16 @@ ALTER TABLE `groups`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT для таблицы `lostpassword`
+--
+ALTER TABLE `lostpassword`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT для таблицы `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT для таблицы `specialties`
@@ -480,7 +517,7 @@ ALTER TABLE `specialties`
 -- AUTO_INCREMENT для таблицы `static`
 --
 ALTER TABLE `static`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
@@ -492,7 +529,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `user_tokens`
 --
 ALTER TABLE `user_tokens`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -510,6 +547,12 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `doctors`
   ADD CONSTRAINT `doctors_ibfk_1` FOREIGN KEY (`specialty_id`) REFERENCES `specialties` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `lostpassword`
+--
+ALTER TABLE `lostpassword`
+  ADD CONSTRAINT `fk_users_lostpassword` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `news`

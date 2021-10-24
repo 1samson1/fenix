@@ -1,0 +1,66 @@
+{ extends main.html }
+
+[block content]
+<table width="100%" border="0">
+    <tr>
+        <td>
+            <span style="color: #333333; font: 15px Arial, sans-serif; line-height: 20px; -webkit-text-size-adjust:none; display: block;">Уважаемый(-ая), { user.surname } { user.name }</span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span style="color: #333333; font: 15px Arial, sans-serif; line-height: 20px; -webkit-text-size-adjust:none; display: block;">Все детали записи нп приём были успешно согласованы с клиникой. Врач ожидает Вас на приёме в назначеное время.</span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span style="color: #333333; font: 15px Arial, sans-serif; line-height: 20px; -webkit-text-size-adjust:none; display: block;"><b>Делали записи на приём:</b></span>
+        </td>
+    </tr>
+        <td>
+            <table width="100%" border="0">
+                <tr>
+                    <td>
+                        <span style="color: #333333; font: 15px Arial, sans-serif; line-height: 20px; -webkit-text-size-adjust:none; display: block;">ФИО пациента:</span>
+                    </td>
+                    <td>
+                        <span style="color: #333333; font: 15px Arial, sans-serif; line-height: 20px; -webkit-text-size-adjust:none; display: block;">{ user.surname } { user.name }</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color: #333333; font: 15px Arial, sans-serif; line-height: 20px; -webkit-text-size-adjust:none; display: block;">Дата и время приёма:</span>
+                    </td>
+                    <td>
+                        <span style="color: #333333; font: 15px Arial, sans-serif; line-height: 20px; -webkit-text-size-adjust:none; display: block;">{recdoc-datatime}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color: #333333; font: 15px Arial, sans-serif; line-height: 20px; -webkit-text-size-adjust:none; display: block;">ФИО доктора:</span>
+                    </td>
+                    <td>
+                        <span style="color: #333333; font: 15px Arial, sans-serif; line-height: 20px; -webkit-text-size-adjust:none; display: block;">{doctor.name}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color: #333333; font: 15px Arial, sans-serif; line-height: 20px; -webkit-text-size-adjust:none; display: block;">Специальность доктора:</span>
+                    </td>
+                    <td>
+                        <span style="color: #333333; font: 15px Arial, sans-serif; line-height: 20px; -webkit-text-size-adjust:none; display: block;">{doctor.specialty}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color: #333333; font: 15px Arial, sans-serif; line-height: 20px; -webkit-text-size-adjust:none; display: block;">Кабинет доктора:</span>
+                    </td>
+                    <td>
+                        <span style="color: #333333; font: 15px Arial, sans-serif; line-height: 20px; -webkit-text-size-adjust:none; display: block;">{doctor.kabinet}</span>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+[/block]
