@@ -1,5 +1,5 @@
 <?php 
-    $tpl->load('login.html');
+    /* $tpl->load('login.html');
 
     if(isset($_SESSION['user'])){
         $tpl->set('{login}', $_SESSION['user']['login']);
@@ -14,5 +14,5 @@
         $tpl->set('{logout}','/logout/');
     }
 
-    $tpl->save('{login}');
+    $tpl->save('{login}'); */
 ?>

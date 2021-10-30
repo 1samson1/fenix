@@ -10,9 +10,12 @@
             
         }
 
-        public function load($tpl_name, $data = null){
+        public function load($tpl_name, $data = []){
 
-            $file_path = ENGINE_DIR."/mails/".$tpl_name;
+            if(strpos($tpl_name, '.' ) === false)
+                $tpl_name = $tpl_name . '.html';
+
+            $file_path = ROOT_DIR . DS . "templates" . DS . $tpl_name;
 
             if (file_exists($file_path)){                
                 return $this->render(
@@ -20,7 +23,7 @@
                     $data
                 );
             }
-            else die("Fatal error! No such file ( $tpl_name ) template!");
+            else die("Fatal error! No such file ( $file_path ) template!");
 
         }
 
@@ -67,9 +70,9 @@
                     }
 
                     if($this->if(
-                        $this->split_or($data, $params[0]),
+                        (isset($params[0]) ? $this->split_or($data, $params[0]) : null),
                         $operator,
-                        $this->split_or($data, $params[2])
+                        (isset($params[2]) ? $this->split_or($data, $params[2]) : null)
                     )){
                         return $body;
                     }

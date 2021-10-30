@@ -1,5 +1,5 @@
 <?php 
-    if(isset($alerts->alerts_array[0])){
+    /* if(isset($alerts->alerts_array[0])){
 
         $tpl->load('alerts.html');
 
@@ -13,6 +13,6 @@
 
         $tpl->save_copy('{alerts}');
     }
-    else $tpl->set('{alerts}', '');
+    else $tpl->set('{alerts}', ''); */
     
 ?>

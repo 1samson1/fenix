@@ -1,7 +1,7 @@
 <?php
     require_once ENGINE_DIR.'/includes/checkFeild.php';    
 
-    if(!$_COOKIE['user_token']){
+    if(!isset($_COOKIE['user_token'])){
         if(isset($_POST['do_login'])){
 
             $alerts->set_error_if(!CheckField::login($_POST['login']), 'Ошибка авторизации', 'Некорректный логин', 201);
@@ -19,7 +19,7 @@
                         
                         if(!$db->error){
                             setcookie('user_token', $token, time() + $config['life_time_token'], '/');
-                            $_SESSION['user']= $user;
+                            Store::set('USER', $user);
                         }
                         else $alerts->set_error('Ошибка авторизации', 'Не удалось выдать токен', 207);
                     }
@@ -32,11 +32,10 @@
     else{
         $db->get_user_by_token($_COOKIE['user_token']);
         if($user = $db->get_row()){
-            $_SESSION['user']= $user;
+            Store::set('USER', $user);
         } 
         else {            
             setcookie('user_token', '', 0, '/');
-            unset($_SESSION['user']);
         }
     }    
 ?>

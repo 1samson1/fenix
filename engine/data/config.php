@@ -1,7 +1,7 @@
 <?php
     // Глобальный конфиг для всего
 
-    $config = array(
+    return [
 
         'host_url' => (isset($_SERVER['HTTPS']) ? 'https' : 'http')."://".$_SERVER['HTTP_HOST'],
         
@@ -24,5 +24,5 @@
         'count_comments_on_page' => 20,
 
         'who_send_mail' => "admin@med.su",
-    )
+    ];
 ?>
