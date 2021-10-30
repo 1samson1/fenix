@@ -58,22 +58,21 @@
         function replace_block($block, $params, $body, $data){
             switch($block){
                 case 'if':
+                    $first = isset($params[0]) ? $this->split_or($data, $params[0]) : false;
+                    $second = isset($params[2]) ? $this->split_or($data, $params[2]) : false;
+
                     if(isset($params[1])){
                         $operator = $params[1];
                     } else {
-                        if(strpos($params[0], '!') === false){
+                        if(strpos($first, '!') === false){
                             $operator = 'equal';
                         } else {
-                            $params[0] = substr($params[0],1);
+                            $first = substr($first,1);
                             $operator = 'notequal';
                         }
                     }
 
-                    if($this->if(
-                        (isset($params[0]) ? $this->split_or($data, $params[0]) : null),
-                        $operator,
-                        (isset($params[2]) ? $this->split_or($data, $params[2]) : null)
-                    )){
+                    if($this->if( $first, $operator, $second )){
                         return $body;
                     }
                     return false;
@@ -107,6 +106,9 @@
 
                     return $tpl;
                 
+                case 'debug':
+                    return debug($this->split_dot($data, $params[1]));
+                    
                 case 'filter':
                     return $this->filter(
                         $params[3],
@@ -176,13 +178,7 @@
                 return str_replace('"', '', $keyset);
             }
 
-            $value = $this->split_dot($data, $keyset);
-
-            if($value === null){
-                return $keyset;
-            }
-
-            return $value;
+            return $this->split_dot($data, $keyset);
         }
 
         public function split_dot($data, $keyset){

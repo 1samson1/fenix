@@ -1,3 +1,4 @@
 <?php 
-    $tpl->save( 'content', 'main');    
+    Store::set('title', 'Главная');
+    $tpl->save( 'content', 'main');
 ?>

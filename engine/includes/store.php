@@ -11,6 +11,8 @@
             }
 
             self::$vars[$key] = $value;
+
+            return $value;
         }
 
         public static function get($keyset){

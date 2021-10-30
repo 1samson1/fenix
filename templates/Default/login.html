@@ -1,5 +1,5 @@
 
-[not-group]
+[if !USER]
 <div class="opener user-dock">
     <div class="menu-button">
         <div class="menu-icon-wrapper" tabindex="0">                                
@@ -44,8 +44,8 @@
         </div>
     </div>
 </div>
-[/not-group]
-[group]  
+[/if]
+[if USER]  
 <div class="opener user-dock">
     <div class="menu-button">
         <div class="menu-icon-wrapper" tabindex="0">                                
@@ -55,15 +55,15 @@
     <div class="links links-right">
         <div class="opener">
             <a id="user-panel" class="opener-toggle topmenu__link" tabindex="1">
-                <img src="{foto}" alt="avatar" srcset="">
-                <span>{surname} {name}</span>
+                <img src="{filter USER.foto | noavatar}" alt="avatar" srcset="">
+                <span>{USER.surname} {USER.name}</span>
             </a>
             <div class="user-options">
-                [admin]<a href="{admin-link}" class="user-option topmenu__link">Админпанель</a>[/admin]
+                <a href="{admin-link}" class="user-option topmenu__link">Админпанель</a>
                 <a href="{profile-link}" class="user-option topmenu__link">Личный кабинет</a>
                 <a href="{logout}" class="user-option topmenu__link">Выход</a>
             </div>       
         </div>
     </div>
 </div>
-[/group]
+[/if]

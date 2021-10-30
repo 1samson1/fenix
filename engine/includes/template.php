@@ -60,6 +60,7 @@
         function replace_block($block, $params, $body, $data){
             switch($block){
                 case 'if':
+
                     if(isset($params[1])){
                         $operator = $params[1];
                     } else {
@@ -71,11 +72,10 @@
                         }
                     }
 
-                    if($this->if(
-                        (isset($params[0]) ? $this->split_or($data, $params[0]) : null),
-                        $operator,
-                        (isset($params[2]) ? $this->split_or($data, $params[2]) : null)
-                    )){
+                    $first = isset($params[0]) ? $this->split_or($data, $params[0]) : false;
+                    $second = isset($params[2]) ? $this->split_or($data, $params[2]) : false;
+
+                    if($this->if( $first, $operator, $second )){
                         return $body;
                     }
                     return false;
@@ -119,6 +119,9 @@
                     unset($this->data_block[$params[1]]);
 
                     return $tpl;
+                
+                case 'debug':
+                    return debug($this->split_dot($data, $params[1]));
                 
                 case 'filter':
                     return $this->filter(
@@ -181,6 +184,18 @@
                         substr($params[0], 1, -1),
                         $value
                     );
+                
+                case 'noavatar':
+                    if($value){
+                        return '/'.$value;
+                    }
+                    return webPath($this->dir . DS . 'img' . DS. 'noavatar.png');
+
+                case 'noimage':
+                    if($value){
+                        return '/'.$value;
+                    }
+                    return webPath($this->dir . DS . 'img' . DS. 'noimage.png');
             }
         }
 
@@ -189,13 +204,7 @@
                 return str_replace('"', '', $keyset);
             }
 
-            $value = $this->split_dot($data, $keyset);
-
-            if($value === null){
-                return $keyset;
-            }
-
-            return $value;
+            return $this->split_dot($data, $keyset);
         }
 
         public function split_dot($data, $keyset){
@@ -260,7 +269,7 @@
         
         public function print($tpl_name, $data = [], $dir_name= null){
             $data = array_merge($data, Store::all());
-            
+
             echo $this->load($tpl_name, $data, $dir_name);
         }         
     }

@@ -11,7 +11,7 @@
             require_once ENGINE_DIR.'/modules/main.php';
             break;
 
-        /* case 'registration':
+        case 'registration':
             require_once ENGINE_DIR.'/modules/registration.php';
             break;
 
@@ -42,20 +42,16 @@
         default:
             $alerts->set_error('Oшибка', 'Такой страницы или файла не существует!', 404);
             $head['title'] = 'Страница не найдена!';
-            break; */
-    }  
-    
-    /* LOAD HEAD FILE ======================================== */
-
-    //require_once ENGINE_DIR.'/modules/head.php';
+            break; 
+    }
 
     /* LOAD ALERTS TEMPLATE ======================================== */
 
-    //require_once ENGINE_DIR.'/modules/alerts.php';
+    $tpl->save('alerts', 'alerts', ['alerts' => $alerts->all()]);
 
     /* LOAD LOGIN TEMPLATE ========================================= */
 
-    //require_once ENGINE_DIR.'/modules/login.php';
+    require_once ENGINE_DIR.'/modules/login.php';
 
     /* LOAD BASE TEMPLATE ========================================= */
 

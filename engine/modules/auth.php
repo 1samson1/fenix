@@ -18,7 +18,7 @@
                         $db->add_token($user['id'], $token);
                         
                         if(!$db->error){
-                            setcookie('user_token', $token, time() + $config['life_time_token'], '/');
+                            setcookie('user_token', $token, time() + Store::get('config.life_time_token'), '/');
                             Store::set('USER', $user);
                         }
                         else $alerts->set_error('Ошибка авторизации', 'Не удалось выдать токен', 207);
