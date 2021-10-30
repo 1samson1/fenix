@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Окт 24 2021 г., 17:53
+-- Время создания: Окт 30 2021 г., 21:34
 -- Версия сервера: 10.3.13-MariaDB-log
 -- Версия PHP: 7.3.9
 
@@ -45,7 +45,8 @@ INSERT INTO `comments` (`id`, `news_id`, `user_id`, `text`, `date`, `parent`) VA
 (1, 1, 12, '<p>Хорошая новость</p>', 1564163134, NULL),
 (2, 2, 56, '<p>Ну значит запишусь после каникул.</p>', 1651354654, NULL),
 (11, 2, 12, '<p><img src=\"https://drasler.ru/wp-content/uploads/2019/05/%D0%9A%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D1%81%D1%82%D0%BE%D0%BB-%D1%82%D0%B8%D0%B3%D1%80-5.jpg\" alt=\"\" /></p>', 1622133007, NULL),
-(30, 2, 12, '<p>hfghfdgh</p>', 1633884227, NULL);
+(30, 2, 12, '<p>hfghfdgh</p>', 1633884227, NULL),
+(31, 2, 12, '<p>test добавления</p>', 1635602820, NULL);
 
 -- --------------------------------------------------------
 
@@ -150,50 +151,60 @@ INSERT INTO `news` (`id`, `autor`, `title`, `short_news`, `full_news`, `date_edi
 CREATE TABLE `recdoctor` (
   `doctor_id` int(11) UNSIGNED NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
-  `time` int(11) UNSIGNED NOT NULL
+  `time` int(11) UNSIGNED NOT NULL,
+  `appointment` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `recdoctor`
 --
 
-INSERT INTO `recdoctor` (`doctor_id`, `user_id`, `time`) VALUES
-(1, 12, 1576161000),
-(1, 12, 1577628000),
-(1, 12, 1577631600),
-(1, 12, 1577635200),
-(1, 12, 1577637000),
-(1, 12, 1577642400),
-(1, 12, 1577646000),
-(1, 12, 1577649600),
-(1, 12, 1577800800),
-(3, 12, 1577802600),
-(1, 12, 1577804400),
-(2, 12, 1577806200),
-(1, 12, 1577813400),
-(1, 12, 1577822400),
-(1, 12, 1577824200),
-(1, 12, 1577885940),
-(1, 12, 1577950200),
-(1, 12, 1578147240),
-(1, 12, 1578148200),
-(1, 12, 1578159000),
-(2, 12, 1580475600),
-(1, 12, 1580998620),
-(1, 12, 1585335600),
-(7, 12, 1620968400),
-(5, 12, 1620970200),
-(5, 12, 1620973800),
-(6, 12, 1620973800),
-(5, 12, 1621321200),
-(6, 12, 1621576800),
-(7, 12, 1622192400),
-(7, 12, 1622442600),
-(3, 12, 1635143400),
-(3, 12, 1635404400),
-(3, 12, 1635494400),
-(5, 56, 1621492200),
-(6, 56, 1621924200);
+INSERT INTO `recdoctor` (`doctor_id`, `user_id`, `time`, `appointment`) VALUES
+(1, 12, 1576161000, ''),
+(1, 12, 1577628000, ''),
+(1, 12, 1577631600, ''),
+(1, 12, 1577635200, ''),
+(1, 12, 1577637000, ''),
+(1, 12, 1577642400, ''),
+(1, 12, 1577646000, ''),
+(1, 12, 1577649600, ''),
+(1, 12, 1577800800, ''),
+(3, 12, 1577802600, ''),
+(1, 12, 1577804400, ''),
+(2, 12, 1577806200, ''),
+(1, 12, 1577813400, ''),
+(1, 12, 1577822400, ''),
+(1, 12, 1577824200, ''),
+(1, 12, 1577885940, ''),
+(1, 12, 1577950200, ''),
+(1, 12, 1578147240, ''),
+(1, 12, 1578148200, ''),
+(1, 12, 1578159000, ''),
+(2, 12, 1580475600, ''),
+(1, 12, 1580998620, ''),
+(1, 12, 1585335600, ''),
+(7, 12, 1620968400, ''),
+(5, 12, 1620970200, ''),
+(5, 12, 1620973800, ''),
+(6, 12, 1620973800, ''),
+(5, 12, 1621321200, ''),
+(5, 56, 1621492200, ''),
+(6, 12, 1621576800, ''),
+(6, 56, 1621924200, ''),
+(7, 12, 1622192400, ''),
+(7, 12, 1622442600, ''),
+(3, 12, 1635143400, ''),
+(3, 12, 1635404400, ''),
+(3, 12, 1635494400, ''),
+(1, 12, 1635744600, ''),
+(1, 12, 1636954200, ''),
+(3, 12, 1637128800, ''),
+(1, 12, 1637132400, ''),
+(3, 12, 1637217000, '32977a'),
+(1, 12, 1637910000, ''),
+(4, 12, 1637911800, ''),
+(1, 12, 1638167400, ''),
+(3, 12, 1639040400, '0cbdcfb1bc9a');
 
 -- --------------------------------------------------------
 
@@ -271,7 +282,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `group_id`, `login`, `password`, `email`, `name`, `surname`, `foto`, `date_reg`) VALUES
-(12, 1, 'Admin', '$2y$10$fH6ureik3Qyk73WPvyJctuELc03pJXYe4eA.9jKZhAA4CScuez8uW', 'ya.ya@ya.ru', 'Админ', 'Админ', 'uploads/avatars/foto_12.png', 1575825604),
+(12, 1, 'Admin', '$2y$10$lNKtwI2lsEGHwG79QuVFHODJJMaBhH2Vz8dyCRibBMI.faekpPzGO', 'ya.ya@ya.ru', 'Админ', 'Админ', 'uploads/avatars/foto_12.png', 1575825604),
 (13, 2, 'tyt', '$2y$10$OgfHEu39yMaikUhK0.vUd.gXGZZB6VgQsvX0w2NrCD6GSLAVTabGW', 'rgdf@f', '', '', '', 1575825604),
 (14, 2, 'hypop', '$2y$10$CKfQJ7FZ4xpTJH4YXFVMeOuqVrv3Yj/KJf2cXgopZcWKeSnbFMBj6', 'hty@tr', '', '', '', 1575825604),
 (15, 2, 'test2', '$2y$10$trgPL1fnnglSY3djNwS5wuI55DDOo5Sk.ZLU4Q/MxCiGVU2duyqwy', 'test@test.test', 'Тестовый', 'Тестов', '', 1575825604),
@@ -299,7 +310,8 @@ INSERT INTO `users` (`id`, `group_id`, `login`, `password`, `email`, `name`, `su
 (46, 2, 'test89', '$2y$10$HirQXNVEHIS08oWB5a5NdeKMY1At/RZPL8QxE/Z4fkTrt27yHT.Dq', 'test89@ya.ru', 'test89', '', '', 1614424404),
 (47, 2, 'GGWP', '$2y$10$P/l/EJEsIZa1l0nIHvZnzuIZVXg6Bg0e6o6ecqi8N6z5BA14B8y6q', 'fjsdl@fjdkls.ru', 'fjsdlkaf;j', 'jglsdf;j', '', 1614437083),
 (55, 2, 'petrvas', '$2y$10$FEb1BMMUXzR0e4gRbBPPnuMzOHnT09yr.ECkqFagQHxooxSQ/BEIC', 'petr.vas@ya.ru', 'Пётр', 'Васильев', '', 1614446372),
-(56, 2, 'Vasya', '$2y$10$7fzPe0uS7lAQ4qlqlxqSQukgBXx5nUOnHJhs.Hn76JatJZnYb5Hy2', 'vasya@ya.ru', 'Вася', 'Уткин', 'uploads/avatars/foto_56.jpg', 1620918189);
+(56, 2, 'Vasya', '$2y$10$7fzPe0uS7lAQ4qlqlxqSQukgBXx5nUOnHJhs.Hn76JatJZnYb5Hy2', 'vasya@ya.ru', 'Вася', 'Уткин', 'uploads/avatars/foto_56.jpg', 1620918189),
+(60, 2, 'hgdfh', '$2y$10$k7wRFpW.I82i3gSi/R0nnexV4UL9AJSaHskkw49UCMpQvtCWFcwhO', 'bfsdg@hgfdh.tu', 'hdgfhd', 'dfgh', '', 1635596797);
 
 -- --------------------------------------------------------
 
@@ -319,81 +331,15 @@ CREATE TABLE `user_tokens` (
 --
 
 INSERT INTO `user_tokens` (`id`, `user_id`, `token`, `date`) VALUES
-(56, 12, '$2y$10$KvMoAB0a1r4rNUOkq6Wyfut60fuy76Yu5wLndDZ9CmbJAAMCvzqp2', 1616334588),
-(60, 12, '$2y$10$6NKRQ4qFgo4sLVR48GrZG.iOON/H2UN7hzBh5YgreDmje/tsnGvUO', 1618242806),
-(62, 12, '$2y$10$8McdnRjcNYtz3NQUkWyeGOF2cK6ArNphYQu0uMr4Cd66nPwV3VSgu', 1618327460),
-(66, 12, '$2y$10$ZGYcORe5F2UMDdmjG4NTkOnAIzBkDjGkrOzJc/84E0P39scMhvdU2', 1620829870),
-(67, 12, '$2y$10$GSD538NK99U9IE1gS2n.J.g7jvuuJBWCLCjT1RBmCn5lCfq1Omvz2', 1620838847),
 (69, 56, '$2y$10$ITIA68pZOs4ChDCJXzdbXe1NWbyGdDoxdsUWEd6zWd3QvkNKfUwaG', 1620918208),
-(73, 12, '$2y$10$sTKegOBKGdYQd2AYsSaage5nEBnftMLf0HKsNWkovry/dlUuUedKO', 1621023072),
-(76, 12, '$2y$10$0Jvae7vXM1qwlZia8IdF8OL8D0HMi4xdkRLyTtWUX8SAm8uE8Vrlm', 1621275008),
-(77, 12, '$2y$10$CaJCkcCWNivO/eKfmrYRsOLjsc1cm8AAjqTzbrCHAk3Wks765yDwC', 1621353764),
-(80, 12, '$2y$10$8rnFSw8p8U5QZvTA7No1UOe.5AMPwYHBUTzGMoWcQ/1uPZ31YZqFi', 1621428710),
-(83, 12, '$2y$10$y2bxv.uiBvoltAeC6M6/d.olXgg8BY9cCugT8ibjEuHg78iFVuMtq', 1621438799),
-(84, 12, '$2y$10$.I8WBbsUaAyjT87csdGsOO1Ti0lJhTiRjhj7xsnu4n.YM5ha8JlmO', 1621445054),
-(85, 12, '$2y$10$oJ4kCTiMvnOR6YxZM5dNbOJXXncj30OtHARLy9UNJhZ0aq05DquJ6', 1621445255),
-(86, 12, '$2y$10$Trz22ZDzOyFrXaWU7jdyS.DcbTRckP5Au2EpkmwYX2IusZAFhH1US', 1621445372),
-(87, 12, '$2y$10$gZrMueroDa3dKutXoQAuDOedncbXN2aH2LSHLGUADS1qP9mMvYtK.', 1621446558),
-(88, 12, '$2y$10$DPyAhQvTmV9fBydiEV1i..2dkjasq3YAg4Cg2ZR4Jzn9g5N5jQzZy', 1621453393),
-(89, 12, '$2y$10$eoP.b/Kj4g2qpmjwbXwOPuFjGuYbfR5ibtWKf.9d5e4XXBmsCY9si', 1621453722),
-(90, 12, '$2y$10$.l0kkxlqWASpQw8MGohhBOsjiTYpoSU9DhrLWVG2MnoW7HbEqa.lm', 1621454068),
 (91, 56, '$2y$10$Q9qjFR.LauHs2bNNOHxw/.Ff9QbuOtXEZyrUbdgWXMuFdJIdlR2ue', 1621454098),
-(92, 12, '$2y$10$7HyX7wcnWvZUPeftBy3st.u.p2twekXYW5WrTcFkzO2tSJAjQEwZ.', 1621455246),
-(94, 12, '$2y$10$9.bh0CGsmJiWJQm8AY4AA.JqmMK/yDzsrJueejU6/s1WtZkns3d52', 1621455578),
-(95, 12, '$2y$10$eSjw/5dKnJgGYRM3TWsVXO90NKSLStUBJm.ad9UL92JdUyVm/3Cr6', 1621455897),
-(96, 12, '$2y$10$CdE3xD4W1nsI3xuNvXxyiucW1D.fXzQ4HB/oDiN4LW0u1MZ6sbOO6', 1621455926),
-(98, 12, '$2y$10$/z9eLbtyiCL.WixGcR4QT.z23XLkeUbZJcFhduM0UNGDITQcYXIMu', 1621455951),
-(100, 12, '$2y$10$PcKxGYPdoGI4XVMAiIsAJuI28G.cnU6ysvjwKOjxX2rYwf9xlN2Yu', 1621456546),
 (101, 56, '$2y$10$lc45KRNk3bdioDZvtP5U5efqt5OCMkD5A2AE3M48IW5Rmx7215J1y', 1621456755),
 (102, 56, '$2y$10$w9JWu4plryDUcH209/5mp.x29nAuYlNg2aUlCeKAlMpuyVvvn6VWO', 1621456916),
-(103, 12, '$2y$10$R7l8G377djHgTDeU.A1qOunDe./7qID.rmaaLtLWn/QzRaHHH1ylm', 1621456936),
 (104, 15, '$2y$10$e4X3lrSSpDoEiQ0DjCHReOUUKGJlgM2TbpNv.1T9jiEf.L00/S8xS', 1621457067),
-(105, 12, '$2y$10$NTt6ILCmWwUnl8n3g6uMduaPXcMDYJ1.cvtjcgSTsOkhTqwyWBGvG', 1621457091),
 (106, 56, '$2y$10$YqypzM0cUDfUtZE7V635SePRRh02U6pVVYyoQdk5mIWkIIsPkpOcW', 1621457289),
-(107, 12, '$2y$10$xAGUqPn4traa7Y96jTGrZecyXBj37fb0Oubn8oV8z.OANqFQaboPG', 1621457309),
-(108, 12, '$2y$10$WzpYz/cr/lbnEUL.IIcaNei.pkPsjllxW2s7ngQXBKi8aUh/DfCEW', 1621457394),
-(109, 12, '$2y$10$L.xb0n8KoVNVGq89FfOLOOMbHcpkEtGTyuwAtzd2h.aGRvHJEy8na', 1621457416),
-(110, 12, '$2y$10$vquMqquqW/nmXXuVaIgVc.S9Qjuto2l9YghrcFhFFrwFqlrEZTVv2', 1621514420),
-(111, 12, '$2y$10$KlFmQ4vpxxxmM4BLNTrF2..kd/i.RpHB2Q7KZfC0gDON7p/b4r..q', 1621514699),
-(112, 12, '$2y$10$XNJAWbXnKWT2GBQ9jud/duQOHolk0xveNOugXy7/pHlcERMfek/d.', 1621535227),
-(113, 12, '$2y$10$0AUkFqW.yShbn0yuvJ4gAuORBgj.GGwoEr.E8qORWLwFLbq6ZzMMC', 1621535918),
-(114, 12, '$2y$10$FnnA9bEDTtrvwHYSBr5F9.SMNcgAvX/I0B2gv5msEwJPoUfJPuN96', 1621598698),
-(115, 12, '$2y$10$BP9D6f5oLTE2Ja0MiYA7LuHCdSU3aMtN5S/TtWXRbZj3fM5xaM36K', 1621634896),
-(116, 12, '$2y$10$.c3flXblVnov051rs2.B2.S7BDSDnMBvGDUlTCY9QGMg59lUG/zqS', 1621782088),
-(117, 12, '$2y$10$iR53w1XfUfS9OEde537yEeyKp0bLptcLEbhxW01SNBZ2IurfhDBD.', 1621792665),
-(118, 12, '$2y$10$tzvObyL2Ex6UQGfyzvvSE.1ACmG90a6OffmNbhIfNuE0NMUeaCcpO', 1621792987),
-(119, 12, '$2y$10$C/l.miRzU4AxDof3KRP1Du8pPnvmtC0YI9J2OUs0e6czxaSr04prO', 1621870694),
-(120, 12, '$2y$10$Svy7T9veg4dXqrrAk4AQPetnanaKsbBKrMGxRFAK3Mt2KyZv33exm', 1621888262),
-(121, 12, '$2y$10$Ulye9apC7W15IMS7b/U9S.a16.85vk4k3cKW1uVSKKt1.0mpdu9ou', 1621950471),
-(124, 12, '$2y$10$cBtRYMOlukfwvbX2nrgl/u3a7wC7JWm.BE6Qyuh2hTjWXFz2lmaSC', 1622035076),
 (125, 55, '$2y$10$hkGkZJSF68Bw0pFk3N38.uo8xHuHhESeaqYx.StvJMI6GXZIigh2C', 1622035286),
-(126, 12, '$2y$10$hEtZrrC596kk45EleKqlk.Vuo8aoZ.w3CemRRxg/L.xLDa.N.mABG', 1622035842),
-(128, 12, '$2y$10$55eqdA7M2EZA1fMLv4vRoeCJuqVTsodWwQFKVHpqG7bI9HAex5kpe', 1622151795),
-(129, 12, '$2y$10$ZST3yz1bR/U4thxZJNWmsOMGuz.nYLbz1PtweZc3jbIXO8SZ8kik6', 1622203703),
-(130, 12, '$2y$10$M2kqJed888k4YyjB1UM1zu5/qlMgeTlSb9eFBzR.bAR9gAxfFBJVi', 1622308173),
-(132, 12, '$2y$10$RFtQbgBIPIM.jJt8AV9nDu5OSVIY3wprSAprbOv2GZ07RzwB.Q4ai', 1622312498),
-(133, 12, '$2y$10$Sj6oTcwvn0emO.57irTToOqe3YPDldd5sXCDgVcGkAzkveueBjRui', 1622396712),
-(134, 12, '$2y$10$qtiAcalUJwijqCTiJElLBuVP1tcBQiwkcMdRNM8KeYiaYd1oLX2.K', 1622567871),
-(138, 12, '$2y$10$GsRYn4V7I9e4QP0S4KNMZODl0hEj96daR/BeMKTiXVl2bSY36Uq3y', 1622834521),
-(141, 12, '$2y$10$.1.l7gDxKYUy5OKAJL72d.r.ABzA5kg4W0pwiMtaULdXNcM4rzArq', 1622988927),
 (142, 47, '$2y$10$yfusvBP5Ta1TiKzySCKCMesSVc7NXqjjCysVHbs0hJGmgRuhyKM6a', 1622989472),
-(143, 12, '$2y$10$YRIG0LmwK8IcRbs6jNS0WO0V88ymc3NuWXlEcuLtfK63gJZxDkefO', 1622989518),
-(144, 12, '$2y$10$9LJPeJcVA4WB2bzV7a5RgOFJQcESk8u2842jngEElNvpXHMR7KhC.', 1623081384),
-(145, 12, '$2y$10$0QhqpMUe.1CEBO7bZHvnCOI/QRSmU8b3H4hThDYL/FfkZxCtFlPOu', 1623091502),
-(146, 12, '$2y$10$bWIC.79BoYauwuv14et/qOyMuJ7QoWt/2jmNrRP6Fy.RQTs78VRX2', 1623164864),
-(147, 12, '$2y$10$0Kmm2AGCWceeAdQ61PcyuOxE6BWfpirtQLXbzbMQ9TcMpx5Fl0GK2', 1623167922),
-(148, 12, '$2y$10$g0dESbKrigGy1e8qj2tPROOMMdw.8fns21.y8gn6Om/HPxNsEDf3q', 1623175229),
-(149, 12, '$2y$10$J6kjh/k4g3xwCXZw/xBFLO18gCoetWequQOiz/LKTz0L/at.jyee6', 1623769633),
-(150, 12, '$2y$10$9mk2tg5gWk8g/7AlRCqAV.iq5s8AUP7sbTFLryqWW9HxmnXD57Xxm', 1623856520),
-(151, 12, '$2y$10$.PeHaU.dEuhJNijDZ/DLM.L3HF.w8MlFJ0DSuBQwGGhdACZ8BXGmC', 1623869276),
-(152, 12, '$2y$10$UYrMLYOwqvLBoKr6pNnTteQn3p/zbMglZ9N.mnpGIF1danpZnoViy', 1623930117),
-(153, 12, '$2y$10$wswn3TLDRss2CAe0DtWCb.vfldu0JrunTw2IampCyUcxkh/WSGFsK', 1623933217),
-(154, 12, '$2y$10$463VR5LuDDG/7iyN7zaf7OWn/ht72DxZ3PIjo.c0TC3MpC7T3vnIO', 1624017024),
-(156, 12, '$2y$10$vNqFqPAYt9zBgsrrETAeEuBMQ69a6EiEoLAL7OdfhojwhrJ1cDYg6', 1629134699),
-(163, 12, '$2y$10$mfmw1s9uFByPCTVjcdbb8eBUJfTO7Lxo7M2xvcE1Ubz6N57L30NZK', 1633718781),
-(165, 12, '$2y$10$RCPLcs961Xp2AtViNzw9SuhrHNy33f7sNMK9j53s/pnvITMCj86.S', 1633869748),
-(166, 12, '$2y$10$qSghGSEPnjC1X7ug61mXZukdvi1.0MH1oqT0nPd/QsnJbEaEgSnii', 1633875692),
-(168, 12, '$2y$10$H0s4419E93kV/AUbA8ejPumiHIwlDcQoD.liQUGWJCxdyewFydKCy', 1634059206);
+(190, 12, '$2y$10$8xvZqlm25umwWaeKAHHDGOrluIZ0xPuCyli2kOOqALVh4TUOLxfWm', 1635610745);
 
 --
 -- Индексы сохранённых таблиц
@@ -481,7 +427,7 @@ ALTER TABLE `user_tokens`
 -- AUTO_INCREMENT для таблицы `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT для таблицы `doctors`
@@ -499,7 +445,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT для таблицы `lostpassword`
 --
 ALTER TABLE `lostpassword`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT для таблицы `news`
@@ -523,13 +469,13 @@ ALTER TABLE `static`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT для таблицы `user_tokens`
 --
 ALTER TABLE `user_tokens`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
