@@ -60,6 +60,10 @@
             return mysqli_fetch_row($query);
         } 
 
+        public function last_id(){
+            return mysqli_insert_id($this->connect);
+        }
+
         public function get_array($query = ''){
             if ($query == '') $query = $this->query;    
 

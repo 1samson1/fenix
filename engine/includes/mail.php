@@ -15,7 +15,7 @@
             if(strpos($tpl_name, '.' ) === false)
                 $tpl_name = $tpl_name . '.html';
 
-            $file_path = ROOT_DIR . DS . "templates" . DS . $tpl_name;
+            $file_path = ENGINE_DIR . "mails" . DS . $tpl_name;
 
             if (file_exists($file_path)){                
                 return $this->render(

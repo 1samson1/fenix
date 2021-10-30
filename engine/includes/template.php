@@ -3,7 +3,8 @@
     class Template{
 
         public $dir = '';
-        public $save_data = array();
+        private $data_block = array();
+        private $save_data = array();
 
         public function __construct($dir = false){
             $this->dir = $dir;
@@ -44,7 +45,7 @@
             $tpl = $this->replace_tags($tpl);
 
             $tpl = preg_replace_callback(
-                '/\{([^\{\}]*)\}/m',
+                '/\{([^\{\}\n]*)\}/m',
                 function ($matches) use ($data){
                     return $this->replace(
                         $this->split(' ',  trim($matches[1]) ),
@@ -76,7 +77,7 @@
                     $second = isset($params[2]) ? $this->split_or($data, $params[2]) : false;
 
                     if($this->if( $first, $operator, $second )){
-                        return $body;
+                        return $this->render($body, $data);
                     }
                     return false;
                 
@@ -84,7 +85,8 @@
                     return $this->for_in(
                         $this->split_dot($data, $params[2]),
                         $params[0],
-                        $body
+                        $body,
+                        $data
                     );
 
                 case 'block':
@@ -160,13 +162,13 @@
             }
         }
 
-        public function for_in($array, $value, $body){
+        public function for_in($array, $value, $body, $data){
             $tpl = '';
 
             foreach($array as $elm){
                 $tpl .= $this->render(
                     $body,
-                    array( $value => $elm)
+                    array_merge($data, array( $value => $elm))
                 );
             }
 
@@ -180,10 +182,10 @@
         public function filter($filter, $value, $params){
             switch ($filter) {
                 case 'date':
-                    return date(
-                        substr($params[0], 1, -1),
-                        $value
-                    );
+                    return date($this->wo_quotes($params[0]), $value);
+
+                case 'linkget':
+                    return addGetParam($this->wo_quotes($params[0]), $value);
                 
                 case 'noavatar':
                     if($value){
@@ -227,6 +229,10 @@
             }
 
             return $temp;
+        }
+
+        public function wo_quotes($str){
+            return substr($str, 1, -1);
         }
 
         public function split($separator, $string){

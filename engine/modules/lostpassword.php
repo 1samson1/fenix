@@ -7,9 +7,11 @@
     $head['title'] = "Восстановление пароля";    
     $step = 1;
 
-    if(!$_COOKIE['user_token']){
+    if(!Store::isset('USER')){
 
-       if(isset($_GET['param1'])){
+        $step = 1;
+
+        if(isset($_GET['param1'])){
             
             $db->get_lostpassword($_GET["param1"]);
 
@@ -66,7 +68,7 @@
                     $mail = new Mail('lostpassword.html', array(
                         'title' => $head['title'],
                         'user' => $user,
-                        'url_lostpassword' => $config['host_url'].'/lostpassword/'.$token,
+                        'url_lostpassword' => Store::get('config.host_url').'/lostpassword/'.$token,
                     ));
 
                     $mail->send(
@@ -74,7 +76,7 @@
                         $head['title']
                     );
 
-                    $alerts->set_success('Востановления пароля', 'На вашу почту отправлено письмо с ссылкой для изменения пароля.');
+                    $alerts->set_success('Востановлениe пароля', 'На вашу почту отправлено письмо с ссылкой для изменения пароля.');
 
                 }
                 else $alerts->set_error('Ошибка востановления пароля', 'Неизвестная ошибка!', $db->error_num);
@@ -84,11 +86,11 @@
 
         }
         
-        $tpl->load("lostpassword.html");
+        Store::set('title', 'Восстановление пароля');
+        $tpl->save('content', 'lostpassword', [
+            'step' => $step
+        ]);
 
-        $tpl->set_block_param('/\[step=(.+)\](.*)\[\/step=\1\]/Us', $step);
-
-        $tpl->save('{content}');
     
     }
 	else $alerts->set_error('Ошибка', 'Востановление пароля не доступно', 233);

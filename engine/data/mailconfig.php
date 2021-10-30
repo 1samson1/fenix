@@ -4,7 +4,7 @@
         
         'Content-type' => 'text/html; charset=utf-8',
 
-        'From' => $config['who_send_mail'],
+        'From' => Store::get('config.who_send_mail'),
 
         'Cc' => '', // копия сообщения на этот адрес
 

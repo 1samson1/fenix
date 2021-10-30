@@ -119,17 +119,17 @@
         /*////////////////// Query for recdoc page  ////////////////////*/
 
         public function get_specialties(){
-            return $this->query('
+            return $this->get_array( $this->query('
                 SELECT * FROM `specialties`
-            ;');
+            ;'));
         }
         
         public function get_doctors_by_specialty($id){
-            return $this->query('
+            return $this->get_array( $this->query('
                 SELECT `doctors`.`id`, `doctors`.`name`, `doctors`.`foto`, `doctors`.`kabinet`, `specialties`.`title` AS `specialty` FROM `doctors` 
                     INNER JOIN `specialties` ON `specialties`.`id` = `doctors`.`specialty_id`
                     WHERE `doctors`.`specialty_id` = '.$this->ecran_html($id).'
-            ;');
+            ;'));
         }
 
         public function get_doctor_by_id($id){
@@ -140,10 +140,10 @@
             ;');
         }
 
-        public function recording($doctor_id, $user_id, $date, $time){
+        public function recording($doctor_id, $user_id, $appointment, $date, $time){
             return $this->query('
-                INSERT INTO `recdoctor` (`time`, `doctor_id`, `user_id`) 
-                    VALUES ('.strtotime($time,strtotime($date)).', '.$this->ecran_html($doctor_id).', '.$this->ecran_html($user_id).')
+                INSERT INTO `recdoctor` (`time`, `doctor_id`, `user_id`, `appointment`) 
+                    VALUES ('.strtotime($time,strtotime($date)).', '.$this->ecran_html($doctor_id).', '.$this->ecran_html($user_id).', "'.$appointment.'")
             ;');
         }
 

@@ -1,31 +1,52 @@
-[step=1]
+[if step = "1"]
 <div class="container-fill container-recdoc">
     <div class="title-page">Запись к врачу</div>
     <div class="instruction-recdoc">Для записи к врачу нужно выбрать специальность врача, к которому Вы бы хотели записаться.</div>
     <div class="specialties-recdoc">
-        {specialties}         
+        [for specialty in specialties]
+        <a href='{filter specialty.id | linkget "specialty"}' class="specialty-recdoc__item">                        
+            <img src="{filter specialty.image | noimage}" alt="" class="specialty-recdoc__item__img">
+            <div class="specialty-recdoc__item__content">
+                <div class="specialty-recdoc__item__title">{specialty.title}</div>
+                <div class="specialty-recdoc__item__text">{specialty.description}</div>
+            </div>
+        </a>  
+        [/for]
     </div>
 </div>
-[/step=1]
-[step=2]
+[/if]
+[if step = "2"]
 <div class="container-fill container-recdoc">
     <div class="title-page">Запись к врачу</div>
     <div class="instruction-recdoc">Выберите нужного Вам врача, для записи на приём.</div>
     <div class="doctors-recdoc">
-        {doctors}
+        [for doctor in doctors]
+        <div class="doctor-recdoc__item">      
+            <img src="{filter doctor.foto | noavatar}" alt="" class="doctor-recdoc__item__img">
+            <div class="doctor-recdoc__item__content">
+                <div class="doctor-recdoc__item__title">{doctor.name}</div>
+                <div class="doctor-recdoc__item__text">
+                    <div><b>Специальность: </b>{doctor.specialty}</div>
+                    <div><b>Кабинет: </b>{doctor.kabinet}</div>
+                </div>
+                [if !USER]<div class="btn btn-recording login-link">Записаться на приём</div>[/if]
+                [if USER]<a href='{filter doctor.id | linkget "doctor"}' class="btn btn-recording">Записаться на приём</a>[/if]
+            </div>
+        </div>
+        [/for]
     </div>   
 </div>
-[/step=2]
-[step=3]
+[/if]
+[if step = "3"]
 <div class="container-fill container-recording">
     <div class="title-page">Запись к врачу</div>
     <div class="doctor-recdoc">      
-        <img src="{doctor-foto}" alt="" class="doctor-recdoc__img">
+        <img src="{filter doctor.foto | noavatar}" alt="" class="doctor-recdoc__img">
         <div class="doctor-recdoc__content">
-            <div class="doctor-recdoc__title">{doctor-name}</div>
+            <div class="doctor-recdoc__title">{doctor.name}</div>
             <div class="doctor-recdoc__text">
-                <div><b>Специальность: </b>{doctor-specialty}</div>
-                <div><b>Кабинет: </b>{doctor-kabinet}</div>
+                <div><b>Специальность: </b>{doctor.specialty}</div>
+                <div><b>Кабинет: </b>{doctor.kabinet}</div>
             </div>
         </div>            
     </div>        
@@ -36,26 +57,31 @@
             <input type="hidden" name="time" class="timerec"/>
         </div>
         <input class="btn btn-large" name="rec" type="submit" value="Записаться">     
-    </form>     
+    </form>    
+    {script} 
 </div>      
-[/step=3]
-[step=4]
-<div class="container-fill container-recording">
-    <div class="title-page">Вы успешно записаны на приём!</div>
+[/if]
+[if step = "4"]
+<div class="container-fill container-recording appointment">
+    <div class="good"></div>
+    <div class="appointment-description">
+        <div class="appointment__title">Вы успешно записаны на приём!</div>
+        <div class="appointment__text">Ждём Вас в назначенное время с документом, удостоверяющим личность.</div>
+    </div>
+</div>
+<div class="container-fill container-recording">    
     <div class="doctor-recdoc">      
-        <img src="{doctor-foto}" alt="" class="doctor-recdoc__img">
+        <img src="{filter doctor.foto | noavatar}" alt="" class="doctor-recdoc__img">
         <div class="doctor-recdoc__content">
-            <div class="doctor-recdoc__title">{doctor-name}</div>
+            <div class="doctor-recdoc__title">{doctor.name}</div>
             <div class="doctor-recdoc__text">
-                <div><b>Специальность: </b>{doctor-specialty}</div>
-                <div><b>Кабинет: </b>{doctor-kabinet}</div>
-                <div><b>Дата и время приёма: </b>{datetime-recdoc}</div>
+                <div><b>Специальность: </b>{doctor.specialty}</div>
+                <div><b>Кабинет: </b>{doctor.kabinet}</div>
+                <div><b>Дата приёма: </b>{recdoc-data}</div>
+                <div><b>Время приёма: </b>{recdoc-time}</div>
+                <div><b>Номер талона: </b>{appointment}</div>
             </div>
         </div>            
-    </div>  
-    <div class="success-recdoc">
-        <div class="title-success-recdoc center">Ждём Вас!</div>
-        <div class="icon-success-recdoc center"></div>
-    </div>   
+    </div>      
 </div>
-[/step=4]
+[/if]

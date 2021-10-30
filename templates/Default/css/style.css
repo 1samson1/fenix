@@ -664,25 +664,26 @@ main{
 }
 
 .doctor-recdoc__item__content{
-    padding-bottom: 45px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .btn-recording{
-    position: absolute;
-    right: 5px;
-    bottom: 5px;
-
+    margin-left: auto;
+    margin-top: auto;
+    display: inline-block !important;
 }
 
 /* RECORDING **************************************** */
 
 .container-recording{
-    max-width: 600px;
+    max-width: 650px;
 }
 
 .doctor-recdoc{
     display: flex;   
-    padding: 7px; 
+    padding: 15px; 
 }
 
 .doctor-recdoc__title{    
@@ -700,8 +701,8 @@ main{
     box-shadow: 1px 1px 4px 1px #777; 
 }
 
-.doctor-recdoc__content{
-    padding-bottom: 45px;
+.doctor-recdoc__text{
+    line-height: 1.5rem;
 }
 
 .form-picker{    
@@ -711,21 +712,42 @@ main{
     margin: 5px 0;
 }
 
-.success-recdoc{
-    padding: 10px 10px 30px 10px;
+.good{
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 0 24 24' width='24px' fill='%23FFFFFF'%3e%3cpath d='M0 0h24v24H0V0z' fill='none'/%3e%3cpath d='M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z'/%3e%3c/svg%3e");
+    background-color: #2fa828;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position:center;
+    margin: 0 auto;
+    box-shadow: 1px 1px 3px 1px #c8d0e7;    
+    border-radius: 50%;
+    min-width: 50px;
+    max-width: 50px;
+    height: 50px;
 }
 
-.title-success-recdoc{
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 5px;
+.appointment{
+    padding: 20px 15px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
-.icon-success-recdoc{
-    background: url(../img/ok.png) no-repeat;
-    background-size: contain;
-    width: 100px;
-    height: 100px;
+.appointment-description{
+    width: 100%;
+    margin-left: 15px;
+    font-size: 0.9rem;
+}
+
+.appointment__title{
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    font-weight: bold;    
+    color: #777;   
+}
+
+.appointment__text{
+    /* margin-bottom: 10px; */
 }
 
 /* NEWS +++++++++++++++++++++++++++++++++++++++++++++ */
@@ -1360,5 +1382,20 @@ footer{
 
     .profile-field:nth-child(2n){
         margin-left: 0;
+    }
+}
+
+@media (max-width: 500px) {
+    /* PROFILE *************************************** */
+
+    .profile-foto {
+        width: 100px;
+        height: 100px;
+    }
+
+    /* RECDOC **************************************** */
+    .doctor-recdoc__img {
+        width: 100px;
+        height: 100px;
     }
 }

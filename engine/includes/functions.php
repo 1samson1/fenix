@@ -9,6 +9,15 @@
     function webPath($path){
         return   str_replace('\\', '/', '/' . str_replace(ROOT_DIR, '', $path));
     }
+
+    function genRandStr($length)
+    {
+        return substr(
+            bin2hex( openssl_random_pseudo_bytes($length) ),
+            0,
+            $length
+        );
+    }
     
     function debug($value){
         echo '<pre>';
