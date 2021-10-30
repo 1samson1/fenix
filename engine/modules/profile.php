@@ -52,7 +52,7 @@
 
 		/* close edit user */
 
-		$head['title'] = 'Личный кабинет '.$user['login'];
+		Store::set('title', 'Личный кабинет '.$user['login']);
 		
     	$tpl->save('content', 'profile', [
 			'logout_all' => '/logout/?exit=all',
@@ -61,7 +61,7 @@
 	}
 	else {
 		$alerts->set_error('Oшибка', 'Такого пользователя не существует!', 404);
-		$head['title'] = 'Профиль не найден';
+		Store::set('title', 'Профиль не найден');
 	}	
 	
 ?>

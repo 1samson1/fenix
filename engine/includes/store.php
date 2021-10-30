@@ -15,6 +15,26 @@
             return $value;
         }
 
+        public static function isset($key){
+            $data = self::$vars;
+
+            if(strpos($key, '.' ) === false)
+                return isset($data[$key]) ? true: false;
+
+            $keylist = explode('.', $key);
+
+            foreach ($keylist as $key){
+
+                if(!isset($data[$key]))
+                    return false;
+                
+                $data = $data[$key];
+                
+            }
+
+            return true;
+        }
+
         public static function get($keyset){
             $data = self::$vars;
 

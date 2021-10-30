@@ -1,7 +1,7 @@
-[not-group]
+[if !USER]
 <div class="container-fill container-comments">Вы не можете оставлять комментарии, пока не авторизуетесь.</div>
-[/not-group]
-[group]
+[/if]
+[if USER]
 <div class="container-fill container-comments">
     <div class="title-comments">Добавить комментарий</div>
     <form action="" method="post" class="form-addcomment">        
@@ -9,4 +9,4 @@
         <input id="addcomment" class="btn" type="submit" value="Отправить" name="addcomment">
     </form>
 </div>
-[/group]
+[/if]

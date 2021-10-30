@@ -1,19 +1,24 @@
 <div class="container-news">
     <div class="container-fill full-news">
-        <div class="title-full-news">{title}</div>
-        <div class="body-full-news">{body}</div>
+        <div class="title-full-news">{story.title}</div>
+        <div class="body-full-news">{story.body}</div>
         <div class="info-full-news">
-            <div class="date-news"> {date}</div>
-            <div class="autor-news">{autor}</div>        
+            <div class="date-news"> {story.date}</div>
+            <div class="autor-news">{story.autor}</div>        
         </div>
     </div>
     
-    {addcomments}
+    {load addcomments}
     
     <div class="container-fill container-comments">
-        <div class="title-comments">Комментарии ({count_comments}):</div>
+        <div class="title-comments">Комментарии ({comments.length}):</div>
         <div id="comments" class="comments">
-            {comments}
+            [for comment in comments]
+                {load comment}
+            [/for]
+            [if comments.length = 0]
+                <span>Пока нет комментариев. Вы можете стать первым.</span>
+            [/if]
         </div>
         <div class="navigation-block">{navigation}</div>
     </div>

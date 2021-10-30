@@ -1,5 +1,5 @@
 <div class="navigation">
-    [prev-link]
+    [if prev-links]
     <div class="prev-link">
         <a href="{prev-page}" class="control-navigation" title="Предыдущая страница">
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
@@ -7,9 +7,9 @@
             </svg>
         </a>
     </div>
-    [/prev-link]
+    [/if]
     <div class="pages-navigation">{pages}</div>
-    [next-link]
+    [if next-links]
     <div class="next-link">
         <a href="{next-page}" class="control-navigation" title="Следующая страница">
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
@@ -17,5 +17,5 @@
             </svg>
         </a>
     </div>
-    [/next-link]
+    [/if]
 </div>

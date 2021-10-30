@@ -54,29 +54,13 @@
             return $this->active? ($this->active - 1) * $this->count_items_on_pages: 0;
         }
 
-        public function gen_tpl( ){
+        public function gen_tpl(){
             global $tpl;
 
             if ( $this->count_pages > 1) {
 
-                $tpl->load('navigation.html');
+                $pages ='';
 
-                if($this->active > 1){
-                    $tpl->set('[prev-link]', '');
-                    $tpl->set('[/prev-link]', '');
-                    $tpl->set('{first-page}', $this->url);
-                    $tpl->set('{prev-page}', $this->active == 2? $this->url: $this->url.'page/'.($this->active - 1).'/');
-                }
-                else $tpl->set_block('prev-link', '', 's');
-
-                if($this->active < $this->count_pages){
-                    $tpl->set('[next-link]', '');
-                    $tpl->set('[/next-link]', '');
-                    $tpl->set('{next-page}', $this->url.'page/'.($this->active + 1).'/');
-                    $tpl->set('{last-page}', $this->url.'page/'.$this->count_pages.'/');
-                }
-                else $tpl->set_block('next-link', '', 's');                
-                
                 for ($i = $this->start; $i <= $this->end; $i++) {                    
                     if ($i == $this->active){
                         $pages .= '<span>'.$i.'</span>'; 
@@ -86,12 +70,18 @@
                     }
                 }
 
-                $tpl->set('{pages}', $pages);
-
-                $tpl->save('{navigation}');
-            
+                $tpl->save('navigation', 'navigation', [
+                    'prev-links' => $this->active > 1,
+                    'next-links' => $this->active < $this->count_pages,
+                    'first-page' => $this->url,
+                    'prev-page' => $this->active == 2? $this->url: $this->url.'page/'.($this->active - 1).'/',
+                    'next-page' => $this->url.'page/'.($this->active + 1).'/',
+                    'last-page'=> $this->url.'page/'.$this->count_pages.'/',
+                    'pages' => $pages,
+                ]);
+                
             }
-            else $tpl->set('{navigation}', '');
+
         }
 
     }

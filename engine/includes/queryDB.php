@@ -150,7 +150,7 @@
         /*////////////////// Query for news ////////////////////*/
 
         public function get_short_news($count, $begin=0){
-            return $this->query('
+            return $this->get_array( $this->query('
                 SELECT 
                     `news`.`id`,
                     `users`.`login` AS `autor`, 
@@ -162,7 +162,7 @@
                     INNER JOIN `users` ON `news`.`autor` = `users`.`id`
                     ORDER BY `news`.`date` DESC
                     LIMIT '.$begin.', '.$count.'
-            ;');
+            ;'));
         }
 
         public function get_full_news($id){
@@ -189,7 +189,7 @@
         }
 
         public function get_comments_by_news_id($news_id, $count, $begin=0){
-            return $this->query('
+            return $this->get_array( $this->query('
                 SELECT 
                     `comments`.`id`,
                     `users`.`name`, 
@@ -202,7 +202,7 @@
                     WHERE `comments`.`news_id` = '.$this->ecran_html($news_id).'
                     ORDER BY `comments`.`date` DESC
                     LIMIT '.$begin.', '.$count.'
-            ;');
+            ;'));
         }
 
         /*////////////////// Query for pagination  ////////////////////*/         

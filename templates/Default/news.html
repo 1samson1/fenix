@@ -1,5 +1,20 @@
 <div class="container-fill container-news">
     <div class="title-page">Новости</div>
-    <div class="news">{news}</div>
+    <div class="news">
+        [for story in news]
+        <div class="short-news">
+            <div class="title-short-news">{story.title}</div>
+            <div class="body-short-news">{story.body}</div>
+            <div class="info-short-news">
+                <div class="date-news">{filter story.date | date "d.m.Y"}</div>
+                <div class="comments-news">
+                    <a href="/news/{story.id}/#comments" class="black">{story.count_comments}</a>
+                </div>
+                <div class="autor-news">{story.autor}</div>        
+                <a href="/news/{story.id}/" class="btn">Подробнее</a>
+            </div>
+        </div>
+        [/for]
+    </div>
     <div class="navigation-block">{navigation}</div>
 </div>

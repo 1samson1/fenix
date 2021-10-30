@@ -3,7 +3,7 @@
 	require_once ENGINE_DIR.'/includes/checkFeild.php';	
 	require_once ENGINE_DIR.'/includes/errors.php';	
 
-	if(!isset($_COOKIE['user_token']) && Store::get('config.registration_on')){
+	if(!Store::isset('USER') && Store::get('config.registration_on')){
 
 		if(isset($_POST['do_reg'])){
 
@@ -24,10 +24,13 @@
 			}
 		}
 		
-		$head['title'] = 'Регистрация';
+		Store::set('title', 'Регистрация');
 
 		$tpl->save('content', 'registration');
 	}
-	else $alerts->set_error('Ошибка', 'Регистрация не доступна', 233);
+	else {
+		$alerts->set_error('Ошибка', 'Регистрация не доступна!', 233);
+		Store::set('title', 'Регистрация не доступна!');
+	}
 
 ?>

@@ -63,6 +63,8 @@
         public function get_array($query = ''){
             if ($query == '') $query = $this->query;    
 
+            $results = [];
+            
             while($row = $this->get_row()){
                 $results[]= $row ;
             }

@@ -4,9 +4,10 @@
         $tpl->save('content', 'static', [
             'static' => $static
         ]);
+        Store::set('title', $static['title']);
     }
     else {
 		$alerts->set_error('Oшибка', 'Такой страницы или файла не существует!', 404);
-        $head['title'] = 'Страница не найдена!';
+        Store::set('title', 'Страница не найдена!');
 	}
 ?>
