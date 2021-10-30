@@ -3,25 +3,25 @@
     <div class="container-header">Профиль</div>
     <div class="container-body">
         <div class="plofile-info">
-            <img src="{foto}" alt="" srcset="" class="profile-foto">
+            <img src="{filter user.foto | noavatar}" alt="" srcset="" class="profile-foto">
             <div class="profile-data">
-                <div class="profile-name">{name} {surname}</div>  
+                <div class="profile-name">{user.name} {user.surname}</div>  
                 <div class="profile-fields">
-                    <div  class="profile-field"><span>Логин:</span>{login}</div>
-                    <div  class="profile-field"><span>E-mail:</span>{email}</div>
+                    <div  class="profile-field"><span>Логин:</span>{user.login}</div>
+                    <div  class="profile-field"><span>E-mail:</span>{user.email}</div>
                 </div>
                 <div class="profile-fields">
-                    <div  class="profile-field"><span>Группа:</span>{group}</div>
+                    <div  class="profile-field"><span>Группа:</span>{user.group_name}</div>
                 </div>
                 <div class="profile-fields">
-                    <div  class="profile-field"><span>Дата регистрации:</span>{date-reg}</div>
+                    <div  class="profile-field"><span>Дата регистрации:</span>{filter user.date_reg | date "d.m.Y"}</div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-    [user]
+    [if USER.id = user.id]
     <div class="container-fill">
         <div class="container-header">Редактировать профиль</div>
         <div class="container-body">
@@ -29,21 +29,21 @@
                 <div class="title-section">Информация</div>
                 <div class="form-groups-inline">
                     <div class="form-group form-group-large">
-                        <input class="form-control" type="text" name="login" id="pf-login" required value="{login}">                        
+                        <input class="form-control" type="text" name="login" id="pf-login" required value="{user.login}">                        
                         <label for="pf-login">Логин</label>                                            
                     </div>
                     <div class="form-group form-group-large">
-                        <input class="form-control" type="email" name="email" id="pf-email" required value="{email}">                        
+                        <input class="form-control" type="email" name="email" id="pf-email" required value="{user.email}">                        
                         <label for="pf-email">E-mail</label>                                            
                     </div>
                 </div>
                 <div class="form-groups-inline">
                     <div class="form-group form-group-large">
-                        <input class="form-control" type="text" name="name" id="pf-name" value="{name}">                        
+                        <input class="form-control" type="text" name="name" id="pf-name" value="{user.name}">                        
                         <label for="pf-name">Имя</label>                                            
                     </div>
                     <div class="form-group form-group-large">
-                        <input class="form-control" type="text" name="surname" id="pf-surname" value="{surname}">                        
+                        <input class="form-control" type="text" name="surname" id="pf-surname" value="{user.surname}">                        
                         <label for="pf-surname">Фамилия</label>                                            
                     </div>        
                 </div>
@@ -89,5 +89,5 @@
             </div>
         </div>
     </div>
-    [/user]
+    [/if]
 </div>

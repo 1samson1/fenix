@@ -6,13 +6,12 @@
         public $filepath = false;
         
         public function __construct($file_name, $file_newname = false, $dir_save = false){
-			global $config;
 
 			$this->file = $_FILES[$file_name];
 			
             if(!empty($this->file['name'])){				
 
-				if($this->file['size'] < $config['max_size_upload_img']){
+				if($this->file['size'] < Store::get('config.max_size_upload_img')){
 					if($this->file['error'] == 0){
 						$type = getimagesize($this->file['tmp_name']);	
 

@@ -1,6 +1,6 @@
 <?php	
 	if(isset($_GET['exit']) and $_GET['exit'] == "all"){
-		$db->remove_token_all($_SESSION['user']['id'], $_COOKIE['user_token']);
+		$db->remove_token_all(Store::get('USER.id'), $_COOKIE['user_token']);
 	}
 	else{
 		setcookie('user_token', '', 0, '/');

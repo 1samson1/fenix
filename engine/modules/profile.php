@@ -8,7 +8,7 @@
 		/* edit user */
 
 		if(isset($_POST['do_save_profile'])){
-			if($_SESSION['user']['group_id'] == $config['admin_group'] || $_SESSION['user']['id'] == $user['id']){
+			if(Store::get('USER.id') == $user['id']){
 
 				$alerts->set_error_if(!CheckField::login($_POST['login']), 'Ошибка изменения данных пользователя', 'Некорректный логин', 201);
 
@@ -22,9 +22,9 @@
 				
 				$foto = new Upload_Image('foto', 'foto_'.$user['id'], 'avatars');
 
-				$alerts->alerts_array = array_merge($alerts->alerts_array, $foto->errors);
+				$alerts->merge($foto->errors);
 
-				if(!isset($alerts->alerts_array[0])){
+				if($alerts->is_empty()){
 
 					if($db->update_user($user['id'], $_POST['name'], $_POST['surname'], $_POST['login'], $_POST['email'], $_POST['password'], $foto->filepath, isset($_POST['delete_foto']))){
 						$alerts->set_success('Данные профиля обновлены', 'Данные профиля успешно обновлены!');
@@ -53,21 +53,11 @@
 		/* close edit user */
 
 		$head['title'] = 'Личный кабинет '.$user['login'];
-		$tpl->set('{login}',$user['login']);
-		$tpl->set('{email}', $user['email']);
-		$tpl->set('{name}', $user['name']);
-		$tpl->set('{surname}', $user['surname']);
-		$tpl->set('{date-reg}', date('d.m.Y', $user['date_reg']));
-		$tpl->set('{group}',$user['group_name']);
-
-        if($user['foto']) $foto = '/'.$user['foto'];
-        else $foto = '{TEMPLATE}/img/noavatar.png';
-        $tpl->set('{foto}', $foto);
-
-		$tpl->set('{logout_all}','/logout/?exit=all');
-
-		$tpl->load('profile.html');    
-    	$tpl->save('{content}');
+		
+    	$tpl->save('content', 'profile', [
+			'logout_all' => '/logout/?exit=all',
+			'user' => $user
+		]);
 	}
 	else {
 		$alerts->set_error('Oшибка', 'Такого пользователя не существует!', 404);

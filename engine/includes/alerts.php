@@ -1,10 +1,10 @@
 <?php 
     class Alerts{
 
-        private $alerts_array = array();
+        private $alerts = array();
 
         public function set_error($title, $text, $number){            
-            $this->alerts_array[]= array(
+            $this->alerts[]= array(
                 'title' => $title,
                 'text' => $text,
                 'type' => 'error',
@@ -19,7 +19,7 @@
         } 
 
         public function set_success($title, $text){            
-            $this->alerts_array[]= array(
+            $this->alerts[]= array(
                 'title' => $title,
                 'text' => $text,
                 'type' => 'success',    
@@ -27,11 +27,15 @@
         }
 
         public function all(){
-            return $this->alerts_array;
+            return $this->alerts;
+        }
+
+        public function merge($alerts){
+            $this->alerts = array_merge($this->alerts, $alerts);
         }
 
         public function is_empty(){
-            return !isset($this->alerts_array[0]);
+            return !isset($this->alerts[0]);
         }
 
         public function set_success_if($condition, $title, $text){  
