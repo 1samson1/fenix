@@ -30,7 +30,7 @@
 
         public function render($tpl, $data){
             $tpl = preg_replace_callback(
-                '/\[\s*([A-z]+)([^]]*)\]((?:(?R)|[^\[\]]++|[\[\]])*?)\[\s*\/\1\s*\]/s',
+                '/\[\s*([A-z]++)([^\[\]]*+)\]((?>[^\[\]]+|(?R))*?)\[\s*\/\1\s*\]/s',
                 function ($matches) use ($data){
                     return $this->replace_block(
                         $matches[1],
