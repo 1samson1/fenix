@@ -22,7 +22,7 @@
 
             $alerts->set_error_if(!CheckField::empty($_POST['password']), 'Ошибка авторизации', 'Вы не ввели пароль', 203);  
 
-            if(!isset($alerts->alerts_array[0])){
+            if($alerts->is_empty()){
 
                 $db->check_user($_POST['login']);
                 if($user = $db->get_row()){

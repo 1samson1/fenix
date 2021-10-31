@@ -12,10 +12,10 @@
         }
 
         public static function load($path,$name){
-            global $config, $tpl, $db, $head, $crumbs, $alerts;
+            global $config, $tpl, $db, $crumbs, $alerts;
 
-            define('MODULE_DIR', $path . DS . $name);
-            define('MODULE_SKIN_DIR', MODULE_DIR. 'skin' . DS);
+            define('MODULE_DIR', $path . $name . DS);
+            define('MODULE_SKIN_DIR', MODULE_DIR. 'skin');
             Store::set('MODULE_SKIN', webPath(MODULE_SKIN_DIR));
             define('MODULE_URL', '/admin/?mod='.$name);
 

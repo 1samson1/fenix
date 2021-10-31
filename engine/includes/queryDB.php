@@ -230,9 +230,9 @@
         /*////////////////// Query for adminpanel ////////////////////*/
 
         public function get_groups(){
-            return $this->query('
+            return $this->get_array( $this->query('
                 SELECT * FROM `groups`
-            ;');
+            ;'));
         }
 
         /* Module static */

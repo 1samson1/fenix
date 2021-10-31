@@ -5,41 +5,52 @@
         <div class="form-groups-w60">
             <div class="form-group">
                 <label for="admin_group">Регистрировать новых пользователей в группе:</label>
-                <select name="save_conf[reg_user_group]" class="right" id="admin_group" required>
-                    {groups}
+                <select name="reg_user_group" class="right" id="admin_group" required>
+                    [for group in groups]
+                    <option value="{group.id}" [if group.id = config.reg_user_group] selected [/if]>{group.group_name}</option>
+                    [/for]
                 </select>
             </div>
             <div class="form-group">
                 <label for="registration_on">Разрешить регистрацию пользователей на сайте:</label>
                 <div class="switch">
-                    <input type="checkbox" id="registration_on" name="save_conf[registration_on]" class="switch-input" {registration_on} required>
+                    <input type="checkbox" id="registration_on" name="registration_on" class="switch-input" [if config.registration_on] checked [/if]>
                     <label for="registration_on" class="switch-label"></label>
                 </div> 
             </div>
             <div class="form-group">
                 <label for="timezone">Часовой пояс:</label>
-                <select name="save_conf[timezone]" class="right" id="timezone" required>
-                    {timezones}                    
+                <select name="timezone" class="right" id="timezone" required>
+                    [for timezone of timezones]
+                    <option value="{key}" [if key = config.timezone] selected [/if]>{timezone}</option>
+                    [/for]                  
                 </select>
             </div>
             <div class="form-group">
                 <label for="max_size_upload_img">Максимальный размер загружаемого изображения (в байтах):</label>
-                <input type="text" id="max_size_upload_img" name="save_conf[max_size_upload_img]" class="form-control form-control-text-center" value="{max_size_upload_img}" required>
+                <input type="text" id="max_size_upload_img" name="max_size_upload_img" class="form-control" value="{config.max_size_upload_img}" required>
             </div>
             <div class="form-group">
                 <label for="template">Шаблон сайта по умолчанию:</label>
-                <select name="save_conf[template]" class="right" id="template" required>
-                    {templates}                
+                <select name="template" class="right" id="template" required>
+                    [for template in templates]
+                    <option value="{template}" [if template = config.template] selected [/if]>{template}</option>
+                    [/for]                 
                 </select>
             </div>
             <div class="form-group">
                 <label for="count_news_on_page">Количество новостей на страницу:</label>
-                <input type="text" id="count_news_on_page" name="save_conf[count_news_on_page]" class="form-control form-control-text-center" value="{count_news_on_page}" required>
+                <input type="text" id="count_news_on_page" name="count_news_on_page" class="form-control" value="{config.count_news_on_page}" required>
             </div>
             <div class="form-group">
                 <label for="count_comments_on_page">Количество комментариев на страницу:</label>
-                <input type="text" id="count_comments_on_page" name="save_conf[count_comments_on_page]" class="form-control form-control-text-center" value="{count_comments_on_page}" required>
+                <input type="text" id="count_comments_on_page" name="count_comments_on_page" class="form-control" value="{config.count_comments_on_page}" required>
             </div>
+            <div class="form-group">
+                <label for="who_send_mail">Системный E-Mail адрес администратора:</label>
+                <input type="text" id="who_send_mail" name="who_send_mail" class="form-control" value="{config.who_send_mail}" required>
+            </div>
+            
             <div class="panel-footer">
                 <input type="submit" value="Сохранить" class="btn" name="save" required>
             </div>

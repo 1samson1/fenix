@@ -18,6 +18,19 @@
             $length
         );
     }
+
+    function debug_trace($value){
+        echo "BEGIN TRACE <br>";
+        foreach(debug_backtrace() as $trace){
+            echo '<pre>';
+            echo '<b>File: '.$trace['file'].'</b> ';
+            echo ' Func: '.$trace['function'].'';
+            echo ' Line: '.$trace['line'].'';
+            echo '</pre>';
+        }
+        echo "END TRACE <br>";
+        debug($value);
+    }
     
     function debug($value){
         echo '<pre>';

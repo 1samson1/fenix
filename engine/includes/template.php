@@ -82,12 +82,21 @@
                     return false;
                 
                 case 'for':
-                    return $this->for_in(
-                        $this->split_dot($data, $params[2]),
-                        $params[0],
-                        $body,
-                        $data
-                    );
+                    if($params[1] == "in")
+                        return $this->for_in(
+                            $this->split_dot($data, $params[2]),
+                            $params[0],
+                            $body,
+                            $data
+                        );
+
+                    if($params[1] == "of")
+                        return $this->for_of(
+                            $this->split_dot($data, $params[2]),
+                            $params[0],
+                            $body,
+                            $data
+                        );
 
                 case 'block':
                     $this->set_block($params[0], $body);
@@ -160,6 +169,22 @@
                 case 'notequal':
                     return $first == false;
             }
+        }
+
+        public function for_of($array, $value, $body, $data){
+            $tpl = '';
+
+            foreach($array as $key => $elm){
+                $tpl .= $this->render(
+                    $body,
+                    array_merge($data, array( 
+                        $value => $elm,
+                        'key' => $key
+                    ))
+                );
+            }
+
+            return $tpl;
         }
 
         public function for_in($array, $value, $body, $data){

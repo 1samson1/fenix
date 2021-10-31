@@ -192,7 +192,7 @@ header> .container{
 /* MAIN ======================================= */
 
 main{
-    margin: auto 0;
+    /* margin: auto 0; */
 }
 
 /* PANELS  ++++++++++++++++++++++++++++++++++++++ */
@@ -258,6 +258,7 @@ table.list th, table.list td{
 
 .login-panel{
     margin: 0 auto;
+    margin-top: 10vh;
     max-width: 400px;
 }
 
