@@ -1,20 +1,4 @@
 <?php
-    $tpl->load('base.html');
-
-    if(!isset($tpl->data['{content}']))
-        $tpl->set('{content}','');
-
-    $tpl->set('{head}', $head);
-
-    $tpl->set('{SKIN}', ADMIN_URL_STATIC.'/skin');
-
-    if(!$_SESSION['user']['is_admin'] ){
-        $tpl->set_block('admin','');
-    }
-    else{
-        $tpl->set('[admin]', '');
-        $tpl->set('[/admin]', '');
-    }
-
-    $tpl->print();
+    $tpl->save('head', 'head.html', [], ADMIN_DIR . 'modules' . DS);
+    $tpl->print('base');
 ?>

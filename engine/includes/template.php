@@ -128,7 +128,7 @@
                 case 'filter':
                     return $this->filter(
                         $params[3],
-                        $this->split_dot($data, $params[1]),
+                        $this->split_or($data, $params[1]),
                         array_slice($params, 4)
                     );
 

@@ -20,7 +20,7 @@
                         </svg>
                         <span>Просмотр сайта</span>
                     </a>
-                    {user-panel}
+                    {load userpanel}
                 </div>
             </div>
         </div>
@@ -30,11 +30,11 @@
             <div class="alerts">
                 {alerts}
             </div>
-            [admin]
+            [if USER]
             <div class="breadcrumbs">
                 {breadcrumbs}
             </div>
-            [/admin]
+            [/if]
             <div class="content">
                 {content}
             </div>

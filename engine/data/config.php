@@ -4,8 +4,6 @@
     return [
 
         'host_url' => (isset($_SERVER['HTTPS']) ? 'https' : 'http')."://".$_SERVER['HTTP_HOST'],
-        
-        'admin_group' => 1,
 
         'reg_user_group' => 2,
 		

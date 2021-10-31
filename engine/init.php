@@ -20,16 +20,8 @@
     
     require_once ENGINE_DIR.'includes/template.php';// Подключает файл класса шаблонизатора
 
-    $tpl = new Template(ROOT_DIR . 'templates' . DS . Store::get('config.template')); // Создание экземпляра шаблонизатора
-
-    Store::set('TEMPLATE', webPath($tpl->dir));
-    
-    define('TEMPLATE_DIR', $tpl->dir); // Задание директории шаблонов
-
     require_once ENGINE_DIR.'includes/alerts.php';// Подключает файл класса уведомлений
 
-    $alerts = new Alerts();
-
-    require_once ENGINE_DIR.'engine.php'; // Подключает файл движка
+    $alerts = new Alerts();    
     
 ?>

@@ -1,4 +1,4 @@
-[admin]
+[if USER]
 <div class="opener user-dock">
     <div class="menu-button">
         <div class="menu-icon-wrapper" tabindex="0">                                
@@ -8,14 +8,14 @@
     <div class="links links-right">
         <div class="opener">
             <a id="user-panel" class="topmenu__link" tabindex="1">
-                <img src="{foto}" alt="avatar" srcset="">
-                <span>{login}</span>
+                <img src='{filter USER.foto | noavatar}' alt="avatar" srcset="">
+                <span>{USER.login}</span>
             </a>
             <div class="user-options">
-                <a href="{profile-link}" class="user-option topmenu__link">Профиль</a>
-                <a href="?action=logout" class="user-option topmenu__link">Выход</a>
+                <a href="/profile/{USER.login}/" class="user-option topmenu__link">Профиль</a>
+                <a href='{filter "logout" | linkget "action"}' class="user-option topmenu__link">Выход</a>
             </div>       
         </div>
     </div>
 </div>
-[/admin]
+[/if]
