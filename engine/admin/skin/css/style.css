@@ -562,7 +562,8 @@ footer> .container{
 .form-groups-w20 .form-group{
     display: flex;
     align-items: center;
-    padding: 5px 10px;    
+    padding: 5px 10px;
+    border-bottom: 1px solid #ddd; 
 }
 
 .form-groups-w20 .form-group>label:nth-child(1){

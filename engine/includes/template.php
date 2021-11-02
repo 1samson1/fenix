@@ -30,7 +30,7 @@
 
         public function render($tpl, $data){
             $tpl = preg_replace_callback(
-                '/\[\s*([A-z]++)([^\[\]]*+)\]((?>[^\[\]]+|(?R))*?)\[\s*\/\1\s*\]/s',
+                '/\[\s*([A-z]++)([^\[\]]*+)\]((?>[^\[\]]+|(?R)|[\[\]])*?)\[\s*\/\1\s*\]/s',
                 function ($matches) use ($data){
                     return $this->replace_block(
                         $matches[1],
@@ -64,13 +64,11 @@
 
                     if(isset($params[1])){
                         $operator = $params[1];
+                    } elseif(strpos($params[0], '!') === false){
+                        $operator = 'equal';
                     } else {
-                        if(strpos($params[0], '!') === false){
-                            $operator = 'equal';
-                        } else {
-                            $params[0] = substr($params[0],1);
-                            $operator = 'notequal';
-                        }
+                        $params[0] = substr($params[0], 1);
+                        $operator = 'notequal';
                     }
 
                     $first = isset($params[0]) ? $this->split_or($data, $params[0]) : false;

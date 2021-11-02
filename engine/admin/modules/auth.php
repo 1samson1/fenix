@@ -27,7 +27,7 @@
                 $db->check_user($_POST['login']);
                 if($user = $db->get_row()){
 
-                    if(true){
+                    if( (bool) $user['allow_adminpanel'] ){
                         if (CheckField::confirm_hash($_POST['password'], $user['password'])) {
                             unset($user['password']);
                             $token = $db->hash(time());
@@ -51,7 +51,7 @@
     else{
         $db->get_user_by_token($_COOKIE['user_token']);
         if($user = $db->get_row()){
-            if(true){
+            if( (bool) $user['allow_adminpanel'] ){
                 Store::set('USER', $user);
             }
             else logout();

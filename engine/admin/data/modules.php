@@ -13,22 +13,28 @@
             "description" => "Создание и редактирование страниц, которые как правило редко изменяются и имеют постоянный адрес",
         ),
         array(
+            "name" => "groups",
+            "verbose_name" => "Группы пользователей",
+            "image" => "skin/img/icon.png",
+            "description" => "Создание и управление различными группами пользователей на сайте, назначение прав доступа для этих групп",
+        ),
+        array(
             "name" => "users",
             "verbose_name" => "Пользователи",
             "image" => "skin/img/icon.png",
             "description" => "Управление пользователями на сайте ,создание и редактирование их профилей",
         ),
         array(
-            "name" => "comments",
-            "verbose_name" => "Комментарии",
-            "image" => "skin/img/icon.png",
-            "description" => "Инструменты для быстрого и удобного модерирования комментариев",
-        ),
-        array(
             "name" => "news",
             "verbose_name" => "Новости",
             "image" => "skin/img/icon.png",
             "description" => "Создание и редактирование новостей на сайте",
+        ),
+        array(
+            "name" => "comments",
+            "verbose_name" => "Комментарии",
+            "image" => "skin/img/icon.png",
+            "description" => "Инструменты для быстрого и удобного модерирования комментариев",
         ),
         array(
             "name" => "specialties",

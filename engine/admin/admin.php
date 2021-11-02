@@ -18,22 +18,26 @@
 
     $crumbs = new BreadCrumbs('Главная', ADMIN_URL);
 
+    if(!Store::isset('USER')){
 
-    if(!Store::isset('USER') ){
         $tpl->save('content', 'login');
-    }
-    else{
 
-        if (isset($_GET['mod']) and Modules::check($_GET['mod'], $modules)) {
+    }
+    elseif (isset($_GET['mod']) and Modules::check($_GET['mod'], $modules)) {
+
+        if( (bool) Store::get('USER.allow_'.$_GET['mod']) ){
 
             Modules::load(ADMIN_DIR . 'modules' . DS , $_GET['mod']);
-            
-        } else{
-            
-            require_once ADMIN_DIR . 'modules/main.php';
-    
+
         }
-    }
+        else showError('Ошибка доступа!', 'У вас не достаточно прав!', ADMIN_URL);
+
+            
+    } else{
+        
+        require_once ADMIN_DIR . 'modules/main.php';
+
+    }    
 
     /* LOAD BREADCRUMBS TEMPLATE ======================================== */
 

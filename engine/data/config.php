@@ -21,6 +21,6 @@
 
         'count_comments_on_page' => 20,
 
-        'who_send_mail' => "admin@med.su",
+        'who_send_mail' => 0,
     ];
 ?>

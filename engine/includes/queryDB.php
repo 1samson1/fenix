@@ -14,7 +14,7 @@
         
         public function check_user($login){
             return $this->query('
-                SELECT `users`.*, `groups`.`group_name`, `groups`.`id` AS `group_id` FROM `users`
+                SELECT `groups`.*, `users`.* FROM `users`
                     INNER JOIN `groups` ON `users`.`group_id` = `groups`.`id` 
                     WHERE `login` = "'.$this->ecran_html($login).'"
             ;');
@@ -55,7 +55,7 @@
 
         public function get_user_by_token($token){
             return $this->query('
-                SELECT `users`.*, `groups`.`group_name`, `groups`.`id` AS `group_id` FROM `user_tokens` 
+                SELECT `groups`.*, `users`.* FROM `user_tokens` 
                     INNER JOIN `users` ON `user_tokens`.`user_id` = `users`.`id`
                     INNER JOIN `groups` ON `users`.`group_id` = `groups`.`id`
                     WHERE `token` = "'.$this->ecran_html( $token).'"
@@ -228,6 +228,8 @@
         }
 
         /*////////////////// Query for adminpanel ////////////////////*/
+
+        /* Module groups */
 
         public function get_groups(){
             return $this->get_array( $this->query('

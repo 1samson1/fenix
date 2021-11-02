@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Окт 30 2021 г., 21:34
+-- Время создания: Ноя 02 2021 г., 15:58
 -- Версия сервера: 10.3.13-MariaDB-log
 -- Версия PHP: 7.3.9
 
@@ -93,16 +93,27 @@ INSERT INTO `doctors` (`id`, `name`, `specialty_id`, `foto`, `kabinet`, `mon`, `
 
 CREATE TABLE `groups` (
   `id` int(11) UNSIGNED NOT NULL,
-  `group_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `group_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cant_detete` tinyint(1) NOT NULL,
+  `allow_adminpanel` tinyint(1) NOT NULL,
+  `allow_settings` tinyint(1) NOT NULL,
+  `allow_static` tinyint(1) NOT NULL,
+  `allow_groups` tinyint(1) NOT NULL,
+  `allow_users` tinyint(1) NOT NULL,
+  `allow_news` tinyint(1) NOT NULL,
+  `allow_comments` tinyint(1) NOT NULL,
+  `allow_specialties` tinyint(1) NOT NULL,
+  `allow_doctors` tinyint(1) NOT NULL,
+  `allow_recdoc` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `groups`
 --
 
-INSERT INTO `groups` (`id`, `group_name`) VALUES
-(1, 'Администраторы'),
-(2, 'Пользователи');
+INSERT INTO `groups` (`id`, `group_name`, `cant_detete`, `allow_adminpanel`, `allow_settings`, `allow_static`, `allow_groups`, `allow_users`, `allow_news`, `allow_comments`, `allow_specialties`, `allow_doctors`, `allow_recdoc`) VALUES
+(1, 'Администраторы', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(2, 'Пользователи', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -282,7 +293,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `group_id`, `login`, `password`, `email`, `name`, `surname`, `foto`, `date_reg`) VALUES
-(12, 1, 'Admin', '$2y$10$lNKtwI2lsEGHwG79QuVFHODJJMaBhH2Vz8dyCRibBMI.faekpPzGO', 'ya.ya@ya.ru', 'Админ', 'Админ', 'uploads/avatars/foto_12.png', 1575825604),
+(12, 1, 'Admin', '$2y$10$W8fdzabN0lgIk1PvPjDYD.XVz7Nv1owxm6vCVsz8ELVygp5iQbg3K', 'ya.ya@ya.ru', 'Админ', 'Админ', 'uploads/avatars/foto_12.png', 1575825604),
 (13, 2, 'tyt', '$2y$10$OgfHEu39yMaikUhK0.vUd.gXGZZB6VgQsvX0w2NrCD6GSLAVTabGW', 'rgdf@f', '', '', '', 1575825604),
 (14, 2, 'hypop', '$2y$10$CKfQJ7FZ4xpTJH4YXFVMeOuqVrv3Yj/KJf2cXgopZcWKeSnbFMBj6', 'hty@tr', '', '', '', 1575825604),
 (15, 2, 'test2', '$2y$10$trgPL1fnnglSY3djNwS5wuI55DDOo5Sk.ZLU4Q/MxCiGVU2duyqwy', 'test@test.test', 'Тестовый', 'Тестов', '', 1575825604),
@@ -339,7 +350,13 @@ INSERT INTO `user_tokens` (`id`, `user_id`, `token`, `date`) VALUES
 (106, 56, '$2y$10$YqypzM0cUDfUtZE7V635SePRRh02U6pVVYyoQdk5mIWkIIsPkpOcW', 1621457289),
 (125, 55, '$2y$10$hkGkZJSF68Bw0pFk3N38.uo8xHuHhESeaqYx.StvJMI6GXZIigh2C', 1622035286),
 (142, 47, '$2y$10$yfusvBP5Ta1TiKzySCKCMesSVc7NXqjjCysVHbs0hJGmgRuhyKM6a', 1622989472),
-(190, 12, '$2y$10$8xvZqlm25umwWaeKAHHDGOrluIZ0xPuCyli2kOOqALVh4TUOLxfWm', 1635610745);
+(190, 12, '$2y$10$8xvZqlm25umwWaeKAHHDGOrluIZ0xPuCyli2kOOqALVh4TUOLxfWm', 1635610745),
+(193, 12, '$2y$10$TBGsO3sOy7UhZ4FYI1trY.8ZMLd84MLqW4IPbSIU3LmcicVGOUr/i', 1635677691),
+(196, 12, '$2y$10$664dzuZT6fiUTEeVdKlZK.5SoY7Kn/m7c0jMP3JYjlEVyWUctMbpG', 1635682149),
+(197, 12, '$2y$10$ZoEWtzlynfy3NOWZHQnFlOG7hsNxvmE9NtjOypy58pMlVZATTYxAe', 1635682234),
+(201, 12, '$2y$10$XYyb4mm9vKrb6Zpd/A4VIOR7WbfqrQah3FV1f1MfucCl.HAlWtXFa', 1635693514),
+(205, 12, '$2y$10$ONV7t2q6kBuzAWuThXXxR.sxW7m05VvC0Waxblq6aS0ifrEWerAdy', 1635781727),
+(209, 12, '$2y$10$0X4JG1S6MrWAulGKL0jc6.INn5OktQvpM5TKOeFwwyiTFfjCQbF1a', 1635854007);
 
 --
 -- Индексы сохранённых таблиц
@@ -475,7 +492,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `user_tokens`
 --
 ALTER TABLE `user_tokens`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

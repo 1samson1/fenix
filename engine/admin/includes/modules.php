@@ -18,6 +18,7 @@
             define('MODULE_SKIN_DIR', MODULE_DIR. 'skin');
             Store::set('MODULE_SKIN', webPath(MODULE_SKIN_DIR));
             define('MODULE_URL', '/admin/?mod='.$name);
+            Store::set('MODULE_URL', MODULE_URL);
 
             require_once ($path . DS . $name. DS . 'init.php');
         }

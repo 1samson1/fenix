@@ -17,7 +17,7 @@
 
         Store::set('title', $title);
 
-        $tpl->save('content', 'success', [
+        $tpl->save('content', 'error', [
             
             'title'=> $title,
             'text'=> $text,
@@ -30,7 +30,7 @@
 
         Store::set('title', $title);
 
-        $tpl->save('content', 'success', [
+        $tpl->save('content', 'confirm', [
             
             'title'=> $title,
             'text'=> $text,

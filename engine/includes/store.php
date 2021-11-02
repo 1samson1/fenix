@@ -6,10 +6,6 @@
 
         public static function set($key, $value){
             
-            if(isset(self::$vars[$key])){
-                return new Exception("This key is exist ($key)");
-            }
-
             self::$vars[$key] = $value;
 
             return $value;
