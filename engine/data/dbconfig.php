@@ -9,5 +9,5 @@
 
     define("DB_NAME","medicine");
 
-    $db = new QueryDB();
+    $db = new QueryDB(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 ?>

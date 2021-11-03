@@ -1,4 +1,5 @@
 <?php
+
     class DataBase {
         
         public $error;
@@ -7,16 +8,20 @@
         public $query;
         public $queries = null;
 
-        public function __construct(){
-            $this->connect = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME) or die("Нет подключения к БД");
+        public function __construct($host, $user, $password, $db_name){
+            $this->connect = mysqli_connect($host, $user, $password, $db_name) or die("Нет подключения к БД");
 			$this->set_charset();
         }  
         
-        public function query($query){            
+        public function query($query){
             $this->query = mysqli_query($this->connect,$query);
             $this->error = mysqli_error($this->connect);
 			$this->error_num = mysqli_errno($this->connect);
             return $this->query;
+        }
+
+        public function table($table){
+            return new Query($this, $table);
         }
         
         public function multi_query($query) {
@@ -28,7 +33,7 @@
             $this->error = mysqli_error($this->connect);
             $this->error_num = mysqli_errno($this->connect);
         }
-
+        
         public function add_query($query) {
             $this->queries .= $query;
         }
@@ -79,6 +84,13 @@
             return password_hash($value, PASSWORD_DEFAULT);
         }
 
+        public function valid_value($value){
+            if(is_bool($value))
+                return $this->bool_to_sql($value);
+            
+            return $this->ecran($value);
+        }
+
         public function ecran($value){
             return mysqli_real_escape_string($this->connect, stripslashes($value));
         }
@@ -101,6 +113,149 @@
 		
 		public function __destruct(){
             mysqli_close($this->connect);
+        }
+    }
+
+    class Query {
+        private $db;
+        private $table;
+        private $_where = null;
+        private $_orderby = null;
+        private $_selectable = '*';
+        private $_offset = null;
+        private $_limit = null;
+        private $_joins = null;
+
+        public function __construct($db, $table) {
+            $this->db = $db;
+            $this->table = $table;
+        }
+
+        public function insert ($data){
+            $properties = '';
+            $values = '';
+            foreach($data as $property => $value){
+                if($properties){
+                    $properties .= ', ';
+                    $values .= ', ';
+                }
+
+                $properties .= $property;
+                $values .= '"' .  $this->db->valid_value($value) . '"';
+            }
+
+            return $this->db->query('INSERT INTO ' .$this->table .' ('. $properties . ') VALUES (' . $values . ');');
+        }
+
+        public function update($data){
+            $values = '';
+            foreach($data as $property => $value){
+                if($values)
+                    $values .= ', ';
+                
+                $values .= $property.' = "' . $this->db->valid_value($value) . '"';
+            }
+
+            return $this->db->query('UPDATE '.$this->table .' SET ' . $values . $this->_where . ';');
+        }
+
+        public function delete(){
+            return $this->db->query('DELETE FROM ' . $this->table . $this->_where . ';');
+        }
+        
+        public function get(){
+            return $this->db->get_array(
+                $this->db->query( $this->_constructSelect())
+            );
+        }
+
+        public function first(){
+            return $this->db->get_row(
+                $this->db->query( $this->_constructSelect())
+            );
+        }
+
+        public function truncate(){
+            return $this->db->query('TRUNCATE TABLE ' .$this->table. ';');
+        }
+
+        public function select($columns = ['*']){
+            $columns = is_array($columns) ? $columns : func_get_args();
+
+            foreach($columns as $value){
+                if($this->_selectable == '*')
+                    $this->_selectable = '';
+                else
+                    $this->_selectable .= ', ';
+
+                
+                $this->_selectable .= $value;
+            }
+
+            return $this;
+        }
+
+        public function where($column, $operator, $value, $boolean = 'and'){
+            if (!$this->_where){
+                $this->_where = ' WHERE ';
+            } else {
+                $this->_where .=  ' '.strtoupper($boolean).' ';
+            }
+
+            $this->_where .= $column . ' ' . $operator . ' "'.$this->db->valid_value($value).'"';
+
+            return $this;
+        }
+        
+        public function orderBy($column, $sort = 'asc'){
+            if (!$this->_orderby){
+                $this->_orderby = ' ORDER BY ';
+            } else {
+                $this->_orderby .=  ', ';
+            }
+
+            $this->_orderby .= $column . ' ' . strtoupper($sort);
+
+            return $this;
+        }
+
+        public function join($table, $first, $operator = null, $second = null, $type = 'inner'){
+            $this->_joins .= ' '.strtoupper($type) . ' JOIN ' . $table . ' ON ' . $first . ' ' . $operator . ' ' . $second;
+        
+            return $this;
+        }
+
+        public function leftJoin($table, $first, $operator = null, $second = null){
+            return $this->join($table, $first, $operator, $second, 'left');
+        }
+
+        public function rightJoin($table, $first, $operator = null, $second = null){
+            return $this->join($table, $first, $operator, $second, 'right');
+        }
+
+        public function offset($value){
+            $value = max(0, $value);
+
+            $this->_offset = ' OFFSET ' . $value;
+
+            return $this;
+        }
+
+        public function limit($value){
+            $value = max(0, $value);
+
+            $this->_limit = ' LIMIT ' . $value;
+
+            return $this;
+        }
+
+        private function _constructSelect(){
+            return  'SELECT ' . $this->_selectable . ' FROM ' . $this->table 
+                . $this->_joins 
+                . $this->_where 
+                . $this->_orderby 
+                . $this->_limit 
+                . ($this->_limit ? $this->_offset : null);
         }
     }
 ?>
