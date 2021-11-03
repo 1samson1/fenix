@@ -91,10 +91,8 @@
         $tpl->save('content', 'addnew', [], MODULE_SKIN_DIR);
     }
     else{
-
         $tpl->save('content', 'main', [
             'groups' => $db->table('groups')->orderBy('allow_adminpanel', 'desc')->get()
         ], MODULE_SKIN_DIR);
-
     }
 ?>

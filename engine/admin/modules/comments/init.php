@@ -1,13 +1,10 @@
 <?php
 
-    $crumbs->add($head['title'] = 'Комментарии', MODULE_URL);
-
-    require_once ENGINE_DIR.'/includes/functions.php';
     require_once ENGINE_DIR.'/includes/checkFeild.php';
     
-    if($_GET['action'] == 'delete'){
+    if(isset($_GET['action']) and $_GET['action'] == 'delete'){
 
-        if($db->remove_comment($_GET['delete'])){
+        if($db->table('comments')->where('id', '=', $_GET['delete'])->delete()){
             showSuccess('Комментарий удалён!','Выбраный комментарий успешно удалён!', MODULE_URL);
         }
         else showError('Ошибка удаления!', 'Неизвестная ошибка!', MODULE_URL);
@@ -20,29 +17,14 @@
     }    
     else{
         
-        $tpl->load('main.html', MODULE_SKIN_DIR);
-    
-        $db->get_comments();
-        
-        $tpl->set_repeat_block('comments');
-        
-        while($comment = $db->get_row()){
-        
-            $tpl->set('{autor}', $comment['autor']);
-            $tpl->set('{news}', $comment['news']);
-            $tpl->set('{url-news}', '/news/'.$comment['news_id'].'/');            
-            $tpl->set('{text}', $comment['text']);
-            $tpl->set('{date}', date('Y.m.d H:i',$comment['date']));
-            $tpl->set('{delete-link}', addGetParam('delete', $comment['id']));
-            
-    
-            $tpl->copy_repeat_block();
-            
-        }
-    
-        $tpl->save_repeat_block();
-    
-        $tpl->save('{content}');
+        $tpl->save('content', 'main', [
+            'comments' => $db->table('comments')
+                ->select('comments.*', 'news.title as news', 'users.login as autor')
+                ->join('users', 'comments.user_id', '=' , 'users.id')
+                ->join('news', 'comments.news_id', '=' , 'news.id')
+                ->orderBy('date', 'desc')
+                ->get()
+        ], MODULE_SKIN_DIR);
 
     }
 
