@@ -1,7 +1,5 @@
 <?php 
     
-    $crumbs->add(Store::set('title', 'Настройки системы') , MODULE_URL);
-
     require_once MODULE_DIR.'/save_conf.php';
     require_once MODULE_DIR.'/timezones.php';
     require_once ENGINE_DIR.'/includes/files.php';

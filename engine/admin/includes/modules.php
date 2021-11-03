@@ -3,15 +3,10 @@
     class Modules{
 
         public static function check($name, $modules){
-            foreach($modules as $module){
-                if($module['name'] == $name){
-                    return true;
-                }
-            }
-            return false;
+            return array_key_exists($name, $modules);
         }
 
-        public static function load($path,$name){
+        public static function load($path, $name, $modules){
             global $config, $tpl, $db, $crumbs, $alerts;
 
             define('MODULE_DIR', $path . $name . DS);
@@ -19,6 +14,7 @@
             Store::set('MODULE_SKIN', webPath(MODULE_SKIN_DIR));
             define('MODULE_URL', '/admin/?mod='.$name);
             Store::set('MODULE_URL', MODULE_URL);
+            $crumbs->add(Store::set('title', $modules[$name]['verbose_name']) , MODULE_URL);
 
             require_once ($path . DS . $name. DS . 'init.php');
         }

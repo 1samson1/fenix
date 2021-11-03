@@ -1,7 +1,5 @@
 <?php
 
-    $crumbs->add(Store::set('title', 'Группы пользователей'), MODULE_URL);
-
     require_once ENGINE_DIR.'/includes/checkFeild.php';
 
     if(isset($_GET['action']) and $_GET['action'] == 'delete'){

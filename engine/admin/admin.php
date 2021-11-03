@@ -27,7 +27,7 @@
 
         if( (bool) Store::get('USER.allow_'.$_GET['mod']) ){
 
-            Modules::load(ADMIN_DIR . 'modules' . DS , $_GET['mod']);
+            Modules::load(ADMIN_DIR . 'modules' . DS , $_GET['mod'], $modules);
 
         }
         else showError('Ошибка доступа!', 'У вас не достаточно прав!', ADMIN_URL);
