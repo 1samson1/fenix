@@ -14,7 +14,7 @@
                 <div class="form-group">
                     <label for="registration_on">Разрешить регистрацию пользователей на сайте:</label>
                     <div class="switch">
-                        <input type="checkbox" id="registration_on" name="registration_on" class="switch-input" [if config.registration_on] checked [/if]>
+                        <input type="checkbox" id="registration_on" name="registration_on" class="switch-input" {filter config.registration_on | checked}>
                         <label for="registration_on" class="switch-label"></label>
                     </div> 
                 </div>

@@ -211,16 +211,22 @@
                     return addGetParam($this->wo_quotes($params[0]), $value);
                 
                 case 'noavatar':
-                    if($value){
+                    if($value)
                         return '/'.$value;
-                    }
+                    
                     return webPath($this->dir . DS . 'img' . DS. 'noavatar.png');
 
                 case 'noimage':
-                    if($value){
+                    if($value)
                         return '/'.$value;
-                    }
+                    
                     return webPath($this->dir . DS . 'img' . DS. 'noimage.png');
+                
+                case 'checked':
+                    if($value)
+                        return 'checked';
+
+                    return '';
             }
         }
 

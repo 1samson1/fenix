@@ -5,7 +5,7 @@
         public $error;
         public $error_num;
         public $connect;
-        public $query;
+        public $result;
         public $queries = null;
 
         public function __construct($host, $user, $password, $db_name){
@@ -14,10 +14,10 @@
         }  
         
         public function query($query){
-            $this->query = mysqli_query($this->connect,$query);
+            $this->result = mysqli_query($this->connect,$query);
             $this->error = mysqli_error($this->connect);
 			$this->error_num = mysqli_errno($this->connect);
-            return $this->query;
+            return $this->result;
         }
 
         public function table($table){
@@ -50,18 +50,18 @@
         }
 
         public function num_rows($query = '') {
-            if ($query == '') $query = $this->query;
+            if ($query == '') $query = $this->result;
     
             return mysqli_num_rows($query);
         }
 
         public function get_row($query = '') {
-            if ($query == '') $query = $this->query; 
+            if ($query == '') $query = $this->result; 
             return mysqli_fetch_assoc($query);
         } 
 
         public function get_row_noassoc($query = '') {
-            if ($query == '') $query = $this->query;    
+            if ($query == '') $query = $this->result;    
             return mysqli_fetch_row($query);
         } 
 
@@ -70,7 +70,7 @@
         }
 
         public function get_array($query = ''){
-            if ($query == '') $query = $this->query;    
+            if ($query == '') $query = $this->result;    
 
             $results = [];
             
