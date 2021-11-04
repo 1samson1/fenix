@@ -4,9 +4,7 @@
     define("ENGINE_DIR", dirname(API_DIR));
     define('ROOT_DIR', dirname(ENGINE_DIR));
 
-    header('Content-Type: application/json');  
-
-    session_start();
+    header('Content-Type: application/json');      
     
     require_once ENGINE_DIR.'/data/config.php'; // Подключаем глобальный конфиг
     

@@ -5,17 +5,19 @@
             <div class="form-groups-w20">
                 <div class="form-group">
                     <label for="add_name">ФИО:</label>
-                    <input type="text" name="name" id="add_name" class="form-control form-control-large" value="{name}" required>
+                    <input type="text" name="name" id="add_name" class="form-control form-control-large" value="{doctor.name}" required>
                 </div>
                 <div class="form-group">
                     <label for="add_specialty">Специальность:</label>
                     <select name="specialty" class="right wide" id="add_specialty" required>
-                        {specialties}
+                        [for specialty in specialties]
+                        <option value="{specialty.id}" [if specialty.id = doctor.specialty_id] selected [/if]>{specialty.title}</option>
+                        [/for]
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="add_kabinet">Кабинет:</label>
-                    <input type="text" name="kabinet" id="add_kabinet" class="form-control form-control-large" value="{kabinet}" required>
+                    <input type="text" name="kabinet" id="add_kabinet" class="form-control form-control-large" value="{doctor.kabinet}" required>
                 </div>   
                 <div class="form-group">
                     <label for="add_kabinet">График работы:</label>
@@ -24,7 +26,7 @@
                             <label for="add_mon">Понедельник:</label>
                             <div class="form-control-large">
                                 <label class="checkbox">
-                                    <input type="checkbox" class="check-input" id="add_mon" name="mon" {mon}>
+                                    <input type="checkbox" class="check-input" id="add_mon" name="mon" {filter doctor.mon | checked}>
                                     <span class="check"></span>    
                                     <span class="label-check"></span>                        
                                 </label>
@@ -34,7 +36,7 @@
                             <label for="add_tue">Вторник:</label>
                             <div class="form-control-large">
                                 <label class="checkbox">
-                                    <input type="checkbox" class="check-input" id="add_tue" name="tue" {tue}>
+                                    <input type="checkbox" class="check-input" id="add_tue" name="tue" {filter doctor.tue | checked}>
                                     <span class="check"></span>  
                                     <span class="label-check"></span>                             
                                 </label>
@@ -44,7 +46,7 @@
                             <label for="add_wed">Среда:</label>
                             <div class="form-control-large">
                                 <label class="checkbox">
-                                    <input type="checkbox" class="check-input" id="add_wed" name="wed" {wed}>
+                                    <input type="checkbox" class="check-input" id="add_wed" name="wed" {filter doctor.wed | checked}>
                                     <span class="check"></span>
                                     <span class="label-check"></span>                               
                                 </label>
@@ -54,7 +56,7 @@
                             <label for="add_thu">Четверг:</label>
                             <div class="form-control-large">
                                 <label class="checkbox">
-                                    <input type="checkbox" class="check-input" id="add_thu" name="thu" {thu}>
+                                    <input type="checkbox" class="check-input" id="add_thu" name="thu" {filter doctor.thu | checked}>
                                     <span class="check"></span>
                                     <span class="label-check"></span>                               
                                 </label>
@@ -64,7 +66,7 @@
                             <label for="add_fri">Пятница:</label>
                             <div class="form-control-large">
                                 <label class="checkbox">
-                                    <input type="checkbox" class="check-input" id="add_fri" name="fri" {fri}>
+                                    <input type="checkbox" class="check-input" id="add_fri" name="fri" {filter doctor.fri | checked}>
                                     <span class="check"></span> 
                                     <span class="label-check"></span>                              
                                 </label>
@@ -74,7 +76,7 @@
                             <label for="add_sat">Суббота:</label>
                             <div class="form-control-large">
                                 <label class="checkbox">
-                                    <input type="checkbox" class="check-input" id="add_sat" name="sat" {sat}>
+                                    <input type="checkbox" class="check-input" id="add_sat" name="sat" {filter doctor.sat | checked}>
                                     <span class="check"></span> 
                                     <span class="label-check"></span>                              
                                 </label>
@@ -84,7 +86,7 @@
                             <label for="add_sun">Воскресенье:</label>
                             <div class="form-control-large">
                                 <label class="checkbox">
-                                    <input type="checkbox" class="check-input" id="add_sun" name="sun" {sun}>
+                                    <input type="checkbox" class="check-input" id="add_sun" name="sun" {filter doctor.sun | checked}>
                                     <span class="check"></span>
                                     <span class="label-check"></span>                               
                                 </label>
@@ -98,13 +100,13 @@
                         <div class="form-control-large">
                             <input type="file" class="form-control form-control-large" name="foto" accept="image/*">
                         </div>                        
-                        <img src="{foto}" class="cicle" alt="">
+                        <img src="{filter doctor.foto | noavatar}" class="cicle" alt="">
                     </div>
                 </div> 
             </div>            
         </div>
         <div class="panel-footer">
-            <input type="submit" class="btn" name="edit_doctor" value="Сохранить">
+            <input type="submit" class="btn" name="edit" value="Сохранить">
         </div>
     </form>
 </div>

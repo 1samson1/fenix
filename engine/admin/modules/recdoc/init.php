@@ -1,29 +1,15 @@
 <?php
-    
-    $crumbs->add($head['title'] = 'Записи на приём к врачам', MODULE_URL);
 
-    require_once ENGINE_DIR.'/includes/functions.php';
     require_once ENGINE_DIR.'/includes/checkFeild.php';
             
-    $tpl->load('main.html', MODULE_SKIN_DIR);
-
-    $db->get_recdoc();
-    
-    $tpl->set_repeat_block('recdoc');
-    
-    while($recdoc = $db->get_row()){
-    
-        $tpl->set('{doctor_name}', $recdoc['doctor_name']);
-        $tpl->set('{doctor_specialty}', $recdoc['doctor_specialty']);                
-        $tpl->set('{patient}', $recdoc['surname'].' '.$recdoc['name']);
-        $tpl->set('{date}', date('Y.m.d H:i',$recdoc['time']));
-
-        $tpl->copy_repeat_block();
-        
-    }
-
-    $tpl->save_repeat_block();
-
-    $tpl->save('{content}');   
+    $tpl->save('content', 'main', [
+        'recdoc' => $db->table('recdoctor')
+            ->select('recdoctor.*', 'users.name', 'users.surname', 'doctors.name as doctor_name', 'specialties.title as doctor_specialty')
+            ->join('doctors', 'recdoctor.doctor_id', '=', 'doctors.id')
+            ->join('specialties', 'doctors.specialty_id', '=', 'specialties.id')
+            ->join('users', 'recdoctor.user_id', '=', 'users.id')
+            ->orderBy('recdoctor.time', 'desc')
+            ->get()
+    ], MODULE_SKIN_DIR);
 
 ?>

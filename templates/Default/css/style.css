@@ -1131,11 +1131,11 @@ footer{
     border-inline-end-width: 1px;
     border-radius: 0;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
-  }
+}
 
-  .form-control:hover::file-selector-button {
+.form-control:hover::file-selector-button {
     background-color: #00000015;
-  }
+}
 
 /* BUTTONS +++++++++++++++++++++++++++++++++++++++++ */
 .btn{

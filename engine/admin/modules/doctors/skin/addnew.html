@@ -1,6 +1,6 @@
 <div class="container-fill">
     <div class="panel-header">Добавление врача</div>
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         <div class="panel-body">
             <div class="form-groups-w20">
                 <div class="form-group">
@@ -10,7 +10,9 @@
                 <div class="form-group">
                     <label for="add_specialty">Специальность:</label>
                     <select name="specialty" class="right wide" id="add_specialty" required>
-                        {specialties}
+                        [for specialty in specialties]
+                        <option value="{specialty.id}">{specialty.title}</option>
+                        [/for]
                     </select>
                 </div>
                 <div class="form-group">
@@ -92,10 +94,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">   
+                    <label>Картинка:</label> 
+                    <div class="wrapper">
+                        <div class="form-control-large">
+                            <input type="file" class="form-control form-control-large" name="foto" accept="image/*">
+                        </div>
+                    </div>
+                </div> 
             </div>            
         </div>
         <div class="panel-footer">
-            <input type="submit" class="btn" name="add_doctor" value="Добавить">
+            <input type="submit" class="btn" name="add" value="Добавить">
         </div>
     </form>
 </div>

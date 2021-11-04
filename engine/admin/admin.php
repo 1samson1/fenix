@@ -1,6 +1,6 @@
 <?php
 
-    $tpl = new Template(ADMIN_DIR . 'skin' . DS); // Создание экземпляра шаблонизатора
+    $tpl = new Template(ADMIN_DIR . 'skin'); // Создание экземпляра шаблонизатора
 
     define('SKIN_DIR', $tpl->dir); // Задание директории шаблонов
 

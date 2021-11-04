@@ -11,14 +11,14 @@
                 </tr>
             </thead>
             <tbody>
-                [recdoc]
+                [for rc in recdoc]
                 <tr>
-                    <td data-list-colname="ФИО доктора:">{doctor_name}</td>
-                    <td data-list-colname="Специальность врача:">{doctor_specialty}</td>
-                    <td data-list-colname="Пациент:">{patient}</td>
-                    <td data-list-colname="Дата и время приёма:">{date}</td>                    
+                    <td data-list-colname="ФИО доктора:">{rc.doctor_name}</td>
+                    <td data-list-colname="Специальность врача:">{rc.doctor_specialty}</td>
+                    <td data-list-colname="Пациент:">{rc.surname} {rc.name}</td>
+                    <td data-list-colname="Дата и время приёма:">{filter rc.time | date "d.m.Y H:i"}</td>                    
                 </tr>
-                [/recdoc]
+                [/for]
             </tbody>
         </table>
     </div>    

@@ -1,5 +1,5 @@
 <?php
-    switch ($_GET['do']) {
+    switch (isset($_GET['do']) ? $_GET['do'] : '') {
         case 'main':
             require_once ENGINE_DIR.'/modules/main.php';
             break;
@@ -34,7 +34,7 @@
         
         default:
             $alerts->set_error('Oшибка', 'Такой страницы или файла не существует!', 404);
-            $head['title'] = 'Страница не найдена!';
+            Store::set('title', 'Страница не найдена!');
             break; 
     }
 ?>

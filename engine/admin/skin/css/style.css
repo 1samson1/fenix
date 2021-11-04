@@ -600,7 +600,8 @@ footer> .container{
 }
 
 .form-flex-wrap .form-group{
-    margin-top: 20px;
+    margin: 10px 0;
+    border-bottom: none;
 }
 
 .form-control{
@@ -657,6 +658,29 @@ footer> .container{
 
 .form-group-icon .form-control{
     padding-left: 2.3rem;
+}
+
+.form-control::file-selector-button {
+    background-color: #1969FF;
+    display: inline-block;
+    font-size: 1rem;
+    color: #fff;    
+    border: 0;
+    padding: 7px;
+    margin-top: 7px;
+    margin-right: 7px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background .3s ease;
+    user-select: none;
+    box-shadow: 1px 1px 3px 1px #aaa;     
+    line-height: 1rem;
+    outline: none;
+}
+
+.form-control:hover::file-selector-button {
+    background: #347AFD;
 }
 
 /* BUTTONS +++++++++++++++++++++++++++++++++++++++++ */
