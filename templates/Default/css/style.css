@@ -139,6 +139,7 @@ header{
     display: inline-block;
     font-weight: bold;
     color:#ffF;
+    white-space: nowrap;
     /* text-transform: uppercase; */
     text-decoration: none;
     padding: 10px 15px;

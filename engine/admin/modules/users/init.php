@@ -1,14 +1,11 @@
 <?php
 
-    $crumbs->add($head['title'] = 'Пользователи', MODULE_URL);
-
-    require_once ENGINE_DIR.'/includes/functions.php';
     require_once ENGINE_DIR.'/includes/checkFeild.php';
     require_once ENGINE_DIR.'/includes/upload.php';
 
-    if($_GET['action'] == 'delete'){
+    if(isset($_GET['action']) and $_GET['action'] == 'delete'){
 
-        if($db->remove_user($_GET['delete'])){
+        if($db->table('users')->where('id', '=', $_GET['delete'])->delete()){
             showSuccess('Пользователь удалён!','Выбраный пользователь успешно удалён!', MODULE_URL);
         }
         else showError('Ошибка удаления!', 'Неизвестная ошибка!', MODULE_URL);
@@ -21,36 +18,51 @@
     }
     elseif(isset($_GET['id'])){
 
-        $crumbs->add($head['title'] = 'Редактирование пользователя', '');
+        $crumbs->add(Store::set('title', 'Редактирование пользователя'), '');
 
-        $db->get_user_by_id($_GET['id']);
+        if($user = $db->table('users')->where('id', '=', $_GET['id'])->first()){
 
-        if($user = $db->get_row()){
-
-            if(isset($_POST['edit_user'])){
+            if(isset($_POST['edit'])){
     
                 $alerts->set_error_if(!CheckField::login($_POST['login']), 'Ошибка изменения данных пользователя!', 'Некорректный логин!', 201);
 
                 $alerts->set_error_if(!CheckField::email($_POST['email']), 'Ошибка изменения данных пользователя!', 'Некорректный email!', 202);
 
-                if(isset($_POST['password'][0]) || isset($_POST['repassword'][0])){
+			    if(isset($_POST['password'][0]) or isset($_POST['repassword'][0])){
                     
-                   $alerts->set_error_if(!CheckField::confirm_pass($_POST['password'],$_POST['repassword']), 'Ошибка изменения данных пользователя!', 'Пароль не совпадает с формой подтверждения!', 204);
+                    $alerts->set_error_if(!CheckField::confirm_pass($_POST['password'],$_POST['repassword']), 'Ошибка изменения данных пользователя!', 'Пароль не совпадает с формой подтверждения!', 204);
                 
                 }
                 
-                $foto = new Upload_Image('foto', 'foto_'.$user['id'], 'avatars');
+                $foto = new Upload_Image('foto', false, 'avatars');
 
-                $alerts->alerts_array = array_merge($alerts->alerts_array, $foto->errors);
+                $alerts->merge($foto->errors);
 
-                if(!isset($alerts->alerts_array[0])){
+                if($alerts->is_empty()){
+                    $fields = [
+                        'name' => $_POST['name'],
+                        'surname' => $_POST['surname'],
+                        'login' => $_POST['login'],
+                        'email' => $_POST['email'],
+                    ];
 
-                    if($db->edit_user($user['id'], $_POST['group'], $_POST['name'], $_POST['surname'], $_POST['login'], $_POST['email'], $_POST['password'], $foto->filepath, isset($_POST['delete_foto']))){
+                    if(isset($_POST['password']))
+                        $fields['password'] = $db->hash($_POST['password']); 
+
+                    if((bool) Store::get('USER.allow_groups'))
+                        $fields['group_id'] = $_POST['group'];
+
+                    if(isset($_POST['delete_foto']))
+                        $fields['foto'] = '';
+                    
+                    if($foto->filepath)
+                        $fields['foto'] = $foto->filepath;
+
+                    if($db->table('users')->where('id', '=' , $user['id'])->update($fields)){
                         
                         if(isset($_POST['delete_foto'])){
                             delete_file($user['foto']);
                         }
-                                                
                         if($foto->filepath){
                             delete_file($user['foto']);
                             $foto->save();
@@ -64,35 +76,19 @@
             
             }
 
-            $tpl->load('edit.html', MODULE_SKIN_DIR);
-
-            $tpl->set('{login}', $user['login']);
-            $tpl->set('{email}', $user['email']);
-            $tpl->set('{group}', $user['group_name']);
-            $tpl->set('{surname}', $user['surname']);
-            $tpl->set('{name}', $user['name']);
-            
-            if($user['foto']) $foto = '/'.$user['foto'];
-            else $foto = '{SKIN}/img/noavatar.png';
-            $tpl->set('{foto}', $foto);
-
-            $db->get_groups();
-            while ($group = $db->get_row()) {
-                $groups .= '<option value="'.$group['id'].'" '.($group['id'] == $user['group_id']?'selected':'').'>'.$group['group_name'].'</option>';
-            }
-            $tpl->set('{groups}', $groups);
-            
-
-            $tpl->save('{content}');
+            $tpl->save('content', 'edit', [
+                'groups' => $db->table('groups')->get(),
+                'user' => $user
+            ], MODULE_SKIN_DIR);
         }
         else $alerts->set_error('Oшибка', 'Такого пользователя не существует!', 404);
 
     }
-    elseif($_GET['action'] == 'addnew'){
+    elseif(isset($_GET['action']) and $_GET['action'] == 'addnew'){
 
-        $crumbs->add($head['title'] = 'Добавление пользователя', '');  
+        $crumbs->add(Store::set('title', 'Добавление пользователя'), '');
 
-        if(isset($_POST['add_user'])){
+        if(isset($_POST['add'])){
 
             $alerts->set_error_if(!CheckField::login($_POST['login']), 'Ошибка регистрации', 'Некорректный логин', 201);
 
@@ -102,58 +98,58 @@
 
 			$alerts->set_error_if(!CheckField::confirm_pass($_POST['password'],$_POST['repassword']), 'Ошибка регистрации', 'Пароль не совпадает с формой подтверждения', 204);
 
-			if(!isset($alerts->alerts_array[0])){
+            $foto = new Upload_Image('foto', false, 'avatars');
 
-				if($db->reg_user($_POST['group'], $_POST['name'], $_POST['surname'], $_POST['login'], $_POST['email'], $_POST['password'])){
-					
-                   return showSuccess('Пользователь добавлен!','Успешно добавлен пользователь!', MODULE_URL);
+            $alerts->merge($foto->errors);
 
-				}
+            if($alerts->is_empty()){
+                $fields = [
+                    'name' => $_POST['name'],
+                    'surname' => $_POST['surname'],
+                    'login' => $_POST['login'],
+                    'email' => $_POST['email'],
+                    'password' => $db->hash($_POST['password']),
+                    'date_reg' => time()
+                ];
+
+                if((bool) Store::get('USER.allow_groups'))
+                    $fields['group_id'] = $_POST['group'];
+                else
+                    $fields['group_id'] = Store::get('config.reg_user_group');
+
+                if($foto->filepath)
+                    $fields['foto'] = $foto->filepath;
+
+				if($db->table('users')->insert($fields)){
+                    if($foto->filepath)
+                        $foto->save();
+                    
+                    return showSuccess('Пользователь добавлен!','Успешно добавлен пользователь!', MODULE_URL);
+                }
 				else $alerts->set_error('Ошибка добавления!', 'Неизвестная ошибка!', $db->error_num);
 			}
 
         }
         
-        $tpl->load('addnew.html', MODULE_SKIN_DIR);
-
-        $db->get_groups();
-        while ($group = $db->get_row()) {
-            $groups .= '<option value="'.$group['id'].'" '.($group['id'] == $config['reg_user_group']?'selected':'').'>'.$group['group_name'].'</option>';
-        }
-        $tpl->set('{groups}', $groups);
-
-        $tpl->save('{content}');
+        $tpl->save('content', 'addnew', [
+            'groups' => $db->table('groups')->get()
+        ], MODULE_SKIN_DIR);
 
     }
     else{
-        $tpl->load('main.html', MODULE_SKIN_DIR);
+        $query = $db->table('users')
+            ->select('groups.*', 'users.*')
+            ->join('groups', 'users.group_id', '=', 'groups.id')
+            ->orderBy('groups.allow_adminpanel', 'desc')
+            ->orderBy('groups.id')
+            ->orderBy('users.date_reg', 'desc');
 
-        $db->get_users();
-        
-        $tpl->set_repeat_block('users');
-        
-        while($user = $db->get_row()){
-        
-            $tpl->set('{login}', $user['login']);
-            $tpl->set_block_param('/\[groups=(.+)\](.*)\[\/groups=\1\]/Us', $user['group_id']);
-            $tpl->set('{group}', $user['group_name']);
-            $tpl->set('{surname}', $user['surname']);
-            $tpl->set('{name}', $user['name']);
-            $tpl->set('{date_reg}', date('Y.m.d H:i', $user['date_reg']));
-            $tpl->set('{edit-link}',  addGetParam('id', $user['id']));
-            $tpl->set('{delete-link}', addGetParam('delete', $user['id']));
-            
-    
-            $tpl->copy_repeat_block();
-            
-        }
-    
-        $tpl->save_repeat_block();
-    
-        $tpl->set('{add_user_link}', addGetParam('action','addnew'));
-    
-        $tpl->save('{content}');
+        if( !(bool) Store::get('USER.allow_groups'))
+            $query->where('groups.allow_adminpanel', '=', false);
 
+        $tpl->save('content', 'main', [
+            'users' => $query->get()
+        ], MODULE_SKIN_DIR);
     }
     
 ?>

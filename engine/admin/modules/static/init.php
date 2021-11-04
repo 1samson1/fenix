@@ -37,7 +37,7 @@
                         'date_edit' => time(),
                     ]);
 
-                    if($db->edit_static($_GET['id'], $_POST['url'], $_POST['title'], $_POST['template'], time())){
+                    if($db->result){
 
                         return showSuccess('Страница изменина!','Успешно изменена страница!', MODULE_URL);
 

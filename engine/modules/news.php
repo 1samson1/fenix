@@ -16,7 +16,7 @@
                     246
                 );
         
-                if(!isset($alerts->alerts_array[0])){
+                if($alerts->is_empty()){
                     if($db->add_comment($_GET['param1'], Store::get('USER.id'), $_POST['text'], time())){
                         $alerts->set_success('Комментарий добавлен!', 'Ваш комментарий успешно добавлен!');
                     }

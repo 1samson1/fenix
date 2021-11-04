@@ -20,6 +20,7 @@
 
     if(!Store::isset('USER')){
 
+        Store::set('title', 'Панель управления');
         $tpl->save('content', 'login');
 
     }

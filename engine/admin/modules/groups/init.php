@@ -27,8 +27,7 @@
 
                 if($alerts->is_empty()){
                     $db->table('groups')->where('id', '=' , $group['id'])->update([
-                        'group_name' => $_POST['group_name'],
-                        'cant_delete' => false,
+                        'group_name' => $_POST['group_name'],                        
                         'allow_adminpanel' => isset($_POST['allow_adminpanel']),
                         'allow_settings' => isset($_POST['allow_settings']),
                         'allow_static' => isset($_POST['allow_static']),

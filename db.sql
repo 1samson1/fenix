@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Ноя 02 2021 г., 15:58
+-- Время создания: Ноя 04 2021 г., 20:39
 -- Версия сервера: 10.3.13-MariaDB-log
 -- Версия PHP: 7.3.9
 
@@ -45,8 +45,7 @@ INSERT INTO `comments` (`id`, `news_id`, `user_id`, `text`, `date`, `parent`) VA
 (1, 1, 12, '<p>Хорошая новость</p>', 1564163134, NULL),
 (2, 2, 56, '<p>Ну значит запишусь после каникул.</p>', 1651354654, NULL),
 (11, 2, 12, '<p><img src=\"https://drasler.ru/wp-content/uploads/2019/05/%D0%9A%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D1%81%D1%82%D0%BE%D0%BB-%D1%82%D0%B8%D0%B3%D1%80-5.jpg\" alt=\"\" /></p>', 1622133007, NULL),
-(30, 2, 12, '<p>hfghfdgh</p>', 1633884227, NULL),
-(31, 2, 12, '<p>test добавления</p>', 1635602820, NULL);
+(30, 2, 12, '<p>hfghfdgh</p>', 1633884227, NULL);
 
 -- --------------------------------------------------------
 
@@ -94,7 +93,7 @@ INSERT INTO `doctors` (`id`, `name`, `specialty_id`, `foto`, `kabinet`, `mon`, `
 CREATE TABLE `groups` (
   `id` int(11) UNSIGNED NOT NULL,
   `group_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cant_detete` tinyint(1) NOT NULL,
+  `cant_delete` tinyint(1) NOT NULL,
   `allow_adminpanel` tinyint(1) NOT NULL,
   `allow_settings` tinyint(1) NOT NULL,
   `allow_static` tinyint(1) NOT NULL,
@@ -104,16 +103,18 @@ CREATE TABLE `groups` (
   `allow_comments` tinyint(1) NOT NULL,
   `allow_specialties` tinyint(1) NOT NULL,
   `allow_doctors` tinyint(1) NOT NULL,
-  `allow_recdoc` tinyint(1) NOT NULL
+  `allow_recdoc` tinyint(1) NOT NULL,
+  `allow_upload_files` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `groups`
 --
 
-INSERT INTO `groups` (`id`, `group_name`, `cant_detete`, `allow_adminpanel`, `allow_settings`, `allow_static`, `allow_groups`, `allow_users`, `allow_news`, `allow_comments`, `allow_specialties`, `allow_doctors`, `allow_recdoc`) VALUES
-(1, 'Администраторы', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(2, 'Пользователи', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+INSERT INTO `groups` (`id`, `group_name`, `cant_delete`, `allow_adminpanel`, `allow_settings`, `allow_static`, `allow_groups`, `allow_users`, `allow_news`, `allow_comments`, `allow_specialties`, `allow_doctors`, `allow_recdoc`, `allow_upload_files`) VALUES
+(1, 'Администраторы', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(2, 'Пользователи', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(3, 'Регистраторы', 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -356,7 +357,9 @@ INSERT INTO `user_tokens` (`id`, `user_id`, `token`, `date`) VALUES
 (197, 12, '$2y$10$ZoEWtzlynfy3NOWZHQnFlOG7hsNxvmE9NtjOypy58pMlVZATTYxAe', 1635682234),
 (201, 12, '$2y$10$XYyb4mm9vKrb6Zpd/A4VIOR7WbfqrQah3FV1f1MfucCl.HAlWtXFa', 1635693514),
 (205, 12, '$2y$10$ONV7t2q6kBuzAWuThXXxR.sxW7m05VvC0Waxblq6aS0ifrEWerAdy', 1635781727),
-(209, 12, '$2y$10$0X4JG1S6MrWAulGKL0jc6.INn5OktQvpM5TKOeFwwyiTFfjCQbF1a', 1635854007);
+(209, 12, '$2y$10$0X4JG1S6MrWAulGKL0jc6.INn5OktQvpM5TKOeFwwyiTFfjCQbF1a', 1635854007),
+(210, 12, '$2y$10$CudmWUEJbEp06tw6ZQFQ4eAyOKtaMDWJokzO5hsqzQkvXt6IYvAE.', 1635944348),
+(213, 12, '$2y$10$BrIvfUiC8tcaKpNaAE1B0OvD6ijhagyBYdTmzKMNPpqoGTXdHpCJi', 1636032051);
 
 --
 -- Индексы сохранённых таблиц
@@ -450,13 +453,13 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT для таблицы `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT для таблицы `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `lostpassword`
@@ -468,19 +471,19 @@ ALTER TABLE `lostpassword`
 -- AUTO_INCREMENT для таблицы `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT для таблицы `specialties`
 --
 ALTER TABLE `specialties`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT для таблицы `static`
 --
 ALTER TABLE `static`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
@@ -492,7 +495,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `user_tokens`
 --
 ALTER TABLE `user_tokens`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

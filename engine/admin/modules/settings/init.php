@@ -24,7 +24,7 @@
     }
 
     $tpl->save('content', 'main', [
-        'groups' => $db->get_groups(),
+        'groups' => $db->table('groups')->get(),
         'timezones' => $timezones,
         'templates' => Files::get_dirs(ROOT_DIR.'/templates/'),
     ], MODULE_SKIN_DIR);
