@@ -2,7 +2,7 @@
 
     require_once ENGINE_DIR.'/includes/upload.php';
 
-    if($_SESSION['user']['group_id'] == $config['admin_group']){
+    if( (bool) Store::get('USER.allow_upload_files')){
 
         $image = new Upload_Image('file');
 

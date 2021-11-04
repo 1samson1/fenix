@@ -39,6 +39,7 @@
                         'allow_specialties' => isset($_POST['allow_specialties']),
                         'allow_doctors' => isset($_POST['allow_doctors']),
                         'allow_recdoc' => isset($_POST['allow_recdoc']),
+                        'allow_upload_files' => isset($_POST['allow_upload_files']),
                     ]);
 
                     if($db->result)
@@ -78,6 +79,7 @@
                     'allow_specialties' => isset($_POST['allow_specialties']),
                     'allow_doctors' => isset($_POST['allow_doctors']),
                     'allow_recdoc' => isset($_POST['allow_recdoc']),
+                    'allow_upload_files' => isset($_POST['allow_upload_files']),
                 ]);
 
                 if($db->result)
