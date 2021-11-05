@@ -5,6 +5,7 @@
         public $error;
         public $error_num;
         public $connect;
+        public $query;
         public $result;
         public $queries = null;
 
@@ -14,6 +15,7 @@
         }  
         
         public function query($query){
+            $this->query = $query;
             $this->result = mysqli_query($this->connect,$query);
             $this->error = mysqli_error($this->connect);
 			$this->error_num = mysqli_errno($this->connect);
@@ -205,6 +207,10 @@
             $this->_where .= $column . ' ' . $operator . ' "'.$this->db->valid_value($value).'"';
 
             return $this;
+        }
+
+        public function orWhere($column, $operator, $value){
+            return $this->where($column,$operator, $value, 'or');
         }
         
         public function orderBy($column, $sort = 'asc'){

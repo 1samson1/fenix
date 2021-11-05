@@ -24,14 +24,19 @@
 
             if($alerts->is_empty()){
 
-                $db->check_user($_POST['login']);
-                if($user = $db->get_row()){
+                $user = $db->table('users')
+                    ->select('groups.*', 'users.*')
+                    ->join('groups', 'users.group_id', '=', 'groups.id')
+                    ->where('users.login', '=', $_POST['login'])
+                    ->first();
+
+                if($user){
 
                     if( (bool) $user['allow_adminpanel'] ){
                         if (CheckField::confirm_hash($_POST['password'], $user['password'])) {
                             unset($user['password']);
                             $token = $db->hash(time());
-                            $db->add_token($user['id'], $token);
+                            $db->table('user_tokens')->insert(['user_id' => $user['id'], 'token' => $token, 'date' => time()]);
                             
                             if(!$db->error){
 
@@ -49,8 +54,13 @@
         }
     }
     else{
-        $db->get_user_by_token($_COOKIE['user_token']);
-        if($user = $db->get_row()){
+        $user = $db->table('user_tokens')
+            ->select('groups.*', 'users.*')
+            ->join('users', 'user_tokens.user_id', '=', 'users.id')
+            ->join('groups', 'users.group_id', '=', 'groups.id')
+            ->first();
+        
+        if($user){
             if( (bool) $user['allow_adminpanel'] ){
                 Store::set('USER', $user);
             }

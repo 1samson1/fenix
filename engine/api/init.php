@@ -15,7 +15,7 @@
     
     ini_set('date.timezone', Store::get('config.timezone')); // Инициализания часового пояса
 
-    require_once ENGINE_DIR.'includes/queryDB.php'; // Подключаем файл класса базы данных
+    require_once ENGINE_DIR.'includes/db.php'; // Подключаем файл класса базы данных
     
     require_once ENGINE_DIR.'data/dbconfig.php'; // Подключаем конфиг базы данных
     

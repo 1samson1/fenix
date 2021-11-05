@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Ноя 04 2021 г., 20:39
+-- Время создания: Ноя 05 2021 г., 20:52
 -- Версия сервера: 10.3.13-MariaDB-log
 -- Версия PHP: 7.3.9
 
@@ -45,7 +45,8 @@ INSERT INTO `comments` (`id`, `news_id`, `user_id`, `text`, `date`, `parent`) VA
 (1, 1, 12, '<p>Хорошая новость</p>', 1564163134, NULL),
 (2, 2, 56, '<p>Ну значит запишусь после каникул.</p>', 1651354654, NULL),
 (11, 2, 12, '<p><img src=\"https://drasler.ru/wp-content/uploads/2019/05/%D0%9A%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D1%81%D1%82%D0%BE%D0%BB-%D1%82%D0%B8%D0%B3%D1%80-5.jpg\" alt=\"\" /></p>', 1622133007, NULL),
-(30, 2, 12, '<p>hfghfdgh</p>', 1633884227, NULL);
+(30, 2, 12, '<p>hfghfdgh</p>', 1633884227, NULL),
+(45, 1, 12, '<p>hgfhgh</p>', 1636130938, NULL);
 
 -- --------------------------------------------------------
 
@@ -172,50 +173,9 @@ CREATE TABLE `recdoctor` (
 --
 
 INSERT INTO `recdoctor` (`doctor_id`, `user_id`, `time`, `appointment`) VALUES
-(1, 12, 1576161000, ''),
-(1, 12, 1577628000, ''),
-(1, 12, 1577631600, ''),
-(1, 12, 1577635200, ''),
-(1, 12, 1577637000, ''),
-(1, 12, 1577642400, ''),
-(1, 12, 1577646000, ''),
-(1, 12, 1577649600, ''),
-(1, 12, 1577800800, ''),
-(3, 12, 1577802600, ''),
-(1, 12, 1577804400, ''),
-(2, 12, 1577806200, ''),
-(1, 12, 1577813400, ''),
-(1, 12, 1577822400, ''),
-(1, 12, 1577824200, ''),
-(1, 12, 1577885940, ''),
-(1, 12, 1577950200, ''),
-(1, 12, 1578147240, ''),
-(1, 12, 1578148200, ''),
-(1, 12, 1578159000, ''),
-(2, 12, 1580475600, ''),
-(1, 12, 1580998620, ''),
-(1, 12, 1585335600, ''),
-(7, 12, 1620968400, ''),
-(5, 12, 1620970200, ''),
-(5, 12, 1620973800, ''),
-(6, 12, 1620973800, ''),
-(5, 12, 1621321200, ''),
-(5, 56, 1621492200, ''),
-(6, 12, 1621576800, ''),
-(6, 56, 1621924200, ''),
-(7, 12, 1622192400, ''),
-(7, 12, 1622442600, ''),
-(3, 12, 1635143400, ''),
-(3, 12, 1635404400, ''),
-(3, 12, 1635494400, ''),
-(1, 12, 1635744600, ''),
-(1, 12, 1636954200, ''),
-(3, 12, 1637128800, ''),
-(1, 12, 1637132400, ''),
+(5, 12, 1637215200, '894eff'),
 (3, 12, 1637217000, '32977a'),
-(1, 12, 1637910000, ''),
-(4, 12, 1637911800, ''),
-(1, 12, 1638167400, ''),
+(5, 12, 1637649000, '537167'),
 (3, 12, 1639040400, '0cbdcfb1bc9a');
 
 -- --------------------------------------------------------
@@ -294,8 +254,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `group_id`, `login`, `password`, `email`, `name`, `surname`, `foto`, `date_reg`) VALUES
-(12, 1, 'Admin', '$2y$10$W8fdzabN0lgIk1PvPjDYD.XVz7Nv1owxm6vCVsz8ELVygp5iQbg3K', 'ya.ya@ya.ru', 'Админ', 'Админ', 'uploads/avatars/foto_12.png', 1575825604),
-(13, 2, 'tyt', '$2y$10$OgfHEu39yMaikUhK0.vUd.gXGZZB6VgQsvX0w2NrCD6GSLAVTabGW', 'rgdf@f', '', '', '', 1575825604),
+(12, 1, 'Admin', '$2y$10$AYnr6y4Yn.cY1xuw4xZU2eaVvTm1/DXPjD9Gp4IZPws7kJxsHPLRO', 'ya.ya@ya.ru', 'Админ', 'Админ', 'uploads/avatars/foto_12.png', 1575825604),
+(13, 2, 'tyt', '$2y$10$BEGCZbo8x97Isq8ht7B0PuUQYwa75EDUQfquEQWZIcXRduwhMwGH.', 'rgdf@fyu.ru', 'Тут', 'Тутов', 'uploads/avatars/1636054885_ай отто под фотошопом.png', 1575825604),
 (14, 2, 'hypop', '$2y$10$CKfQJ7FZ4xpTJH4YXFVMeOuqVrv3Yj/KJf2cXgopZcWKeSnbFMBj6', 'hty@tr', '', '', '', 1575825604),
 (15, 2, 'test2', '$2y$10$trgPL1fnnglSY3djNwS5wuI55DDOo5Sk.ZLU4Q/MxCiGVU2duyqwy', 'test@test.test', 'Тестовый', 'Тестов', '', 1575825604),
 (19, 2, 'test3', '$2y$10$GV1Cwv1gMDQLZWVQSMdkN.YsOKecISXX3D8Bnxr0KjimPH05dklvK', 'fdsfsdfsd@fdsf', '', '', '', 1575825604),
@@ -323,7 +283,11 @@ INSERT INTO `users` (`id`, `group_id`, `login`, `password`, `email`, `name`, `su
 (47, 2, 'GGWP', '$2y$10$P/l/EJEsIZa1l0nIHvZnzuIZVXg6Bg0e6o6ecqi8N6z5BA14B8y6q', 'fjsdl@fjdkls.ru', 'fjsdlkaf;j', 'jglsdf;j', '', 1614437083),
 (55, 2, 'petrvas', '$2y$10$FEb1BMMUXzR0e4gRbBPPnuMzOHnT09yr.ECkqFagQHxooxSQ/BEIC', 'petr.vas@ya.ru', 'Пётр', 'Васильев', '', 1614446372),
 (56, 2, 'Vasya', '$2y$10$7fzPe0uS7lAQ4qlqlxqSQukgBXx5nUOnHJhs.Hn76JatJZnYb5Hy2', 'vasya@ya.ru', 'Вася', 'Уткин', 'uploads/avatars/foto_56.jpg', 1620918189),
-(60, 2, 'hgdfh', '$2y$10$k7wRFpW.I82i3gSi/R0nnexV4UL9AJSaHskkw49UCMpQvtCWFcwhO', 'bfsdg@hgfdh.tu', 'hdgfhd', 'dfgh', '', 1635596797);
+(60, 2, 'hgdfh', '$2y$10$k7wRFpW.I82i3gSi/R0nnexV4UL9AJSaHskkw49UCMpQvtCWFcwhO', 'bfsdg@hgfdh.tu', 'hdgfhd', 'dfgh', '', 1635596797),
+(61, 3, 'regest', '$2y$10$W8fdzabN0lgIk1PvPjDYD.XVz7Nv1owxm6vCVsz8ELVygp5iQbg3K', 'regest@med.su', 'Регистратор', '', '', 1636049916),
+(62, 2, 'ghfhd', '$2y$10$z5axPcPXq6Y/AoCuq6DhU.8vsdVibUvwm/OM8uqRD4XNoiZkCI4Vm', 'hdfgh@hgh.tr', 'sdfsdf', 'sdfsdf', '', 1636051710),
+(63, 2, 'gfdgsdfgds', '$2y$10$GW7PXnNzffaqejx332BY4.bTUVO1fZiRv7G6UBkEl4yIVt4xLamhO', 'fgdsg@gfdg.tu', 'adfgrvd', 'asdfafasfasdf', 'uploads/avatars/1636051813_аватарка гта оригинал.png', 1636051813),
+(68, 2, 'hgdfghf', '$2y$10$iwwZ2sK/v.OGuW2vcLW.xeftIC.wxl6NZ3dcykVFmXSNHQlngW7kW', 'fghdfg@gfdsg.tr', 'gfsdgsd', 'sdfgs', '', 1636121267);
 
 -- --------------------------------------------------------
 
@@ -351,15 +315,10 @@ INSERT INTO `user_tokens` (`id`, `user_id`, `token`, `date`) VALUES
 (106, 56, '$2y$10$YqypzM0cUDfUtZE7V635SePRRh02U6pVVYyoQdk5mIWkIIsPkpOcW', 1621457289),
 (125, 55, '$2y$10$hkGkZJSF68Bw0pFk3N38.uo8xHuHhESeaqYx.StvJMI6GXZIigh2C', 1622035286),
 (142, 47, '$2y$10$yfusvBP5Ta1TiKzySCKCMesSVc7NXqjjCysVHbs0hJGmgRuhyKM6a', 1622989472),
-(190, 12, '$2y$10$8xvZqlm25umwWaeKAHHDGOrluIZ0xPuCyli2kOOqALVh4TUOLxfWm', 1635610745),
-(193, 12, '$2y$10$TBGsO3sOy7UhZ4FYI1trY.8ZMLd84MLqW4IPbSIU3LmcicVGOUr/i', 1635677691),
-(196, 12, '$2y$10$664dzuZT6fiUTEeVdKlZK.5SoY7Kn/m7c0jMP3JYjlEVyWUctMbpG', 1635682149),
-(197, 12, '$2y$10$ZoEWtzlynfy3NOWZHQnFlOG7hsNxvmE9NtjOypy58pMlVZATTYxAe', 1635682234),
-(201, 12, '$2y$10$XYyb4mm9vKrb6Zpd/A4VIOR7WbfqrQah3FV1f1MfucCl.HAlWtXFa', 1635693514),
-(205, 12, '$2y$10$ONV7t2q6kBuzAWuThXXxR.sxW7m05VvC0Waxblq6aS0ifrEWerAdy', 1635781727),
-(209, 12, '$2y$10$0X4JG1S6MrWAulGKL0jc6.INn5OktQvpM5TKOeFwwyiTFfjCQbF1a', 1635854007),
-(210, 12, '$2y$10$CudmWUEJbEp06tw6ZQFQ4eAyOKtaMDWJokzO5hsqzQkvXt6IYvAE.', 1635944348),
-(213, 12, '$2y$10$BrIvfUiC8tcaKpNaAE1B0OvD6ijhagyBYdTmzKMNPpqoGTXdHpCJi', 1636032051);
+(227, 13, '$2y$10$LDYMaq8M4MxMVMsfVs/nOOAYCisBJ9y/yNZgwk5bxySzjLy1UGqJ.', 1636055849),
+(236, 13, '$2y$10$cOegZFOz9asjrPS3vprtUO7VTd8.htdSkMIosgGF/X0DmjrhqepQq', 1636129582),
+(237, 12, '$2y$10$h9KXyesEX5uuDAAs.aMUYOE4.YJ3L1d0/xCZIVv6Vl6if4CBPx9MK', 1636129641),
+(242, 12, '$2y$10$pKTqnu.wvLK7scViqDqW9euG3A9dyjnl66mzdYhI5L7Q82bbPPUbK', 1636133211);
 
 --
 -- Индексы сохранённых таблиц
@@ -447,7 +406,7 @@ ALTER TABLE `user_tokens`
 -- AUTO_INCREMENT для таблицы `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT для таблицы `doctors`
@@ -465,7 +424,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT для таблицы `lostpassword`
 --
 ALTER TABLE `lostpassword`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT для таблицы `news`
@@ -489,13 +448,13 @@ ALTER TABLE `static`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT для таблицы `user_tokens`
 --
 ALTER TABLE `user_tokens`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=243;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

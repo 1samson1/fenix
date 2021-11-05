@@ -4,9 +4,16 @@
 
     if(isset($_GET['param1'])){
         
-        $db->get_full_news($_GET['param1']);
-        if($news = $db->get_row()){
+        $story =$db->table('news')
+            ->select('news.*', 'news.full_news AS body')
+            ->select('users.login AS autor')
+            ->join('users', 'news.autor', '=', 'users.id')
+            ->where('news.id', '=', $_GET['param1'])
+            ->first();
 
+        if($story){
+
+            /* ADDCOMMENTS BEGIN */
             if(isset($_POST['addcomment'])){
 
                 $alerts->set_error_if(
@@ -17,16 +24,27 @@
                 );
         
                 if($alerts->is_empty()){
-                    if($db->add_comment($_GET['param1'], Store::get('USER.id'), $_POST['text'], time())){
+                    $db->table('comments')->insert([
+                        'news_id' => $_GET['param1'],
+                        'user_id' => Store::get('USER.id'),
+                        'text' => $_POST['text'],
+                        'date' => time()
+                    ]);
+                    if($db->result){
                         $alerts->set_success('Комментарий добавлен!', 'Ваш комментарий успешно добавлен!');
                     }
                     else $alerts->set_error('Ошибка добавления комментария!', 'Неизвестная ошибка!', $db->error_num);
                 }
             }
 
+            /* PAGINATION FOR COMMENTS */
+
             $pagination = new Pagination(
                 function() use ($db){
-                    $db->count_comments_for_news($_GET['param1']);
+                    return $db->table('comments')
+                        ->select('count(*) as count')
+                        ->where('news_id', '=', $_GET['param1'])
+                        ->first();
                 },
                 '/news/'.$_GET['param1'].'/',
                 Store::get('config.count_comments_on_page')
@@ -34,16 +52,19 @@
         
             $pagination->gen_tpl();
             
+            /* PRINT STORY AND HER COMMENTS */
             $tpl->save('content', 'fullnews', [
-                'story' => $news,
-                'comments' => $db->get_comments_by_news_id(
-                    $_GET['param1'],
-                    Store::get('config.count_comments_on_page'),
-                    $pagination->get_begin_item()
-                ),
+                'story' => $story,
+                'comments' => $db->table('comments')
+                    ->select('users.*', 'comments.*')
+                    ->join('users', 'comments.user_id', '=', 'users.id')
+                    ->where('comments.news_id', '=', $_GET['param1'])
+                    ->offset($pagination->get_begin_item())
+                    ->limit(Store::get('config.count_comments_on_page'))
+                    ->orderBy('comments.date', 'desc')
+                    ->get()
             ]);
-            Store::set('title', $news['title']);
-
+            Store::set('title', $story['title']);
         }
         else {
             $alerts->set_error('Oшибка', 'Такой новости не существует!', 404);
@@ -55,7 +76,7 @@
 
         $pagination = new Pagination(
             function() use ($db){
-                $db->count_news();
+                return $db->table('news')->select('count(*) as count')->first();
             },
             '/news/',
             Store::get('config.count_news_on_page')
@@ -64,10 +85,15 @@
         $pagination->gen_tpl();
 
         $tpl->save('content', 'news', [
-            'news' => $db->get_short_news( 
-                Store::get('config.count_news_on_page'),
-                $pagination->get_begin_item()
-            )
+            'news' => $db->table('news')
+                ->select('news.*', 'news.short_news AS body')
+                ->select('users.login AS autor')
+                ->select('(SELECT COUNT(*) FROM comments WHERE comments.news_id = news.id) AS count_comments')
+                ->join('users', 'news.autor', '=', 'users.id')
+                ->offset($pagination->get_begin_item())
+                ->limit(Store::get('config.count_news_on_page'))
+                ->orderBy('news.date', 'desc')
+                ->get()
         ]);
 
         Store::set('title', 'Новости');

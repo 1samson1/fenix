@@ -8,14 +8,20 @@
 
             $alerts->set_error_if(!CheckField::empty($_POST['password']), 'Ошибка авторизации', 'Вы не ввели пароль', 203);  
 
-            if(!isset($alerts->alerts_array[0])){
+            if($alerts->is_empty()){
 
-                $db->check_user($_POST['login']);
-                if($user = $db->get_row()){
+                $user = $db->table('users')
+                    ->select('groups.*', 'users.*')
+                    ->join('groups', 'users.group_id', '=', 'groups.id')
+                    ->where('users.login', '=', $_POST['login'])
+                    ->first();
+
+                if($user){
+
                     if (CheckField::confirm_hash($_POST['password'], $user['password'])) {
                         unset($user['password']);
                         $token = $db->hash(time());
-                        $db->add_token($user['id'], $token);
+                        $db->table('user_tokens')->insert(['user_id' => $user['id'], 'token' => $token, 'date' => time()]);
                         
                         if(!$db->error){
                             setcookie('user_token', $token, time() + Store::get('config.life_time_token'), '/');
@@ -30,8 +36,13 @@
         }
     }
     else{
-        $db->get_user_by_token($_COOKIE['user_token']);
-        if($user = $db->get_row()){
+        $user = $db->table('user_tokens')
+            ->select('groups.*', 'users.*')
+            ->join('users', 'user_tokens.user_id', '=', 'users.id')
+            ->join('groups', 'users.group_id', '=', 'groups.id')
+            ->first();
+        
+        if($user){
             Store::set('USER', $user);
         } 
         else {            

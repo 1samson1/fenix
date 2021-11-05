@@ -17,7 +17,17 @@
 
 			if($alerts->is_empty()){
 
-				if($db->reg_user(Store::get('config.reg_user_group'), $_POST['name'], $_POST['surname'], $_POST['login'], $_POST['email'], $_POST['password'])){
+				$db->table('users')->insert([
+					'group_id' => Store::get('config.reg_user_group'),
+					'name' => $_POST['name'],
+					'surname' => $_POST['surname'],
+					'login' => $_POST['login'],
+					'email' => $_POST['email'],
+					'password' => $db->hash($_POST['password']),
+					'date_reg' => time()
+				]);
+
+				if($db->result){
 					$alerts->set_success('Регистрация прошла успешно', 'Вы успешно зарегистрированы.');
 				}
 				else $alerts->set_error('Ошибка регистрации', Error_info::reg_user($db->error_num), $db->error_num);

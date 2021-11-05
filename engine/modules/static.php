@@ -1,6 +1,10 @@
 <?php 
-    $db->get_static($_GET['param1']);
-    if($static = $db->get_row()){
+
+    $static = $db->table('static')
+        ->where('url', '=', (isset($_GET['param1']) ? $_GET['param1'] : null))
+        ->first();
+            
+    if($static){
         $tpl->save('content', 'static', [
             'static' => $static
         ]);

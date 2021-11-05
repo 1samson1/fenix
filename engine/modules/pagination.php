@@ -16,10 +16,9 @@
 
             $this->active = isset($_GET['page'])? $_GET['page']: 1;
             $this->count_items_on_pages = $count_items_on_page;    
-            $this->url = $url;    
-
-            call_user_func($counter);
-            if($table = $db->get_row()){
+            $this->url = $url;
+            
+            if($table = $counter()){
 
                 $this->count_items = $table['count'];
                 

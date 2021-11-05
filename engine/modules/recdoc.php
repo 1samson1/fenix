@@ -18,7 +18,14 @@
 
                 $appointment = genRandStr(6);
 
-                if($db->recording($_GET['doctor'], Store::get('USER.id'), $appointment, $_POST['date'], $_POST['time'])){
+                $db->table('recdoctor')->insert([
+                    'doctor_id' => $_GET['doctor'],
+                    'user_id' => Store::get('USER.id'),
+                    'appointment' => $appointment,
+                    'time' => strtotime($_POST['time'], strtotime( $_POST['date'] ))
+                ]);
+
+                if($db->result){
                     
 					return $appointment;
 				}
@@ -30,9 +37,13 @@
 
     if ($appointment = checkRecording()){
         $step = 4;
-        $db->get_doctor_by_id($_GET['doctor']);
+        $doctor = $db->table('doctors')
+            ->select('doctors.*', 'specialties.title as specialty')
+            ->join('specialties', 'doctors.specialty_id', '=', 'specialties.id')
+            ->where('doctors.id', '=', $_GET['doctor'])
+            ->first();
         
-        if ($doctor = $db->get_row()) {
+        if ($doctor) {
             $mail = new Mail('recording.html', array(
                 'title' => Store::get('title'),
                 'user' =>  Store::get('USER'),
@@ -55,9 +66,13 @@
     }
     else if(isset($_GET['doctor'])){
         
-        $db->get_doctor_by_id($_GET['doctor']);
+        $doctor = $db->table('doctors')
+            ->select('doctors.*', 'specialties.title as specialty')
+            ->join('specialties', 'doctors.specialty_id', '=', 'specialties.id')
+            ->where('doctors.id', '=', $_GET['doctor'])
+            ->first();
         
-        if ($doctor = $db->get_row()) {
+        if ($doctor) {
             $step = 3;
 
             $tpl->save('content', 'recdoc', [
@@ -96,7 +111,11 @@
 
         $tpl->save('content', 'recdoc', [
             'step' => $step,
-            'doctors' => $db->get_doctors_by_specialty($_GET['specialty']),
+            'doctors' =>  $db->table('doctors')
+                ->select('doctors.*', 'specialties.title as specialty')
+                ->join('specialties', 'doctors.specialty_id', '=', 'specialties.id')
+                ->where('doctors.specialty_id', '=', $_GET['specialty'])
+                ->get()
         ]);
     }
     else showSpecialties();
@@ -108,7 +127,7 @@
 
         $tpl->save('content', 'recdoc', [
             'step' => $step,
-            'specialties' => $db->get_specialties(),
+            'specialties' => $db->table('specialties')->get(),
         ]);
     }
     

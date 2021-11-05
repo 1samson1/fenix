@@ -12,10 +12,13 @@
         $step = 1;
 
         if(isset($_GET['param1'])){
-            
-            $db->get_lostpassword($_GET["param1"]);
 
-            if($lostpass = $db->get_row()){
+            $lostpass = $db->table('lostpassword')
+                ->join('users', 'lostpassword.user_id', '=', 'users.id')
+                ->where('token', '=', $_GET["param1"])
+                ->first();
+
+            if($lostpass){
                 
                 if($lostpass['date'] > time() - 86400){
                     $step = 2;
@@ -38,9 +41,14 @@
 
                         if(!isset($alerts->alerts_array[0])){
                             $step = 3;
-                            if($db->change_password($lostpass['user_id'], $_POST['password'])){
+
+                            $db->table('users')
+                                ->where('id', '=', $lostpass['user_id'])
+                                ->update([ 'password' => $db->hash($_POST['password']) ]);
+                            
+                            if($db->result){
                                 $alerts->set_success('Востановления пароля', 'Пароль был успешно изменён.');
-                                $db->remove_lostpassword($lostpass['user_id']);
+                                $db->table('lostpassword')->where('user_id', '=', $lostpass['id'])->delete();
                             }
                             else
                                 $alerts->set_error('Ошибка востановления пароля', 'Неизвестная ошибка!', $db->error_num);
@@ -55,15 +63,24 @@
         }
         elseif(isset($_POST['reset'])){
 
-            $db->get_user_by_email_or_login($_POST['lostpassword']);
+            $user = $db->table('users')
+                ->where('login', '=', $_POST['lostpassword'])
+                ->orWhere('email', '=', $_POST['lostpassword'])
+                ->first();
 
-            if($user = $db->get_row()){
+            if($user){
 
                 $token = md5(time());
 
-                $db->remove_lostpassword($user['id']);
+                $db->table('lostpassword')->where('user_id', '=', $user['id'])->delete();
 
-                if($db->add_lostpassword($user['id'], $token, time())){
+                $db->table('lostpassword')->insert([
+                    'user_id' => $user['id'],
+                    'token' => $token,
+                    'date' => time()
+                ]);
+
+                if($db->result){
 
                     $mail = new Mail('lostpassword.html', array(
                         'title' => $head['title'],

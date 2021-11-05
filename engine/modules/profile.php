@@ -3,8 +3,14 @@
 	require_once ENGINE_DIR.'/includes/checkFeild.php';	
 	require_once ENGINE_DIR.'/includes/errors.php';	
 
-	$db->check_user($_GET['param1']);
-	if($user = $db->get_row()){
+	$user = $db->table('users')
+		->select('groups.*', 'users.*')
+		->join('groups', 'users.group_id', '=', 'groups.id')
+		->where('users.login', '=', (isset($_GET['param1']) ? $_GET['param1'] : null))
+		->first();
+
+	if($user){
+
 		/* edit user */
 
 		if(isset($_POST['do_save_profile'])){
@@ -25,9 +31,26 @@
 				$alerts->merge($foto->errors);
 
 				if($alerts->is_empty()){
+                    $fields = [
+                        'name' => $_POST['name'],
+                        'surname' => $_POST['surname'],
+                        'login' => $_POST['login'],
+                        'email' => $_POST['email'],
+                    ];
 
-					if($db->update_user($user['id'], $_POST['name'], $_POST['surname'], $_POST['login'], $_POST['email'], $_POST['password'], $foto->filepath, isset($_POST['delete_foto']))){
-						$alerts->set_success('Данные профиля обновлены', 'Данные профиля успешно обновлены!');
+                    if(isset($_POST['password']))
+                        $fields['password'] = $db->hash($_POST['password']); 
+
+                    if(isset($_POST['delete_foto']))
+                        $fields['foto'] = '';
+                    
+                    if($foto->filepath)
+                        $fields['foto'] = $foto->filepath;
+
+                    if($db->table('users')->where('id', '=' , $user['id'])->update($fields)){
+                        
+                        $alerts->set_success('Данные профиля обновлены', 'Данные профиля успешно обновлены!');
+						
 						$user['name'] = $_POST['name'];
 						$user['surname'] = $_POST['surname'];
 						$user['login'] = $_POST['login'];
@@ -43,6 +66,10 @@
 							$foto->save();
 							$user['foto'] = $foto->filepath;
 						}
+
+						if(Store::get('USER.id') === $user['id'])
+							Store::set('USER', $user);
+						
 					}
 					else $alerts->set_error('Ошибка изменения данных пользователя', Error_info::reg_user($db->error_num), $db->error_num);
 				}	

@@ -1,10 +1,17 @@
 <?php	
 	if(isset($_GET['exit']) and $_GET['exit'] == "all"){
-		$db->remove_token_all(Store::get('USER.id'), $_COOKIE['user_token']);
+		$db->table('user_tokens')
+			->where('user_id', '=', Store::get('USER.id'))
+			->where('token', '!=', $_COOKIE['user_token'])
+			->delete();
 	}
 	else{
 		setcookie('user_token', '', 0, '/');
-		!isset($_COOKIE['user_token']) ?: $db->remove_token($_COOKIE['user_token']);
+		if(isset($_COOKIE['user_token'])){
+			$db->table('user_tokens')
+				->where('token', '=', $_COOKIE['user_token'])
+				->delete();
+		}
 	}
 	header('Location: /');
 	die();
