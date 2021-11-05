@@ -5,7 +5,11 @@
         global $db;
 
         setcookie('user_token', '', 0, '/');
-		!isset($_COOKIE['user_token']) ?: $db->remove_token($_COOKIE['user_token']);
+		if(isset($_COOKIE['user_token'])){
+			$db->table('user_tokens')
+				->where('token', '=', $_COOKIE['user_token'])
+				->delete();
+		}
 		
         header('Location: /admin/');
         die();
