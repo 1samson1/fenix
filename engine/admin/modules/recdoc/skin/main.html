@@ -7,16 +7,18 @@
                     <th>ФИО доктора:</th>
                     <th>Специальность врача:</th>
                     <th>Пациент:</th>
+                    <th>Дата и время записи на приём:</th>                    
                     <th>Дата и время приёма:</th>                    
                 </tr>
             </thead>
             <tbody>
-                [for rc in recdoc]
+                [for rd in recdoc]
                 <tr>
-                    <td data-list-colname="ФИО доктора:">{rc.doctor_name}</td>
-                    <td data-list-colname="Специальность врача:">{rc.doctor_specialty}</td>
-                    <td data-list-colname="Пациент:">{rc.surname} {rc.name}</td>
-                    <td data-list-colname="Дата и время приёма:">{filter rc.time | date "d.m.Y H:i"}</td>                    
+                    <td data-list-colname="ФИО доктора:">{rd.doctor_name}</td>
+                    <td data-list-colname="Специальность врача:">{rd.doctor_specialty}</td>
+                    <td data-list-colname="Пациент:">{rd.surname} {rd.name}</td>
+                    <td data-list-colname="Дата и время записи на приём:">{filter rd.reg_time | date "d.m.Y H:i"}</td>                    
+                    <td data-list-colname="Дата и время приёма:">{filter rd.time | date "d.m.Y H:i"}</td>                    
                 </tr>
                 [/for]
             </tbody>

@@ -21,6 +21,7 @@
                 $db->table('recdoctor')->insert([
                     'doctor_id' => $_GET['doctor'],
                     'user_id' => Store::get('USER.id'),
+                    'reg_time' => time(),
                     'appointment' => $appointment,
                     'time' => strtotime($_POST['time'], strtotime( $_POST['date'] ))
                 ]);
