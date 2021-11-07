@@ -83,9 +83,6 @@
                     <script>
                         $('.daterec').datepicker({
                             inline:true,
-                            minHours:9,
-                            maxHours:17,
-                            minutesStep:30,
                             minDate:new Date(new Date().setDate(new Date().getDate() + 1)),
                             maxDate: new Date(new Date().setDate(new Date().getDate() + 42)),
                             onRenderCell: function (date, cellType) {

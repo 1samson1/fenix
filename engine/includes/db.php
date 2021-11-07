@@ -111,8 +111,8 @@
 		
 		public function set_charset($charset="utf8"){
             return mysqli_set_charset($this->connect, $charset);    
-        }  
-		
+        }
+        
 		public function __destruct(){
             mysqli_close($this->connect);
         }

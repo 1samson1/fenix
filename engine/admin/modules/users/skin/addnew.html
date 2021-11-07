@@ -29,6 +29,29 @@
                     <label for="add_name">Имя:</label>
                     <input type="text" name="name" id="add_name" class="form-control form-control-large">
                 </div>
+                <div class="form-group">
+                    <label for="patronymic">Отчество</label>                                            
+                    <input class="form-control form-control-large" type="text" name="patronymic" id="patronymic" required>                        
+                </div>
+                <div class="form-group">
+                    <label for="gender">Пол</label>                                            
+                    <select name="gender" id="gender" class="right wide">
+                        <option value="none">Не выбрано</option>
+                        [for gender of genders]<option value="{key}">{gender}</option>[/for]                    
+                    </select>                   
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон</label>                                            
+                    <input class="form-control phone form-control-large" type="text" name="phone" id="phone" required>                        
+                </div>
+                <div class="form-group ">
+                    <label for="birthday">Дата рождения</label>                                            
+                    <input class="form-control date form-control-large" type="text" name="birthday" id="birthday" required>                        
+                </div>
+                <div class="form-group">
+                    <label for="adress">Адрес</label>                                            
+                    <input class="form-control form-control-large" type="text" name="adress" id="adress" >                        
+                </div>
                 <div class="form-group">   
                     <label>Фото:</label> 
                     <div class="wrapper">

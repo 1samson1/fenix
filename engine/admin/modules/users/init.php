@@ -42,11 +42,16 @@
                     $fields = [
                         'name' => $_POST['name'],
                         'surname' => $_POST['surname'],
+						'patronymic' => $_POST['patronymic'],
                         'login' => $_POST['login'],
                         'email' => $_POST['email'],
+						'phone' => $_POST['phone'],
+						'birthday' => strtotime($_POST['birthday']),
+						'gender' => $_POST['gender'],
+						'adress' => $_POST['adress'],
                     ];
 
-                    if(isset($_POST['password']))
+                    if(isset($_POST['password'][0]))
                         $fields['password'] = $db->hash($_POST['password']); 
 
                     if((bool) Store::get('USER.allow_groups'))
@@ -106,8 +111,13 @@
                 $fields = [
                     'name' => $_POST['name'],
                     'surname' => $_POST['surname'],
+                    'patronymic' => $_POST['patronymic'],
                     'login' => $_POST['login'],
                     'email' => $_POST['email'],
+                    'phone' => $_POST['phone'],
+                    'birthday' => strtotime($_POST['birthday']),
+                    'gender' => $_POST['gender'],
+                    'adress' => $_POST['adress'],
                     'password' => $db->hash($_POST['password']),
                     'date_reg' => time()
                 ];

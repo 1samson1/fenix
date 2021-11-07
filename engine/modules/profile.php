@@ -34,11 +34,16 @@
                     $fields = [
                         'name' => $_POST['name'],
                         'surname' => $_POST['surname'],
+						'patronymic' => $_POST['patronymic'],
                         'login' => $_POST['login'],
                         'email' => $_POST['email'],
+						'phone' => $_POST['phone'],
+						'birthday' => strtotime($_POST['birthday']),
+						'gender' => $_POST['gender'],
+						'adress' => $_POST['adress'],
                     ];
 
-                    if(isset($_POST['password']))
+                    if(isset($_POST['password'][0]))
                         $fields['password'] = $db->hash($_POST['password']); 
 
                     if(isset($_POST['delete_foto']))
@@ -51,23 +56,18 @@
                         
                         $alerts->set_success('Данные профиля обновлены', 'Данные профиля успешно обновлены!');
 						
-						$user['name'] = $_POST['name'];
-						$user['surname'] = $_POST['surname'];
-						$user['login'] = $_POST['login'];
-						$user['email'] = $_POST['email'];
-
+						$user = array_merge($user, $fields);
+						
 						if(isset($_POST['delete_foto'])){
 							delete_file($user['foto']);
-							$user['foto'] = '';
 						}
 											 
 						if($foto->filepath){
 							delete_file($user['foto']);
 							$foto->save();
-							$user['foto'] = $foto->filepath;
 						}
 
-						if(Store::get('USER.id') === $user['id'])
+						if(Store::get('USER.id') == $user['id'])
 							Store::set('USER', $user);
 						
 					}

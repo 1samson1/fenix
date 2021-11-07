@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Ноя 05 2021 г., 20:52
+-- Время создания: Ноя 07 2021 г., 16:59
 -- Версия сервера: 10.3.13-MariaDB-log
 -- Версия PHP: 7.3.9
 
@@ -130,6 +130,13 @@ CREATE TABLE `lostpassword` (
   `date` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Дамп данных таблицы `lostpassword`
+--
+
+INSERT INTO `lostpassword` (`id`, `user_id`, `token`, `date`) VALUES
+(39, 12, 'fd465c3c456ba8b6cddebccb9bc558e4', 1636215653);
+
 -- --------------------------------------------------------
 
 --
@@ -164,6 +171,7 @@ INSERT INTO `news` (`id`, `autor`, `title`, `short_news`, `full_news`, `date_edi
 CREATE TABLE `recdoctor` (
   `doctor_id` int(11) UNSIGNED NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
+  `reg_time` int(10) UNSIGNED NOT NULL,
   `time` int(11) UNSIGNED NOT NULL,
   `appointment` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -172,11 +180,10 @@ CREATE TABLE `recdoctor` (
 -- Дамп данных таблицы `recdoctor`
 --
 
-INSERT INTO `recdoctor` (`doctor_id`, `user_id`, `time`, `appointment`) VALUES
-(5, 12, 1637215200, '894eff'),
-(3, 12, 1637217000, '32977a'),
-(5, 12, 1637649000, '537167'),
-(3, 12, 1639040400, '0cbdcfb1bc9a');
+INSERT INTO `recdoctor` (`doctor_id`, `user_id`, `reg_time`, `time`, `appointment`) VALUES
+(5, 12, 1636208126, 1637128800, '4cc5ef'),
+(5, 12, 1636210947, 1637217000, '80a7b9'),
+(7, 12, 1636195994, 1637217000, '523994');
 
 -- --------------------------------------------------------
 
@@ -245,6 +252,11 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(120) COLLATE utf8mb4_unicode_ci DEFAULT '',
   `surname` varchar(120) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `patronymic` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `birthday` int(10) UNSIGNED NOT NULL,
+  `gender` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `adress` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `foto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '',
   `date_reg` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -253,41 +265,43 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `group_id`, `login`, `password`, `email`, `name`, `surname`, `foto`, `date_reg`) VALUES
-(12, 1, 'Admin', '$2y$10$AYnr6y4Yn.cY1xuw4xZU2eaVvTm1/DXPjD9Gp4IZPws7kJxsHPLRO', 'ya.ya@ya.ru', 'Админ', 'Админ', 'uploads/avatars/foto_12.png', 1575825604),
-(13, 2, 'tyt', '$2y$10$BEGCZbo8x97Isq8ht7B0PuUQYwa75EDUQfquEQWZIcXRduwhMwGH.', 'rgdf@fyu.ru', 'Тут', 'Тутов', 'uploads/avatars/1636054885_ай отто под фотошопом.png', 1575825604),
-(14, 2, 'hypop', '$2y$10$CKfQJ7FZ4xpTJH4YXFVMeOuqVrv3Yj/KJf2cXgopZcWKeSnbFMBj6', 'hty@tr', '', '', '', 1575825604),
-(15, 2, 'test2', '$2y$10$trgPL1fnnglSY3djNwS5wuI55DDOo5Sk.ZLU4Q/MxCiGVU2duyqwy', 'test@test.test', 'Тестовый', 'Тестов', '', 1575825604),
-(19, 2, 'test3', '$2y$10$GV1Cwv1gMDQLZWVQSMdkN.YsOKecISXX3D8Bnxr0KjimPH05dklvK', 'fdsfsdfsd@fdsf', '', '', '', 1575825604),
-(20, 2, 'test4', '$2y$10$lL.M9yafid52HKYQ5OYo/OH1mxjzHJg0QkUARprESvk/YLEVvJYZ6', 'ghg@hjkdf', 'dsfsf', '', '', 1575825604),
-(21, 2, 'test5', '$2y$10$2BFbRYEDMku90LjfrS4Al.kyCexnvN5J6z9jHlEPsxiRgPtt/XP8a', 'fasdfjkfbds@gjhfs', 'dsfsfsdfs', '', '', 1575825604),
-(23, 2, 'hgjgjgj', '$2y$10$pi0Hkd8VUAr3XNsYBICU/OyOM3VcF4Y5KC5CId8sYBMX4uEpuZbjG', 'dfgdfgf@gdfggd', 'dfgdgdg', '', '', 1575825604),
-(25, 2, 'gfddshkjgfjk', '$2y$10$6l.hHmNFp3Y4xKlOWlNqoeRAIW4XcCQ7QhYX/MrygF9oHuP.euP/W', 'fdsfljsdfj@hkgjdf', 'sdfsdfsf', '', '', 1575825604),
-(26, 2, 'test87', '$2y$10$W1UWHA1ybyF0eNlkNuSo0.dbvBj1bQfR4215e5tOc8QbHbT2Ylg7m', 'hgfhfgh@dggdg.ru', 'dgdgdg', '', '', 1575825604),
-(27, 2, 'test88', '$2y$10$XRLbLXNq.EieUoZY8m1pxOQcqdzBO0yH0pO3.f43Od08iezs.Mbx2', 'hgfhfgh@dggdg5', 'dgdgdg', '', '', 1575825604),
-(28, 2, 'fgdffdgfdg', '$2y$10$Vp8j.e5X.9jECPgMMuZ5auewavm34kx1/oYxsG6vm7ydeBik7mVs2', 'fdgdfg@fgdfgdg', '', '', '', 1575825604),
-(29, 2, 'dfgdfgdfgdfg', '$2y$10$nWiDBkVduanxtKnVyJVUbuMQpOXBx/yVL5cYaXjJ1JheG1dftvf6y', 'rgdfg@dfgdgd', 'fghgfhf', '', '', 1575825604),
-(30, 2, 'dfgdfgdfgdfgfdgdfg', '$2y$10$UrhtHUHy/1hcDCXdzNeh0.k52mc6XDNUFCU8g957W0qotsSbr9YGK', 'rgdfg@dfgdgddfgdfg', 'fghgfhfdfg', '', '', 1575825604),
-(31, 2, 'dfgdfgdfgdfgfdgdfgfdgdfg', '$2y$10$Uc2ylGHBSftqXAMsz/AYbOsJywx4gbpNeEeX3G7R5Aqbu4IiFLGUC', 'rgdfg@dfgdgddfgdfgsdfgs', 'fghgfhfdfgsdf', '', '', 1575825604),
-(32, 2, 'dfgdfgd', '$2y$10$1sYAaCUP6SlMuEJJ4KK8J.qw.Z0IlgYb3nRhKbUEnofdIbGc93vKu', 'rgdfg@d', 'fghgfhfdfgsdf', '', '', 1575825604),
-(33, 2, 'dfgdfgddff', '$2y$10$Np3ccZSAhvsNmqLc4GmY5OJqAnAWuqDScxKVm/L5ppzYGeP6NQrpG', 'rgdfg@dsdf', 'fghgfhfdfgsdfsdf', '', '', 1575825604),
-(34, 2, 'dfsujhsdfjlhsdf', '$2y$10$HhiaKhUm9XUJFcPknTfatewwQXIN/wYc6ZQK8l2uOxRSgMoDLTCNi', 'fdkjhbsdflkn@hjf', '', '', '', 1575830181),
-(35, 2, 'sfkjhgsdfgk', '$2y$10$MOPRXxDi4tUwXy9I9GRCTujJ1bc23KHmCBqxsBr01d6k6R9wEr8RW', 's@d', 'sd', '', '', 1576773901),
-(36, 2, 'sfk', '$2y$10$DZc53gNIGdL3EUmI04/3CepW4RHyH1A2suba/p1plrq7WmjAACLfK', 's@dh', 'sd', '', '', 1576774588),
-(37, 2, 'fdsfsf', '$2y$10$nP49Z7JiAyxSIHWLTKF7cuu0DbyoZBeghcG/CR7eKf./0kBXeIWCS', 'sd@asf', 'sdd', '', '', 1576774705),
-(40, 2, 'fdsfsffdg', '$2y$10$CQJVddGT3VDNYOZQcU9.EuhNjCLQyHkKEIJ3hjaiouKA8hHkZGkv.', 'sd@asf.ds', 'sdd', '', '', 1576774913),
-(41, 2, 'fdsfsffdggfg', '$2y$10$jE2o5argpNKxiCjxnWEPheDCw5ooGCWG9tFE0Mfe4GSXMXu7OE4xO', 'sd@asf.ds.fg', 'sdd', '', '', 1576774960),
-(44, 2, 'dasfsdf', '$2y$10$/i0ywU7S/Usd2XpGypEBKOB91xUbOw/OJd6ert95THscY0Fr2gS2.', 'fdsf@dff.er', 'sfsdfs', '', '', 1576775451),
-(45, 2, 'antonina.kzrta', '$2y$10$jNKBywD0l9iVGhAgJFuYbuZX13QnF9gxcngQed.vOc58CGogS64X2', '79023988868@gsgsgsg.trt', 'gsdfgdfgdfg', '', '', 1594577359),
-(46, 2, 'test89', '$2y$10$HirQXNVEHIS08oWB5a5NdeKMY1At/RZPL8QxE/Z4fkTrt27yHT.Dq', 'test89@ya.ru', 'test89', '', '', 1614424404),
-(47, 2, 'GGWP', '$2y$10$P/l/EJEsIZa1l0nIHvZnzuIZVXg6Bg0e6o6ecqi8N6z5BA14B8y6q', 'fjsdl@fjdkls.ru', 'fjsdlkaf;j', 'jglsdf;j', '', 1614437083),
-(55, 2, 'petrvas', '$2y$10$FEb1BMMUXzR0e4gRbBPPnuMzOHnT09yr.ECkqFagQHxooxSQ/BEIC', 'petr.vas@ya.ru', 'Пётр', 'Васильев', '', 1614446372),
-(56, 2, 'Vasya', '$2y$10$7fzPe0uS7lAQ4qlqlxqSQukgBXx5nUOnHJhs.Hn76JatJZnYb5Hy2', 'vasya@ya.ru', 'Вася', 'Уткин', 'uploads/avatars/foto_56.jpg', 1620918189),
-(60, 2, 'hgdfh', '$2y$10$k7wRFpW.I82i3gSi/R0nnexV4UL9AJSaHskkw49UCMpQvtCWFcwhO', 'bfsdg@hgfdh.tu', 'hdgfhd', 'dfgh', '', 1635596797),
-(61, 3, 'regest', '$2y$10$W8fdzabN0lgIk1PvPjDYD.XVz7Nv1owxm6vCVsz8ELVygp5iQbg3K', 'regest@med.su', 'Регистратор', '', '', 1636049916),
-(62, 2, 'ghfhd', '$2y$10$z5axPcPXq6Y/AoCuq6DhU.8vsdVibUvwm/OM8uqRD4XNoiZkCI4Vm', 'hdfgh@hgh.tr', 'sdfsdf', 'sdfsdf', '', 1636051710),
-(63, 2, 'gfdgsdfgds', '$2y$10$GW7PXnNzffaqejx332BY4.bTUVO1fZiRv7G6UBkEl4yIVt4xLamhO', 'fgdsg@gfdg.tu', 'adfgrvd', 'asdfafasfasdf', 'uploads/avatars/1636051813_аватарка гта оригинал.png', 1636051813),
-(68, 2, 'hgdfghf', '$2y$10$iwwZ2sK/v.OGuW2vcLW.xeftIC.wxl6NZ3dcykVFmXSNHQlngW7kW', 'fghdfg@gfdsg.tr', 'gfsdgsd', 'sdfgs', '', 1636121267);
+INSERT INTO `users` (`id`, `group_id`, `login`, `password`, `email`, `name`, `surname`, `patronymic`, `phone`, `birthday`, `gender`, `adress`, `foto`, `date_reg`) VALUES
+(12, 1, 'Admin', '$2y$10$3z80yL7YCgWM3rQswvrwhemOibr0.bCKpL9lM22Uo.XtkQKu5ktZu', 'ya.ya@ya.ru', 'Админ', 'Админов', '', '', 0, '', '', 'uploads/avatars/foto_12.png', 1575825604),
+(13, 2, 'tyt', '$2y$10$aLjMenwbk/uqTyOJT2cUm.CzU3LY.nWWo0drL/sNmIMBQgntZ43KG', 'rgdf@fyu.ruv', 'Тут', 'Тутов', '', '', 0, '', '', 'uploads/avatars/1636054885_ай отто под фотошопом.png', 1575825604),
+(14, 2, 'hypop', '$2y$10$CKfQJ7FZ4xpTJH4YXFVMeOuqVrv3Yj/KJf2cXgopZcWKeSnbFMBj6', 'hty@tr', '', '', '', '', 0, '', '', '', 1575825604),
+(15, 2, 'test2', '$2y$10$trgPL1fnnglSY3djNwS5wuI55DDOo5Sk.ZLU4Q/MxCiGVU2duyqwy', 'test@test.test', 'Тестовый', 'Тестов', '', '', 0, '', '', '', 1575825604),
+(19, 2, 'test3', '$2y$10$GV1Cwv1gMDQLZWVQSMdkN.YsOKecISXX3D8Bnxr0KjimPH05dklvK', 'fdsfsdfsd@fdsf', '', '', '', '', 0, '', '', '', 1575825604),
+(20, 2, 'test4', '$2y$10$lL.M9yafid52HKYQ5OYo/OH1mxjzHJg0QkUARprESvk/YLEVvJYZ6', 'ghg@hjkdf', 'dsfsf', '', '', '', 0, '', '', '', 1575825604),
+(21, 2, 'test5', '$2y$10$2BFbRYEDMku90LjfrS4Al.kyCexnvN5J6z9jHlEPsxiRgPtt/XP8a', 'fasdfjkfbds@gjhfs', 'dsfsfsdfs', '', '', '', 0, '', '', '', 1575825604),
+(23, 2, 'hgjgjgj', '$2y$10$pi0Hkd8VUAr3XNsYBICU/OyOM3VcF4Y5KC5CId8sYBMX4uEpuZbjG', 'dfgdfgf@gdfggd', 'dfgdgdg', '', '', '', 0, '', '', '', 1575825604),
+(25, 2, 'gfddshkjgfjk', '$2y$10$6l.hHmNFp3Y4xKlOWlNqoeRAIW4XcCQ7QhYX/MrygF9oHuP.euP/W', 'fdsfljsdfj@hkgjdf', 'sdfsdfsf', '', '', '', 0, '', '', '', 1575825604),
+(26, 2, 'test87', '$2y$10$W1UWHA1ybyF0eNlkNuSo0.dbvBj1bQfR4215e5tOc8QbHbT2Ylg7m', 'hgfhfgh@dggdg.ru', 'dgdgdg', '', '', '', 0, '', '', '', 1575825604),
+(27, 2, 'test88', '$2y$10$XRLbLXNq.EieUoZY8m1pxOQcqdzBO0yH0pO3.f43Od08iezs.Mbx2', 'hgfhfgh@dggdg5', 'dgdgdg', '', '', '', 0, '', '', '', 1575825604),
+(28, 2, 'fgdffdgfdg', '$2y$10$Vp8j.e5X.9jECPgMMuZ5auewavm34kx1/oYxsG6vm7ydeBik7mVs2', 'fdgdfg@fgdfgdg', '', '', '', '', 0, '', '', '', 1575825604),
+(29, 2, 'dfgdfgdfgdfg', '$2y$10$nWiDBkVduanxtKnVyJVUbuMQpOXBx/yVL5cYaXjJ1JheG1dftvf6y', 'rgdfg@dfgdgd', 'fghgfhf', '', '', '', 0, '', '', '', 1575825604),
+(30, 2, 'dfgdfgdfgdfgfdgdfg', '$2y$10$UrhtHUHy/1hcDCXdzNeh0.k52mc6XDNUFCU8g957W0qotsSbr9YGK', 'rgdfg@dfgdgddfgdfg', 'fghgfhfdfg', '', '', '', 0, '', '', '', 1575825604),
+(31, 2, 'dfgdfgdfgdfgfdgdfgfdgdfg', '$2y$10$Uc2ylGHBSftqXAMsz/AYbOsJywx4gbpNeEeX3G7R5Aqbu4IiFLGUC', 'rgdfg@dfgdgddfgdfgsdfgs', 'fghgfhfdfgsdf', '', '', '', 0, '', '', '', 1575825604),
+(32, 2, 'dfgdfgd', '$2y$10$1sYAaCUP6SlMuEJJ4KK8J.qw.Z0IlgYb3nRhKbUEnofdIbGc93vKu', 'rgdfg@d', 'fghgfhfdfgsdf', '', '', '', 0, '', '', '', 1575825604),
+(33, 2, 'dfgdfgddff', '$2y$10$Np3ccZSAhvsNmqLc4GmY5OJqAnAWuqDScxKVm/L5ppzYGeP6NQrpG', 'rgdfg@dsdf', 'fghgfhfdfgsdfsdf', '', '', '', 0, '', '', '', 1575825604),
+(34, 2, 'dfsujhsdfjlhsdf', '$2y$10$HhiaKhUm9XUJFcPknTfatewwQXIN/wYc6ZQK8l2uOxRSgMoDLTCNi', 'fdkjhbsdflkn@hjf', '', '', '', '', 0, '', '', '', 1575830181),
+(35, 2, 'sfkjhgsdfgk', '$2y$10$MOPRXxDi4tUwXy9I9GRCTujJ1bc23KHmCBqxsBr01d6k6R9wEr8RW', 's@d', 'sd', '', '', '', 0, '', '', '', 1576773901),
+(36, 2, 'sfk', '$2y$10$DZc53gNIGdL3EUmI04/3CepW4RHyH1A2suba/p1plrq7WmjAACLfK', 's@dh', 'sd', '', '', '', 0, '', '', '', 1576774588),
+(37, 2, 'fdsfsf', '$2y$10$nP49Z7JiAyxSIHWLTKF7cuu0DbyoZBeghcG/CR7eKf./0kBXeIWCS', 'sd@asf', 'sdd', '', '', '', 0, '', '', '', 1576774705),
+(40, 2, 'fdsfsffdg', '$2y$10$CQJVddGT3VDNYOZQcU9.EuhNjCLQyHkKEIJ3hjaiouKA8hHkZGkv.', 'sd@asf.ds', 'sdd', '', '', '', 0, '', '', '', 1576774913),
+(41, 2, 'fdsfsffdggfg', '$2y$10$jE2o5argpNKxiCjxnWEPheDCw5ooGCWG9tFE0Mfe4GSXMXu7OE4xO', 'sd@asf.ds.fg', 'sdd', '', '', '', 0, '', '', '', 1576774960),
+(44, 2, 'dasfsdf', '$2y$10$/i0ywU7S/Usd2XpGypEBKOB91xUbOw/OJd6ert95THscY0Fr2gS2.', 'fdsf@dff.er', 'sfsdfs', '', '', '', 0, '', '', '', 1576775451),
+(45, 2, 'antonina.kzrta', '$2y$10$jNKBywD0l9iVGhAgJFuYbuZX13QnF9gxcngQed.vOc58CGogS64X2', '79023988868@gsgsgsg.trt', 'gsdfgdfgdfg', '', '', '', 0, '', '', '', 1594577359),
+(46, 2, 'test89', '$2y$10$HirQXNVEHIS08oWB5a5NdeKMY1At/RZPL8QxE/Z4fkTrt27yHT.Dq', 'test89@ya.ru', 'test89', '', '', '', 0, '', '', '', 1614424404),
+(47, 2, 'GGWP', '$2y$10$P/l/EJEsIZa1l0nIHvZnzuIZVXg6Bg0e6o6ecqi8N6z5BA14B8y6q', 'fjsdl@fjdkls.ru', 'fjsdlkaf;j', 'jglsdf;j', '', '', 0, '', '', '', 1614437083),
+(55, 2, 'petrvas', '$2y$10$FEb1BMMUXzR0e4gRbBPPnuMzOHnT09yr.ECkqFagQHxooxSQ/BEIC', 'petr.vas@ya.ru', 'Пётр', 'Васильев', '', '', 0, '', '', '', 1614446372),
+(56, 2, 'Vasya', '$2y$10$7fzPe0uS7lAQ4qlqlxqSQukgBXx5nUOnHJhs.Hn76JatJZnYb5Hy2', 'vasya@ya.ru', 'Вася', 'Уткин', '', '', 0, '', '', 'uploads/avatars/foto_56.jpg', 1620918189),
+(60, 2, 'hgdfh', '$2y$10$k7wRFpW.I82i3gSi/R0nnexV4UL9AJSaHskkw49UCMpQvtCWFcwhO', 'bfsdg@hgfdh.tu', 'hdgfhd', 'dfgh', '', '', 0, '', '', '', 1635596797),
+(61, 3, 'regest', '$2y$10$W8fdzabN0lgIk1PvPjDYD.XVz7Nv1owxm6vCVsz8ELVygp5iQbg3K', 'regest@med.su', 'Регистратор', '', '', '', 0, '', '', '', 1636049916),
+(62, 2, 'ghfhd', '$2y$10$z5axPcPXq6Y/AoCuq6DhU.8vsdVibUvwm/OM8uqRD4XNoiZkCI4Vm', 'hdfgh@hgh.tr', 'sdfsdf', 'sdfsdf', '', '', 0, '', '', '', 1636051710),
+(63, 2, 'gfdgsdfgds', '$2y$10$GW7PXnNzffaqejx332BY4.bTUVO1fZiRv7G6UBkEl4yIVt4xLamhO', 'fgdsg@gfdg.tu', 'adfgrvd', 'asdfafasfasdf', '', '', 0, '', '', 'uploads/avatars/1636051813_аватарка гта оригинал.png', 1636051813),
+(68, 2, 'hgdfghf', '$2y$10$iwwZ2sK/v.OGuW2vcLW.xeftIC.wxl6NZ3dcykVFmXSNHQlngW7kW', 'fghdfg@gfdsg.tr', 'gfsdgsd', 'sdfgs', '', '', 0, '', '', '', 1636121267),
+(69, 2, 'test_new', '$2y$10$Az5x/641xg8NJ.wqDaz70OT7CaTRQhivOOAYch8faZ7BsZsePF0dm', 'test.new@new.ru', 'Тест', 'Тестовый', 'Тестовый', '+7 (777) 777-77-77', 1637096400, 'male', 'г. Тестов', '', 1636291189),
+(70, 2, 'test_77', '$2y$10$D9t5kU3mNO9U3UVpC52VNuUxP8HD470VfQkca6o1FVIQB2rpBBtCO', 'test77@ya.ru', 'Жавод', 'Жавдо', 'Ррга', '+7 (921) 354-35-13', 1637874000, 'male', 'пваправп', '', 1636293512);
 
 -- --------------------------------------------------------
 
@@ -318,7 +332,8 @@ INSERT INTO `user_tokens` (`id`, `user_id`, `token`, `date`) VALUES
 (227, 13, '$2y$10$LDYMaq8M4MxMVMsfVs/nOOAYCisBJ9y/yNZgwk5bxySzjLy1UGqJ.', 1636055849),
 (236, 13, '$2y$10$cOegZFOz9asjrPS3vprtUO7VTd8.htdSkMIosgGF/X0DmjrhqepQq', 1636129582),
 (237, 12, '$2y$10$h9KXyesEX5uuDAAs.aMUYOE4.YJ3L1d0/xCZIVv6Vl6if4CBPx9MK', 1636129641),
-(242, 12, '$2y$10$pKTqnu.wvLK7scViqDqW9euG3A9dyjnl66mzdYhI5L7Q82bbPPUbK', 1636133211);
+(242, 12, '$2y$10$pKTqnu.wvLK7scViqDqW9euG3A9dyjnl66mzdYhI5L7Q82bbPPUbK', 1636133211),
+(263, 12, '$2y$10$Rr9Wa0EXZ0ThepH5lVLG4ucQboDBVpXX5uY4CjGTxBFENPUtWknIi', 1636293343);
 
 --
 -- Индексы сохранённых таблиц
@@ -424,7 +439,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT для таблицы `lostpassword`
 --
 ALTER TABLE `lostpassword`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT для таблицы `news`
@@ -448,13 +463,13 @@ ALTER TABLE `static`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT для таблицы `user_tokens`
 --
 ALTER TABLE `user_tokens`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=243;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=264;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

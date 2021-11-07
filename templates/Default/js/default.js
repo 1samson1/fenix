@@ -34,4 +34,9 @@ $(function () {
     })
 
     $('.opener').opener();
+    $('select').niceSelect();
+
+    $('.date').datepicker({
+        dateFormat:"dd.mm.yyyy"
+    });
 })

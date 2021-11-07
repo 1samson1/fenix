@@ -713,6 +713,10 @@ main{
     margin: 5px 0;
 }
 
+.form-picker .datepicker{
+    height: 100%;
+}  
+
 .good{
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 0 24 24' width='24px' fill='%23FFFFFF'%3e%3cpath d='M0 0h24v24H0V0z' fill='none'/%3e%3cpath d='M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z'/%3e%3c/svg%3e");
     background-color: #2fa828;
@@ -1112,7 +1116,7 @@ footer{
 
 .form-groups-inline{
     display: flex;
-    gap: 5px;
+    gap: 10px;
 }
 
 .form-control[type=file], .form-group-active .form-control[type=file]{

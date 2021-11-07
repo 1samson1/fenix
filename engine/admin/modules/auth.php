@@ -62,6 +62,7 @@
             ->select('groups.*', 'users.*')
             ->join('users', 'user_tokens.user_id', '=', 'users.id')
             ->join('groups', 'users.group_id', '=', 'groups.id')
+            ->where('user_tokens.token', '=', $_COOKIE['user_token'])
             ->first();
         
         if($user){

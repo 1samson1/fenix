@@ -21,8 +21,13 @@
 					'group_id' => Store::get('config.reg_user_group'),
 					'name' => $_POST['name'],
 					'surname' => $_POST['surname'],
+					'patronymic' => $_POST['patronymic'],
 					'login' => $_POST['login'],
 					'email' => $_POST['email'],
+					'phone' => $_POST['phone'],
+					'birthday' => strtotime($_POST['birthday']),
+					'gender' => $_POST['gender'],
+					'adress' => $_POST['adress'],
 					'password' => $db->hash($_POST['password']),
 					'date_reg' => time()
 				]);

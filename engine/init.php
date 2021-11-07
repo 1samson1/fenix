@@ -11,6 +11,8 @@
     require_once ENGINE_DIR. 'includes/functions.php'; // Подключаем важные функции 
     
     Store::load('config');
+
+    Store::load('genders');
     
     ini_set('date.timezone', Store::get('config.timezone')); // Инициализания часового пояса
 
