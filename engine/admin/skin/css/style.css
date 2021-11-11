@@ -90,6 +90,15 @@ header> .container{
     padding: 0 15px;
 }
 
+/* MEDIA HEADER *************************************** */
+@media (max-width: 720px) {
+    header{
+        position: fixed;
+        width: 100%;
+        z-index: 10;
+    }
+}
+
 /* TOPMENU ++++++++++++++++++++++++++++++++++++++ */
 
 
@@ -145,6 +154,13 @@ header> .container{
     margin-left: 5px;
 }
 
+/* MEDIA TOPMENU ********************************* */
+@media (max-width: 720px) {
+    .to-site span{
+        display: none;
+    }    
+}
+
 /* USER PANEL ======================================= */
 
 #user-panel{
@@ -189,10 +205,35 @@ header> .container{
     margin: 0;
 }
 
+/* MEDIA USER PANEL ********************************** */
+@media (max-width: 720px) {
+    #user-panel{
+        background: #eeeeee27;;
+        border-radius: none;
+        margin: 0;
+    }
+
+    .user-options{
+        position: static;
+        margin: 5px;
+        box-shadow: none;
+        border-radius: none;
+        transform: scaleY(1);
+    }
+
+    .user-option{
+        border-radius: 5px;
+    }
+}
+
 /* MAIN ======================================= */
 
-main{
-    /* margin: auto 0; */
+
+/* MEDIA MAIN ************************************ */
+@media (max-width: 720px) {
+    main{
+        padding-top: 85px;
+    }
 }
 
 /* PANELS  ++++++++++++++++++++++++++++++++++++++ */
@@ -252,6 +293,31 @@ table.list tr:hover{
 table.list th, table.list td{
     padding: 7px;
     text-align: left;    
+}
+
+/* MEDIA LIST ********************************** */
+@media (max-width: 720px) {
+    table.list tr{
+        border-bottom: 1px solid #aaa;
+    }
+
+    table.list td{
+        display: flex;
+        width: 100%;
+        border-bottom: 0;
+    }
+
+    table.list td::before{
+        content: attr(data-list-colname);
+        display: block;
+        flex: 33% 0 0;
+        margin-right: 7px;
+        font-weight: bold;
+    }
+
+    table.list th{
+        display: none;
+    }
 }
 
 /* LOGINPANEL ++++++++++++++++++++++++++++++++++++++ */
@@ -381,6 +447,13 @@ table.list th, table.list td{
     border:3px solid #eee;
     box-shadow: 1px 1px 4px 1px #777; 
     background: #fff;
+}
+
+/* MEDIA MODULES ********************************** */
+@media (max-width: 720px) {
+    .module{
+        width: 100%;
+    }
 }
 
 /* ALERTS +++++++++++++++++++++++++++++++++++++++ */
@@ -709,6 +782,18 @@ footer> .container{
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 0 24 24' width='24px' fill='%23000000'%3e%3cpath d='M0 0h24v24H0zm0 0h24v24H0zm0 0h24v24H0zm0 0h24v24H0z' fill='none'/%3e%3cpath d='M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z'/%3e%3c/svg%3e") !important;
 }
 
+/* MEDIA INPUTS ********************************* */
+@media (max-width: 720px) {
+    .form-groups-w60 .form-group, .form-groups-w60 .form-group>label:nth-child(1){
+        display: block;
+    }
+
+    .form-groups-w60 .form-group input:not(.switch),
+    .form-groups-w60 .form-group> div{
+        width: 100%;
+    }
+}
+
 /* BUTTONS +++++++++++++++++++++++++++++++++++++++++ */
 .btn{
     background-color: #1969FF;
@@ -833,6 +918,42 @@ footer> .container{
     position: relative;
 }
 
+/* MEDIA HAMBURGER MENU ***************************** */
+@media (max-width: 720px) {
+    .menu-button{
+        display: block;        
+    }
+
+    .links-left{
+        transform-origin: left center;
+        left:0;
+    }
+
+    .links-right{
+        transform-origin: right center;
+        right: 0;
+    }    
+
+    .links{
+        display: block;        
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        top:100%;
+        bottom:0;
+        z-index: 1;
+        height: calc(100vh - 100%);
+        min-width: 200px;
+        background-color: #efefef;
+        transform: scaleX(0);
+        transition: transform .5s ease;        
+    }
+
+    .opener.open> .links{
+        transform: scaleX(1);
+    }   
+}
+
 /* USER ICON ++++++++++++++++++++++++++++++++++++++ */
 
 .user-icon {    
@@ -892,122 +1013,4 @@ footer> .container{
     border:5px solid #eee;
     box-shadow: 1px 1px 4px 1px #777; 
     background: #fff;
-}
-
-/* MEDIA QUERY ================================ */
-@media (max-width: 720px) {
-
-    /* GLOBAL ************************************ */
-
-    header{
-        position: fixed;
-        width: 100%;
-        z-index: 10;
-    }
-
-    main{
-        padding-top: 85px;
-    }
-
-    /* TOPMENU ********************************* */
-
-    .to-site span{
-        display: none;
-    }    
-
-    /* LIST ********************************** */
-
-    table.list tr{
-        border-bottom: 1px solid #aaa;
-    }
-
-    table.list td{
-        display: flex;
-        width: 100%;
-        border-bottom: 0;
-    }
-
-    table.list td::before{
-        content: attr(data-list-colname);
-        display: block;
-        flex: 33% 0 0;
-        margin-right: 7px;
-        font-weight: bold;
-    }
-
-    table.list th{
-        display: none;
-    }
-
-    /* MODULES ********************************** */
-
-    .module{
-        width: 100%;
-    }
-
-    /* HAMBURGER MENU ***************************** */
-    .menu-button{
-        display: block;        
-    }
-
-    .links-left{
-        transform-origin: left center;
-        left:0;
-    }
-
-    .links-right{
-        transform-origin: right center;
-        right: 0;
-    }    
-
-    .links{
-        display: block;        
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        top:100%;
-        bottom:0;
-        z-index: 1;
-        height: calc(100vh - 100%);
-        min-width: 200px;
-        background-color: #efefef;
-        transform: scaleX(0);
-        transition: transform .5s ease;        
-    }
-
-    .opener.open> .links{
-        transform: scaleX(1);
-    }   
-
-    /* FORM-GROUPS ********************************* */
-
-    .form-groups-w60 .form-group, .form-groups-w60 .form-group>label:nth-child(1){
-        display: block;
-    }
-
-    .form-groups-w60 .form-group input:not(.switch),
-    .form-groups-w60 .form-group> div{
-        width: 100%;
-    }
-
-    /* USER PANEL ********************************** */
-
-    #user-panel{
-        background: #eeeeee27;;
-        border-radius: none;
-        margin: 0;
-    }
-
-    .user-options{
-        position: static;
-        margin: 5px;
-        box-shadow: none;
-        border-radius: none;
-        transform: scaleY(1);
-    }
-
-    .user-option{
-        border-radius: 5px;
-    }
-
 }

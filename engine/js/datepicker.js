@@ -213,7 +213,7 @@
             this.$el.on('blur.adp', this._onBlur.bind(this));
             this.$el.on('keyup.adp', this._onKeyUpGeneral.bind(this));
             $(window).on('resize.adp', this._onResize.bind(this));
-            $(window).on('scroll.adp', this._changeOrientation.bind(this));
+            if (this.opts.adaptive) $(window).on('scroll.adp', this._changeOrientation.bind(this));
             $('body').on('mouseup.adp', this._onMouseUpBody.bind(this));
         },
 
@@ -950,8 +950,11 @@
         show: function () {
             var onShow = this.opts.onShow;
 
-            this.setPosition(this.opts.position);
-            this._changeOrientation();
+            if(this.opts.adaptive){
+                this._changeOrientation();
+            } else {
+                this.setPosition(this.opts.position);
+            }
             this.$datepicker.addClass('active');
             this.visible = true;
 
@@ -1383,24 +1386,25 @@
 
         _onResize: function () {
             if (this.visible) {
-                this.setPosition();
-                this._changeOrientation()
+                if(this.opts.adaptive){
+                    this._changeOrientation();
+                } else {
+                    this.setPosition();
+                }
             }
         },
 
         _changeOrientation(e) {
-            if(this.opts.adaptive){
-                var $dp = this.$datepicker,
-                    $lenghtTop = $(this.$el).offset().top - $(window).scrollTop(),
-                    $lenghtBotton = $(window).height() - $lenghtTop - $(this.$el).outerHeight(),
-                    $position = this.opts.position.split(' ');
-        
-                if($lenghtBotton < $lenghtTop && $dp.outerHeight() >= $lenghtBotton -40){
-                    this.setPosition('top ' + $position[1]);
-                }
-                else{
-                    this.setPosition(this.opts.position);
-                }
+            var $dp = this.$datepicker,
+                $lenghtTop = $(this.$el).offset().top - $(window).scrollTop(),
+                $lenghtBotton = $(window).height() - $lenghtTop - $(this.$el).outerHeight(),
+                $position = this.opts.position.split(' ');
+    
+            if($lenghtBotton < $lenghtTop && $dp.outerHeight() >= $lenghtBotton -40){
+                this.setPosition('top ' + $position[1]);
+            }
+            else{
+                this.setPosition('bottom ' + $position[1]);
             }
         },
 

@@ -1,6 +1,5 @@
 $(function () {
     $('.opener').opener();
-    $('select').niceSelect();
 
     $('.date').datepicker({
         dateFormat:"dd.mm.yyyy"
@@ -38,4 +37,6 @@ $(function () {
         let type = input.attr('type') == 'password'? 'text' : 'password'
         input.attr('type', type)
     })
+    
+    $('select').niceSelect();
 })

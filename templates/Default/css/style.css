@@ -169,6 +169,16 @@ header{
     margin: 0 auto;
     display: block;
 }
+
+/* MEDIA HEADER ******************************* */
+@media (max-width: 720px) {
+    header{
+        position: fixed;
+        width: 100%;
+        z-index: 10;
+    }
+}
+
 /* HAMBURGER MENU ++++++++++++++++++++++++++++++++++++*/
 
 .menu-button{
@@ -236,6 +246,42 @@ header{
 
 .links{
     position: relative;
+}
+
+/* MEDIA HAMBURGER MENU ***************************** */
+@media (max-width: 720px) {
+    .menu-button{
+        display: block;        
+    }
+
+    .links-left{
+        transform-origin: left center;
+        left:0;
+    }
+
+    .links-right{
+        transform-origin: right center;
+        right: 0;
+    }    
+
+    .links{
+        display: block;        
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        top:100%;
+        bottom:0;
+        z-index: 1;
+        height: calc(100vh - 100%);
+        min-width: 200px;
+        background-color: #1969ff;
+        transform: scaleX(0);
+        transition: transform .5s ease;        
+    }
+
+    .opener.open> .links{
+        transform: scaleX(1);
+    }   
 }
 
 /* LOGIN PANEL ++++++++++++++++++++++++++++++++++++++ */
@@ -361,6 +407,27 @@ header{
     margin: 0;
 }
 
+/* MEDIA USER PANEL ********************************** */
+@media (max-width: 720px) {
+    #user-panel{
+        background: #eeeeee27;;
+        border-radius: none;
+        margin: 0;
+    }
+
+    .user-options{
+        position: static;
+        margin: 5px;
+        box-shadow: none;
+        border-radius: none;
+        transform: scaleY(1);
+    }
+
+    .user-option{
+        border-radius: 5px;
+    }
+}
+
 /* MAIN ============================================= */
 
 main{    
@@ -380,6 +447,13 @@ main{
     font-weight: bold;
     color:#777;
     padding: 15px 40px;
+}
+
+/* MEDIA MAIN ************************************ */
+@media (max-width: 720px) {
+    main{
+        padding-top: 85px;
+    }
 }
 
 
@@ -471,6 +545,13 @@ main{
     box-shadow: 1px 1px 4px 1px #777; 
 }
 
+/* MEDIA MENU-SITE ********************************** */
+@media (max-width: 720px) {
+    .menu-site__item{
+        width: 100%;
+    }
+}
+
 /* REGISTRATION +++++++++++++++++++++++++++++++++++++ */
 
 .container-reg{
@@ -478,7 +559,7 @@ main{
 }
 
 .container-reg .form-group{
-    margin: 7px 0;
+    margin: 5px 0;
 }
 
 .container-reg .title-page{
@@ -515,6 +596,10 @@ main{
 .container-profile{
     max-width: 750px;
     margin: 0 auto;
+}
+
+.container-profile .form-group{
+    margin: 5px 0;
 }
 
 .container-profile .container-fill{
@@ -580,10 +665,36 @@ main{
     margin: 1rem 0.5rem 0.5rem 0.5rem;
 }
 
+/*MEDIA  PROFILE **************************************** */
+@media (max-width: 720px) {
+    .profile-field{
+        display: block;
+    }
+
+    .profile-field:nth-child(2n){
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .profile-foto {
+        width: 100px;
+        height: 100px;
+    }
+}
+
 /* RECDOC +++++++++++++++++++++++++++++++++++++++++++ */
 
 .instruction-recdoc{
     padding:3px  22px;
+}
+
+/* MEDIA RECDOC **************************************** */
+@media (max-width: 500px) {
+    .doctor-recdoc__img {
+        width: 100px;
+        height: 100px;
+    }
 }
 
 /* SPECIALTIES ************************************* */
@@ -625,6 +736,13 @@ main{
     border-radius: 50%;
     border:3px solid #eee;
     box-shadow: 1px 1px 4px 1px #777; 
+}
+
+/* MEDIA SPECIALTIES-RECDOC ******************* */
+@media (max-width: 720px) {
+    .specialty-recdoc__item{
+        width: 100%;
+    }
 }
 
 /* DOCTORS ************************************* */
@@ -674,6 +792,13 @@ main{
     margin-left: auto;
     margin-top: auto;
     display: inline-block !important;
+}
+
+/* MEDIA DOCTORS-RECDOC ******************************* */
+@media (max-width: 720px) {
+    .doctor-recdoc__item{
+        width: 100%;
+    }
 }
 
 /* RECORDING **************************************** */
@@ -1086,8 +1211,6 @@ footer{
     height: 100%;
 }
 
-
-
 .form-group-password .form-control{
     padding-right: 37px !important;
 }
@@ -1140,6 +1263,15 @@ footer{
 
 .form-control:hover::file-selector-button {
     background-color: #00000015;
+}
+
+/* MEDIA INPUTS ************************************* */    
+
+@media (max-width: 720px) {
+    .form-groups-inline{
+        flex-direction: column;
+        gap: 0;
+    }
 }
 
 /* BUTTONS +++++++++++++++++++++++++++++++++++++++++ */
@@ -1287,120 +1419,4 @@ footer{
 
 .opener.open .user-icon::after {
     transform: rotate(-45deg);    
-}
-
-/* MEDIA ++++++++++++++++++++++++++++++++++++++++++ */
-
-@media (max-width: 720px) {
-    /* GLOBAL ************************************ */
-
-    header{
-        position: fixed;
-        width: 100%;
-        z-index: 10;
-    }
-
-    main{
-        padding-top: 85px;
-    }
-    
-    /* MENU-SITE ********************************** */
-    .menu-site__item{
-        width: 100%;
-    }
-    
-    /* INPUTS ************************************* */    
-
-    .form-groups-inline{
-        display: block;
-    }
-
-    /* HAMBURGER MENU ***************************** */
-    .menu-button{
-        display: block;        
-    }
-
-    .links-left{
-        transform-origin: left center;
-        left:0;
-    }
-
-    .links-right{
-        transform-origin: right center;
-        right: 0;
-    }    
-
-    .links{
-        display: block;        
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        top:100%;
-        bottom:0;
-        z-index: 1;
-        height: calc(100vh - 100%);
-        min-width: 200px;
-        background-color: #1969ff;
-        transform: scaleX(0);
-        transition: transform .5s ease;        
-    }
-
-    .opener.open> .links{
-        transform: scaleX(1);
-    }   
-
-    /* USER PANEL ********************************** */
-
-    #user-panel{
-        background: #eeeeee27;;
-        border-radius: none;
-        margin: 0;
-    }
-
-    .user-options{
-        position: static;
-        margin: 5px;
-        box-shadow: none;
-        border-radius: none;
-        transform: scaleY(1);
-    }
-
-    .user-option{
-        border-radius: 5px;
-    }
-
-    /* SPECIALTIES-RECDOC ******************************* */
-    .specialty-recdoc__item{
-        width: 100%;
-    }
-
-    /* DOCTORS-RECDOC ******************************* */
-    .doctor-recdoc__item{
-        width: 100%;
-    }
-
-    /* PROFILE **************************************** */
-
-    .profile-field{
-        display: block;
-    }
-
-    .profile-field:nth-child(2n){
-        margin-left: 0;
-    }
-}
-
-@media (max-width: 500px) {
-    /* PROFILE *************************************** */
-
-    .profile-foto {
-        width: 100px;
-        height: 100px;
-    }
-
-    /* RECDOC **************************************** */
-    .doctor-recdoc__img {
-        width: 100px;
-        height: 100px;
-    }
 }
