@@ -1,3 +1,9 @@
+/* 
+    https://github.com/t1m0n/air-datepicker/tree/v2
+    Air datepicker v2.2.3 with fixes by 1samson1
+
+*/
+
 ;(function (window, $, undefined) { ;(function () {
     var VERSION = '2.2.3',
         pluginName = 'datepicker',
@@ -17,12 +23,14 @@
             startDate: new Date(),
             firstDay: '',
             weekends: [6, 0],
+            mask:true,
             dateFormat: '',
             altField: '',
             altFieldDateFormat: '@',
             toggleSelected: true,
             keyboardNav: true,
 
+            adaptive: true,
             position: 'bottom left',
             offset: 12,
 
@@ -114,12 +122,6 @@
         if (!this.opts.startDate) {
             this.opts.startDate = new Date();
         }
-        
-        console.log(new Date());
-
-        if(this.el.value){
-            this.opts.startDate =  new Date( Date.parse(this.el.value));
-        }
 
         if (this.el.nodeName == 'INPUT') {
             this.elIsInput = true;
@@ -143,7 +145,9 @@
         this.maxRange = '';
         this._prevOnSelectValue = '';
 
-        this.init()
+        this.init();
+        this.makeMask();
+        this.initKeys();
     };
 
     datepicker = Datepicker;
@@ -209,6 +213,7 @@
             this.$el.on('blur.adp', this._onBlur.bind(this));
             this.$el.on('keyup.adp', this._onKeyUpGeneral.bind(this));
             $(window).on('resize.adp', this._onResize.bind(this));
+            $(window).on('scroll.adp', this._changeOrientation.bind(this));
             $('body').on('mouseup.adp', this._onMouseUpBody.bind(this));
         },
 
@@ -436,6 +441,133 @@
             }
 
             return result;
+        },
+
+        initKeys: function (){
+            this.kcodes = {
+                KEY0: 48,
+                KEY9 :57,
+                _KEY0 :96,
+                _KEY9 :105,
+                CTRLKEY :17,
+                CMDKEY :91,
+                DEL :46,
+                ENTER :13,
+                ESC :27,
+                BACKSPACE :8,
+                ARROWLEFT :37,
+                ARROWUP :38,
+                ARROWRIGHT :39,
+                ARROWDOWN :40,
+                TAB :9,
+                F5 :116,
+                AKEY :65,
+                CKEY :67,
+                VKEY :86,
+                ZKEY :90,
+                YKEY :89,
+            }
+        },
+
+        makeMask: function(){
+            if (this.opts.mask === true) {
+                this.opts.mask = this.opts.dateFormat
+                    .replace(/yyyy/ig, '9999')
+                    .replace(/MM/g, '9999')
+                    .replace(/mm/g, '19')
+                    .replace(/dd/g, '39')
+                    .replace(/hh/g, '29')
+                    .replace(/ii/g, '59');
+                
+            }
+            if (typeof(this.opts.mask) === 'string' && !this.opts.multipleDates && !this.opts.range) {
+                if (!this.isValidValue(this.opts.mask, this.$el.val())) {
+                    this.$el.val(this.opts.mask.replace(/[0-9]/g, '_'));
+                    this.setCaretPos(this.$el[0] , 0);
+                }
+                else {
+                    this._tryParseValue();
+                }
+            }
+        },
+
+        setCaretPos: function (node, pos) {
+            node = (typeof node === "string" || node instanceof String) ? options.ownerDocument.getElementById(node) : node;
+            if (!node) {
+                return false;
+            }
+            if (node.createTextRange) {
+                var textRange = node.createTextRange();
+                textRange.collapse(true);
+                textRange.moveEnd('character', pos);
+                textRange.moveStart('character', pos);
+                textRange.select();
+                return true;
+            }
+            if (node.setSelectionRange) {
+                node.setSelectionRange(pos, pos);
+                return true;
+            }
+            return false;
+        },
+
+        isValidValue: function (format, value) {
+            var mask = format
+                
+                reg = mask
+                .replace(/([\[\]\/\{\}\(\)\-\.\+]{1})/g, '\\$1')
+                .replace(/_/g, '{digit+}')
+                .replace(/([0-9]{1})/g, '{digit$1}')
+                .replace(/\{digit([0-9]{1})\}/g, '[0-$1_]{1}')
+                .replace(/\{digit[\+]\}/g, '[0-9_]{1}');
+            return (new RegExp(reg).test(value));
+        },
+
+        _ConvertToNumber: function(format, mask, date, value = null){
+            var temp = null;
+
+            if(format.indexOf(mask) > -1){
+                temp = date.substr(format.indexOf(mask),  mask.length);
+
+                if(this._isFinalNumber(temp)){
+                    return parseInt(temp);
+                }
+            }
+
+            return value;
+        },
+
+        _isFinalNumber: function(value){
+            return /\D/g.test(value) ? false : true;
+        },
+
+        _dateFormater: function(format, value){
+            var year = null, month = null, date = null, hours = 0, minutes = 0, d = null;
+            
+            year = this._ConvertToNumber(format, 'yyyy', value, year);
+            month = this._ConvertToNumber(format, 'mm', value, month);
+            date = this._ConvertToNumber(format, 'dd', value, date);
+            hours = this._ConvertToNumber(format, 'hh', value, hours);
+            minutes = this._ConvertToNumber(format, 'ii', value, minutes);
+
+            if(year && month && date){
+                return new Date(year, month -1, date, hours, minutes);
+            }
+
+            return false;
+        },
+
+        _tryParseValue: function(){
+            var value = this.$el.val(),
+                format = this.opts.dateFormat
+                mask = this.opts.mask;
+                
+            var date = this._dateFormater(format, value)
+
+            if(date){
+                this.selectDate(date);
+                this.down(date);
+            }
         },
 
         _replacer: function (str, reg, data) {
@@ -819,6 +951,7 @@
             var onShow = this.opts.onShow;
 
             this.setPosition(this.opts.position);
+            this._changeOrientation();
             this.$datepicker.addClass('active');
             this.visible = true;
 
@@ -1134,6 +1267,102 @@
             }
         },
 
+        _onEnterOrDelNumber: function(e){
+            var input = e.target,
+                val = input.value,
+                key = e.which,
+                pos = input.selectionStart,
+                selEnd = input.selectionEnd,
+                hasSel = pos !== selEnd,
+                digit;
+            
+            // get char to insert which is new character or placeholder ('_')
+            digit = (key === this.kcodes.BACKSPACE || key === this.kcodes.DEL) ? '_' :
+                String.fromCharCode((this.kcodes._KEY0 <= key && key <= this.kcodes. _KEY9) ? key - this.kcodes.KEY0 : key);
+
+            // we're deleting something, we're not at the start, and have normal cursor, move back one
+            // if we have a selection length, cursor actually sits behind deletable char, not in front
+            if (key === this.kcodes.BACKSPACE && pos && !hasSel) {
+                pos -= 1;
+            }
+            // don't stop on a separator, continue whatever direction you were going
+            //   value char - keep incrementing position while on separator char and we still have room
+            //   del char   - keep decrementing position while on separator char and we still have room
+            while (true) {
+                var maskValueAtCurPos = this.opts.mask.substr(pos, 1);
+                var posShorterThanMaskLength = pos < this.opts.mask.length;
+                var posGreaterThanZero = pos > 0;
+                var notNumberOrPlaceholder = /[^0-9_]/;
+                var curPosOnSep = notNumberOrPlaceholder.test(maskValueAtCurPos);
+                var continueMovingPosition = curPosOnSep && posShorterThanMaskLength && posGreaterThanZero
+
+                // if we hit a real char, stay where we are
+                if (!continueMovingPosition) break;
+
+                // hitting backspace in a selection, you can possibly go back any further - go forward
+                pos += (key === this.kcodes.BACKSPACE && !hasSel) ? -1 : 1;
+
+            }
+            
+            if (e.metaKey) {    // cmd has been pressed
+                pos = 0;
+                hasSel = true;
+            }
+
+            if (hasSel) {
+                // pos might have moved so re-calc length
+                var selLength = selEnd - pos
+
+                // if we have a selection length we will wipe out entire selection and replace with default template for that range
+                var defaultBlank = this.opts.mask.replace(/[0-9]/g, '_');
+                var defaultBlankSelectionReplacement = defaultBlank.substr(pos, selLength); 
+                var selReplacementRemainder = defaultBlankSelectionReplacement.substr(1) // might be empty
+
+                var valueBeforeSel = val.substr(0, pos);
+                var insertChars = digit + selReplacementRemainder;
+                var charsAfterSelection = val.substr(pos + selLength);
+
+                val = valueBeforeSel + insertChars + charsAfterSelection
+
+            } else {
+                var valueBeforeCursor = val.substr(0, pos);
+                var insertChar = digit;
+                var valueAfterNextChar = val.substr(pos + 1);
+
+                val = valueBeforeCursor + insertChar + valueAfterNextChar
+            }
+            
+            if (val.trim() === '') {
+            // if empty, set to default
+                val = defaultBlank
+            } else {
+            // if at the last character don't need to do anything
+                if (pos === this.opts.mask.length) {
+                e.preventDefault();
+                return false;
+                }
+            }
+
+            // resume cursor location
+            pos += (key === this.kcodes.BACKSPACE) ? 0 : 1;
+            // don't stop on a separator, continue whatever direction you were going
+            while (/[^0-9_]/.test(this.opts.mask.substr(pos, 1)) && pos < this.opts.mask.length && pos > 0) {
+                pos += (key === this.kcodes.BACKSPACE) ? 0 : 1;
+            }
+
+            if (this.isValidValue(this.opts.mask, val)) {
+                this.$el.val(val);
+                this.setCaretPos(e.target, pos);
+                this._tryParseValue();
+            } else if ($.trim(val) === '') {
+                this.$el.val( this.opts.mask.replace(/[0-9]/g, '_'));
+            } else {
+                this.$el.trigger('error_input');
+            }
+
+            e.preventDefault();
+        },
+
         _onMouseDownDatepicker: function (e) {
             this.inFocus = true;
         },
@@ -1155,6 +1384,23 @@
         _onResize: function () {
             if (this.visible) {
                 this.setPosition();
+                this._changeOrientation()
+            }
+        },
+
+        _changeOrientation(e) {
+            if(this.opts.adaptive){
+                var $dp = this.$datepicker,
+                    $lenghtTop = $(this.$el).offset().top - $(window).scrollTop(),
+                    $lenghtBotton = $(window).height() - $lenghtTop - $(this.$el).outerHeight(),
+                    $position = this.opts.position.split(' ');
+        
+                if($lenghtBotton < $lenghtTop && $dp.outerHeight() >= $lenghtBotton -40){
+                    this.setPosition('top ' + $position[1]);
+                }
+                else{
+                    this.setPosition(this.opts.position);
+                }
             }
         },
 
@@ -1179,10 +1425,21 @@
             if (code >= 37 && code <= 40) {
                 e.preventDefault();
                 this._focusNextCell(code);
+            }           
+
+            //Enter or Delete Numbers
+            
+            if (((code >=  this.kcodes.KEY0 && code <=  this.kcodes.KEY9)  ||
+            (code >= this.kcodes._KEY0 && code <= this.kcodes._KEY9)) || 
+            (code === this.kcodes.BACKSPACE || code === this.kcodes.DEL)) {
+                if (typeof(this.opts.mask) === 'string' && !this.opts.multipleDates && !this.opts.range) {
+                    this._onEnterOrDelNumber(e);
+                }
             }
 
             // Enter
             if (code == 13) {
+                e.preventDefault();
                 if (this.focused) {
                     if (this._getCell(this.focused).hasClass('-disabled-')) return;
                     if (this.view != this.opts.minView) {

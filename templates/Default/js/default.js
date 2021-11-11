@@ -1,4 +1,10 @@
 $(function () {
+    $('.opener').opener();
+    $('select').niceSelect();
+
+    $('.date').datepicker({
+        dateFormat:"dd.mm.yyyy"
+    });
 
     /* LOGIN PANEL SCRIPTS +++++++++++++++++++++++++++++++++++++++++++++++++++ */
     $('.login-link').on('click',function () {
@@ -32,11 +38,4 @@ $(function () {
         let type = input.attr('type') == 'password'? 'text' : 'password'
         input.attr('type', type)
     })
-
-    $('.opener').opener();
-    $('select').niceSelect();
-
-    $('.date').datepicker({
-        dateFormat:"dd.mm.yyyy"
-    });
 })

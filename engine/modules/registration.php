@@ -46,6 +46,7 @@
 	else {
 		$alerts->set_error('Ошибка', 'Регистрация не доступна!', 233);
 		Store::set('title', 'Регистрация не доступна!');
+		header('Location: /');
 	}
 
 ?>
