@@ -1398,14 +1398,17 @@
             var $dp = this.$datepicker,
                 $lenghtTop = $(this.$el).offset().top - $(window).scrollTop(),
                 $lenghtBotton = $(window).height() - $lenghtTop - $(this.$el).outerHeight(),
-                $position = this.opts.position.split(' ');
+                $position = this.opts.position.split(' '),
+                $orintation = $position[0];
     
             if($lenghtBotton < $lenghtTop && $dp.outerHeight() >= $lenghtBotton -40){
-                this.setPosition('top ' + $position[1]);
+                $orintation = 'top';
             }
             else{
-                this.setPosition('bottom ' + $position[1]);
+                $orintation = 'bottom';
             }
+            this.setPosition($orintation + ' ' + $position[1]);
+            this._setPositionClasses($orintation + ' ' + $position[1]);
         },
 
         _onMouseUpBody: function (e) {
