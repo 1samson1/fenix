@@ -40,7 +40,7 @@
             "image" => "skin/img/icon.png",
             "description" => "Управление врачами, создание и редактирование их профилей",
         ],
-        'recdoc' => [
+        'appointments' => [
             "verbose_name" => "Записи на приём",
             "image" => "skin/img/icon.png",
             "description" => "Просмотр записей на приём к врачам",

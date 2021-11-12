@@ -48,10 +48,9 @@
                             
                             if($db->result){
                                 $alerts->set_success('Востановления пароля', 'Пароль был успешно изменён.');
-                                $db->table('lostpassword')->where('user_id', '=', $lostpass['id'])->delete();
+                                $db->table('lostpassword')->where('user_id', '=', $lostpass['user_id'])->delete();
                             }
-                            else
-                                $alerts->set_error('Ошибка востановления пароля', 'Неизвестная ошибка!', $db->error_num);
+                            else $alerts->set_error('Ошибка востановления пароля', 'Неизвестная ошибка!', $db->error_num);
                             
                         }
                     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Ноя 07 2021 г., 16:59
+-- Время создания: Ноя 12 2021 г., 14:57
 -- Версия сервера: 10.3.13-MariaDB-log
 -- Версия PHP: 7.3.9
 
@@ -21,6 +21,30 @@ SET time_zone = "+00:00";
 --
 -- База данных: `medicine`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `appointments`
+--
+
+CREATE TABLE `appointments` (
+  `doctor_id` int(11) UNSIGNED NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL,
+  `reg_time` int(10) UNSIGNED NOT NULL,
+  `time` int(11) UNSIGNED NOT NULL,
+  `number` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `appointments`
+--
+
+INSERT INTO `appointments` (`doctor_id`, `user_id`, `reg_time`, `time`, `number`) VALUES
+(5, 12, 1636208126, 1637128800, '4cc5ef'),
+(10, 12, 1636717986, 1637130600, '099685'),
+(5, 12, 1636210947, 1637217000, '80a7b9'),
+(7, 12, 1636195994, 1637217000, '523994');
 
 -- --------------------------------------------------------
 
@@ -104,7 +128,7 @@ CREATE TABLE `groups` (
   `allow_comments` tinyint(1) NOT NULL,
   `allow_specialties` tinyint(1) NOT NULL,
   `allow_doctors` tinyint(1) NOT NULL,
-  `allow_recdoc` tinyint(1) NOT NULL,
+  `allow_appointments` tinyint(1) NOT NULL,
   `allow_upload_files` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -112,7 +136,7 @@ CREATE TABLE `groups` (
 -- Дамп данных таблицы `groups`
 --
 
-INSERT INTO `groups` (`id`, `group_name`, `cant_delete`, `allow_adminpanel`, `allow_settings`, `allow_static`, `allow_groups`, `allow_users`, `allow_news`, `allow_comments`, `allow_specialties`, `allow_doctors`, `allow_recdoc`, `allow_upload_files`) VALUES
+INSERT INTO `groups` (`id`, `group_name`, `cant_delete`, `allow_adminpanel`, `allow_settings`, `allow_static`, `allow_groups`, `allow_users`, `allow_news`, `allow_comments`, `allow_specialties`, `allow_doctors`, `allow_appointments`, `allow_upload_files`) VALUES
 (1, 'Администраторы', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 (2, 'Пользователи', 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (3, 'Регистраторы', 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0);
@@ -161,29 +185,6 @@ INSERT INTO `news` (`id`, `autor`, `title`, `short_news`, `full_news`, `date_edi
 (1, 12, 'В нашей клинике появился лазерный хирургический аппарат', '<p style=\"text-align: justify;\">В нашей клинике появился лазерный хирургический аппарат. Предназначен он для лечения сосудистой патологии нижних конечностей (варикозная болезнь), заболеваний прямой кишки (геморрой) и патологии лор органов.</p>', '<p style=\"text-align: justify;\">В нашей клинике появился лазерный хирургический аппарат. Предназначен он для лечения сосудистой патологии нижних конечностей (варикозная болезнь), заболеваний прямой кишки (геморрой) и патологии лор органов. Принцип действия аппарата: вена обжигается лазерным излучением изнутри, после чего происходит полное её склеивание. Спустя определённого периода времени вена перестаёт существовать.</p>\r\n<p><img src=\"/uploads/images/1634059780_IMG_1100.jpg\" alt=\"\" /></p>\r\n<p style=\"text-align: justify;\">Уникальность прибора в том, что длина волны лазера составляет 1940 нм. Это абсолютно новое течение в лазерной хирургии. Данные операции относятся к разряду малоинвазивных. Выполняются без разрезов под местным обезболивающим, имеют меньший болевой синдром и малую травматичность. После такой операции пациенты очень быстро восстанавливаются и возвращаются к привычной жизни.</p>', 1634059789, 1432874149),
 (2, 12, 'Как будут работать больницы и поликлиники с 1 по 10 мая 2021 года', '<p style=\"text-align: justify;\">Так как Указом Президента РФ общая продолжительность майских праздников составит 10 дней (с 1 по 10 мая), больницы и поликлиники изменят график работы. Уже известно, что больницы и поликлиники не будут полноценно работать все майские праздники, в том числе с 4 по 7 мая. Но продолжат работу все пункты вакцинации, а в поликлиниках организуют дежурные группы специалистов.</p>', '<p style=\"text-align: justify;\">Так как Указом Президента РФ общая продолжительность майских праздников составит 10 дней (с 1 по 10 мая), больницы и поликлиники изменят график работы. Уже известно, что больницы и поликлиники не будут полноценно работать все майские праздники, в том числе с 4 по 7 мая. Но продолжат работу все пункты вакцинации, а в поликлиниках организуют дежурные группы специалистов.</p>\r\n<p style=\"text-align: justify;\">Минтруд выпустил рекомендации о нерабочих днях с 4 по 7 мая.</p>\r\n<p style=\"text-align: justify;\"><span style=\"font-size: 14pt;\"><strong>График работы больниц и поликлиник в майские праздники 2021 года</strong></span></p>\r\n<p style=\"text-align: justify;\">Несмотря на увеличенную продолжительность майских праздников, в сфере здравоохранения продолжат работу:</p>\r\n<ul style=\"text-align: justify;\">\r\n<li>дежурные группы медиков, которые будут принимать пациентов в экстренных ситуациях в поликлиниках;</li>\r\n<li>стационары больниц, где пациенты проходят лечение;</li>\r\n<li>сотрудники скорой и неотложной помощи;</li>\r\n<li>пункты вакцинации от коронавируса.</li>\r\n</ul>\r\n<p style=\"text-align: justify;\">Таким образом, попасть на плановый прием к медицинским специалистам будет нельзя с 1 по 10 мая. Но экстренную и неотложную помощь можно получить даже в праздники.</p>\r\n<p style=\"text-align: justify;\">В каждом регионе есть круглосуточные телефоны горячих линий, где можно получить информацию о графике работы медиков в определенных больницах и поликлиниках. Также отметим, что коммерческие медицинские центры и клиники могут работать даже в нерабочие, выходные и праздничные дни мая, так как это зависит от решения руководителя.</p>\r\n<p style=\"text-align: justify;\">Еще раз напомним текст Указа президента Путина о майских праздниках 2021 года:</p>\r\n<p style=\"text-align: justify;\">В целях сохранения тенденции сокращения распространения новой коронавирусной инфекции (COVID-19), укрепления здоровья граждан Российской Федерации и в соответствии со статьей 80 Конституции Российской Федерации постановляю:</p>\r\n<ol>\r\n<li style=\"text-align: justify;\">Установить с 4 по 7 мая 2021 г. включительно нерабочие дни с сохранением за работниками заработной платы.</li>\r\n<li style=\"text-align: justify;\">Органам публичной власти, иным органам и организациям определить количество служащих и работников, обеспечивающих с 1 по 10 мая 2021 г. включительно функционирование этих органов и организаций.</li>\r\n<li style=\"text-align: justify;\">Настоящий Указ вступает в силу со дня его официального опубликования.</li>\r\n</ol>', 1622126075, 1619670949),
 (52, 12, 'Тест новости с редактором название', '<p>Тест новости с редактором короткое</p>', '<p>Тест новости с редактором полное</p>\r\n<p>&nbsp;</p>', 1633879956, 1622126377);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `recdoctor`
---
-
-CREATE TABLE `recdoctor` (
-  `doctor_id` int(11) UNSIGNED NOT NULL,
-  `user_id` int(11) UNSIGNED NOT NULL,
-  `reg_time` int(10) UNSIGNED NOT NULL,
-  `time` int(11) UNSIGNED NOT NULL,
-  `appointment` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Дамп данных таблицы `recdoctor`
---
-
-INSERT INTO `recdoctor` (`doctor_id`, `user_id`, `reg_time`, `time`, `appointment`) VALUES
-(5, 12, 1636208126, 1637128800, '4cc5ef'),
-(5, 12, 1636210947, 1637217000, '80a7b9'),
-(7, 12, 1636195994, 1637217000, '523994');
 
 -- --------------------------------------------------------
 
@@ -266,7 +267,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `group_id`, `login`, `password`, `email`, `name`, `surname`, `patronymic`, `phone`, `birthday`, `gender`, `adress`, `foto`, `date_reg`) VALUES
-(12, 1, 'Admin', '$2y$10$3z80yL7YCgWM3rQswvrwhemOibr0.bCKpL9lM22Uo.XtkQKu5ktZu', 'ya.ya@ya.ru', 'Админ', 'Админов', '', '', 0, '', '', 'uploads/avatars/foto_12.png', 1575825604),
+(12, 1, 'Admin', '$2y$10$3z80yL7YCgWM3rQswvrwhemOibr0.bCKpL9lM22Uo.XtkQKu5ktZu', 'ya.ya@ya.ru', 'Админ', 'Админов', 'Админович', '+7 (777) 777-77-77', 1636578000, 'male', '', 'uploads/avatars/foto_12.png', 1575825604),
 (13, 2, 'tyt', '$2y$10$aLjMenwbk/uqTyOJT2cUm.CzU3LY.nWWo0drL/sNmIMBQgntZ43KG', 'rgdf@fyu.ruv', 'Тут', 'Тутов', '', '', 0, '', '', 'uploads/avatars/1636054885_ай отто под фотошопом.png', 1575825604),
 (14, 2, 'hypop', '$2y$10$CKfQJ7FZ4xpTJH4YXFVMeOuqVrv3Yj/KJf2cXgopZcWKeSnbFMBj6', 'hty@tr', '', '', '', '', 0, '', '', '', 1575825604),
 (15, 2, 'test2', '$2y$10$trgPL1fnnglSY3djNwS5wuI55DDOo5Sk.ZLU4Q/MxCiGVU2duyqwy', 'test@test.test', 'Тестовый', 'Тестов', '', '', 0, '', '', '', 1575825604),
@@ -333,11 +334,24 @@ INSERT INTO `user_tokens` (`id`, `user_id`, `token`, `date`) VALUES
 (236, 13, '$2y$10$cOegZFOz9asjrPS3vprtUO7VTd8.htdSkMIosgGF/X0DmjrhqepQq', 1636129582),
 (237, 12, '$2y$10$h9KXyesEX5uuDAAs.aMUYOE4.YJ3L1d0/xCZIVv6Vl6if4CBPx9MK', 1636129641),
 (242, 12, '$2y$10$pKTqnu.wvLK7scViqDqW9euG3A9dyjnl66mzdYhI5L7Q82bbPPUbK', 1636133211),
-(263, 12, '$2y$10$Rr9Wa0EXZ0ThepH5lVLG4ucQboDBVpXX5uY4CjGTxBFENPUtWknIi', 1636293343);
+(263, 12, '$2y$10$Rr9Wa0EXZ0ThepH5lVLG4ucQboDBVpXX5uY4CjGTxBFENPUtWknIi', 1636293343),
+(264, 12, '$2y$10$8Y8ptbYd5VVEHPQnUvFcbOveemkHZkfB9uUFduAUJmOhZyxIqzr9e', 1636392639),
+(265, 12, '$2y$10$9uZ3vB4QBA05WdBx8PmpuuW14WVWmpsBg0JNIyXq5py/TDXfUwhgG', 1636400829),
+(266, 12, '$2y$10$ISJuuQqRY4CF2mZNqLFtjOWOdy4zHqdv7FROMVn0t6Nj5DQJi.iAe', 1636472389),
+(268, 12, '$2y$10$JqUQP7oB1ouEF9fDojz3HeMlX0hbv2MG1kev9sbf0ccbA2TLbkLQi', 1636555460),
+(278, 12, '$2y$10$wQOdHY7T4aixPVxbrs9SJu03V5YQFTjBhuhzzM7U/kQXTiK4aZE5K', 1636717196);
 
 --
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `appointments`
+--
+ALTER TABLE `appointments`
+  ADD PRIMARY KEY (`time`,`doctor_id`),
+  ADD KEY `recdoctor_ibfk_1` (`doctor_id`),
+  ADD KEY `recdoctor_ibfk_2` (`user_id`);
 
 --
 -- Индексы таблицы `comments`
@@ -374,14 +388,6 @@ ALTER TABLE `lostpassword`
 ALTER TABLE `news`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_users_news` (`autor`);
-
---
--- Индексы таблицы `recdoctor`
---
-ALTER TABLE `recdoctor`
-  ADD PRIMARY KEY (`time`,`doctor_id`),
-  ADD KEY `recdoctor_ibfk_1` (`doctor_id`),
-  ADD KEY `recdoctor_ibfk_2` (`user_id`);
 
 --
 -- Индексы таблицы `specialties`
@@ -469,11 +475,18 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `user_tokens`
 --
 ALTER TABLE `user_tokens`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=264;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=279;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
+
+--
+-- Ограничения внешнего ключа таблицы `appointments`
+--
+ALTER TABLE `appointments`
+  ADD CONSTRAINT `appointments_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `comments`
@@ -499,13 +512,6 @@ ALTER TABLE `lostpassword`
 --
 ALTER TABLE `news`
   ADD CONSTRAINT `FK_users_news` FOREIGN KEY (`autor`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `recdoctor`
---
-ALTER TABLE `recdoctor`
-  ADD CONSTRAINT `recdoctor_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `recdoctor_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `users`

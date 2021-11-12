@@ -12,13 +12,13 @@
                 </tr>
             </thead>
             <tbody>
-                [for rd in recdoc]
+                [for appointment in appointments]
                 <tr>
-                    <td data-list-colname="ФИО доктора:">{rd.doctor_name}</td>
-                    <td data-list-colname="Специальность врача:">{rd.doctor_specialty}</td>
-                    <td data-list-colname="Пациент:">{rd.surname} {rd.name}</td>
-                    <td data-list-colname="Дата и время записи на приём:">{filter rd.reg_time | date "d.m.Y H:i"}</td>                    
-                    <td data-list-colname="Дата и время приёма:">{filter rd.time | date "d.m.Y H:i"}</td>                    
+                    <td data-list-colname="ФИО доктора:">{appointment.doctor_name}</td>
+                    <td data-list-colname="Специальность врача:">{appointment.doctor_specialty}</td>
+                    <td data-list-colname="Пациент:">{appointment.surname} {appointment.name}</td>
+                    <td data-list-colname="Дата и время записи на приём:">{filter appointment.reg_time | date "d.m.Y H:i"}</td>                    
+                    <td data-list-colname="Дата и время приёма:">{filter appointment.time | date "d.m.Y H:i"}</td>                    
                 </tr>
                 [/for]
             </tbody>

@@ -28,8 +28,8 @@
             require_once ENGINE_DIR.'/modules/news.php';
             break;
 
-        case 'recdoc':
-            require_once ENGINE_DIR.'/modules/recdoc.php';
+        case 'appointments':
+            require_once ENGINE_DIR.'/modules/appointments.php';
             break;
         
         default:

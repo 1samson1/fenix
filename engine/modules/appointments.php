@@ -16,19 +16,19 @@
             
             if($alerts->is_empty()){
 
-                $appointment = genRandStr(6);
+                $num_appointment = genRandStr(6);
 
-                $db->table('recdoctor')->insert([
+                $db->table('appointments ')->insert([
                     'doctor_id' => $_GET['doctor'],
                     'user_id' => Store::get('USER.id'),
                     'reg_time' => time(),
-                    'appointment' => $appointment,
+                    'number' => $num_appointment,
                     'time' => strtotime($_POST['time'], strtotime( $_POST['date'] ))
                 ]);
 
                 if($db->result){
                     
-					return $appointment;
+					return $num_appointment;
 				}
 				else $alerts->set_error('Ошибка записи на приём!', 'Выбраная дата занята!', $db->error_num);
             }
@@ -36,7 +36,7 @@
         return false;
     }
 
-    if ($appointment = checkRecording()){
+    if ($num_appointment = checkRecording()){
         $step = 4;
         $doctor = $db->table('doctors')
             ->select('doctors.*', 'specialties.title as specialty')
@@ -56,12 +56,12 @@
                 Store::get('title')
             );
 
-            $tpl->save('content', 'recdoc', [
+            $tpl->save('content', 'appointments', [
                 'step' => $step,
                 'doctor' => $doctor,
                 'recdoc-data' => $_POST['date'],
                 'recdoc-time' => $_POST['time'],
-                'appointment' => $appointment
+                'number' => $num_appointment
             ]);
         }
     }
@@ -76,7 +76,7 @@
         if ($doctor) {
             $step = 3;
 
-            $tpl->save('content', 'recdoc', [
+            $tpl->save('content', 'appointments', [
                 'step' => $step,
                 'doctor' => $doctor,
                 'script' => "
@@ -107,7 +107,7 @@
     else if(isset($_GET['specialty'])){
         $step = 2;
 
-        $tpl->save('content', 'recdoc', [
+        $tpl->save('content', 'appointments', [
             'step' => $step,
             'doctors' =>  $db->table('doctors')
                 ->select('doctors.*', 'specialties.title as specialty')
@@ -123,7 +123,7 @@
 
         $step = 1;
 
-        $tpl->save('content', 'recdoc', [
+        $tpl->save('content', 'appointments', [
             'step' => $step,
             'specialties' => $db->table('specialties')->get(),
         ]);

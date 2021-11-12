@@ -37,7 +37,7 @@
                         'allow_comments' => isset($_POST['allow_comments']),
                         'allow_specialties' => isset($_POST['allow_specialties']),
                         'allow_doctors' => isset($_POST['allow_doctors']),
-                        'allow_recdoc' => isset($_POST['allow_recdoc']),
+                        'allow_appointments' => isset($_POST['allow_appointments']),
                         'allow_upload_files' => isset($_POST['allow_upload_files']),
                     ]);
 
@@ -77,7 +77,7 @@
                     'allow_comments' => isset($_POST['allow_comments']),
                     'allow_specialties' => isset($_POST['allow_specialties']),
                     'allow_doctors' => isset($_POST['allow_doctors']),
-                    'allow_recdoc' => isset($_POST['allow_recdoc']),
+                    'allow_appointments' => isset($_POST['allow_appointments']),
                     'allow_upload_files' => isset($_POST['allow_upload_files']),
                 ]);
 
