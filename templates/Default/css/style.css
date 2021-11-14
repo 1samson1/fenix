@@ -454,6 +454,11 @@ main{
     main{
         padding-top: 85px;
     }
+
+    .title-page{
+        font-size: 1.7rem;
+        padding: 10px 20px;
+    }
 }
 
 
@@ -552,6 +557,17 @@ main{
     }
 }
 
+@media (max-width: 500px) {
+    .menu-site__item__img{
+        width: 60px;
+        height: 60px;
+    }
+
+    .menu-site__item__title{ 
+        margin-bottom: 5px;
+    }   
+}
+
 /* REGISTRATION +++++++++++++++++++++++++++++++++++++ */
 
 .container-reg{
@@ -609,7 +625,7 @@ main{
 .plofile-info{
     display: flex;
     align-items: center;
-    padding: 10px 10px 25px 10px;
+    padding: 10px 0 25px 0;
 }
 
 .profile-foto{
@@ -637,6 +653,7 @@ main{
 }
 
 .profile-field span{
+    white-space: nowrap;
     font-weight: bold;
     margin-right: 5px;
 }
@@ -665,7 +682,7 @@ main{
     margin: 1rem 0.5rem 0.5rem 0.5rem;
 }
 
-/*MEDIA  PROFILE **************************************** */
+/* MEDIA PROFILE **************************************** */
 @media (max-width: 720px) {
     .profile-field{
         display: block;
@@ -680,6 +697,14 @@ main{
     .profile-foto {
         width: 100px;
         height: 100px;
+    }
+
+    .profile-name{
+        font-size: 1.4rem;
+    }
+
+    .profile-field {
+        font-size: 1rem;
     }
 }
 
@@ -745,6 +770,17 @@ main{
     }
 }
 
+@media (max-width: 500px){
+    .specialty-recdoc__item__img{
+        width: 60px;
+        height: 60px;
+    }
+
+    .specialty-recdoc__item__title{
+        margin-bottom: 5px;
+    }
+}
+
 /* DOCTORS ************************************* */
 
 .doctors-recdoc{
@@ -798,6 +834,13 @@ main{
 @media (max-width: 720px) {
     .doctor-recdoc__item{
         width: 100%;
+    }
+}
+
+@media (max-width: 500px){
+    .doctor-recdoc__item__img{
+        width: 100px;
+        height: 100px;
     }
 }
 
@@ -874,6 +917,19 @@ main{
     margin-bottom: 10px;
     font-weight: bold;    
     color: #777;   
+}
+
+/* MEDIA RECORDING  ********************************* */
+@media (max-width: 500px){
+    .doctor-recdoc__img{
+        width: 100px;
+        height: 100px;
+    }
+
+    .doctor-recdoc__title{
+        margin-bottom: 10px;
+        font-size: 1.4rem;
+    }
 }
 
 /* NEWS +++++++++++++++++++++++++++++++++++++++++++++ */

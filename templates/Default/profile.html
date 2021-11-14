@@ -5,16 +5,16 @@
         <div class="plofile-info">
             <img src="{filter user.foto | noavatar}" alt="" srcset="" class="profile-foto">
             <div class="profile-data">
-                <div class="profile-name">{user.name} {user.surname}</div>  
+                <div class="profile-name">{user.surname} {user.name} {user.patronymic}</div>  
                 <div class="profile-fields">
-                    <div  class="profile-field"><span>Логин:</span>{user.login}</div>
-                    <div  class="profile-field"><span>E-mail:</span>{user.email}</div>
+                    <div class="profile-field"><span>Логин:</span>{user.login}</div>
+                    <div class="profile-field"><span>E-mail:</span>{user.email}</div>
                 </div>
                 <div class="profile-fields">
-                    <div  class="profile-field"><span>Группа:</span>{user.group_name}</div>
+                    <div class="profile-field"><span>Группа:</span>{user.group_name}</div>
                 </div>
                 <div class="profile-fields">
-                    <div  class="profile-field"><span>Дата регистрации:</span>{filter user.date_reg | date "d.m.Y"}</div>
+                    <div class="profile-field"><span>Дата регистрации:</span>{filter user.date_reg | date "d.m.Y"}</div>
                 </div>
             </div>
         </div>

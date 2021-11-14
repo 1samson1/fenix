@@ -456,6 +456,17 @@ table.list th, table.list td{
     }
 }
 
+@media (max-width: 500px) {
+    .module__img{
+        width: 60px;
+        height: 60px;
+    }
+
+    .module__title{ 
+        margin-bottom: 5px;
+    }   
+}
+
 /* ALERTS +++++++++++++++++++++++++++++++++++++++ */
 
 .alert{
