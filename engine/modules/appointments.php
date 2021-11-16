@@ -79,26 +79,7 @@
             $tpl->save('content', 'appointments', [
                 'step' => $step,
                 'doctor' => $doctor,
-                'script' => "
-                    <script>
-                        $('.daterec').datepicker({
-                            inline:true,
-                            minDate:new Date(new Date().setDate(new Date().getDate() + 1)),
-                            maxDate: new Date(new Date().setDate(new Date().getDate() + 42)),
-                            onRenderCell: function (date, cellType) {
-                                if (cellType == 'day') {
-                                    var day = date.getDay(),days = [".$doctor['sun'].",".$doctor['mon'].",".$doctor['tue'].",".$doctor['wed'].",".$doctor['thu'].",".$doctor['fri'].",".$doctor['sat']."]
-                                        isDisabled = days[day] == 0;
-                        
-                                    return {
-                                        disabled: isDisabled
-                                    }
-                                }
-                            }
-                        })   
-                        $('.timerec').timepicker()         
-                    </script> 
-                ",
+                'script' => '<script src="/engine/js/recording.js?doctor='.$doctor['id'].'"></script>',
             ]);
 
         }
