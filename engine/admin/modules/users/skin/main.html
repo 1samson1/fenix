@@ -1,6 +1,7 @@
 <div class="container-fill">
     <div class="panel-header">Список пользователей</div>
     <div class="panel-body">
+        [if users.length > "0"]
         <table class="list">
             <thead>
                 <tr>
@@ -21,7 +22,7 @@
                         [if !user.allow_adminpanel]<span>{user.group_name}</span>[/if]
                     </td>
                     [/if]
-                    <td data-list-colname="ФИО:">{user.surname} {user.name}</td>
+                    <td data-list-colname="ФИО:">{user.surname} {user.name} {user.patronymic}</td>
                     <td data-list-colname="Дата регистрации:">{filter user.date_reg | date "d.m.Y H:i"}</td>
                     <td data-list-colname="Действия:">
                         <a href='{filter user.id | linkget "id"}' class="link-btn black tooltips" data-tooltip="Редактировать">
@@ -39,6 +40,10 @@
                 [/for]
             </tbody>
         </table>
+        [/if]
+        [if users.length = "0"]
+        <div class="list-empty">Ничего не найдено</div>
+        [/if]
     </div>
     <div class="panel-footer">
         <a href='{filter "addnew" | linkget "action"}' class="btn btn-green">Создать нового пользователя</a>

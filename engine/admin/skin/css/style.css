@@ -295,6 +295,14 @@ table.list th, table.list td{
     text-align: left;    
 }
 
+.list-empty{
+    min-height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* MEDIA LIST ********************************** */
 @media (max-width: 720px) {
     table.list tr{

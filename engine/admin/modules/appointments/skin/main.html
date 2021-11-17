@@ -1,6 +1,7 @@
 <div class="container-fill">
     <div class="panel-header">Список записей на приём к врачам</div>
     <div class="panel-body">
+        [if appointments.length > "0"]
         <table class="list">
             <thead>
                 <tr>
@@ -23,5 +24,9 @@
                 [/for]
             </tbody>
         </table>
+        [/if]
+        [if appointments.length = "0"]
+        <div class="list-empty">Ничего не найдено</div>
+        [/if]
     </div>    
 </div>

@@ -1,27 +1,29 @@
-.clock{
+.timepicker .clock{
     width: 100%;
     padding: 10px;
     color:#000;
+    font-weight: bold;
     text-align: center;
     border-bottom: 1px solid #d7d7d7;
     user-select: none;
     cursor: pointer;
 }
-.clock:hover{
+.timepicker .clock:hover{
     background: #4685fb;
     color:#fff;
 }
 
-.clock-selected, .clock-selected:hover{
+.timepicker .clock-selected, .clock-selected:hover{
     background: #0059ff;
     color:#fff !important;
 }
 
-.clock.disable {
+.timepicker .clock.disable {
     opacity: 0.7;
+    font-weight: normal;
 }
 
-.clock.disable:hover {
+.timepicker .clock.disable:hover {
     background: initial;
     color: #000;
     cursor:initial;

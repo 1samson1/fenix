@@ -1,6 +1,7 @@
 <div class="container-fill">
     <div class="panel-header">Список групп пользователей</div>
     <div class="panel-body">
+        [if groups.length > "0"]
         <table class="list">
             <thead>
                 <tr>
@@ -35,6 +36,10 @@
                 [/for]
             </tbody>
         </table>
+        [/if]
+        [if groups.length = "0"]
+        <div class="list-empty">Ничего не найдено</div>
+        [/if]
     </div>
     <div class="panel-footer">
         <a href='{filter "addnew" | linkget "action"}' class="btn btn-green">Создать новую группу</a>

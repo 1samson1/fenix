@@ -41,22 +41,20 @@
     }
 
     $.fn.timepicker = function( options ) {  
-        var settings = $.extend({
+        const defaults = {
             minHours: 8,
             maxHours: 17,
             step: 30,
-            disable: true,
+            disable: false,
             disableClock: []
-        },options);
-
-        
+        };
   
         return this.each(function() {   
             
             if(!$.data(this, pluginName))
 
                 if(this.nodeName == 'INPUT'){
-                    $.data(this, pluginName, new Timepicker(this, settings));
+                    $.data(this, pluginName, new Timepicker(this, $.extend(defaults, options)));
                 }
                 else {
                     console.error('This DOM element is not a input!', this)
