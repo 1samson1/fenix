@@ -5,14 +5,6 @@ $(function () {
         dateFormat:"dd.mm.yyyy"
     });
 
-    /* FORM INPUTS SCRIPTS +++++++++++++++++++++++++++++++++++++++++++++++++++ */
-    $('.form-group-password .password-show').on('click',function () {
-        $(this).toggleClass('password-show-hidden')
-        let input = $(this).siblings('.form-control')
-        let type = input.attr('type') == 'password'? 'text' : 'password'
-        input.attr('type', type)
-    })
-
     tinymce.init({
         selector: 'textarea',
         language:"ru",
@@ -29,4 +21,28 @@ $(function () {
         toolbar1: "formatselect fontselect fontsizeselect | link anchor unlink | image filemanager | codesample hr visualblocks code | spellchecker removeformat searchreplace fullscreen",
         toolbar2: "undo redo | copy paste pastetext | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | subscript superscript | table bullist numlist | forecolor backcolor",
     });
+
+    /* FORM INPUTS SCRIPTS +++++++++++++++++++++++++++++++++++++++++++++++++++ */
+    $('.form-group-password .password-show').on('click',function () {
+        $(this).toggleClass('password-show-hidden')
+        let input = $(this).siblings('.form-control')
+        let type = input.attr('type') == 'password'? 'text' : 'password'
+        input.attr('type', type)
+    });
+
+    /* LEADER AND FOLLOWERS CHECKBOXES +++++++++++++++++++++++++++++++++++++++++++++++++++ */
+    function checked (){
+        var inputs = $(this).siblings('.followers').find('input[type=checkbox]');
+
+        if($(this).find('input[type=checkbox]').is(':checked')){
+            inputs.attr('disabled', false);
+        } else {
+            inputs.prop('checked', false);
+            inputs.attr('disabled', true);
+        }
+    }
+
+    $('.leader').each(checked);
+    $('.leader').on('input', checked);
+    
 })

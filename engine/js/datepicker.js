@@ -213,6 +213,7 @@
             this.$el.on('blur.adp', this._onBlur.bind(this));
             this.$el.on('keyup.adp', this._onKeyUpGeneral.bind(this));
             $(window).on('resize.adp', this._onResize.bind(this));
+            $(window).on('submit.adp', this._onSubmit.bind(this));
             if (this.opts.adaptive) $(window).on('scroll.adp', this._changeOrientation.bind(this));
             $('body').on('mouseup.adp', this._onMouseUpBody.bind(this));
         },
@@ -1391,6 +1392,13 @@
                 } else {
                     this.setPosition();
                 }
+            }
+        },
+
+        _onSubmit: function (e){
+            if (!$.trim(this.$el.val()).length ||
+                    ( typeof this.opts.mask === "string" && /_/g.test( $.trim(this.$el.val()) ) ) ) {
+                this.$el.val(null);
             }
         },
 

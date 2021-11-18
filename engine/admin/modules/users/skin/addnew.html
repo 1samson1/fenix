@@ -23,29 +23,29 @@
                 [/if]
                 <div class="form-group">
                     <label for="add_surname">Фамилия:</label>
-                    <input type="text" name="surname" id="add_surname" class="form-control form-control-large">
+                    <input type="text" name="surname" id="add_surname" class="form-control form-control-large" required>
                 </div>
                 <div class="form-group">
                     <label for="add_name">Имя:</label>
-                    <input type="text" name="name" id="add_name" class="form-control form-control-large">
+                    <input type="text" name="name" id="add_name" class="form-control form-control-large" required>
                 </div>
                 <div class="form-group">
-                    <label for="patronymic">Отчество</label>                                            
+                    <label for="patronymic">Отчество:</label>                                            
                     <input class="form-control form-control-large" type="text" name="patronymic" id="patronymic" required>                        
                 </div>
                 <div class="form-group">
-                    <label for="gender">Пол</label>                                            
+                    <label for="gender">Пол:</label>                                            
                     <select name="gender" id="gender" class="right wide">
                         <option value="none">Не выбрано</option>
                         [for gender of genders]<option value="{key}">{gender}</option>[/for]                    
                     </select>                   
                 </div>
                 <div class="form-group">
-                    <label for="phone">Телефон</label>                                            
+                    <label for="phone">Телефон:</label>                                            
                     <input class="form-control phone form-control-large" type="tel" name="phone" id="phone" required>                        
                 </div>
                 <div class="form-group ">
-                    <label for="birthday">Дата рождения</label>                                            
+                    <label for="birthday">Дата рождения:</label>                                            
                     <input class="form-control date form-control-large" type="text" name="birthday" id="birthday" required>                        
                 </div>
                 <div class="form-group">

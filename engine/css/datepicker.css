@@ -176,6 +176,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   box-sizing: border-box;
+  pointer-events: none;
   font-family: Tahoma, sans-serif;
   font-size: 18px;
   color: #4a4a4a;
@@ -200,6 +201,7 @@
     -webkit-transform: translateX(-8px);
             transform: translateX(-8px); }
   .datepicker.active {
+    pointer-events: all;
     opacity: 1;
     -webkit-transform: translate(0);
             transform: translate(0);

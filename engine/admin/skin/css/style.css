@@ -43,7 +43,8 @@ body{
 
 .container-fill{
     background: #fff;   
-    box-shadow: 1px 1px 4px 1px #aaa;         
+    -webkit-box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);     
     margin: 0 auto;   
     margin-bottom: 20px; 
 }
@@ -351,12 +352,16 @@ table.list th, table.list td{
     color:#000;
 }
 
-.crumbs span:not(:first-child)::before{
+.crumbs span:not(:last-child)::after{
     display: inline-block;
     padding-right: .5rem;
     padding-left: .5rem;
     color: #6c757d;
     content: "/";
+}
+
+.crumbs span{
+    white-space: nowrap;
 }
 
 .crumbs span:last-child{
@@ -620,6 +625,9 @@ footer> .container{
     -webkit-transform: translate(80%, -50%);
     transform: translate(80%, -50%);
 }
+.switch-input:disabled + .switch-label {
+    opacity: 0.7;
+}
 
 /* TOOLTIPS +++++++++++++++++++++++++++++++++++++ */
 
@@ -660,7 +668,7 @@ footer> .container{
 
 .form-groups-w20 .form-group>label:nth-child(1){
     display: inline-block;
-    font-weight: bold;
+    color:#4b4f53;
     flex:20% 0 1;
     margin-right: 10px;
 }
@@ -674,7 +682,6 @@ footer> .container{
 
 .form-groups-w60 .form-group>label:nth-child(1){
     display: inline-block;
-    font-weight: bold;
     flex:60% 1 1;
     margin-right: 10px;
 }
@@ -702,7 +709,7 @@ footer> .container{
     border:0;
     border-bottom: 2px solid #aaa;
     margin: 10px 0;
-    padding: 10px;
+    padding: 10px 0;
     font-size: 1rem;
     outline: none;
     transition: border .3s ease ;
@@ -813,6 +820,16 @@ footer> .container{
     }
 }
 
+@media (max-width: 500px) {
+    .form-groups-w20 .form-group .form-control{
+        margin-top: 0;
+    }
+
+    .form-groups-w20 .form-group, .form-groups-w20 .form-group>label:nth-child(1){
+        display: block;
+    }
+}
+
 /* BUTTONS +++++++++++++++++++++++++++++++++++++++++ */
 .btn{
     background-color: #1969FF;
@@ -834,6 +851,10 @@ footer> .container{
 
 .btn-large{
     width: 100%;
+}
+
+.btn-small{
+    padding: 7px 12px;
 }
 
 .btn-inline{
@@ -1018,18 +1039,32 @@ footer> .container{
     display: flex;
     justify-content: center;
     width: 100%;
+    gap: 10px;
     align-items: center;
 }
 
+/* @media (max-width: 500px){
+    .wrapper{
+        flex-direction: column;
+    }
+}
+ */
 /* CICLE ++++++++++++++++++++++++++++++++++++ */
 
 .cicle{
     display: block;
     width: 150px;
     height: 150px;
-    border-radius: 50%;  
-    margin-left: 10px;  
+    border-radius: 50%;    
     border:5px solid #eee;
     box-shadow: 1px 1px 4px 1px #777; 
     background: #fff;
+}
+
+/* MEDIA CICLE ****************************** */
+@media (max-width: 720px){
+    .cicle{
+        width: 70px;
+        height: 70px;
+    }
 }
