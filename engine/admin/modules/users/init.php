@@ -145,8 +145,7 @@
             'groups' => $db->table('groups')->get()
         ], MODULE_SKIN_DIR);
 
-    }
-    else{
+    } else {
         $query = $db->table('users')
             ->select('groups.*', 'users.*')
             ->join('groups', 'users.group_id', '=', 'groups.id')
@@ -154,10 +153,59 @@
             ->orderBy('groups.id')
             ->orderBy('users.date_reg', 'desc');
 
+        if(isset($_POST['search'])) {
+            
+            if(isset($_POST['login'][0])){
+                $query->where('users.login', 'like', '%'.$_POST['login'].'%');
+            }     
+    
+            if(isset($_POST['email'][0])){
+                $query->where('users.email', 'like', '%'.$_POST['email'].'%');
+            }        
+            
+            if(isset($_POST['surname'][0])){
+                $query->where('users.surname', 'like', '%'.$_POST['surname'].'%');
+            }        
+    
+            if(isset($_POST['name'][0])){
+                $query->where('users.name', 'like', '%'.$_POST['name'].'%');
+            }        
+    
+            if(isset($_POST['patronymic'][0])){
+                $query->where('users.patronymic', 'like', '%'.$_POST['patronymic'].'%');
+            }        
+    
+            if(isset($_POST['phone'][0])){
+                $query->where('users.phone', 'like', '%'.$_POST['phone'].'%');
+            }        
+    
+            if(isset($_POST['group'][0]) and (bool) Store::get('USER.allow_groups')){
+                $query->where('users.group_id', '=', $_POST['group']);
+            }        
+    
+            if(isset($_POST['begin_birthday'][0])){
+                $query->where('users.birthday', '>=', ''.strtotime($_POST['begin_birthday']));
+            }  
+    
+            if(isset($_POST['end_birthday'][0])){
+                $query->where('users.birthday', '<', ''.strtotime($_POST['end_birthday']));
+            }    
+    
+            if(isset($_POST['begin_regdate'][0])){
+                $query->where('users.date_reg', '>=', ''.strtotime($_POST['begin_regdate']));
+            }  
+    
+            if(isset($_POST['end_regdate'][0])){
+                $query->where('users.date_reg', '<', ''.strtotime($_POST['end_regdate']));
+            }    
+        }  
+
         if( !(bool) Store::get('USER.allow_groups'))
             $query->where('groups.allow_adminpanel', '=', false);
 
         $tpl->save('content', 'main', [
+            'search' => $_POST,
+            'groups' => $db->table('groups')->get(),
             'users' => $query->get()
         ], MODULE_SKIN_DIR);
     }
