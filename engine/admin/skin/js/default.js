@@ -46,3 +46,36 @@ $(function () {
     $('.leader').on('input', checked);
     
 })
+
+/* LIST ++++++++++++++++++++++++++++++++++++++++++ */
+
+function list_submit(pn = 1, method = 'POST') {
+
+    var form;
+
+    if(document.search){
+        form = document.search;
+
+    } else {
+        form = document.createElement("form");
+        form.setAttribute("method", method);
+
+        var action = document.createElement('input');
+        action.setAttribute('type', 'hidden');
+        action.setAttribute('name', 'search');
+        form.appendChild(action);
+
+        document.body.appendChild(form);
+    }
+   
+    var pni = document.createElement("input");
+    pni.setAttribute("type", "hidden");
+    pni.setAttribute("name", 'page');
+    pni.setAttribute("value", pn);
+
+    form.appendChild(pni);
+
+    form.submit();
+
+    return false;
+}

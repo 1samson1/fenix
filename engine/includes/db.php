@@ -177,6 +177,14 @@
             );
         }
 
+        public function count(){
+            return intval(
+                $this->db->get_row(
+                    $this->db->query( $this->_constructSelect('count(*) as count'))
+                )['count']
+            );
+        }
+
         public function truncate(){
             return $this->db->query('TRUNCATE TABLE ' .$this->table. ';');
         }
@@ -255,8 +263,8 @@
             return $this;
         }
 
-        private function _constructSelect(){
-            return  'SELECT ' . $this->_selectable . ' FROM ' . $this->table 
+        private function _constructSelect( $selectable = false ){
+            return  'SELECT ' . ( $selectable ? $selectable : $this->_selectable ) . ' FROM ' . $this->table 
                 . $this->_joins 
                 . $this->_where 
                 . $this->_orderby 

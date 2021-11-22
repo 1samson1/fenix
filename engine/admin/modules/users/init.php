@@ -2,6 +2,7 @@
 
     require_once ENGINE_DIR.'/includes/checkFeild.php';
     require_once ENGINE_DIR.'/includes/upload.php';
+    require_once ENGINE_DIR.'/includes/pagination.php';
 
     if(isset($_GET['action']) and $_GET['action'] == 'delete'){
 
@@ -203,10 +204,29 @@
         if( !(bool) Store::get('USER.allow_groups'))
             $query->where('groups.allow_adminpanel', '=', false);
 
+        isset($_POST['count_on_page']) ?: $_POST['count_on_page'] = 50;
+
+        $count = $query->count();
+
+        $pagination = new Pagination(
+            function () use ($count) {
+               return $count;
+            },
+            false,
+            $_POST['count_on_page'],
+            isset($_POST['page']) ? $_POST['page'] : 1
+        );
+
+        $pagination->gen_post_tpl();
+
         $tpl->save('content', 'main', [
             'search' => $_POST,
+            'count' => $count,
             'groups' => $db->table('groups')->get(),
-            'users' => $query->get()
+            'users' => $query
+                ->offset($pagination->get_begin_item())
+                ->limit($_POST['count_on_page'])
+                ->get()
         ], MODULE_SKIN_DIR);
     }
     

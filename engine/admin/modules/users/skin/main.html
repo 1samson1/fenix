@@ -1,6 +1,6 @@
 <div class="container-fill">
     <div class="panel-header">Поиск пользователей</div>
-    <form method="POST">
+    <form method="POST" name='search'>
         <div class="panel-body">            
             <div class="search-params">
                 <div class="left-col form-groups-w20">
@@ -46,11 +46,11 @@
                         <div class="form-range">
                             <div class="form-group form-group-small">
                                 <label for="begin_birthday">От:</label>                                            
-                                <input class="form-control date" style="min-width: 130px; width: 130px;" type="text" name="begin_birthday" id="begin_birthday" value="{search.begin_birthday}">                        
+                                <input class="form-control date" type="text" name="begin_birthday" id="begin_birthday" value="{search.begin_birthday}">                        
                             </div>
                             <div class="form-group form-group-small">
                                 <label for="end_birthday">До:</label>                                            
-                                <input class="form-control date" style="min-width: 130px; width: 130px;" type="text" name="end_birthday" id="end_birthday" value="{search.end_birthday}">                        
+                                <input class="form-control date" data-position="button right" type="text" name="end_birthday" id="end_birthday" value="{search.end_birthday}">                        
                             </div>
                         </div>
                     </div>
@@ -59,25 +59,30 @@
                         <div class="form-range">
                             <div class="form-group form-group-small">
                                 <label for="begin_regdate">От:</label>                                            
-                                <input class="form-control date" style="min-width: 130px; width: 130px;" type="text" name="begin_regdate" id="begin_regdate" value="{search.begin_regdate}">                        
+                                <input class="form-control date" type="text" name="begin_regdate" id="begin_regdate" value="{search.begin_regdate}">                        
                             </div>
                             <div class="form-group form-group-small">
                                 <label for="end_regdate">До:</label>                                            
-                                <input class="form-control date" style="min-width: 130px; width: 130px;" type="text" name="end_regdate" id="end_regdate" value="{search.end_regdate}">                        
+                                <input class="form-control date" data-position="button right" type="text" name="end_regdate" id="end_regdate" value="{search.end_regdate}">                        
                             </div>
                         </div>
                     </div>
+                    <div class="form-group form-group-small">
+                        <label for="count_on_page" style="flex: 50% 0 1;">Количество пользователей на страницу::</label>                                            
+                        <input class="form-control" type="tel" name="count_on_page" id="count_on_page" value="{search.count_on_page}">                        
+                    </div>    
                 </div>
             </div>
         </div>
         <div class="panel-footer">
-            <input type="submit" class="btn" name="search" value="Поиск">
+            <button type="submit" class="btn" name="search">Поиск</button>
+            <a href="{MODULE_URL}" class="btn btn-red">Сбросить</a>
         </div>
     </form>
 </div>
 
 <div class="container-fill">
-    <div class="panel-header">Список пользователей ({users.length})</div>
+    <div class="panel-header">Список пользователей ({count})</div>
     <div class="panel-body">
         [if users.length > "0"]
         <table class="list">
@@ -125,7 +130,8 @@
         <div class="list-empty">Ничего не найдено</div>
         [/if]
     </div>
-    <div class="panel-footer">
+    <div class="panel-footer list-footer">
         <a href='{filter "addnew" | linkget "action"}' class="btn btn-green">Создать нового пользователя</a>
+        {navigation}
     </div>
 </div>

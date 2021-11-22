@@ -211,6 +211,7 @@
 
 .datepicker-inline .datepicker {
   border-color: #d7d7d7;
+  pointer-events: all;
   box-shadow: none;
   position: static;
   left: auto;

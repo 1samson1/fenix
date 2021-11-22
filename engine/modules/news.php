@@ -1,6 +1,6 @@
 <?php 
 
-    require_once ENGINE_DIR.'/modules/pagination.php';
+    require_once ENGINE_DIR.'/includes/pagination.php';
 
     if(isset($_GET['param1'])){
         
@@ -42,12 +42,12 @@
             $pagination = new Pagination(
                 function() use ($db){
                     return $db->table('comments')
-                        ->select('count(*) as count')
                         ->where('news_id', '=', $_GET['param1'])
-                        ->first();
+                        ->count();
                 },
                 '/news/'.$_GET['param1'].'/',
-                Store::get('config.count_comments_on_page')
+                Store::get('config.count_comments_on_page'),
+                isset($_GET['page'])? $_GET['page']: 1
             );
         
             $pagination->gen_tpl();
@@ -76,10 +76,11 @@
 
         $pagination = new Pagination(
             function() use ($db){
-                return $db->table('news')->select('count(*) as count')->first();
+                return $db->table('news')->count();
             },
             '/news/',
-            Store::get('config.count_news_on_page')
+            Store::get('config.count_news_on_page'),
+            isset($_GET['page'])? $_GET['page']: 1
         );
 
         $pagination->gen_tpl();
