@@ -149,10 +149,7 @@
     } else {
         $query = $db->table('users')
             ->select('groups.*', 'users.*')
-            ->join('groups', 'users.group_id', '=', 'groups.id')
-            ->orderBy('groups.allow_adminpanel', 'desc')
-            ->orderBy('groups.id')
-            ->orderBy('users.date_reg', 'desc');
+            ->join('groups', 'users.group_id', '=', 'groups.id');
 
         if(isset($_POST['search'])) {
             
@@ -204,14 +201,12 @@
         if( !(bool) Store::get('USER.allow_groups'))
             $query->where('groups.allow_adminpanel', '=', false);
 
-        isset($_POST['count_on_page']) ?: $_POST['count_on_page'] = 50;
+        (isset($_POST['count_on_page']) and $_POST['count_on_page'] > 0) ?: $_POST['count_on_page'] = 50;
 
         $count = $query->count();
 
         $pagination = new Pagination(
-            function () use ($count) {
-               return $count;
-            },
+            function () use ($count) { return $count; },
             false,
             $_POST['count_on_page'],
             isset($_POST['page']) ? $_POST['page'] : 1
@@ -224,6 +219,9 @@
             'count' => $count,
             'groups' => $db->table('groups')->get(),
             'users' => $query
+                ->orderBy('groups.allow_adminpanel', 'desc')
+                ->orderBy('groups.id')
+                ->orderBy('users.date_reg', 'desc')
                 ->offset($pagination->get_begin_item())
                 ->limit($_POST['count_on_page'])
                 ->get()

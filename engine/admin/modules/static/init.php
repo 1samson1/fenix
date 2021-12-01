@@ -1,6 +1,7 @@
 <?php
 
     require_once ENGINE_DIR.'/includes/checkFeild.php';
+    require_once ENGINE_DIR.'/includes/pagination.php';
     
     if(isset($_GET['action']) and $_GET['action'] == 'delete'){
 
@@ -85,8 +86,27 @@
 
     }
     else{
+        $query = $db->table('static');
+        
+        (isset($_POST['count_on_page']) and $_POST['count_on_page'] > 0) ?: $_POST['count_on_page'] = 50;
+        
+        $count = $query->count();
+
+        $pagination = new Pagination(
+            function () use ($count) { return $count; },
+            false,
+            $_POST['count_on_page'],
+            isset($_POST['page']) ? $_POST['page'] : 1
+        );
+    
+        $pagination->gen_post_tpl();
+
         $tpl->save('content', 'main', [
-            'statics' => $db->table('static')->get()
+            'count' => $count,
+            'statics' => $query
+                ->offset($pagination->get_begin_item())
+                ->limit($_POST['count_on_page'])    
+                ->get()
         ], MODULE_SKIN_DIR);
     }
 

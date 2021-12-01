@@ -1,5 +1,5 @@
 <div class="container-fill">
-    <div class="panel-header">Список специальностей врачей</div>
+    <div class="panel-header">Список специальностей врачей ({count})</div>
     <div class="panel-body">   
         [if specialties.length > "0"]     
         <table class="list">
@@ -34,7 +34,8 @@
         <div class="list-empty">Ничего не найдено</div>
         [/if]
     </div>
-    <div class="panel-footer">
+    <div class="panel-footer list-footer">       
         <a href='{filter "addnew" | linkget "action"}' class="btn btn-green">Добавить специальность</a>
-    </div>
+        {navigation}
+    </div> 
 </div>

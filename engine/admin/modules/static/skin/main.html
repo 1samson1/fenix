@@ -1,5 +1,5 @@
 <div class="container-fill">
-    <div class="panel-header">Список статических страниц</div>
+    <div class="panel-header">Список статических страниц ({count})</div>
     <div class="panel-body">
         [if statics.length > "0"]
         <table class="list">
@@ -40,7 +40,8 @@
         <div class="list-empty">Ничего не найдено</div>
         [/if]
     </div>
-    <div class="panel-footer">
+    <div class="panel-footer list-footer">       
         <a href='{filter "addnew" | linkget "action"}' class="btn btn-green">Создать новую страницу</a>
-    </div>
+        {navigation}
+    </div> 
 </div>

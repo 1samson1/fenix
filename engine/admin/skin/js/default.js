@@ -59,6 +59,7 @@ function list_submit(pn = 1, method = 'POST') {
     } else {
         form = document.createElement("form");
         form.setAttribute("method", method);
+        form.style.display = 'none';
 
         var action = document.createElement('input');
         action.setAttribute('type', 'hidden');

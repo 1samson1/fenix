@@ -13,7 +13,7 @@
 
         public function __construct($counter, $url, $count_items_on_page, $active){
             $this->active = $active;
-            $this->count_items_on_pages = $count_items_on_page;    
+            $this->count_items_on_pages = max(1, $count_items_on_page);    
             $this->url = $url;
 
             $this->count_items = $counter();

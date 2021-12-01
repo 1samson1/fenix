@@ -24,7 +24,7 @@
             firstDay: '',
             weekends: [6, 0],
             mask:true,
-            dateFormat: '',
+            dateFormat: "dd.mm.yyyy",
             altField: '',
             altFieldDateFormat: '@',
             toggleSelected: true,

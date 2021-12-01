@@ -1,5 +1,5 @@
 <div class="container-fill">
-    <div class="panel-header">Управление комментариями</div>
+    <div class="panel-header">Управление комментариями ({count})</div>
     <div class="panel-body">
         [if comments.length > "0"]
         <table class="list">
@@ -35,4 +35,8 @@
         <div class="list-empty">Ничего не найдено</div>
         [/if]
     </div>    
+    <div class="panel-footer list-footer">       
+        <div class="both"></div> 
+        {navigation}
+    </div> 
 </div>
