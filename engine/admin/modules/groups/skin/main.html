@@ -1,5 +1,8 @@
 <div class="container-fill">
-    <div class="panel-header">Список групп пользователей ({count})</div>
+    <div class="panel-header list-header">
+        <div class="panel-title"> Список групп пользователей ({count})</div>
+        <a href='{filter "addnew" | linkget "action"}' class="btn btn-green">Создать новую группу</a>
+    </div>
     <div class="panel-body">
         [if groups.length > "0"]
         <table class="list">
@@ -42,7 +45,7 @@
         [/if]
     </div>
     <div class="panel-footer list-footer">       
-        <a href='{filter "addnew" | linkget "action"}' class="btn btn-green">Создать новую группу</a>
+        <div class="margin"></div>
         {navigation}
     </div> 
 </div>

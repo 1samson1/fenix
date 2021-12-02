@@ -1,5 +1,8 @@
 <div class="container-fill">
-    <div class="panel-header">Список специальностей врачей ({count})</div>
+    <div class="panel-header list-header">
+        <div class="panel-title"> Список специальностей врачей ({count})</div>
+        <a href='{filter "addnew" | linkget "action"}' class="btn btn-green">Добавить специальность</a>
+    </div>
     <div class="panel-body">   
         [if specialties.length > "0"]     
         <table class="list">
@@ -35,7 +38,7 @@
         [/if]
     </div>
     <div class="panel-footer list-footer">       
-        <a href='{filter "addnew" | linkget "action"}' class="btn btn-green">Добавить специальность</a>
+        <div class="margin"></div>
         {navigation}
     </div> 
 </div>

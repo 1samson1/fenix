@@ -8,6 +8,10 @@
         ->join('doctors', 'appointments.doctor_id', '=', 'doctors.id')
         ->join('specialties', 'doctors.specialty_id', '=', 'specialties.id')
         ->join('users', 'appointments.user_id', '=', 'users.id');
+
+    if(isset($_GET['user_id'])){
+        $query->where('users.id', '=', $_GET['user_id']);
+    }
     
     if(isset($_POST['search'])) {
         

@@ -250,6 +250,7 @@ header> .container{
     padding: 5px 10px;    
 }
 
+.panel-header .btn,
 .panel-footer .btn{
     margin-top: 0;
 }
@@ -305,6 +306,7 @@ table.list th, table.list td{
     align-items: center;
 }
 
+.panel-header.list-header,
 .panel-footer.list-footer{
     display: flex;
     justify-content: space-between;
@@ -337,6 +339,7 @@ table.list th, table.list td{
 }
 
 @media (max-width: 540px) {
+    .panel-header.list-header,
     .panel-footer.list-footer{
         flex-direction: column;
         gap: 5px 0;
