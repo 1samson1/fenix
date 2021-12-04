@@ -1,0 +1,41 @@
+<div class="container-fill">
+    <div class="panel-header">Редактирование приёма</div>
+    <form action="" method="POST">
+        <div class="panel-body">
+            <div class="form-groups-w20">
+                <div class="form-group">
+                    <label for="pacient">Пациент:</label>
+                    <input class="form-control form-control-large" id="pacient" disabled value="{user.surname} {user.name} {user.patronymic}"></select>
+                </div>
+                <div class="form-group">
+                    <label for="pacient">Номер талона:</label>
+                    <input class="form-control form-control-large" id="pacient" disabled value="{appointment.number}"></select>
+                </div>
+                <div class="form-group">
+                    <label for="specialty">Специальность врача:</label>
+                    <select class="right wide" id="specialty">
+                        [for specialty in specialties]
+                        <option value="{specialty.id}" [if specialty.id = docspec] selected [/if]>{specialty.title}</option>
+                        [/for]
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="doctor">Врач:</label>
+                    <select name="doctor" class="right wide" id="doctor" required>
+                        [for doc in doctors]                        
+                        <option value="{doc.id}" [if doc.id = appointment.doctor_id] selected [/if]>{doc.name}</option>
+                        [/for]
+                    </select>
+                </div>
+                <div class="form-group form-top">
+                    <label for="time">Дата и время записи на приём:</label>
+                    <input class="form-control form-control-large" type="text" name="time" id="time" value="{appoint_time}" required>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" class="btn" name="save" value="Сохранить">
+        </div>
+    </form>
+    {script}
+</div>

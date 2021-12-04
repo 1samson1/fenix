@@ -1,0 +1,212 @@
+/* DATESTABLE ========================================== */
+
+.datestable {
+    width: 100%;
+}
+
+/* .datestable-inline {
+    max-width: 800px;
+} */
+
+.datestable * {
+    box-sizing: border-box;
+    font-family: Tahoma, sans-serif;
+}
+
+/* NAVIGATION ========================================== */
+
+.datestable--nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border: solid #E6E6E6;
+    border-width: 1px 1px 0 1px;
+}
+
+.datestable--nav-range {
+    display: flex;
+    flex-direction: column;  
+    justify-content: center;  
+    align-items: center;
+    min-height: 42px;
+}
+
+.datestable--nav-title {
+    font-size: 1.2em;
+}
+
+.datestable--nav-current {
+    background: #1969FF;
+    padding: 3px 10px;
+    border-radius: 5px;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.datestable--nav .datestable--btn {
+    font-size: 0.9em;    
+    text-transform: uppercase;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    user-select: none;
+}
+
+.datestable--nav .datestable--btn[data-action="prev"] {
+    padding-right: 10px;
+}
+
+.datestable--nav .datestable--btn[data-action="next"] {
+    padding-left: 10px;
+    flex-direction: row-reverse;
+}
+
+.datestable--nav .datestable--btn svg {
+    width: 32px;
+    height: 32px;
+}
+
+.datestable--nav .datestable--btn path {
+    fill: none;
+    stroke: #000000;
+    stroke-width: 2px;
+}
+
+@media (max-width: 630px) {
+    .datestable--nav .datestable--btn span {
+        display: none;        
+    }
+
+    .datestable--nav .datestable--btn[data-action="prev"],
+    .datestable--nav .datestable--btn[data-action="next"] {
+        padding: 0;
+    }
+}
+
+@media (max-width: 450px) {
+    .datestable--nav-title {
+        font-size: 1em;
+    }
+}
+
+/* CONTENT ============================================= */
+
+.datestable--content {
+    display: flex;
+    border-top: 1px solid #E6E6E6;
+    border-left: 1px solid #E6E6E6;
+}
+
+/* DAY ================================================== */
+
+.datestable--day {
+    width: 14.28571%;
+}
+
+@media (max-width: 450px){
+    .datestable--day .datestable--btn{
+        padding: 0;
+    }
+}
+
+/* DAY NAME ============================================= */
+
+.datestable--day-name {
+    text-align: center;
+    white-space: nowrap;
+    padding: 7px 3px;
+    border-right: 1px solid #E6E6E6;
+    border-bottom: 2px solid #E6E6E6;
+}
+
+@media (max-width: 430px){
+    .datestable--day-name {
+        font-size: 0.9em;
+    }
+}
+
+/* DAY NAME ============================================= */
+
+.datestable--day-time {
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #E6E6E6;
+    border-bottom: 1px solid #E6E6E6;
+}
+
+/* BUTTON =============================================== */
+
+.datestable--btn {
+    display: inline-block;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    text-align: center;
+    background: #EDEFEE;
+    border-color: #DCE0E3;
+    border-width: 1px 1px 3px 1px;
+    border-style: solid;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.datestable--btn:hover:not(.-disabled-) {
+    background: #e5e8eb;
+}
+
+.datestable--btn.-large- {
+    width: 199%;
+}
+
+.datestable--btn.-disabled- {
+    opacity: 0.6;
+    cursor:not-allowed;
+}
+
+/* BUTTON GREEN */
+
+.datestable--btn.-green- {
+    background: #32B436;
+    border-color: #309B33;
+    color: #fff;
+}
+
+.datestable--btn.-green-:hover:not(.-disabled-) {
+    background: #3cac3f;
+}
+
+/* BUTTON PEACH */
+
+.datestable--btn.-peach- {
+    background: #FFAF77;
+    border-color: #ffa15e;
+    color: #fff;
+}
+
+.datestable--btn.-peach-:hover:not(.-disabled-) {
+    background: #fd9f5c;
+}
+
+/* BUTTON SELECT */
+
+.datestable--btn.-select- {
+    background: #1969FF;
+    border-color: #1969FF;
+    color: #fff;
+}
+
+.datestable--btn.-select-:hover:not(.-disabled-) {
+    background: #347AFD;
+}
+
+/* BUTTON MEDIA */
+@media (max-width: 600px) {
+    .datestable--btn {
+        font-size: 0.9em;
+    }
+}

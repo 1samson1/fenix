@@ -80,3 +80,11 @@ function list_submit(pn = 1, method = 'POST') {
 
     return false;
 }
+
+function list_reset(method = 'POST') {
+    form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.style.display = 'none';
+    document.body.appendChild(form);
+    form.submit();
+}

@@ -1,5 +1,4 @@
 <?php     
-    require_once ENGINE_DIR.'/includes/functions.php';
     require_once ENGINE_DIR.'/includes/checkFeild.php';
     require_once ENGINE_DIR."/includes/mail.php";
     require_once ENGINE_DIR."/data/mailconfig.php";
