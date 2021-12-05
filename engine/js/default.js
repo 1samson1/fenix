@@ -4,6 +4,7 @@ $(function(){
         language:"ru",
         mode : "textareas",
         plugins:"link, image, paste",
+        deprecation_warnings: false,
         statusbar:false,
         menubar:false,
         branding: false,  

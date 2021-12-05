@@ -34,12 +34,18 @@
 
                     $db->table('news')->where('id', '=' , $news['id'])->update([
                         'title' => $_POST['title'],
-                        'short_news' => $_POST['short_news'],
-                        'full_news' => $_POST['full_news'],
+                        'short_news' => [
+                            'html' => true,
+                            'value' => $_POST['short_news'],
+                        ],
+                        'full_news' => [
+                            'html' => true,
+                            'value' => $_POST['full_news'],
+                        ],
                         'date_edit' => time()
                     ]);
 
-                    if($db->edit_news($_GET['id'], $_POST['title'], $_POST['short_news'], $_POST['full_news'], time())){
+                    if($db->result){
 
                         return showSuccess('Новость изменина!','Успешно изменена новость!', MODULE_URL);
 
@@ -71,8 +77,14 @@
                 $db->table('news')->insert([
                     'autor' => Store::get('USER.id'),
                     'title' => $_POST['title'],
-                    'short_news' => $_POST['short_news'],
-                    'full_news' => $_POST['full_news'],
+                    'short_news' => [
+                        'html' => true,
+                        'value' => $_POST['short_news'],
+                    ],
+                    'full_news' => [
+                        'html' => true,
+                        'value' => $_POST['full_news'],
+                    ],
                     'date_edit' => time(),
                     'date' => time()
                 ]);

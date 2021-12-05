@@ -22,12 +22,22 @@
                     'Вы не ввели текст комментария!',
                     246
                 );
+
+                $alerts->set_error_if(
+                    strlen($_POST['text']) < 20,
+                    'Ошибка добавления комментария!',
+                    'Текст комментария слишком маленький!',
+                    247
+                );
         
                 if($alerts->is_empty()){
                     $db->table('comments')->insert([
                         'news_id' => $_GET['param1'],
                         'user_id' => Store::get('USER.id'),
-                        'text' => $_POST['text'],
+                        'text' => [
+                            'html' => true,
+                            'value' => $_POST['text'],
+                        ],
                         'date' => time()
                     ]);
                     if($db->result){

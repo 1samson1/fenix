@@ -37,7 +37,10 @@
 
                     $fields = [
                         'title' => $_POST['title'],
-                        'description' => $_POST['description']
+                        'description' => [
+                            'html' => true,
+                            'value' => $_POST['description'],
+                        ],
                     ];
                     if($image->filepath)
                         $fields['image'] = $image->filepath;
@@ -79,7 +82,10 @@
 
                 $fields = [
                     'title' => $_POST['title'],
-                    'description' => $_POST['description']
+                    'description' => [
+                        'html' => true,
+                        'value' => $_POST['description'],
+                    ],
                 ];
                 if($image->filepath)
                     $fields['image'] = $image->filepath;

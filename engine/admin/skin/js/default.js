@@ -13,6 +13,7 @@ $(function () {
         height:500,                
         plugins: ["advlist autolink lists link image filemanager charmap anchor searchreplace visualblocks visualchars media nonbreaking table emoticons paste spellchecker codesample hr fullscreen"],
         statusbar:false,
+        deprecation_warnings: false,
         menubar:false,
         relative_urls:false,
         branding: false,  

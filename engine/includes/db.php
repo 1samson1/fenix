@@ -86,11 +86,17 @@
             return password_hash($value, PASSWORD_DEFAULT);
         }
 
-        public function valid_value($value){
-            if(is_bool($value))
-                return $this->bool_to_sql($value);
+        public function valid_value($val){
+            if(is_bool($val))
+                return $this->bool_to_sql($val);
+
+            if(is_array($val)){
+                if(isset($val['html']) and $val['html']){
+                    return $this->ecran($val['value']);
+                }
+            }
             
-            return $this->ecran($value);
+            return $this->ecran_html($val);
         }
 
         public function ecran($value){

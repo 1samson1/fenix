@@ -34,7 +34,10 @@
                     $db->table('static')->where('id', '=' , $static['id'])->update([
                         'url' => $_POST['url'],
                         'title' => $_POST['title'],
-                        'template' => $_POST['template'],
+                        'template' => [
+                            'html' => true,
+                            'value' => $_POST['template'],
+                        ],
                         'date_edit' => time(),
                     ]);
 
@@ -70,7 +73,10 @@
                 $db->table('static')->insert([
                     'url' => $_POST['url'],
                     'title' => $_POST['title'],
-                    'template' => $_POST['template'],
+                    'template' => [
+                        'html' => true,
+                        'value' => $_POST['template'],
+                    ],
                     'date_edit' => time(),
                     'date' => time()
                 ]);
