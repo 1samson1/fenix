@@ -28,6 +28,7 @@
             // Datestable
             timestamp: false,
             disabled: false,
+            pointers: true,
 
             // Dates
             minDate: '',
@@ -95,6 +96,10 @@
             this.body = new $.fn.datestable.Body(this, this.opts);
             this.nav = new $.fn.datestable.Navigation(this, this.opts);
 
+            if(this.opts.pointers){
+                this._buildPointers();
+            }
+
             this.inited = true;
         },
 
@@ -161,6 +166,35 @@
             this.$nav = $('.datestable--nav', this.$datestable);
 
                     
+        },
+
+        _buildPointers: function(){
+            var containerPtrs = $('<div class="pointers"></div>').appendTo(this.$datestable),
+                ptrTemplate = '' +
+                    '<div class="ptr">' +
+                    '<span class="ptr-clr"></span>' +
+                    '<span class="ptr-text"></span>' +
+                    '</div>',
+                tempPtr = null;
+
+            tempPtr = $(ptrTemplate)
+            $('.ptr-clr', tempPtr).addClass('free');
+            $('.ptr-text', tempPtr).text('- ' + this.loc.freeDates);
+            containerPtrs.append(tempPtr);
+            
+            tempPtr = $(ptrTemplate)
+            $('.ptr-clr', tempPtr).addClass('busy');
+            $('.ptr-text', tempPtr).text('- ' + this.loc.busyDates);
+            containerPtrs.append(tempPtr);
+            
+            tempPtr = $(ptrTemplate)
+            $('.ptr-clr', tempPtr).addClass('selected');
+            $('.ptr-text', tempPtr).text('- ' + this.loc.selectedDate);
+            containerPtrs.append(tempPtr);
+
+            tempPtr = $(ptrTemplate)
+            $('.ptr-text', tempPtr).text('- ' + this.loc.notWorkDates);
+            containerPtrs.append(tempPtr);
         },
 
         _syncWithMinMaxDates: function () {
@@ -325,6 +359,10 @@
             dateMonth: ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'],
             monthsShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
             today: 'Сегодня',
+            freeDates: 'свободные даты',
+            busyDates: 'занятые даты',
+            selectedDate: 'выбраная дата',
+            notWorkDates: 'не рабочие даты',
             currentWeek: 'Текущая неделя',
             clear: 'Очистить',
             dateFormat: 'd.m.Y H:i',
@@ -453,11 +491,11 @@
             }
 
             if(render.busy){
-                classes += ' -peach-';
+                classes += ' -busy-';
             }
 
             if(!render.disabled && !render.busy){
-                classes += ' -green-';
+                classes += ' -free-';
             }                
 
             if(this.d._isSelected(date)){

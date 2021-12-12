@@ -1,3 +1,22 @@
+:root{
+    --border: #E6E6E6;
+
+    --free: #32B436;
+    --freeBorder: #309B33;
+    --freeHover: #3cac3f;
+
+    --busy: #FFAF77;
+    --busyBorder: #ffa15e;
+    --busyHover: #fd9f5c;
+
+    --btn: #EDEFEE;
+    --btnBorder: #DCE0E3;
+    --btnHover: #e5e8eb;;
+
+    --selected: #1969FF;
+    --selectedDis: #347AFD;
+}
+
 /* DATESTABLE ========================================== */
 
 .datestable {
@@ -20,7 +39,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 5px;
-    border: solid #E6E6E6;
+    border: solid var(--border);
     border-width: 1px 1px 0 1px;
 }
 
@@ -37,7 +56,7 @@
 }
 
 .datestable--nav-current {
-    background: #1969FF;
+    background: var(--selected);
     padding: 3px 10px;
     border-radius: 5px;
     font-size: 0.7em;
@@ -95,8 +114,8 @@
 
 .datestable--content {
     display: flex;
-    border-top: 1px solid #E6E6E6;
-    border-left: 1px solid #E6E6E6;
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
 }
 
 /* DAY ================================================== */
@@ -117,8 +136,8 @@
     text-align: center;
     white-space: nowrap;
     padding: 7px 3px;
-    border-right: 1px solid #E6E6E6;
-    border-bottom: 2px solid #E6E6E6;
+    border-right: 1px solid var(--border);
+    border-bottom: 2px solid var(--border);
 }
 
 @media (max-width: 430px){
@@ -134,8 +153,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-right: 1px solid #E6E6E6;
-    border-bottom: 1px solid #E6E6E6;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
 
 /* BUTTON =============================================== */
@@ -147,8 +166,8 @@
     font-size: 1em;
     border-radius: 5px;
     text-align: center;
-    background: #EDEFEE;
-    border-color: #DCE0E3;
+    background: var(--btn);
+    border-color: var(--btnBorder);
     border-width: 1px 1px 3px 1px;
     border-style: solid;
     font-weight: bold;
@@ -156,7 +175,7 @@
 }
 
 .datestable--btn:hover:not(.-disabled-) {
-    background: #e5e8eb;
+    background: var(--btnHover);
 }
 
 .datestable--btn.-large- {
@@ -164,44 +183,44 @@
 }
 
 .datestable--btn.-disabled- {
-    opacity: 0.6;
+    opacity: 0.8;
     cursor:not-allowed;
 }
 
-/* BUTTON GREEN */
+/* BUTTON FREE */
 
-.datestable--btn.-green- {
-    background: #32B436;
-    border-color: #309B33;
+.datestable--btn.-free- {
+    background: var(--free);
+    border-color: var(--freeBorder);
     color: #fff;
 }
 
-.datestable--btn.-green-:hover:not(.-disabled-) {
-    background: #3cac3f;
+.datestable--btn.-free-:hover:not(.-disabled-) {
+    background: var(--freeHover);
 }
 
-/* BUTTON PEACH */
+/* BUTTON BUSY */
 
-.datestable--btn.-peach- {
-    background: #FFAF77;
-    border-color: #ffa15e;
-    color: #fff;
+.datestable--btn.-busy- {
+    background: var(--busy);
+    border-color: var(--busyBorder);
+    color: #000;
 }
 
-.datestable--btn.-peach-:hover:not(.-disabled-) {
-    background: #fd9f5c;
+.datestable--btn.-busy-:hover:not(.-disabled-) {
+    background: var(--busyHover);
 }
 
 /* BUTTON SELECT */
 
 .datestable--btn.-select- {
-    background: #1969FF;
-    border-color: #1969FF;
+    background: var(--selected);
+    border-color: var(--selected);
     color: #fff;
 }
 
 .datestable--btn.-select-:hover:not(.-disabled-) {
-    background: #347AFD;
+    background: var(--selectedDis);
 }
 
 /* BUTTON MEDIA */
@@ -209,4 +228,46 @@
     .datestable--btn {
         font-size: 0.9em;
     }
+}
+
+/* POINTERS ============================================= */
+
+.datestable .pointers {
+    border: solid var(--border);
+    border-width: 0 1px 1px 1px;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7em;
+}
+
+.datestable .ptr {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.datestable .ptr-clr {
+    display: inline-block;
+    width: 1.1em;
+    height: 1.1em;
+    background: var(--btn);
+    border: 1px solid var(--border);
+}
+
+.datestable .ptr-text {
+    font-size: 0.9em;
+}
+
+.datestable .ptr-clr.free{
+    background: var(--free);
+}
+
+.datestable .ptr-clr.selected{
+    background: var(--selected);
+}
+
+.datestable .ptr-clr.busy{
+    background: var(--busy);
+    opacity: 0.8;
 }
