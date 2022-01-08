@@ -80,8 +80,8 @@
                 ]);
 
                 if($db->result){
-
                     $mail = new Mail('lostpassword.html', array(
+                        'host_url' => Store::get('config.host_url'),
                         'title' => $head['title'],
                         'user' => $user,
                         'url_lostpassword' => Store::get('config.host_url').'/lostpassword/'.$token,

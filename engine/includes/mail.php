@@ -29,7 +29,7 @@
 
         public function render($tpl, $data){
             $tpl = preg_replace_callback(
-                '/\[\s*([A-z]+)([^]]*)\]((?:(?R)|[^\[\]]++|[\[\]])*?)\[\s*\/\1\s*\]/s',
+                '/\[\s*([A-z]++)([^\[\]]*+)\]((?>[^\[\]]+|(?R)|[\[\]])*?)\[\s*\/\1\s*\]/s',
                 function ($matches) use ($data){
                     return $this->replace_block(
                         $matches[1],
@@ -58,31 +58,40 @@
         function replace_block($block, $params, $body, $data){
             switch($block){
                 case 'if':
-                    $first = isset($params[0]) ? $this->split_or($data, $params[0]) : false;
-                    $second = isset($params[2]) ? $this->split_or($data, $params[2]) : false;
 
                     if(isset($params[1])){
                         $operator = $params[1];
+                    } elseif(strpos($params[0], '!') === false){
+                        $operator = 'equal';
                     } else {
-                        if(strpos($first, '!') === false){
-                            $operator = 'equal';
-                        } else {
-                            $first = substr($first,1);
-                            $operator = 'notequal';
-                        }
+                        $params[0] = substr($params[0], 1);
+                        $operator = 'notequal';
                     }
 
+                    $first = isset($params[0]) ? $this->split_or($data, $params[0]) : false;
+                    $second = isset($params[2]) ? $this->split_or($data, $params[2]) : false;
+
                     if($this->if( $first, $operator, $second )){
-                        return $body;
+                        return $this->render($body, $data);
                     }
                     return false;
                 
                 case 'for':
-                    return $this->for_in(
-                        $this->split_dot($data, $params[2]),
-                        $params[0],
-                        $body
-                    );
+                    if($params[1] == "in")
+                        return $this->for_in(
+                            $this->split_dot($data, $params[2]),
+                            $params[0],
+                            $body,
+                            $data
+                        );
+
+                    if($params[1] == "of")
+                        return $this->for_of(
+                            $this->split_dot($data, $params[2]),
+                            $params[0],
+                            $body,
+                            $data
+                        );
 
                 case 'block':
                     $this->set_block($params[0], $body);
@@ -108,11 +117,11 @@
                 
                 case 'debug':
                     return debug($this->split_dot($data, $params[1]));
-                    
+                
                 case 'filter':
                     return $this->filter(
                         $params[3],
-                        $this->split_dot($data, $params[1]),
+                        $this->split_or($data, $params[1]),
                         array_slice($params, 4)
                     );
 
@@ -146,13 +155,29 @@
             }
         }
 
-        public function for_in($array, $value, $body){
+        public function for_of($array, $value, $body, $data){
+            $tpl = '';
+
+            foreach($array as $key => $elm){
+                $tpl .= $this->render(
+                    $body,
+                    array_merge($data, array( 
+                        $value => $elm,
+                        'key' => $key
+                    ))
+                );
+            }
+
+            return $tpl;
+        }
+
+        public function for_in($array, $value, $body, $data){
             $tpl = '';
 
             foreach($array as $elm){
                 $tpl .= $this->render(
                     $body,
-                    array( $value => $elm)
+                    array_merge($data, array( $value => $elm))
                 );
             }
 
@@ -166,10 +191,7 @@
         public function filter($filter, $value, $params){
             switch ($filter) {
                 case 'date':
-                    return date(
-                        substr($params[0], 1, -1),
-                        $value
-                    );
+                    return date($this->wo_quotes($params[0]), $value);
             }
         }
 
@@ -201,6 +223,10 @@
             }
 
             return $temp;
+        }
+
+        public function wo_quotes($str){
+            return substr($str, 1, -1);
         }
 
         public function split($separator, $string){

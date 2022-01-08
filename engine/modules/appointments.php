@@ -45,6 +45,7 @@
         
         if ($doctor) {
             $mail = new Mail('recording.html', array(
+                'host_url' => Store::get('config.host_url'),
                 'title' => Store::get('title'),
                 'user' =>  Store::get('USER'),
                 'doctor' => $doctor,

@@ -3,7 +3,7 @@
         'settings' => [
             "verbose_name" => "Настройки системы",
             "image" => "skin/img/icon.png",
-            "description" => "Управление настройками DuckEngine",
+            "description" => "Управление настройками сайта",
         ],
         'static' => [
             "verbose_name" => "Статические страницы",
