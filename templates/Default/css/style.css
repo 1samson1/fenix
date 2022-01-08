@@ -69,33 +69,30 @@ body{
     margin: 0 auto;
 }
 
-table tr:nth-child(2n+1){
-    background: #f3f8f8;
-}
 table{
     font-size:12px;
     color:#333333;
-    width:100%;
-    outline: 1px solid #729ea5;
+    width:100%;    
     border-radius: 5px;
 }
 table th {
     font-size:17px;
     background:#1969ff;    
     color:#fff;
-    padding: 8px;
-    outline: 1px solid #fff;
+    padding: 8px;    
 }
 table tr {
     background:rgb(210, 222, 239);
 }
+table tr:nth-child(2n+1){
+    background: #f3f8f8;
+}
 table tr:hover {
-    background:#b3e7e7;
+    background:rgb(199, 206, 216);
 }
 table td {
     font-size:15px;    
-    padding: 15px 8px;
-    outline: 1px solid #729ea5;
+    padding: 15px 8px;    
 }
 table th,table td{
     text-align:left;
