@@ -24,9 +24,9 @@
                 );
 
                 $alerts->set_error_if(
-                    strlen($_POST['text']) < 20,
+                    strlen($_POST['text']) < Store::get('config.min_length_comment'),
                     'Ошибка добавления комментария!',
-                    'Текст комментария слишком маленький!',
+                    'Текст комментария слишком короткий! Минимальная длина '. Store::get('config.min_length_comment') .' символов.',
                     247
                 );
         

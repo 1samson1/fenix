@@ -15,6 +15,7 @@
         $save_conf->set_str_option('template', $_POST['template']);
         $save_conf->set_int_option('count_news_on_page', $_POST['count_news_on_page']);
         $save_conf->set_int_option('count_comments_on_page', $_POST['count_comments_on_page']);
+        $save_conf->set_int_option('min_length_comment', $_POST['min_length_comment']);
         $save_conf->set_str_option('who_send_mail', $_POST['who_send_mail']);
 
         $save_conf->save();

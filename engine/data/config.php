@@ -21,6 +21,8 @@
 
         'count_comments_on_page' => 20,
 
+        'min_length_comment' => 10,
+
         'who_send_mail' => 'admin@med.su',
     ];
 ?>

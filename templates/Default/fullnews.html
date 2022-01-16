@@ -3,7 +3,7 @@
         <div class="title-full-news">{story.title}</div>
         <div class="body-full-news">{story.body}</div>
         <div class="info-full-news">
-            <div class="date-news"> {story.date}</div>
+            <div class="date-news"> {filter story.date | date "d.m.Y"}</div>
             <div class="autor-news">{story.autor}</div>        
         </div>
     </div>
