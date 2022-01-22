@@ -122,6 +122,7 @@
             'news' => $query
                 ->offset($pagination->get_begin_item())
                 ->limit($_POST['count_on_page'])
+                ->orderBy('news.date', 'desc')
                 ->get()
         ], MODULE_SKIN_DIR);
     }

@@ -1,4 +1,4 @@
-<div class="container-fill">
+<div class="container-fill container-main">
     <div class="slider">  
         <script src="{TEMPLATE}/js/slider.js"></script>              
         <div class="slides">
@@ -8,8 +8,25 @@
             <img src="{TEMPLATE}/slides/4.jpg" alt="" class="slide">
         </div>                             
     </div>
-    <div class="title-page">Главная</div>               
+</div>
+
+<div class="container-fill container-main">    
+    <div class="container-header">Главная</div>               
     <div class="menu-site">
+        <a href="/appointments/" class="menu-site__item">                        
+            <img src="{TEMPLATE}/img/regdoc.png" alt="" class="menu-site__item__img">
+            <div class="menu-site__item__content">
+                <div class="menu-site__item__title">Записаться к врачу</div>
+                <div class="menu-site__item__text">Запись к врачу на приём.</div>
+            </div>
+        </a>
+        <a href="/static/prace/" class="menu-site__item">                        
+            <img src="{TEMPLATE}/img/price.png" alt="" class="menu-site__item__img">
+            <div class="menu-site__item__content">
+                <div class="menu-site__item__title">Прайс-лист</div>
+                <div class="menu-site__item__text">Цены на приём врачей. Другая медицинская помощь оказывается за дополнительные услуги</div>
+            </div>
+        </a>  
         <a href="/static/insurance/" class="menu-site__item">                        
             <img src="{TEMPLATE}/img/strahovka.png" alt="" class="menu-site__item__img">
             <div class="menu-site__item__content">
@@ -24,20 +41,6 @@
                 <div class="menu-site__item__text">Вся информация о донорах и возможность стать донором</div>
             </div>
         </a>
-        <a href="/static/prace/" class="menu-site__item">                        
-            <img src="{TEMPLATE}/img/price.png" alt="" class="menu-site__item__img">
-            <div class="menu-site__item__content">
-                <div class="menu-site__item__title">Прайс-лист</div>
-                <div class="menu-site__item__text">Цены на приём врачей. Другая медицинская помощь оказывается за дополнительные услуги</div>
-            </div>
-        </a>
-        <a href="/static/rating/" class="menu-site__item">                        
-            <img src="{TEMPLATE}/img/ratedoc.png" alt="" class="menu-site__item__img">
-            <div class="menu-site__item__content">
-                <div class="menu-site__item__title">Рейтинг врачей</div>
-                <div class="menu-site__item__text">Рейтинг врачей нашей больницы.</div>
-            </div>
-        </a>
         <a href="/static/information/" class="menu-site__item">                        
             <img src="{TEMPLATE}/img/hospital.png" alt="" class="menu-site__item__img">
             <div class="menu-site__item__content">
@@ -45,13 +48,25 @@
                 <div class="menu-site__item__text">Узнать о нашей больнице подробнее. План здания.</div>
             </div>
         </a>
-        <a href="/appointments/" class="menu-site__item">                        
-            <img src="{TEMPLATE}/img/regdoc.png" alt="" class="menu-site__item__img">
-            <div class="menu-site__item__content">
-                <div class="menu-site__item__title">Записаться к врачу</div>
-                <div class="menu-site__item__text">Запись к врачу на приём.</div>
+    </div>
+</div>
+
+<div class="container-fill">
+    <div class="container-header more">
+        <span>Новости</span>
+        <a href="/news/" class="link">Показать ещё +</a>
+    </div>
+    <div class="main-news">
+        [for story in news]
+        <div class="main-story">
+            <div class="main-story__title">{ story.title }</div>
+            <div class="main-story__text">{ story.body}</div>
+            <div class="main-story__info">
+                <div class="date-news">{filter story.date | date "d.m.Y"}</div>
+                <div class="btn">Подробнее</div>
             </div>
-        </a>
+        </div>
+        [/for]
     </div>
 </div>
             
