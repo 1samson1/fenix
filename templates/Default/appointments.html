@@ -1,23 +1,6 @@
 [if step = "1"]
 <div class="container-fill container-recdoc">
-    <div class="title-page">Запись к врачу</div>
-    <div class="instruction-recdoc">Для записи к врачу нужно выбрать специальность врача, к которому Вы бы хотели записаться.</div>
-    <div class="specialties-recdoc">
-        [for specialty in specialties]
-        <a href='{filter specialty.id | linkget "specialty"}' class="specialty-recdoc__item">                        
-            <img src="{filter specialty.image | noimage}" alt="" class="specialty-recdoc__item__img">
-            <div class="specialty-recdoc__item__content">
-                <div class="specialty-recdoc__item__title">{specialty.title}</div>
-                <div class="specialty-recdoc__item__text">{specialty.description}</div>
-            </div>
-        </a>  
-        [/for]
-    </div>
-</div>
-[/if]
-[if step = "2"]
-<div class="container-fill container-recdoc">
-    <div class="title-page">Запись к врачу</div>
+    <div class="container-header">Запись к врачу</div>
     <div class="instruction-recdoc">Выберите нужного Вам врача, для записи на приём.</div>
     <div class="doctors-recdoc">
         [for doctor in doctors]
@@ -37,9 +20,9 @@
     </div>   
 </div>
 [/if]
-[if step = "3"]
+[if step = "2"]
 <div class="container-fill container-recording">
-    <div class="title-page">Запись к врачу</div>
+    <div class="container-header">Запись к врачу</div>
     <div class="doctor-recdoc">      
         <img src="{filter doctor.foto | noavatar}" alt="" class="doctor-recdoc__img">
         <div class="doctor-recdoc__content">
@@ -61,7 +44,7 @@
     {script} 
 </div>      
 [/if]
-[if step = "4"]
+[if step = "3"]
 <div class="container-fill container-recording appointment">
     <div class="good"></div>
     <div class="appointment-description">

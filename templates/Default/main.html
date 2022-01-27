@@ -11,15 +11,43 @@
 </div>
 
 <div class="container-fill container-main">    
-    <div class="container-header">Основное</div>               
-    <div class="menu-site">
-        <a href="/appointments/" class="menu-site__item">                        
-            <img src="{TEMPLATE}/img/regdoc.png" alt="" class="menu-site__item__img">
-            <div class="menu-site__item__content">
-                <div class="menu-site__item__title">Записаться к врачу</div>
-                <div class="menu-site__item__text">Запись к врачу на приём.</div>
+    <div class="container-header">Записаться к врачу</div>               
+    <div class="instruction-recdoc">Для записи к врачу нужно выбрать специальность врача, к которому Вы бы хотели записаться.</div>
+    <div class="specialties-recdoc">
+        [for specialty in specialties]
+        <a href='/appointments/?specialty={specialty.id}' class="specialty-recdoc__item">                        
+            <img src="{filter specialty.image | noimage}" alt="" class="specialty-recdoc__item__img">
+            <div class="specialty-recdoc__item__content">
+                <div class="specialty-recdoc__item__title">{specialty.title}</div>
+                <div class="specialty-recdoc__item__text">{specialty.description}</div>
             </div>
-        </a>
+        </a>  
+        [/for]
+    </div>
+</div>            
+
+<div class="container-fill container-main">
+    <div class="container-header more">
+        <span>Новости</span>
+        <a href="/news/" class="link">Показать ещё +</a>
+    </div>
+    <div class="main-news">
+        [for story in news]
+        <div class="main-story">
+            <div class="main-story__title">{ story.title }</div>
+            <div class="main-story__text">{ story.body}</div>
+            <div class="main-story__info">
+                <div class="date-news">{filter story.date | date "d.m.Y"}</div>
+                <a href="/news/{story.id}" class="btn">Подробнее</a>
+            </div>
+        </div>
+        [/for]
+    </div>
+</div>
+
+<div class="container-fill container-main"> 
+    <div class="container-header">Информация</div>
+    <div class="menu-site">        
         <a href="/static/prace/" class="menu-site__item">                        
             <img src="{TEMPLATE}/img/price.png" alt="" class="menu-site__item__img">
             <div class="menu-site__item__content">
@@ -48,25 +76,6 @@
                 <div class="menu-site__item__text">Узнать о нашей больнице подробнее. План здания.</div>
             </div>
         </a>
-    </div>
-</div>
-
-<div class="container-fill">
-    <div class="container-header more">
-        <span>Новости</span>
-        <a href="/news/" class="link">Показать ещё +</a>
-    </div>
-    <div class="main-news">
-        [for story in news]
-        <div class="main-story">
-            <div class="main-story__title">{ story.title }</div>
-            <div class="main-story__text">{ story.body}</div>
-            <div class="main-story__info">
-                <div class="date-news">{filter story.date | date "d.m.Y"}</div>
-                <div class="btn">Подробнее</div>
-            </div>
-        </div>
-        [/for]
     </div>
 </div>
             

@@ -36,7 +36,7 @@
     }
 
     if ($num_appointment = checkRecording()){
-        $step = 4;
+        $step = 3;
         $doctor = $db->table('doctors')
             ->select('doctors.*', 'specialties.title as specialty')
             ->join('specialties', 'doctors.specialty_id', '=', 'specialties.id')
@@ -74,7 +74,7 @@
             ->first();
         
         if ($doctor) {
-            $step = 3;
+            $step = 2;
 
             $tpl->save('content', 'appointments', [
                 'step' => $step,
@@ -83,10 +83,13 @@
             ]);
 
         }
-        else showSpecialties();	
+        else {
+            $alerts->set_error('Oшибка', 'Такого врача не существует!', 404);
+		    Store::set('title', 'Врач не найден');
+        }	
     }
     else if(isset($_GET['specialty'])){
-        $step = 2;
+        $step = 1;
 
         $tpl->save('content', 'appointments', [
             'step' => $step,
@@ -97,17 +100,8 @@
                 ->get()
         ]);
     }
-    else showSpecialties();
-
-    function showSpecialties(){
-        global $step,$tpl,$db;
-
-        $step = 1;
-
-        $tpl->save('content', 'appointments', [
-            'step' => $step,
-            'specialties' => $db->table('specialties')->get(),
-        ]);
+    else {
+        $alerts->set_error('Oшибка', 'Такой специальности не существует!', 404);
+		Store::set('title', 'Специальность не найдена');
     }
-    
 ?>
