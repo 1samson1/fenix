@@ -8,12 +8,12 @@
     user-select: none;
     cursor: pointer;
 }
-.timepicker .clock:hover{
+.timepicker .clock:hover:not(.clock-selected){
     background: #4685fb;
     color:#fff;
 }
 
-.timepicker .clock-selected, .clock-selected:hover{
+.timepicker .clock-selected{
     background: #0059ff;
     color:#fff !important;
 }

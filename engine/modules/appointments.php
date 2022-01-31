@@ -12,6 +12,15 @@
             $alerts->set_error_if(!CheckField::empty($_POST['date']), 'Ошибка!', 'Вы не выбрали дату!', 248);
 
             $alerts->set_error_if(!CheckField::empty($_POST['time']), 'Ошибка!', 'Вы не выбрали время!', 249);
+
+            $last_appointment = $db->table('appointments')
+                ->where("doctor_id", '=', $_GET['doctor'])
+                ->where("user_id", '=', Store::get('USER.id'))
+                ->where('time', '>', strtotime($_POST['date']))
+                ->where('time', '<' , strtotime($_POST['date']) + 86400)
+                ->get();
+
+            $alerts->set_error_if($last_appointment, 'Ошибка записи!', 'Вы уже записаны к этому врачу на выбранную дату!', 249);
             
             if($alerts->is_empty()){
 

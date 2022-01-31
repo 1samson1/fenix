@@ -3,16 +3,22 @@
     require_once ENGINE_DIR.'/includes/checkFeild.php';
     require_once ENGINE_DIR.'/includes/pagination.php';
 
+    if(isset($_GET['user_id'])){
+        $return_to = addGetParam('user_id', $_GET['user_id'], MODULE_URL);
+    } else {
+        $return_to = MODULE_URL;
+    }
+
     if(isset($_GET['action']) and $_GET['action'] == 'delete'){
 
         if($db->table('appointments')->where('number', '=', $_GET['delete'])->delete()){
-            showSuccess('Запись на приём удалена!','Выбраная запись успешно удалена!', MODULE_URL);
+            showSuccess('Запись на приём удалена!','Выбраная запись успешно удалена!', $return_to);
         }
-        else showError('Ошибка удаления!', 'Неизвестная ошибка!', MODULE_URL);
+        else showError('Ошибка удаления!', 'Неизвестная ошибка!', $return_to);
 
     } elseif(isset($_GET['delete'])){
 
-        showConfirm('Удаление записи на приём', 'Вы действительно хотите удалить выбранную запись?', addGetParam('action','delete'), MODULE_URL);
+        showConfirm('Удаление записи на приём', 'Вы действительно хотите удалить выбранную запись?', addGetParam('action','delete'), $return_to);
     
     } elseif(isset($_GET['edit'])){
 
@@ -31,7 +37,7 @@
     
                     if($db->result){
                         
-                        return showSuccess('Редактирование приёма','Приём успешно отредактирован!', MODULE_URL);
+                        return showSuccess('Редактирование приёма','Приём успешно отредактирован!', $return_to);
                     }
                     else return showError('Ошибка записи на приём!', 'Выбраная дата занята!', $_REQUEST);
                 }
@@ -70,7 +76,7 @@
 
                 if($db->result){
                     
-                    return showSuccess('Запись на приём','Пользователь успешно записан на приём!', MODULE_URL);
+                    return showSuccess('Запись на приём','Пользователь успешно записан на приём!', $return_to);
                 }
                 else return showError('Ошибка записи на приём!', 'Выбраная дата занята!', $_REQUEST);
             }
@@ -92,6 +98,7 @@
             ->join('users', 'appointments.user_id', '=', 'users.id');
     
         if(isset($_GET['user_id'])){
+            $crumbs->add(Store::set('title', 'Записи пользователя'), '');
             $query->where('users.id', '=', $_GET['user_id']);
         }
         

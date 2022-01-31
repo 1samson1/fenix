@@ -1,9 +1,13 @@
 <?php 
-    function addGetParam($name, $param){
-        if(strpos($_SERVER['REQUEST_URI'], '?') === false){
-            return $_SERVER['REQUEST_URI'].'?'.$name.'='.$param;
+    function addGetParam($name, $param, $url = false){
+        if(!$url){
+            $url = $_SERVER['REQUEST_URI'];
         }
-        return $_SERVER['REQUEST_URI'].'&'.$name.'='.$param;     
+
+        if(strpos($url, '?') === false){
+            return $url.'?'.$name.'='.$param;
+        }
+        return $url.'&'.$name.'='.$param;     
     }
 
     function webPath($path){
