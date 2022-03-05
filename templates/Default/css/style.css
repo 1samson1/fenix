@@ -663,28 +663,19 @@ main{
 
 /* PROFILE +++++++++++++++++++++++++++++++++++++ */
 
-.container-profile{
-    max-width: 750px;
-    margin: 0 auto;
-}
-
-.container-profile .form-group{
-    margin: 5px 0;
-}
-
 .container-profile .container-fill{
     margin-bottom: 15px;
 }
 
-.plofile-info{
+.profile-info {
     display: flex;
     align-items: center;
-    padding: 10px 0 25px 0;
+    padding: 15px 0 5px 0;
 }
 
-.profile-foto{
-    width: 150px;
-    height: 150px;
+.profile-foto {
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     border:5px solid #eee;
     box-shadow: 1px 1px 4px 1px #777; 
@@ -696,13 +687,13 @@ main{
 
 .profile-name{
     font-weight: bold;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     padding-bottom: 15px;
 }
 
 .profile-field {
     display: inline;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     color:#5a5a5a;
 }
 
@@ -714,6 +705,53 @@ main{
 
 .profile-field:nth-child(2n){
     margin-left: 25px;
+}
+
+.profile-content{
+    display: flex;
+    align-items: flex-start;
+    margin: 0 auto;
+    gap: 15px;
+}
+
+.profile-content .form-group{
+    margin: 5px 0;
+}
+
+.profile-content .container-fill{
+    margin-bottom: 15px;
+    margin: 0;
+}
+
+.profile-tabs{
+    width: 280px;
+}
+
+.profile-tabs .tab {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 7px;
+    text-align: center;
+    width: 100%;
+    padding: 10px 15px;
+    transition: all .3s ease;
+}
+
+.profile-tabs .tab:hover{
+    color: #769afd;
+}
+
+.profile-tabs .tab.active{
+    color: #1755ff;
+}
+
+.profile-tabs svg {
+    display: block;
+}
+
+.profile-tab-content {
+    flex-grow: 1;
 }
 
 .profile-edit .btn, .profile-security .btn{
@@ -737,6 +775,12 @@ main{
 }
 
 /* MEDIA PROFILE **************************************** */
+@media (max-width: 840px) {
+    .profile-tabs{
+        width: 230px;
+    }
+}
+
 @media (max-width: 720px) {
     .profile-field{
         display: block;
