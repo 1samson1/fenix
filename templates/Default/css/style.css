@@ -728,11 +728,11 @@ main{
 }
 
 .profile-tabs .tab {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 7px;
-    text-align: center;
     width: 100%;
     padding: 10px 15px;
     transition: all .3s ease;

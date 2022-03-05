@@ -113,6 +113,18 @@
                             <span class="check"></span>
                             <span class="label-check">Удалить фото</span>
                         </label>
+                        <input type="submit" name="do_save_profile" value="Сохранить изменения" class="btn btn-large btn-green">  
+                    </form>
+                </div>
+            </div>           
+            <div class="container-fill " data-tab-content="list">
+                <div class="container-header">Список приёмов</div>
+                <div class="container-body"></div>
+            </div>
+            <div class="container-fill" data-tab-content="security">
+                <div class="container-header">Безопасность</div>
+                <div class="container-body">
+                    <div class="profile-security">
                         <div class="title-section">Смена пароля</div>
                         <div class="form-group form-group-password form-group-large">
                             <input class="form-control" type="password" name="lastpassword" id="lastpassword">                        
@@ -131,22 +143,12 @@
                                 <div class="password-show"></div>                                       
                             </div>
                         </div>
-                        <input type="submit" name="do_save_profile" value="Сохранить изменения" class="btn btn-large btn-green">  
-                    </form>
-                </div>
-            </div>
-            <div class="profile-tab-content">
-                <div class="container-fill " data-tab-content="list">
-                    <div class="container-header">Список приёмов</div>
-                    <div class="container-body"></div>
-                </div>
-            <div class="container-fill" data-tab-content="security">
-                <div class="container-header">Безопасность</div>
-                <div class="container-body">
-                    <div class="profile-security">
+                        <input type="submit" name="do_save_profile" value="Сохранить изменения" class="btn btn-large btn-green">
                         <div class="title-section">Управление сеансами</div>
-                        <span>Завершить все сеансы, кроме текущего.</span>
-                        <a href="{logout_all}" class="btn btn-red btn-large">Завершить все сеансы</a>
+                        <div class="security-section">
+                            <span>Завершить все сеансы, кроме текущего.</span>
+                            <a href="{logout_all}" class="btn btn-red btn-large">Завершить все сеансы</a>
+                        </div>
                     </div>
                 </div>
             </div>
