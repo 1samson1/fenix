@@ -8,7 +8,12 @@
     transition:transform 1s ease;
 }
 
-.slider img{
+.slide {
+    display: block;
+    width: 100%;
+}
+
+.slider .slide img{
     display: block;
     width: 100%;
 }

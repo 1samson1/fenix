@@ -3,6 +3,6 @@
         'logout' => '/logout/',
         'admin-link' => '/admin/',
         'registration-link' => '/registration/',
-        'profile-link' => '/profile/' . Store::get('USER.login') . '/',
+        'profile-link' => '/profile/',
     ]);
 ?>

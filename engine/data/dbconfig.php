@@ -7,7 +7,7 @@
 
     define("DB_PASS","");
 
-    define("DB_NAME","medicine");
+    define("DB_NAME","fenix");
 
     $db = new DataBase(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 ?>

@@ -9,86 +9,82 @@
                 </div>
             </div>
             <div class="form-groups-w60">
-                <div class="leader">
-                    <div class="form-group">
-                        <label for="allow_adminpanel">Доступ к панели управления:</label>
-                        <div class="switch">
-                            <input type="checkbox" id="allow_adminpanel" name="allow_adminpanel" class="switch-input">
-                            <label for="allow_adminpanel" class="switch-label"></label>
-                        </div> 
-                    </div>
+                <div class="form-group">
+                    <label for="allow_adminpanel">Доступ к панели управления:</label>
+                    <div class="switch">
+                        <input type="checkbox" data-leader="adminperm" id="allow_adminpanel" name="allow_adminpanel" class="switch-input">
+                        <label for="allow_adminpanel" class="switch-label"></label>
+                    </div> 
                 </div>
-                <div class="followers">
-                    <div class="form-group">
-                        <label for="allow_settings">Доступ к разделу "Настройки системы":</label>
-                        <div class="switch">
-                            <input type="checkbox" id="allow_settings" name="allow_settings" class="switch-input">
-                            <label for="allow_settings" class="switch-label"></label>
-                        </div> 
-                    </div>
-                    <div class="form-group">
-                        <label for="allow_static">Доступ к разделу "Статические страницы":</label>
-                        <div class="switch">
-                            <input type="checkbox" id="allow_static" name="allow_static" class="switch-input">
-                            <label for="allow_static" class="switch-label"></label>
-                        </div> 
-                    </div>
-                    <div class="form-group">
-                        <label for="allow_groups">Доступ к разделу "Группы пользователей":</label>
-                        <div class="switch">
-                            <input type="checkbox" id="allow_groups" name="allow_groups" class="switch-input">
-                            <label for="allow_groups" class="switch-label"></label>
-                        </div> 
-                    </div>
-                    <div class="form-group">
-                        <label for="allow_users">Доступ к разделу "Пользователи":</label>
-                        <div class="switch">
-                            <input type="checkbox" id="allow_users" name="allow_users" class="switch-input">
-                            <label for="allow_users" class="switch-label"></label>
-                        </div> 
-                    </div>
-                    <div class="form-group">
-                        <label for="allow_news">Доступ к разделу "Новости":</label>
-                        <div class="switch">
-                            <input type="checkbox" id="allow_news" name="allow_news" class="switch-input">
-                            <label for="allow_news" class="switch-label"></label>
-                        </div> 
-                    </div>
-                    <div class="form-group">
-                        <label for="allow_comments">Доступ к разделу "Комментарии":</label>
-                        <div class="switch">
-                            <input type="checkbox" id="allow_comments" name="allow_comments" class="switch-input">
-                            <label for="allow_comments" class="switch-label"></label>
-                        </div> 
-                    </div>
-                    <div class="form-group">
-                        <label for="allow_specialties">Доступ к разделу "Специальности врачей":</label>
-                        <div class="switch">
-                            <input type="checkbox" id="allow_specialties" name="allow_specialties" class="switch-input">
-                            <label for="allow_specialties" class="switch-label"></label>
-                        </div> 
-                    </div>
-                    <div class="form-group">
-                        <label for="allow_doctors">Доступ к разделу "Врачи":</label>
-                        <div class="switch">
-                            <input type="checkbox" id="allow_doctors" name="allow_doctors" class="switch-input">
-                            <label for="allow_doctors" class="switch-label"></label>
-                        </div> 
-                    </div>
-                    <div class="form-group">
-                        <label for="allow_appointments">Доступ к разделу "Записи на приём":</label>
-                        <div class="switch">
-                            <input type="checkbox" id="allow_appointments" name="allow_appointments" class="switch-input">
-                            <label for="allow_appointments" class="switch-label"></label>
-                        </div> 
-                    </div>
-                    <div class="form-group">
-                        <label for="allow_upload_files">Возможность загружать файлы:</label>
-                        <div class="switch">
-                            <input type="checkbox" id="allow_upload_files" name="allow_upload_files" class="switch-input">
-                            <label for="allow_upload_files" class="switch-label"></label>
-                        </div> 
-                    </div>
+                <div class="form-group">
+                    <label for="allow_settings">Доступ к разделу "Настройки системы":</label>
+                    <div class="switch">
+                        <input type="checkbox" data-follower="adminperm" id="allow_settings" name="allow_settings" class="switch-input">
+                        <label for="allow_settings" class="switch-label"></label>
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <label for="allow_static">Доступ к разделу "Статические страницы":</label>
+                    <div class="switch">
+                        <input type="checkbox" data-follower="adminperm" id="allow_static" name="allow_static" class="switch-input">
+                        <label for="allow_static" class="switch-label"></label>
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <label for="allow_groups">Доступ к разделу "Группы пользователей":</label>
+                    <div class="switch">
+                        <input type="checkbox" data-follower="adminperm" id="allow_groups" name="allow_groups" class="switch-input">
+                        <label for="allow_groups" class="switch-label"></label>
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <label for="allow_users">Доступ к разделу "Пользователи":</label>
+                    <div class="switch">
+                        <input type="checkbox" data-follower="adminperm" id="allow_users" name="allow_users" class="switch-input">
+                        <label for="allow_users" class="switch-label"></label>
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <label for="allow_news">Доступ к разделу "Новости":</label>
+                    <div class="switch">
+                        <input type="checkbox" data-follower="adminperm" id="allow_news" name="allow_news" class="switch-input">
+                        <label for="allow_news" class="switch-label"></label>
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <label for="allow_comments">Доступ к разделу "Комментарии":</label>
+                    <div class="switch">
+                        <input type="checkbox" data-follower="adminperm" id="allow_comments" name="allow_comments" class="switch-input">
+                        <label for="allow_comments" class="switch-label"></label>
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <label for="allow_specialties">Доступ к разделу "Специальности врачей":</label>
+                    <div class="switch">
+                        <input type="checkbox" data-follower="adminperm" id="allow_specialties" name="allow_specialties" class="switch-input">
+                        <label for="allow_specialties" class="switch-label"></label>
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <label for="allow_doctors">Доступ к разделу "Врачи":</label>
+                    <div class="switch">
+                        <input type="checkbox" data-follower="adminperm" id="allow_doctors" name="allow_doctors" class="switch-input">
+                        <label for="allow_doctors" class="switch-label"></label>
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <label for="allow_appointments">Доступ к разделу "Записи на приём":</label>
+                    <div class="switch">
+                        <input type="checkbox" data-follower="adminperm" id="allow_appointments" name="allow_appointments" class="switch-input">
+                        <label for="allow_appointments" class="switch-label"></label>
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <label for="allow_upload_files">Возможность загружать файлы:</label>
+                    <div class="switch">
+                        <input type="checkbox" data-follower="adminperm" id="allow_upload_files" name="allow_upload_files" class="switch-input">
+                        <label for="allow_upload_files" class="switch-label"></label>
+                    </div> 
                 </div>
             </div>            
         </div>

@@ -33,9 +33,11 @@ $(function () {
 
     /* LEADER AND FOLLOWERS CHECKBOXES +++++++++++++++++++++++++++++++++++++++++++++++++++ */
     function checked (){
-        var inputs = $(this).siblings('.followers').find('input[type=checkbox]');
 
-        if($(this).find('input[type=checkbox]').is(':checked')){
+        var group = $(this).data('leader'),
+            inputs = $('[data-follower="'+ group +'"]');
+        
+        if($(this).is(':checked')){
             inputs.attr('disabled', false);
         } else {
             inputs.prop('checked', false);
@@ -43,8 +45,8 @@ $(function () {
         }
     }
 
-    $('.leader').each(checked);
-    $('.leader').on('input', checked);
+    $('[data-leader]').each(checked);
+    $('[data-leader]').on('input', checked);
     
 })
 
