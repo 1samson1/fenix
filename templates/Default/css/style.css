@@ -663,8 +663,9 @@ main{
 
 /* PROFILE +++++++++++++++++++++++++++++++++++++ */
 
-.container-fill {
+.container-profile {
     max-width: 750px;
+    margin: 0 auto;
 }
 
 .container-profile .container-fill{
