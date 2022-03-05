@@ -663,6 +663,10 @@ main{
 
 /* PROFILE +++++++++++++++++++++++++++++++++++++ */
 
+.container-fill {
+    max-width: 750px;
+}
+
 .container-profile .container-fill{
     margin-bottom: 15px;
 }
@@ -707,13 +711,6 @@ main{
     margin-left: 25px;
 }
 
-.profile-content{
-    display: flex;
-    align-items: flex-start;
-    margin: 0 auto;
-    gap: 15px;
-}
-
 .profile-content .form-group{
     margin: 5px 0;
 }
@@ -724,18 +721,18 @@ main{
 }
 
 .profile-tabs{
-    width: 280px;
+    display: flex;
+    justify-content: space-around;
 }
 
 .profile-tabs .tab {
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 7px;
-    width: 100%;
     padding: 10px 15px;
     transition: all .3s ease;
+    user-select: none;
 }
 
 .profile-tabs .tab:hover{
@@ -748,10 +745,6 @@ main{
 
 .profile-tabs svg {
     display: block;
-}
-
-.profile-tab-content {
-    flex-grow: 1;
 }
 
 .profile-edit .btn, .profile-security .btn{
@@ -775,12 +768,6 @@ main{
 }
 
 /* MEDIA PROFILE **************************************** */
-@media (max-width: 840px) {
-    .profile-tabs{
-        width: 230px;
-    }
-}
-
 @media (max-width: 720px) {
     .profile-field{
         display: block;

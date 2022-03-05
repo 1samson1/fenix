@@ -19,141 +19,135 @@
             </div>
         </div>
     </div>
-    <div class="profile-content">        
-        
-
-        <div class="profile-tab-content">
-            <div class="container-fill " data-tab-content="edit">
-                <div class="container-header">Личные данные</div>
-                <div class="container-body">
-                    <form method="post" class="profile-edit" enctype="multipart/form-data">
-                        <div class="title-section">Информация</div>
-                        <div class="form-groups-inline">
-                            <div class="form-group form-group-large">
-                                <input class="form-control" type="text" name="login" id="pf-login" required value="{user.login}">                        
-                                <label for="pf-login">Логин</label>                                            
-                            </div>
-                            <div class="form-group form-group-large">
-                                <input class="form-control" type="email" name="email" id="pf-email" required value="{user.email}">                        
-                                <label for="pf-email">E-mail</label>                                            
-                            </div>
-                        </div>
-                        <div class="form-groups-inline">
-                            <div class="form-group form-group-large">
-                                <input class="form-control" type="text" name="surname" id="pf-surname" value="{user.surname}" required>                        
-                                <label for="pf-surname">Фамилия</label>                                            
-                            </div>        
-                            <div class="form-group form-group-large">
-                                <input class="form-control" type="text" name="name" id="pf-name" value="{user.name}" required>                        
-                                <label for="pf-name">Имя</label>                                            
-                            </div>
-                        </div>
-                        <div class="form-groups-inline">
-                            <div class="form-group form-group-large">
-                                <input class="form-control" type="text" name="patronymic" id="patronymic" value="{user.patronymic}" required>                        
-                                <label for="patronymic">Отчество</label>                                            
-                            </div>
-                            <div class="form-group form-group-large form-group-active">
-                                <select name="gender" id="gender" class="form-control">
-                                    <option value="none">Не выбрано</option>
-                                    [for gender of genders]<option value="{key}" [if key = user.gender] selected [/if]>{gender}</option>[/for]                    
-                                </select>                   
-                                <label for="gender">Пол</label>                                            
-                            </div>
-                        </div> 
-                        <div class="form-groups-inline">
-                            <div class="form-group form-group-large">
-                                <input class="form-control phone" type="tel" name="phone" id="phone" value="{user.phone}" required>                        
-                                <label for="phone">Телефон</label>                                            
-                            </div>
-                            <div class="form-group form-group-large">
-                                <input class="form-control date" type="text" name="birthday" id="birthday" value='{filter user.birthday | date "d.m.Y"}' required>                        
-                                <label for="birthday">Дата рождения</label>                                            
-                            </div>
-                        </div> 
-                        <div class="form-group form-group-large">
-                            <input class="form-control" type="text" name="adress" id="adress" value="{user.adress}" >                        
-                            <label for="adress">Адрес</label>                                            
-                        </div>
-                        <div class="title-section">Фото</div>
-                        <div class="form-group-file form-group-large">
-                            <input class="form-control" type="file" class="" name="foto" accept="image/*">
-                        </div>
-                        <label class="checkbox delete-foto">
-                            <input type="checkbox" class="check-input" name="delete_foto">
-                            <span class="check"></span>
-                            <span class="label-check">Удалить фото</span>
-                        </label>
-                        <input type="submit" name="do_save_profile" value="Сохранить изменения" class="btn btn-large btn-green">  
-                    </form>
-                </div>
-            </div>           
-            <div class="container-fill " data-tab-content="list">
-                <div class="container-header">Список приёмов</div>
-                <div class="container-body"></div>
+     
+    <div class="container-fill profile-tabs">
+        <div class="tab" data-tab="edit">
+            <div class="tab-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                </svg>
             </div>
-            <div class="container-fill" data-tab-content="security">
-                <div class="container-header">Безопасность</div>
-                <div class="container-body">
-                    <div class="profile-security">
-                        <div class="title-section">Смена пароля</div>
-                        <div class="form-group form-group-password form-group-large">
-                            <input class="form-control" type="password" name="lastpassword" id="lastpassword">                        
-                            <label for="lastpassword">Старый пароль</label>         
-                            <div class="password-show"></div>                                   
-                        </div>
-                        <div class="form-groups-inline">
-                            <div class="form-group form-group-password form-group-large">
-                                <input class="form-control" type="password" name="password" id="password">                        
-                                <label for="password">Новый пароль</label>         
-                                <div class="password-show"></div>                                   
-                            </div>
-                            <div class="form-group form-group-password form-group-large">
-                                <input class="form-control" type="password" name="repassword" id="repassword">                        
-                                <label for="repassword">Подтверждение пароля</label>     
-                                <div class="password-show"></div>                                       
-                            </div>
-                        </div>
-                        <input type="submit" name="do_save_profile" value="Сохранить изменения" class="btn btn-large btn-green">
-                        <div class="title-section">Управление сеансами</div>
-                        <div class="security-section">
-                            <span>Завершить все сеансы, кроме текущего.</span>
-                            <a href="{logout_all}" class="btn btn-red btn-large">Завершить все сеансы</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="tab-text">Личные данные</div>
         </div>
-
-        <div class="container-fill profile-tabs">
-            <div class="tabs">
-                <div class="tab" data-tab="edit">
-                    <div class="tab-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                        </svg>
-                    </div>
-                    <div class="tab-text">Личные данные</div>
-                </div>
-                <div class="tab" data-tab="list">
-                    <div class="tab-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-calendar2-week" viewBox="0 0 16 16">
-                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
-                            <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
-                        </svg>
-                    </div>
-                    <div class="tab-text">Список приёмов</div>
-                </div>
-                <div class="tab" data-tab="security">
-                    <div class="tab-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-shield-shaded" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 14.933a.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067v13.866zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
-                        </svg>
-                    </div>
-                    <div class="tab-text">Безопасность</div>
-                </div>
-            </div>        
+        <div class="tab" data-tab="list">
+            <div class="tab-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-calendar2-week" viewBox="0 0 16 16">
+                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                    <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
+                </svg>
+            </div>
+            <div class="tab-text">Список приёмов</div>
+        </div>
+        <div class="tab" data-tab="security">
+            <div class="tab-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-shield-shaded" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 14.933a.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067v13.866zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
+                </svg>
+            </div>
+            <div class="tab-text">Безопасность</div>
         </div>
     </div>
+    
+    <div class="container-fill " data-tab-content="edit">
+        <div class="container-header">Личные данные</div>
+        <div class="container-body">
+            <form method="post" class="profile-edit" enctype="multipart/form-data">
+                <div class="title-section">Информация</div>
+                <div class="form-groups-inline">
+                    <div class="form-group form-group-large">
+                        <input class="form-control" type="text" name="login" id="pf-login" required value="{user.login}">                        
+                        <label for="pf-login">Логин</label>                                            
+                    </div>
+                    <div class="form-group form-group-large">
+                        <input class="form-control" type="email" name="email" id="pf-email" required value="{user.email}">                        
+                        <label for="pf-email">E-mail</label>                                            
+                    </div>
+                </div>
+                <div class="form-groups-inline">
+                    <div class="form-group form-group-large">
+                        <input class="form-control" type="text" name="surname" id="pf-surname" value="{user.surname}" required>                        
+                        <label for="pf-surname">Фамилия</label>                                            
+                    </div>        
+                    <div class="form-group form-group-large">
+                        <input class="form-control" type="text" name="name" id="pf-name" value="{user.name}" required>                        
+                        <label for="pf-name">Имя</label>                                            
+                    </div>
+                </div>
+                <div class="form-groups-inline">
+                    <div class="form-group form-group-large">
+                        <input class="form-control" type="text" name="patronymic" id="patronymic" value="{user.patronymic}" required>                        
+                        <label for="patronymic">Отчество</label>                                            
+                    </div>
+                    <div class="form-group form-group-large form-group-active">
+                        <select name="gender" id="gender" class="form-control">
+                            <option value="none">Не выбрано</option>
+                            [for gender of genders]<option value="{key}" [if key = user.gender] selected [/if]>{gender}</option>[/for]                    
+                        </select>                   
+                        <label for="gender">Пол</label>                                            
+                    </div>
+                </div> 
+                <div class="form-groups-inline">
+                    <div class="form-group form-group-large">
+                        <input class="form-control phone" type="tel" name="phone" id="phone" value="{user.phone}" required>                        
+                        <label for="phone">Телефон</label>                                            
+                    </div>
+                    <div class="form-group form-group-large">
+                        <input class="form-control date" type="text" name="birthday" id="birthday" value='{filter user.birthday | date "d.m.Y"}' required>                        
+                        <label for="birthday">Дата рождения</label>                                            
+                    </div>
+                </div> 
+                <div class="form-group form-group-large">
+                    <input class="form-control" type="text" name="adress" id="adress" value="{user.adress}" >                        
+                    <label for="adress">Адрес</label>                                            
+                </div>
+                <div class="title-section">Фото</div>
+                <div class="form-group-file form-group-large">
+                    <input class="form-control" type="file" class="" name="foto" accept="image/*">
+                </div>
+                <label class="checkbox delete-foto">
+                    <input type="checkbox" class="check-input" name="delete_foto">
+                    <span class="check"></span>
+                    <span class="label-check">Удалить фото</span>
+                </label>
+                <input type="submit" name="do_save_profile" value="Сохранить изменения" class="btn btn-large btn-green">  
+            </form>
+        </div>
+    </div>           
+    <div class="container-fill " data-tab-content="list">
+        <div class="container-header">Список приёмов</div>
+        <div class="container-body"></div>
+    </div>
+    <div class="container-fill" data-tab-content="security">
+        <div class="container-header">Безопасность</div>
+        <div class="container-body">
+            <div class="profile-security">
+                <div class="title-section">Смена пароля</div>
+                <div class="form-group form-group-password form-group-large">
+                    <input class="form-control" type="password" name="lastpassword" id="lastpassword">                        
+                    <label for="lastpassword">Старый пароль</label>         
+                    <div class="password-show"></div>                                   
+                </div>
+                <div class="form-groups-inline">
+                    <div class="form-group form-group-password form-group-large">
+                        <input class="form-control" type="password" name="password" id="password">                        
+                        <label for="password">Новый пароль</label>         
+                        <div class="password-show"></div>                                   
+                    </div>
+                    <div class="form-group form-group-password form-group-large">
+                        <input class="form-control" type="password" name="repassword" id="repassword">                        
+                        <label for="repassword">Подтверждение пароля</label>     
+                        <div class="password-show"></div>                                       
+                    </div>
+                </div>
+                <input type="submit" name="do_save_profile" value="Сменить пароль" class="btn btn-large btn-green">
+                <div class="title-section">Управление сеансами</div>
+                <div class="security-section">
+                    <span>Завершить все сеансы, кроме текущего.</span>
+                    <a href="{logout_all}" class="btn btn-red btn-large">Завершить все сеансы</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </div>
