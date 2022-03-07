@@ -734,6 +734,7 @@ main{
     padding: 10px 15px;
     transition: all .3s ease;
     user-select: none;
+    cursor: pointer;
 }
 
 .profile-tabs .tab:hover{
@@ -780,6 +781,9 @@ main{
 }
 
 @media (max-width: 500px) {
+    .profile-tabs {
+        flex-direction: column;
+    }
     .profile-foto {
         width: 100px;
         height: 100px;

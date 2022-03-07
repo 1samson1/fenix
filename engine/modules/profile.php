@@ -14,12 +14,6 @@
 
 			$alerts->set_error_if(!CheckField::email($_POST['email']), 'Ошибка изменения данных пользователя', 'Некорректный email', 202);
 
-			if(isset($_POST['password'][0]) || isset($_POST['repassword'][0]) || isset($_POST['lastpassword'][0])){
-				$alerts->set_error_if(!CheckField::confirm_hash($_POST['lastpassword'],$user['password']), 'Ошибка изменения данных пользователя', 'Пароль не совпадает с предыдущим', 212);
-				
-				$alerts->set_error_if(!CheckField::confirm_pass($_POST['password'],$_POST['repassword']), 'Ошибка изменения данных пользователя', 'Пароль не совпадает с формой подтверждения', 204);
-			}
-			
 			$foto = new Upload_Image('foto', 'foto_'.$user['id'], 'avatars');
 
 			$alerts->merge($foto->errors);
@@ -37,9 +31,6 @@
 					'adress' => $_POST['adress'],
 				];
 
-				if(isset($_POST['password'][0]))
-					$fields['password'] = $db->hash($_POST['password']); 
-
 				if(isset($_POST['delete_foto']))
 					$fields['foto'] = '';
 				
@@ -48,7 +39,7 @@
 
 				if($db->table('users')->where('id', '=' , $user['id'])->update($fields)){
 					
-					$alerts->set_success('Данные профиля обновлены', 'Данные профиля успешно обновлены!');
+					$alerts->set_success('Данные пользователя обновлены', 'Данные пользователя успешно обновлены!');
 					
 					$user = array_merge($user, $fields);
 					
@@ -70,6 +61,28 @@
 		}
 
 		/* close edit user */
+
+		/* change password */
+
+		if(isset($_POST['do_change_password'])){
+			$alerts->set_error_if(!CheckField::confirm_hash($_POST['lastpassword'],$user['password']), 'Ошибка изменения данных пользователя', 'Пароль не совпадает с предыдущим', 212);
+				
+			$alerts->set_error_if(!CheckField::confirm_pass($_POST['password'],$_POST['repassword']), 'Ошибка изменения данных пользователя', 'Пароль не совпадает с формой подтверждения', 204);
+		
+			if($alerts->is_empty()){
+
+				$result = $db->table('users')->where('id', '=' , $user['id'])->update([
+					'password' => $db->hash($_POST['password'])
+				]);
+
+				if($result) {
+					$alerts->set_success('Пароль пользователя обновлен', 'Пароль пользователя успешно обновлен!');
+				} 
+				else $alerts->set_error('Ошибка изменения пароля пользователя', "Неизвестная ошибка", 520);
+			}
+		}
+
+		/* close change password */
 
 		Store::set('title', 'Личный кабинет '.$user['login']);
 		
