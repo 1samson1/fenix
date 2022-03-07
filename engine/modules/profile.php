@@ -88,7 +88,14 @@
 		
     	$tpl->save('content', 'profile', [
 			'logout_all' => '/logout/?exit=all',
-			'user' => $user
+			'user' => $user,
+			'appointments' => $db->table('appointments')
+				->select('doctors.name as doctor', 'doctors.kabinet as kabinet' , 'specialties.title as specialty', 'appointments.*')
+				->join('doctors', 'doctors.id', '=', 'appointments.doctor_id')
+				->join('specialties', 'specialties.id', '=', 'doctors.id')
+				->where('user_id', '=', $user['id'])
+				->orderBy('time', 'desc')
+				->get()
 		]);
 	}
 	else {

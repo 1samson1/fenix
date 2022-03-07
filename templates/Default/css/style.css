@@ -79,6 +79,17 @@ body{
     margin: 0 auto;
 }
 
+.empty{
+    min-height: 100px;
+    width: 100%;
+    border-radius: 7px;
+    background: #e4e4e4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 1px 4px 1px #aaa; 
+}
+
 table{
     font-size:12px;
     color:#333333;
@@ -92,14 +103,14 @@ table th {
     padding: 8px;    
 }
 table tr {
-    background:rgb(210, 222, 239);
+    background: #ffffff;
 }
 table tr:nth-child(2n+1){
-    background: #f3f8f8;
+    background: #e4e4e4;
 }
-table tr:hover {
+/* table tr:hover {
     background:rgb(199, 206, 216);
-}
+} */
 table td {
     font-size:15px;    
     padding: 15px 8px;    
@@ -123,6 +134,14 @@ table th,table td{
 
 .black{
     color: #000 !important;
+}
+
+.original{
+    color: #1969ff !important;
+}
+
+.light{
+    color: #709bec !important;
 }
 
 /* HEADER =========================================== */
@@ -468,9 +487,6 @@ main{
     }
 }
 
-
-/* ALERTS +++++++++++++++++++++++++++++++++++++++++++ */
-
 /* ALERTS +++++++++++++++++++++++++++++++++++++++++++ */
 
 .alert{
@@ -798,6 +814,64 @@ main{
     }
 }
 
+/* PROFILE APPOINTMENTS  ++++++++++++++++++++++++++++ */
+
+.appointment {
+    margin-bottom: 15px;
+    background: #00000010;
+    border-radius: 7px;
+    box-shadow: 1px 1px 4px 1px #aaa; 
+    padding: 2px;
+}
+
+.appointment:last-child{
+    margin-bottom: 0;
+}
+
+.appointment__head {
+    display: flex;
+    padding: 10px 10px;
+}
+
+.appointment__text {
+    margin-right: 1rem;
+    color: #709bec;
+}
+
+.appointment__body {
+    padding: 7px;
+    background: #fff;
+    border-radius: 7px;
+}
+
+.appointment__body .btn{
+    margin-top: 5px;
+}
+
+.appointment__body table{    
+    border-spacing: 0px;
+    border-collapse: collapse;
+    border: 1px solid #e4e4e4;
+}
+
+.appointment__body tr {
+    background:#ffffff;
+}
+
+.appointment__body tr:nth-child(2n+1){
+    background: #F7F7F7;
+}
+/* .appointment__body tr:hover {
+    background: #e4e4e4;
+} */
+.appointment__body td {
+    padding: 10px;    
+}
+
+.appointment__body td:first-child{
+    width: 40%;
+}
+
 /* RECDOC +++++++++++++++++++++++++++++++++++++++++++ */
 
 .instruction-recdoc{
@@ -942,7 +1016,7 @@ main{
 
 .doctor-recdoc{
     display: flex;   
-    padding: 15px; 
+    padding: 15px 0px; 
 }
 
 .doctor-recdoc__title{    
@@ -989,19 +1063,19 @@ main{
     height: 50px;
 }
 
-.appointment{
-    padding: 20px 15px;
+.success-appointment{
+    padding: 15px;
     display: flex;
     align-items: center;
 }
 
-.appointment-description{
+.success-appointment__description{
     width: 100%;
     margin-left: 15px;
     font-size: 0.9rem;
 }
 
-.appointment__title{
+.success-appointment__title{
     font-size: 1.4rem;
     margin-bottom: 10px;
     font-weight: bold;    

@@ -116,7 +116,44 @@
     </div>           
     <div class="container-fill " data-tab-content="list">
         <div class="container-header">Список приёмов</div>
-        <div class="container-body"></div>
+        <div class="container-body">
+            <div class="appointments">
+                [for appointment in appointments]
+                <div class="appointment">
+                    <div class="appointment__head">
+                        <div class="appointment__text"> Номер талона </div>
+                        <div class="appointment__number">{ appointment.number }</div>
+                    </div>
+                    <div class="appointment__body">
+                        <table>
+                            <tr>
+                                <td><b>ФИО доктора:</b></td>
+                                <td>{ appointment.doctor }</td>
+                            </tr>
+                            <tr>
+                                <td><b>Специальность доктора: </b></td>
+                                <td>{ appointment.specialty }</td>
+                            </tr>
+                            <tr>
+                                <td><b>Дата и время приёма: </b></td>
+                                <td>{ filter appointment.time | date "d.m.Y H:i"}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Кабинет: </b></td>
+                                <td>{ appointment.kabinet }</td>
+                            </tr>
+                        </table>
+                        <button class="btn btn-red">Отменить запись на приём</button>
+                    </div>
+                </div>
+                [/for]
+                [if appointments.length = "0"]
+                <div class="empty">
+                    <span>Ваш список приёмов пуст.</span>
+                </div>
+                [/if]
+            </div>
+        </div>
     </div>
     <div class="container-fill" data-tab-content="security">
         <div class="container-header">Безопасность</div>

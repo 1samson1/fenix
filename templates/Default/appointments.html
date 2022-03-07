@@ -23,51 +23,55 @@
 [if step = "2"]
 <div class="container-fill container-recording">
     <div class="container-header">Запись к врачу</div>
-    <div class="doctor-recdoc">      
-        <img src="{filter doctor.foto | noavatar}" alt="" class="doctor-recdoc__img">
-        <div class="doctor-recdoc__content">
-            <div class="doctor-recdoc__title">{doctor.name}</div>
-            <div class="doctor-recdoc__text">
-                <div><b>Специальность: </b>{doctor.specialty}</div>
-                <div><b>Кабинет: </b>{doctor.kabinet}</div>
+    <div class="container-body">
+        <div class="doctor-recdoc">      
+            <img src="{filter doctor.foto | noavatar}" alt="" class="doctor-recdoc__img">
+            <div class="doctor-recdoc__content">
+                <div class="doctor-recdoc__title">{doctor.name}</div>
+                <div class="doctor-recdoc__text">
+                    <div><b>Специальность: </b>{doctor.specialty}</div>
+                    <div><b>Кабинет: </b>{doctor.kabinet}</div>
+                </div>
+            </div>            
+        </div>        
+        <div class="instruction-recdoc center">Выберите дату и время приёма для записи к врачу.</div>
+        <form action="" class="form-recording" method="post">
+            <div class="form-picker">
+                <input type="hidden" name="date" class="daterec"/>
+                <input type="hidden" name="time" class="timerec"/>
             </div>
-        </div>            
-    </div>        
-    <div class="instruction-recdoc center">Выберите дату и время приёма для записи к врачу.</div>
-    <form action="" class="form-recording" method="post">
-        <div class="form-picker">
-            <input type="hidden" name="date" class="daterec"/>
-            <input type="hidden" name="time" class="timerec"/>
-        </div>
-        <input class="btn btn-large" name="rec" type="submit" value="Записаться">     
-    </form>    
+            <input class="btn btn-large" name="rec" type="submit" value="Записаться">     
+        </form>    
+    </div>
     {script} 
 </div>      
 [/if]
 [if step = "3"]
 <div class="container-fill container-recording">
-    <div class="appointment">
-        <div class="good"></div>
-        <div class="appointment-description">
-            <div class="appointment__title">Вы успешно записаны на приём!</div>
-            <div class="appointment__text">Ждём Вас в назначенное время с документом, удостоверяющим личность.</div>
-        </div>
-    </div>  
-    <div class="doctor-recdoc">      
-        <img src="{filter doctor.foto | noavatar}" alt="" class="doctor-recdoc__img">
-        <div class="doctor-recdoc__content">
-            <div class="doctor-recdoc__title">{doctor.name}</div>
-            <div class="doctor-recdoc__text">
-                <div><b>Специальность: </b>{doctor.specialty}</div>
-                <div><b>Кабинет: </b>{doctor.kabinet}</div>
-                <div><b>Дата приёма: </b>{recdoc-data}</div>
-                <div><b>Время приёма: </b>{recdoc-time}</div>
-                <div><b>Номер талона: </b>{number}</div>
+    <div class="container-body">
+        <div class="success-appointment">
+            <div class="good"></div>
+            <div class="success-appointment__description">
+                <div class="success-appointment__title">Вы успешно записаны на приём!</div>
+                <div class="success-appointment__text">Ждём Вас в назначенное время с документом, удостоверяющим личность.</div>
             </div>
-        </div>            
-    </div>      
-    <div class="return-to-main">
-        <a href="/" class="btn">Вернуться на главную</a>
+        </div>  
+        <div class="doctor-recdoc">      
+            <img src="{filter doctor.foto | noavatar}" alt="" class="doctor-recdoc__img">
+            <div class="doctor-recdoc__content">
+                <div class="doctor-recdoc__title">{doctor.name}</div>
+                <div class="doctor-recdoc__text">
+                    <div><b>Специальность: </b>{doctor.specialty}</div>
+                    <div><b>Кабинет: </b>{doctor.kabinet}</div>
+                    <div><b>Дата приёма: </b>{recdoc-data}</div>
+                    <div><b>Время приёма: </b>{recdoc-time}</div>
+                    <div><b>Номер талона: </b>{number}</div>
+                </div>
+            </div>            
+        </div>      
+        <div class="return-to-main">
+            <a href="/" class="btn">Вернуться на главную</a>
+        </div>
     </div>
 </div>
 [/if]
