@@ -143,7 +143,8 @@
                                 <td>{ appointment.kabinet }</td>
                             </tr>
                         </table>
-                        <button class="btn btn-red">Отменить запись на приём</button>
+                        [if appointment.is_can_canceled]<button class="btn btn-red" onclick="cancelappointment('{ appointment.number }')">Отменить запись на приём</button>[/if]
+                        [if !appointment.is_can_canceled]<button class="btn btn-red" disabled>Отменить запись на приём</button>[/if]
                     </div>
                 </div>
                 [/for]

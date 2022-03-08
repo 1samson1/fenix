@@ -41,39 +41,37 @@ class FileManager{
     generateHTML() {
         this.$template = $('<div class="fm-box">')
 
-            let $window = $('<div class="fm-window">')
-                .append(`
-                    <div class="fm-header">
-                        <div class="fm-header__title">Файловый менеджер</div>
-                        <div class="fm-header__close">
-                            <svg width="24" height="24"><path d="M17.3 8.2L13.4 12l3.9 3.8a1 1 0 01-1.5 1.5L12 13.4l-3.8 3.9a1 1 0 01-1.5-1.5l3.9-3.8-3.9-3.8a1 1 0 011.5-1.5l3.8 3.9 3.8-3.9a1 1 0 011.5 1.5z" fill-rule="evenodd"></path></svg>
-                        </div>
-                    </div>
-                    <div class="drop-area">
-                        <form action="" method="post" enctype="multipart/form-data">
-                            <label for="upload_files" class="fm-drag-drop">
-                                <div> Перетащите файлы сюда </div>
-                                <div> — или — </div>
-                                <div class="fm-btn fm-btn-secondary"> Выберите файл на компьютере </div>
-                            </label>
-                            <input type="file" name="upload_files" id="upload_files" multiple>
-                        </form>
-                    </div>
-                    <div class="fm-previews"></div>
-                    <div class="fm-actions">
-                        <button class="fm-btn fm-btn-secondary fm-cansel">Отмена</button>
-                        <button class="fm-btn fm-insert">Вставить</button>
-                    </div>
-                    
-                `)
+        let $window = $('<div class="fm-window">').append(`
+            <div class="fm-header">
+                <div class="fm-header__title">Файловый менеджер</div>
+                <div class="fm-header__close">
+                    <svg width="24" height="24"><path d="M17.3 8.2L13.4 12l3.9 3.8a1 1 0 01-1.5 1.5L12 13.4l-3.8 3.9a1 1 0 01-1.5-1.5l3.9-3.8-3.9-3.8a1 1 0 011.5-1.5l3.8 3.9 3.8-3.9a1 1 0 011.5 1.5z" fill-rule="evenodd"></path></svg>
+                </div>
+            </div>
+            <div class="drop-area">
+                <form action="" method="post" enctype="multipart/form-data">
+                    <label for="upload_files" class="fm-drag-drop">
+                        <div> Перетащите файлы сюда </div>
+                        <div> — или — </div>
+                        <div class="fm-btn fm-btn-secondary"> Выберите файл на компьютере </div>
+                    </label>
+                    <input type="file" name="upload_files" id="upload_files" multiple>
+                </form>
+            </div>
+            <div class="fm-previews"></div>
+            <div class="fm-actions">
+                <button class="fm-btn fm-btn-secondary fm-cansel">Отмена</button>
+                <button class="fm-btn fm-insert">Вставить</button>
+            </div>
+        `)
 
-            this.previews = $window.children('.fm-previews'),
-            this.generateEvents($window)
-            this.$template.append($window)
-            this.$template.append('<div class="fm-wrap">')
-            
-            this.$template.appendTo('body')
-            this.generate = true
+        this.previews = $window.children('.fm-previews'),
+        this.generateEvents($window)
+        this.$template.append($window)
+        this.$template.append('<div class="fm-wrap">')
+        
+        this.$template.appendTo('body')
+        this.generate = true
     }
 
     generateEvents ($window){

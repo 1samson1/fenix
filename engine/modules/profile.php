@@ -84,18 +84,51 @@
 
 		/* close change password */
 
+		/* cancel appointment */
+
+		if(isset($_POST['do_cancal_appointment'])){
+
+			$appointment = $db->table('appointments')->where('number', '=', $_POST['param'])->first();
+			
+			if($appointment['reg_time'] > time() - 1800){
+
+				$result = $db->table('appointments')
+					->where('user_id', '=', Store::get('USER.id'))
+					->where('number', '=', $_POST['param'])
+					->delete();
+				
+				if($result) {
+					$alerts->set_success('Запись на приём', 'Запись на приём успешно отменина!');
+				} 
+				else $alerts->set_error('Ошибка', "Неизвестная ошибка", 520);
+			}
+			else $alerts->set_error('Ошибка', "Время отмены записи на приём истекло!", 406);
+		}
+
+		/* close cancel appointment  */
+
 		Store::set('title', 'Личный кабинет '.$user['login']);
-		
-    	$tpl->save('content', 'profile', [
-			'logout_all' => '/logout/?exit=all',
-			'user' => $user,
-			'appointments' => $db->table('appointments')
+
+		$appointments = $db->table('appointments')
 				->select('doctors.name as doctor', 'doctors.kabinet as kabinet' , 'specialties.title as specialty', 'appointments.*')
 				->join('doctors', 'doctors.id', '=', 'appointments.doctor_id')
 				->join('specialties', 'specialties.id', '=', 'doctors.id')
 				->where('user_id', '=', $user['id'])
 				->orderBy('time', 'desc')
-				->get()
+				->get();
+		
+		foreach ($appointments as &$appointment){
+			if($appointment['reg_time'] > time() - 1800){
+				$appointment['is_can_canceled'] = true;
+			} else {
+				$appointment['is_can_canceled'] = false;
+			}
+		}
+
+    	$tpl->save('content', 'profile', [
+			'logout_all' => '/logout/?exit=all',
+			'user' => $user,
+			'appointments' => $appointments
 		]);
 	}
 	else {
