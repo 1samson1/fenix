@@ -103,6 +103,10 @@
         }
         
         if(isset($_POST['search'])) {
+
+            if(isset($_POST['number'][0])){
+                $query->where('appointments.number', 'like', '%'.$_POST['number'].'%');
+            }  
             
             if(isset($_POST['specialty'][0])){
                 $query->where('doctors.specialty_id', '=', $_POST['specialty']);
