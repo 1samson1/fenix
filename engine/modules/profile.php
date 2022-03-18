@@ -90,7 +90,7 @@
 
 			$appointment = $db->table('appointments')->where('number', '=', $_POST['param'])->first();
 			
-			if($appointment['reg_time'] > time() - 1800){
+			if($appointment['time'] > time()){
 
 				$result = $db->table('appointments')
 					->where('user_id', '=', Store::get('USER.id'))
@@ -118,7 +118,7 @@
 				->get();
 		
 		foreach ($appointments as &$appointment){
-			if($appointment['reg_time'] > time() - 1800){
+			if($appointment['time'] > time()){
 				$appointment['is_can_canceled'] = true;
 			} else {
 				$appointment['is_can_canceled'] = false;

@@ -11,7 +11,6 @@ RewriteRule ^([A-z0-9-]+)/([A-z0-9-]+)/page/([0-9]+)?/?$ index.php?do=$1&param1=
 RewriteRule ^([A-z0-9-]+)/page/([0-9]+)?/?$ index.php?do=$1&page=$2 [QSA,L]
 RewriteRule ^([A-z0-9-]+)/([A-z0-9-]+)/?$ index.php?do=$1&param1=$2 [QSA,L]
 RewriteRule ^([A-z0-9-]+)/?$ index.php?do=$1 [QSA,L]
-RewriteRule ^$ index.php?do=main [QSA,L]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f

@@ -38,6 +38,10 @@
                     $fields = [
                         'name' => $_POST['name'],
                         'specialty_id' => $_POST['specialty'],
+                        'qualification' => [
+                            'html' => true,
+                            'value' => $_POST['qualification']
+                        ],
                         'kabinet' => $_POST['kabinet'],
                         'mon' => isset($_POST['mon']),
                         'tue' => isset($_POST['tue']),
@@ -94,6 +98,10 @@
                     'name' => $_POST['name'],
                     'specialty_id' => $_POST['specialty'],
                     'kabinet' => $_POST['kabinet'],
+                    'qualification' => [
+                        'html' => true,
+                        'value' => $_POST['qualification']
+                    ],
                     'mon' => isset($_POST['mon']),
                     'tue' => isset($_POST['tue']),
                     'wed' => isset($_POST['wed']),

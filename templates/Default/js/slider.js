@@ -27,7 +27,13 @@ document.addEventListener('DOMContentLoaded', function (e) {
         slides.style.transform = `translateX(-${width_slider*currentSlide}px)`;
 
         for(var i = 0; i < slides_list.length; i++){
-            slides_list[i].style.width = width_slider+"px";
+            slides_list[i].style.width = width_slider + "px";
+
+            if(slides_list[i].nodeName !== "IMG"){
+                var img = slides_list[i].querySelector('img');
+
+                img.style.width = width_slider + "px";
+            }
         }
     }
 });

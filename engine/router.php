@@ -1,5 +1,5 @@
 <?php
-    switch (isset($_GET['do']) ? $_GET['do'] : '') {
+    switch (isset($_GET['do']) ? $_GET['do'] : 'main') {
         case 'main':
             require_once ENGINE_DIR.'/modules/main.php';
             break;

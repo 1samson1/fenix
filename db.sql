@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3307
--- Время создания: Фев 27 2022 г., 17:12
+-- Хост: localhost
+-- Время создания: Мар 18 2022 г., 21:29
 -- Версия сервера: 10.3.13-MariaDB-log
 -- Версия PHP: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -498,7 +497,8 @@ INSERT INTO `appointments` (`doctor_id`, `user_id`, `reg_time`, `time`, `number`
 (2, 25, 1645716600, 1645803000, '186986'),
 (1, 27, 1645783200, 1645869600, '213002'),
 (9, 28, 1645801200, 1645887600, '489529'),
-(1, 29, 1645884000, 1645970400, '514638');
+(1, 29, 1645884000, 1645970400, '514638'),
+(3, 12, 1647094487, 1647406800, 'aaf21e');
 
 -- --------------------------------------------------------
 
@@ -536,6 +536,7 @@ CREATE TABLE `doctors` (
   `specialty_id` int(11) UNSIGNED NOT NULL,
   `foto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '',
   `kabinet` int(11) UNSIGNED DEFAULT NULL,
+  `qualification` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `mon` tinyint(1) NOT NULL,
   `tue` tinyint(1) NOT NULL,
   `wed` tinyint(1) NOT NULL,
@@ -549,24 +550,27 @@ CREATE TABLE `doctors` (
 -- Дамп данных таблицы `doctors`
 --
 
-INSERT INTO `doctors` (`id`, `name`, `specialty_id`, `foto`, `kabinet`, `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`) VALUES
-(1, 'Мирная Ирина Сергеевна', 1, 'uploads/doctors/1.jpg', 1, 1, 0, 1, 0, 1, 0, 0),
-(2, 'Вареньева Марина Александровна', 1, 'uploads/doctors/2.jpg', 2, 0, 1, 0, 1, 1, 0, 0),
-(3, 'Кульянов Андрей Витальевич', 2, 'uploads/doctors/3.jpg', 3, 1, 1, 1, 1, 1, 0, 0),
-(4, 'Астапов Андрей Петрович', 3, 'uploads/doctors/4.jpg', 4, 1, 1, 1, 1, 1, 0, 0),
-(5, 'Верная Галина Петровна', 4, 'uploads/doctors/5.jpg', 5, 0, 1, 1, 1, 1, 0, 0),
-(6, 'Креанов Эдуард Максимович', 5, 'uploads/doctors/6.jpg', 6, 1, 1, 1, 1, 1, 0, 0),
-(7, 'Кирсанов Игорь Александрович', 6, 'uploads/doctors/7.jpg', 7, 1, 1, 1, 1, 1, 0, 0),
-(8, 'Коршина Елена Петровна', 7, 'uploads/doctors/8.jpg', 8, 0, 0, 1, 1, 1, 0, 0),
-(9, 'Машина Вероника Сергеевна', 7, 'uploads/doctors/9.jpg', 9, 1, 1, 0, 0, 1, 0, 0),
-(10, 'Петров Даниил Александрович', 8, 'uploads/doctors/10.jpg', 10, 1, 1, 1, 1, 1, 0, 0),
-(21, 'Бабенко Михаил Федорович', 2, 'uploads/doctors/1645970350_2.png', 11, 1, 1, 1, 1, 1, 0, 0),
-(22, 'Дымнич Дмитрий Игоревич', 4, 'uploads/doctors/1645970408_4.jpg', 12, 1, 1, 1, 1, 1, 0, 0),
-(23, 'Глазырина Татьяна Юрьевна', 16, 'uploads/doctors/1645970508_3.jpg', 13, 1, 1, 1, 1, 1, 0, 0),
-(24, 'Осипов Михаил Алексеевич', 3, 'uploads/doctors/1645970607_1.jpeg', 14, 1, 1, 1, 1, 1, 0, 0),
-(25, 'Верещагин Сергей Анатольевич', 1, 'uploads/doctors/1645970683_8.jpg', 15, 1, 1, 1, 1, 1, 0, 0),
-(26, 'Тихонова Галия Сулеймановна', 17, 'uploads/doctors/1645970778_7.jpg', 16, 1, 1, 1, 1, 1, 0, 0),
-(27, 'Волохин Игорь Алексеевич', 17, 'uploads/doctors/1645971034_9.jpg', 17, 1, 1, 1, 1, 1, 0, 0);
+INSERT INTO `doctors` (`id`, `name`, `specialty_id`, `foto`, `kabinet`, `qualification`, `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`) VALUES
+(1, 'Мирная Ирина Сергеевна', 1, 'uploads/doctors/1.jpg', 1, '', 1, 0, 1, 0, 1, 0, 0),
+(2, 'Вареньева Марина Александровна', 1, 'uploads/doctors/2.jpg', 2, '', 0, 1, 0, 1, 1, 0, 0),
+(3, 'Кульянов Андрей Витальевич', 2, 'uploads/doctors/3.jpg', 3, '', 1, 1, 1, 1, 1, 0, 0),
+(4, 'Астапов Андрей Петрович', 3, 'uploads/doctors/4.jpg', 4, '', 1, 1, 1, 1, 1, 0, 0),
+(5, 'Верная Галина Петровна', 4, 'uploads/doctors/5.jpg', 5, '', 0, 1, 1, 1, 1, 0, 0),
+(6, 'Креанов Эдуард Максимович', 5, 'uploads/doctors/6.jpg', 6, '<p>Кандидат медицинских наук</p>', 1, 1, 1, 1, 1, 0, 0),
+(7, 'Кирсанов Игорь Александрович', 6, 'uploads/doctors/7.jpg', 7, '<p>Доктор медицинских наук</p>', 1, 1, 1, 1, 1, 0, 0),
+(8, 'Коршина Елена Петровна', 7, 'uploads/doctors/8.jpg', 8, '', 0, 0, 1, 1, 1, 0, 0),
+(9, 'Машина Вероника Сергеевна', 7, 'uploads/doctors/9.jpg', 9, '', 1, 1, 0, 0, 1, 0, 0),
+(10, 'Петров Даниил Александрович', 8, 'uploads/doctors/10.jpg', 10, '<p>Врач высшей квалификационной категории</p>', 1, 1, 1, 1, 1, 0, 0),
+(21, 'Бабенко Михаил Федорович', 2, 'uploads/doctors/1645970350_2.png', 11, '<p>Врач высшей квалификационной категории</p>', 1, 1, 1, 1, 1, 0, 0),
+(22, 'Дымнич Дмитрий Игоревич', 4, 'uploads/doctors/1645970408_4.jpg', 12, '', 1, 1, 1, 1, 1, 0, 0),
+(23, 'Глазырина Татьяна Юрьевна', 16, 'uploads/doctors/1645970508_3.jpg', 13, '', 1, 1, 1, 1, 1, 0, 0),
+(24, 'Осипов Михаил Алексеевич', 3, 'uploads/doctors/1645970607_1.jpeg', 14, '', 1, 1, 1, 1, 1, 0, 0),
+(25, 'Верещагин Сергей Анатольевич', 1, 'uploads/doctors/1645970683_8.jpg', 15, '<p>Врач первой категории, Кандидат медицинских наук</p>', 1, 1, 1, 1, 1, 0, 0),
+(26, 'Тихонова Галия Сулеймановна', 17, 'uploads/doctors/1645970778_7.jpg', 16, '', 1, 1, 1, 1, 1, 0, 0),
+(27, 'Волохин Игорь Алексеевич', 17, 'uploads/doctors/1645971034_9.jpg', 17, '', 1, 1, 1, 1, 1, 0, 0),
+(28, 'Абакушин Дмитрий Николаевич', 17, 'uploads/doctors/1647626738_5.jpg', 18, '<p>Кандидат медицинских наук</p>', 1, 1, 1, 1, 1, 0, 0),
+(29, 'Смирнова Лариса Эдуардовна', 4, 'uploads/doctors/1647626960_10.jpg', 19, '<p>Кандидат медицинских наук</p>', 1, 1, 1, 1, 1, 0, 0),
+(30, 'Эманов Валерий Геннадьевич', 3, 'uploads/doctors/1647627583_11.jpg', 20, '<p>Врач высшей категории, Доктор медицинских наук</p>', 1, 1, 1, 1, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -618,7 +622,7 @@ CREATE TABLE `lostpassword` (
 --
 
 INSERT INTO `lostpassword` (`id`, `user_id`, `token`, `date`) VALUES
-(43, 12, 'c1475cc88f34af251d5caab0e3c7576e', 1641660522);
+(45, 12, '04a8db8abe98de6870aabea20559e055', 1647602058);
 
 -- --------------------------------------------------------
 
@@ -665,12 +669,12 @@ CREATE TABLE `specialties` (
 INSERT INTO `specialties` (`id`, `title`, `description`, `image`) VALUES
 (1, 'Травматолог и ортопед', '<p>Специалист, который диагностирует и лечит травматическую и нетравматическую патологию опорно-двигательного аппарата (кости, суставы, мышцы, связки, хрящи)</p>', 'uploads/specialties/travma.png'),
 (2, 'Невролог', '<p>Врач, занимающийся выявлением, терапией и предупреждением развития болезней нервной системы.</p>', 'uploads/specialties/nero.png'),
-(3, 'Окулист', '<p>Врач, который специализируется на изучении механизмов возникновения и развития заболеваний органов зрения.</p>', 'uploads/specialties/oko.png'),
-(4, 'Педиатр', '<p>Врач, который занимается диагностикой, лечением и профилактикой заболеваний у детей.</p>', 'uploads/specialties/pediator.png'),
+(3, 'Офтальмолог', '<p>Врач, который специализируется на изучении механизмов возникновения и развития заболеваний органов зрения.</p>', 'uploads/specialties/oko.png'),
+(4, 'Терапевт', '<p>Терапевт &ndash; это многопрофильный специалист, который занимается болезнями внутренних органов, не требующих хирургического лечения.</p>', 'uploads/specialties/1647094177_terapevt.png'),
 (5, 'Уролог', '<p>Врач, который занимается диагностикой, лечением и профилактикой заболеваний органов мочеполовой системы.</p>', 'uploads/specialties/urologpng.png'),
 (6, 'Хирург', '<p>Врач-специалист, получивший подготовку по методам диагностики и хирургического лечения заболеваний и травм.</p>', 'uploads/specialties/hirurg.png'),
-(7, 'Хирургическая стоматология', '<p>Один из разделов стоматологии, который специализируется на подсадке костной ткани, оперативном удалении/подготовке/имплантации зубов.</p>', 'uploads/specialties/hirurstom.png'),
-(8, 'Лечебная стоматология', '<p>Раздел медицины, основное назначение которого диагностика, лечение зубов и предупреждение заболеваний ротовой полости.</p>', 'uploads/specialties/lechstom.png'),
+(7, 'Психиатр', '<p>Психиатр &ndash; это специалист , занимающийся диагностикой, терапией и профилактикой психических заболеваний.</p>', 'uploads/specialties/1647093196_2.png'),
+(8, 'Дерматовенеролог ', '<p>Дерматовенеролог &ndash; это специалист, занимающегося диагностикой, лечением и профилактикой заболеваний кожи и венерических болезней.&nbsp;</p>', 'uploads/specialties/1647093295_1.png'),
 (16, 'Отоларинголог ', '<p>Отоларинголог (ЛОР) &ndash; это врач, который занимается профилактикой и лечением заболеваний уха, горла и носа.&nbsp;</p>', 'uploads/specialties/1645967495_lorr.png'),
 (17, 'Гинеколог', '<p>Гинеколог &ndash; это врач, который занимается диагностикой, лечением и профилактикой заболеваний женской репродуктивной системы.</p>', 'uploads/specialties/1645967164_ginekolog.png');
 
@@ -695,9 +699,8 @@ CREATE TABLE `static` (
 
 INSERT INTO `static` (`id`, `url`, `title`, `template`, `date_edit`, `date`) VALUES
 (1, 'donorstvo', 'Донорство', '<p><img src=\"/uploads/images/756c86a5e17b59e_621x300.jpg\" alt=\"\" /></p>\r\n<p style=\"text-align: justify;\"><strong>Донорство крови</strong> (от лат. donare &mdash; &laquo;дарить&raquo;) и (или) её компонентов &mdash; добровольная сдача крови и (или) её компонентов донорами, а также мероприятия, направленные на организацию и обеспечение безопасности заготовки крови и её компонентов. Клиническое использование связано с трансфузией (переливанием) реципиенту в лечебных целях. Также кровь, взятая от донора (донорская кровь), используется в научно-исследовательских и образовательных целях; в производстве компонентов крови лекарственных средств. &nbsp;Кровь как уникальное лечебное средство незаменима при переливании пострадавшим от ожогов и травм, при проведении сложных операций и при тяжелых родах. Кровь также жизненно необходима больным гемофилией, анемией и онкологическим больным при химиотерапии. &nbsp;Современная медицина не использует для лечения больных цельную кровь. Каждую дозу крови разделяют на компоненты. Для специализированного лечения применяются компоненты крови и препараты на основе донорской плазмы.&nbsp;</p>\r\n<p style=\"text-align: justify;\">Узнать можете ли вы быть донором</p>\r\n<p><img src=\"/uploads/images/2-3_protivopokazaniya_k_donorstvu.jpg\" alt=\"\" /></p>', 1621876964, 1621793638),
-(2, 'information', 'Информация о поликлинике', '<p><img src=\"/uploads/images/08-09-33-i.jpg\" alt=\"\" /></p>\r\n<p style=\"text-align: justify;\"><strong>Морозовская взрослая городская клиническая больница</strong><br />Наша больница занимает 7 место по оборудованию и персоналу в России. У нас все необходимые аппараты и устройства для устранения самых сложных заболеваний. Мы не являемся государственной больницей. Квалифицированный персонал ждет вас на прием в нашей больнице.</p>\r\n<p style=\"text-align: justify;\">Наша больница находится по адресу: Город Москва, Улица Дмитрия Ульянова</p>\r\n<p><img src=\"/uploads/images/08-17-28-zb24.jpg\" alt=\"\" /></p>', 1644326106, 1621793638),
-(3, 'prace', 'Прайс-лист', '<table border=\"1\" cellspacing=\"0\" cellpadding=\"1\">\r\n<thead>\r\n<tr>\r\n<th>Травматолог и ортопед</th>\r\n<th>Цена в руб.</th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr>\r\n<td>Травматолог и ортопед</td>\r\n<td>1000</td>\r\n</tr>\r\n<tr>\r\n<td>Невролог</td>\r\n<td>1000</td>\r\n</tr>\r\n<tr>\r\n<td>Окулист</td>\r\n<td>1000</td>\r\n</tr>\r\n<tr>\r\n<td>Педиатр</td>\r\n<td>1500</td>\r\n</tr>\r\n<tr>\r\n<td>Уролог</td>\r\n<td>1700</td>\r\n</tr>\r\n<tr>\r\n<td>Хирург</td>\r\n<td>500</td>\r\n</tr>\r\n<tr>\r\n<td>Хирургическая стоматология</td>\r\n<td>3000</td>\r\n</tr>\r\n<tr>\r\n<td>Лечебная стоматология</td>\r\n<td>2500</td>\r\n</tr>\r\n<tr>\r\n<td>Стоматология общей практики</td>\r\n<td>1500</td>\r\n</tr>\r\n</tbody>\r\n</table>', 1621873997, 1621793638),
-(4, 'rating', 'Рейтинг врачей', '<table class=\"cwdtable\" border=\"1\" cellspacing=\"0\" cellpadding=\"1\">\r\n<thead>\r\n<tr>\r\n<th>Специалист</th>\r\n<th>Рейтинг</th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr>\r\n<td>Травматолог и ортопед</td>\r\n<td>4,7</td>\r\n</tr>\r\n<tr>\r\n<td>Невролог</td>\r\n<td>4,2</td>\r\n</tr>\r\n<tr>\r\n<td>Окулист</td>\r\n<td>4,8</td>\r\n</tr>\r\n<tr>\r\n<td>Педиатр</td>\r\n<td>5,0</td>\r\n</tr>\r\n<tr>\r\n<td>Уролог</td>\r\n<td>4,9</td>\r\n</tr>\r\n<tr>\r\n<td>Хирург</td>\r\n<td>4,3</td>\r\n</tr>\r\n<tr>\r\n<td>Хирургическая стоматология</td>\r\n<td>4,8</td>\r\n</tr>\r\n<tr>\r\n<td>Лечебная стоматология</td>\r\n<td>4,8</td>\r\n</tr>\r\n<tr>\r\n<td>Стоматология общей практики</td>\r\n<td>4,6</td>\r\n</tr>\r\n</tbody>\r\n</table>', 1621874012, 1621793638),
+(2, 'about', 'Информация о поликлинике', '<p><img src=\"/uploads/images/08-09-33-i.jpg\" alt=\"\" /></p>\r\n<p>Платная поликлиника &laquo;Феникс&raquo; работает с 2015 года, когда открылся мед. центр в городе Тюмень и является одним из лучших частных медучреждений Тюменской области.</p>\r\n<p><span style=\"font-size: 12pt;\">&nbsp;&laquo;Феникс&raquo; &ndash; это более 12 врачей, в числе которых 2 доктора медицинских наук, 4 кандидатов медицинских наук, 3 врачей высшей квалификационной категории, ведущие эксперты в различных областях медицины. Все специалисты проходят стажировки в ведущих российских клиниках, посещают медицинские конференции, выступают на них с докладами, публикуют научные работы. В клиниках ведется прием по 10 направлениям медицины.</span></p>\r\n<p><span style=\"font-size: 12pt;\">В наших центрах работают опытные специалисты, которые с вниманием относятся к каждому пациенту. Это профессионалы, которые станут вашими партнёрами в сохранении здоровья.</span></p>\r\n<p><span style=\"font-size: 12pt;\">Наше принципиальное отличие от большинства государственных и частных медицинских учреждений является полный лечебный цикл &ndash; от постановки диагноза до выздоровления.</span></p>\r\n<p><span style=\"font-size: 12pt;\">Ваше здоровье &ndash; наша профессия!</span></p>', 1647622525, 1621793638),
+(3, 'price', 'Прайс-лист', '<table style=\"width: 100%; height: 1298.65px;\" border=\"1\" cellspacing=\"0\" cellpadding=\"1\">\r\n<thead>\r\n<tr style=\"height: 22.3906px;\">\r\n<th style=\"width: 79.1335%; height: 22.3906px;\">Перечень услуг</th>\r\n<th style=\"width: 20.8665%; height: 22.3906px;\">Цена в руб.</th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; гинеколога, первичный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 850 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; гинеколога, повторный (до 10 дней после первичнойконсультации)</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 500 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; гинеколога при беременности</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">2 200 ₽</td>\r\n</tr>\r\n<tr style=\"height: 44.7812px;\">\r\n<td style=\"width: 79.1335%; height: 44.7812px;\">Приём врача &ndash; гинеколога с формлением справки, направления, по результатам анализов и др.</td>\r\n<td style=\"width: 20.8665%; height: 44.7812px;\">850 ₽</td>\r\n</tr>\r\n<tr style=\"height: 44.7812px;\">\r\n<td style=\"width: 79.1335%; height: 44.7812px;\">Приём врача &ndash; гинеколога специализированный (бесплодие, эндокринная патология, сочетанная патология)</td>\r\n<td style=\"width: 20.8665%; height: 44.7812px;\">2 300 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; гинеколога Полевой О.В.</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">2 500 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; гинеколога, осмотр после операции</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">850 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; гинеколога, имеющего ученую степень К.М.Н., первичный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 970 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; гинеколога, имеющего ученую степень К.М.Н., повторный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 470 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; хирурга, первичный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 850 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; хирурга, повторный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 500 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; хирурга, осмотр после операции</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">850 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; хирурга-онколога, имеющего учённую степень Д.М.Н, первичный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">2 100 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; хирурга-онколога, имеющего учённую степень Д.М.Н, повторный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 750 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; хирурга, осмотр перед операцией в стационаре</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 850 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; терапевта, имеющего учённую степень К.М.Н., первичный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 950 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; терапевта, имеющего учённую степень К.М.Н., повторный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 500 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; терапевта, повторный (с открытым больничным листом)</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 500 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; терапевта, первичный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 750 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; терапевта, повторный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 500 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; терапевта по результатам анализов</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">600 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; уролога, первичный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 750 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; уролога, повторный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 500 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; уролога, имеющего учённую степень К.М.Н., первичный&nbsp;</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 980 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; уролога, имеющего учённую степень К.М.Н., повторный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 650 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; уролога, осмотр после операции</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">850 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; отоларинголога, первичный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 950 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; отоларинголога, повторный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 500 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; отоларинголога (стаж работы менее 5 лет), первичный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 500 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; отоларинголога (стаж работы менее 5 лет), повторный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 270 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; отоларинголога, осмотр перед операцией в стационаре</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 950 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; отоларинголога, осмотр после операции</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 050 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Консультация и диагностическое эндоскопическое исследование ЛОР-органов</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">2 780 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Осмотр врача - отоларинголога с оформлением заключения о состоянии здоровья</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 050 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; невролога, первичный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 650 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; невролога, повторный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 300 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Прием врача &ndash; невролога по коррекции лечения</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 050 ₽</td>\r\n</tr>\r\n<tr style=\"height: 44.7812px;\">\r\n<td style=\"width: 79.1335%; height: 44.7812px;\">Приём врача &ndash; ортопеда-травматолога, имеющего ученную степень К.М.Н., первичный</td>\r\n<td style=\"width: 20.8665%; height: 44.7812px;\">3 000 ₽</td>\r\n</tr>\r\n<tr style=\"height: 44.7812px;\">\r\n<td style=\"width: 79.1335%; height: 44.7812px;\">Приём врача &ndash; ортопеда-травматолога, имеющего учённую степень К.М.Н., повторный</td>\r\n<td style=\"width: 20.8665%; height: 44.7812px;\">2 000 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; ортопеда-травматолога, первичный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 750 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; ортопеда-травматолога, повторный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 500 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; ортопеда-травматолога, осмотр после операции</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">850 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; ортопеда-травматолога, осмотр перед операцией в стационаре</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 750 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; офтальмолога, в.к., первичный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">2 000 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; офтальмолога, в.к., повторный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 600 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Осмотр офтальмологом беременных</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 400 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; офтальмолога,медосмотр</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 750 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Прием врача - дерматовенеролога, первичный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 650 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Прием врача - дерматовенеролога, повторный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">1 270 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Прием врача - дерматовенеролога, с оформлением больничного листа</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">2 100 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Прием профилактический врача - дерматовенеролога</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">770 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Приём врача &ndash; дерматовенеролога по результатам анализов и др.</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">770 ₽</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 79.1335%; height: 22.3906px;\">Прием врача - психиатра, первичный</td>\r\n<td style=\"width: 20.8665%; height: 22.3906px;\">&nbsp;1 650 ₽</td>\r\n</tr>\r\n<tr>\r\n<td style=\"width: 79.1335%;\">Прием врача - психиатра, повторный</td>\r\n<td style=\"width: 20.8665%;\">1 270 ₽</td>\r\n</tr>\r\n<tr>\r\n<td style=\"width: 79.1335%;\">Прием профилактический врача - психиатра</td>\r\n<td style=\"width: 20.8665%;\">&nbsp;870 ₽</td>\r\n</tr>\r\n</tbody>\r\n</table>', 1647610314, 1621793638),
 (5, 'insurance', 'Страхование', '<p><img src=\"/uploads/images/medicinskoe-strahovanie.jpg\" alt=\"\" /></p>\r\n<p style=\"text-align: justify;\">Болезни вредят не только здоровью человека, но и приводят к материальным потерям: операции, медикаменты, различные медицинские исследования и лечебные процедуры иногда стоят дорого.</p>\r\n<p style=\"text-align: justify;\"><strong>Советуем оформить медицинский полис.</strong> Что дает полис добровольного медицинского страхования?</p>\r\n<ul>\r\n<li style=\"text-align: justify;\">Гарантия сохранности ваших средств, поскольку после приобретения полиса ДМС все затраты на медицинскую помощь в рамках программы страхования несет страховая компания,</li>\r\n<li style=\"text-align: justify;\">ваш выбор страховой программы с необходимым объемом медицинских услуг в оптимальных для вас лечебных учреждениях,</li>\r\n<li style=\"text-align: justify;\">гарантия того, что вы своевременно получите квалифицированную медицинскую помощь в рамках выбранной вами программы страхования,</li>\r\n<li style=\"text-align: justify;\">возможность круглосуточно получать бесплатные консультации у специалистов контакт-центра страховой компании по возникающим вопросам, в том числе по организации необходимой медицинской помощи в лечебном учреждении,</li>\r\n<li style=\"text-align: justify;\">постоянный контроль качества предоставляемых услуг и защита ваших интересов перед лечебным учреждением.</li>\r\n</ul>\r\n<p>Застраховаться <strong>8-800-999-65-78</strong></p>\r\n<p>Номер поддержки <strong>8-800-999-65-79</strong></p>', 1621877141, 1621793638);
 
 -- --------------------------------------------------------
@@ -729,41 +732,41 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `group_id`, `login`, `password`, `email`, `name`, `surname`, `patronymic`, `phone`, `birthday`, `gender`, `adress`, `foto`, `date_reg`) VALUES
 (12, 1, 'Admin', '$2y$10$3z80yL7YCgWM3rQswvrwhemOibr0.bCKpL9lM22Uo.XtkQKu5ktZu', 'ya.ya@ya.ru', 'Админ', 'Админов', 'Админович', '+7 (777) 777-77-77', 1636578000, 'male', '', 'uploads/avatars/foto_12.png', 1575825604),
-(13, 2, 'tyt', '$2y$10$aLjMenwbk/uqTyOJT2cUm.CzU3LY.nWWo0drL/sNmIMBQgntZ43KG', 'rgdf@fyu.ruv', 'Тут', 'Тутов', '', '', 0, '', '', 'uploads/avatars/1636054885_ай отто под фотошопом.png', 1575825604),
-(14, 2, 'hypop', '$2y$10$CKfQJ7FZ4xpTJH4YXFVMeOuqVrv3Yj/KJf2cXgopZcWKeSnbFMBj6', 'hty@tr', '', '', '', '', 0, '', '', '', 1575825604),
-(15, 2, 'test2', '$2y$10$trgPL1fnnglSY3djNwS5wuI55DDOo5Sk.ZLU4Q/MxCiGVU2duyqwy', 'test@test.test', 'Тестовый', 'Тестов', '', '', 0, '', '', '', 1575825604),
-(19, 2, 'test3', '$2y$10$GV1Cwv1gMDQLZWVQSMdkN.YsOKecISXX3D8Bnxr0KjimPH05dklvK', 'fdsfsdfsd@fdsf', '', '', '', '', 0, '', '', '', 1575825604),
-(20, 2, 'test4', '$2y$10$lL.M9yafid52HKYQ5OYo/OH1mxjzHJg0QkUARprESvk/YLEVvJYZ6', 'ghg@hjkdf', 'dsfsf', '', '', '', 0, '', '', '', 1575825604),
-(21, 2, 'test5', '$2y$10$2BFbRYEDMku90LjfrS4Al.kyCexnvN5J6z9jHlEPsxiRgPtt/XP8a', 'fasdfjkfbds@gjhfs', 'dsfsfsdfs', '', '', '', 0, '', '', '', 1575825604),
-(23, 2, 'hgjgjgj', '$2y$10$pi0Hkd8VUAr3XNsYBICU/OyOM3VcF4Y5KC5CId8sYBMX4uEpuZbjG', 'dfgdfgf@gdfggd', 'dfgdgdg', '', '', '', 0, '', '', '', 1575825604),
-(25, 2, 'gfddshkjgfjk', '$2y$10$6l.hHmNFp3Y4xKlOWlNqoeRAIW4XcCQ7QhYX/MrygF9oHuP.euP/W', 'fdsfljsdfj@hkgjdf', 'sdfsdfsf', '', '', '', 0, '', '', '', 1575825604),
-(26, 2, 'test87', '$2y$10$W1UWHA1ybyF0eNlkNuSo0.dbvBj1bQfR4215e5tOc8QbHbT2Ylg7m', 'hgfhfgh@dggdg.ru', 'dgdgdg', '', '', '', 0, '', '', '', 1575825604),
-(27, 2, 'test88', '$2y$10$XRLbLXNq.EieUoZY8m1pxOQcqdzBO0yH0pO3.f43Od08iezs.Mbx2', 'hgfhfgh@dggdg5', 'dgdgdg', '', '', '', 0, '', '', '', 1575825604),
-(28, 2, 'fgdffdgfdg', '$2y$10$Vp8j.e5X.9jECPgMMuZ5auewavm34kx1/oYxsG6vm7ydeBik7mVs2', 'fdgdfg@fgdfgdg', '', '', '', '', 0, '', '', '', 1575825604),
-(29, 2, 'dfgdfgdfgdfg', '$2y$10$nWiDBkVduanxtKnVyJVUbuMQpOXBx/yVL5cYaXjJ1JheG1dftvf6y', 'rgdfg@dfgdgd', 'fghgfhf', '', '', '', 0, '', '', '', 1575825604),
-(30, 2, 'dfgdfgdfgdfgfdgdfg', '$2y$10$UrhtHUHy/1hcDCXdzNeh0.k52mc6XDNUFCU8g957W0qotsSbr9YGK', 'rgdfg@dfgdgddfgdfg', 'fghgfhfdfg', '', '', '', 0, '', '', '', 1575825604),
-(31, 2, 'dfgdfgdfgdfgfdgdfgfdgdfg', '$2y$10$Uc2ylGHBSftqXAMsz/AYbOsJywx4gbpNeEeX3G7R5Aqbu4IiFLGUC', 'rgdfg@dfgdgddfgdfgsdfgs', 'fghgfhfdfgsdf', '', '', '', 0, '', '', '', 1575825604),
-(32, 2, 'dfgdfgd', '$2y$10$1sYAaCUP6SlMuEJJ4KK8J.qw.Z0IlgYb3nRhKbUEnofdIbGc93vKu', 'rgdfg@d', 'fghgfhfdfgsdf', '', '', '', 0, '', '', '', 1575825604),
-(33, 2, 'dfgdfgddff', '$2y$10$Np3ccZSAhvsNmqLc4GmY5OJqAnAWuqDScxKVm/L5ppzYGeP6NQrpG', 'rgdfg@dsdf', 'fghgfhfdfgsdfsdf', '', '', '', 0, '', '', '', 1575825604),
-(34, 2, 'dfsujhsdfjlhsdf', '$2y$10$HhiaKhUm9XUJFcPknTfatewwQXIN/wYc6ZQK8l2uOxRSgMoDLTCNi', 'fdkjhbsdflkn@hjf', '', '', '', '', 0, '', '', '', 1575830181),
-(35, 2, 'sfkjhgsdfgk', '$2y$10$MOPRXxDi4tUwXy9I9GRCTujJ1bc23KHmCBqxsBr01d6k6R9wEr8RW', 's@d', 'sd', '', '', '', 0, '', '', '', 1576773901),
-(36, 2, 'sfk', '$2y$10$DZc53gNIGdL3EUmI04/3CepW4RHyH1A2suba/p1plrq7WmjAACLfK', 's@dh', 'sd', '', '', '', 0, '', '', '', 1576774588),
-(37, 2, 'fdsfsf', '$2y$10$nP49Z7JiAyxSIHWLTKF7cuu0DbyoZBeghcG/CR7eKf./0kBXeIWCS', 'sd@asf', 'sdd', '', '', '', 0, '', '', '', 1576774705),
-(40, 2, 'fdsfsffdg', '$2y$10$CQJVddGT3VDNYOZQcU9.EuhNjCLQyHkKEIJ3hjaiouKA8hHkZGkv.', 'sd@asf.ds', 'sdd', '', '', '', 0, '', '', '', 1576774913),
-(41, 2, 'fdsfsffdggfg', '$2y$10$jE2o5argpNKxiCjxnWEPheDCw5ooGCWG9tFE0Mfe4GSXMXu7OE4xO', 'sd@asf.ds.fg', 'sdd', '', '', '', 0, '', '', '', 1576774960),
-(44, 2, 'dasfsdf', '$2y$10$/i0ywU7S/Usd2XpGypEBKOB91xUbOw/OJd6ert95THscY0Fr2gS2.', 'fdsf@dff.er', 'sfsdfs', '', '', '', 0, '', '', '', 1576775451),
-(45, 2, 'antonina.kzrta', '$2y$10$jNKBywD0l9iVGhAgJFuYbuZX13QnF9gxcngQed.vOc58CGogS64X2', '79023988868@gsgsgsg.trt', 'gsdfgdfgdfg', '', '', '', 0, '', '', '', 1594577359),
-(46, 2, 'test89', '$2y$10$HirQXNVEHIS08oWB5a5NdeKMY1At/RZPL8QxE/Z4fkTrt27yHT.Dq', 'test89@ya.ru', 'test89', '', '', '', 0, '', '', '', 1614424404),
-(47, 2, 'GGWP', '$2y$10$P/l/EJEsIZa1l0nIHvZnzuIZVXg6Bg0e6o6ecqi8N6z5BA14B8y6q', 'fjsdl@fjdkls.ru', 'fjsdlkaf;j', 'jglsdf;j', '', '', 0, '', '', '', 1614437083),
-(55, 2, 'petrvas', '$2y$10$FEb1BMMUXzR0e4gRbBPPnuMzOHnT09yr.ECkqFagQHxooxSQ/BEIC', 'petr.vas@ya.ru', 'Пётр', 'Васильев', '', '', 0, '', '', '', 1614446372),
-(56, 2, 'Vasya', '$2y$10$7fzPe0uS7lAQ4qlqlxqSQukgBXx5nUOnHJhs.Hn76JatJZnYb5Hy2', 'vasya@ya.ru', 'Вася', 'Уткин', '', '', 0, '', '', 'uploads/avatars/foto_56.jpg', 1620918189),
-(60, 2, 'hgdfh', '$2y$10$k7wRFpW.I82i3gSi/R0nnexV4UL9AJSaHskkw49UCMpQvtCWFcwhO', 'bfsdg@hgfdh.tu', 'hdgfhd', 'dfgh', '', '', 0, '', '', '', 1635596797),
-(61, 3, 'regest', '$2y$10$W8fdzabN0lgIk1PvPjDYD.XVz7Nv1owxm6vCVsz8ELVygp5iQbg3K', 'regest@med.su', 'Регистратор', '', '', '', 0, '', '', '', 1636049916),
-(62, 2, 'ghfhd', '$2y$10$z5axPcPXq6Y/AoCuq6DhU.8vsdVibUvwm/OM8uqRD4XNoiZkCI4Vm', 'hdfgh@hgh.tr', 'sdfsdf', 'sdfsdf', '', '', 0, '', '', '', 1636051710),
-(63, 2, 'gfdgsdfgds', '$2y$10$GW7PXnNzffaqejx332BY4.bTUVO1fZiRv7G6UBkEl4yIVt4xLamhO', 'fgdsg@gfdg.tu', 'adfgrvd', 'asdfafasfasdf', '', '', 0, '', '', 'uploads/avatars/1636051813_аватарка гта оригинал.png', 1636051813),
-(68, 2, 'hgdfghf', '$2y$10$iwwZ2sK/v.OGuW2vcLW.xeftIC.wxl6NZ3dcykVFmXSNHQlngW7kW', 'fghdfg@gfdsg.tr', 'gfsdgsd', 'sdfgs', '', '', 0, '', '', '', 1636121267),
-(69, 2, 'test_new', '$2y$10$Az5x/641xg8NJ.wqDaz70OT7CaTRQhivOOAYch8faZ7BsZsePF0dm', 'test.new@new.ru', 'Тест', 'Тестовый', 'Тестовый', '+7 (777) 777-77-77', 1637096400, 'male', 'г. Тестов', '', 1636291189),
-(70, 2, 'test_77', '$2y$10$D9t5kU3mNO9U3UVpC52VNuUxP8HD470VfQkca6o1FVIQB2rpBBtCO', 'test77@ya.ru', 'Жавод', 'Жавдо', 'Ррга', '+7 (921) 354-35-13', 1637874000, 'male', 'пваправп', '', 1636293512);
+(13, 2, 'tyt', '$2y$10$aLjMenwbk/uqTyOJT2cUm.CzU3LY.nWWo0drL/sNmIMBQgntZ43KG', 'rgdf@fyu.ruv', 'Виктория', 'Куликова', 'Тимофеевна', '', 0, '', '', 'uploads/avatars/1636054885_ай отто под фотошопом.png', 1575825604),
+(14, 2, 'hypop', '$2y$10$CKfQJ7FZ4xpTJH4YXFVMeOuqVrv3Yj/KJf2cXgopZcWKeSnbFMBj6', 'hty@tr', 'Тимур', 'Журавлев', 'Тимофеевич', '', 0, '', '', '', 1575825604),
+(15, 2, 'test2', '$2y$10$trgPL1fnnglSY3djNwS5wuI55DDOo5Sk.ZLU4Q/MxCiGVU2duyqwy', 'test@test.test', 'Николай', 'Федосеев', 'Сергеевич', '', 0, '', '', '', 1575825604),
+(19, 2, 'test3', '$2y$10$GV1Cwv1gMDQLZWVQSMdkN.YsOKecISXX3D8Bnxr0KjimPH05dklvK', 'fdsfsdfsd@fdsf', 'Дмитрий', 'Борисов', 'Михайлович', '', 0, '', '', '', 1575825604),
+(20, 2, 'test4', '$2y$10$lL.M9yafid52HKYQ5OYo/OH1mxjzHJg0QkUARprESvk/YLEVvJYZ6', 'ghg@hjkdf', 'Роман', 'Гришин', 'Константинович', '', 0, '', '', '', 1575825604),
+(21, 2, 'test5', '$2y$10$2BFbRYEDMku90LjfrS4Al.kyCexnvN5J6z9jHlEPsxiRgPtt/XP8a', 'fasdfjkfbds@gjhfs', 'Василиса', 'Короткова', 'Савельевна', '', 0, '', '', '', 1575825604),
+(23, 2, 'hgjgjgj', '$2y$10$pi0Hkd8VUAr3XNsYBICU/OyOM3VcF4Y5KC5CId8sYBMX4uEpuZbjG', 'dfgdfgf@gdfggd', 'Амина', 'Гончарова', 'Владимировна', '', 0, '', '', '', 1575825604),
+(25, 2, 'gfddshkjgfjk', '$2y$10$6l.hHmNFp3Y4xKlOWlNqoeRAIW4XcCQ7QhYX/MrygF9oHuP.euP/W', 'fdsfljsdfj@hkgjdf', 'Полина', 'Степанова', 'Никитична', '', 0, '', '', '', 1575825604),
+(26, 2, 'test87', '$2y$10$W1UWHA1ybyF0eNlkNuSo0.dbvBj1bQfR4215e5tOc8QbHbT2Ylg7m', 'hgfhfgh@dggdg.ru', 'Елена', 'Голикова', 'Никитична', '', 0, '', '', '', 1575825604),
+(27, 2, 'test88', '$2y$10$XRLbLXNq.EieUoZY8m1pxOQcqdzBO0yH0pO3.f43Od08iezs.Mbx2', 'hgfhfgh@dggdg5', 'Матвей', 'Высоцкий', 'Фёдорович', '', 0, '', '', '', 1575825604),
+(28, 2, 'fgdffdgfdg', '$2y$10$Vp8j.e5X.9jECPgMMuZ5auewavm34kx1/oYxsG6vm7ydeBik7mVs2', 'fdgdfg@fgdfgdg', 'Даниил', 'Калинин', 'Даниилович', '', 0, '', '', '', 1575825604),
+(29, 2, 'dfgdfgdfgdfg', '$2y$10$nWiDBkVduanxtKnVyJVUbuMQpOXBx/yVL5cYaXjJ1JheG1dftvf6y', 'rgdfg@dfgdgd', 'Ева', 'Болдырева', 'Ярославовна', '', 0, '', '', '', 1575825604),
+(30, 2, 'dfgdfgdfgdfgfdgdfg', '$2y$10$UrhtHUHy/1hcDCXdzNeh0.k52mc6XDNUFCU8g957W0qotsSbr9YGK', 'rgdfg@dfgdgddfgdfg', 'София', 'Соколова', 'Данииловна', '', 0, '', '', '', 1575825604),
+(31, 2, 'dfgdfgdfgdfgfdgdfgfdgdfg', '$2y$10$Uc2ylGHBSftqXAMsz/AYbOsJywx4gbpNeEeX3G7R5Aqbu4IiFLGUC', 'rgdfg@dfgdgddfgdfgsdfgs', 'Полина', 'Фокина', 'Ярославовна', '', 0, '', '', '', 1575825604),
+(32, 2, 'dfgdfgd', '$2y$10$1sYAaCUP6SlMuEJJ4KK8J.qw.Z0IlgYb3nRhKbUEnofdIbGc93vKu', 'rgdfg@d', 'Владимир', 'Голубев', 'Всеволодович', '', 0, '', '', '', 1575825604),
+(33, 2, 'dfgdfgddff', '$2y$10$Np3ccZSAhvsNmqLc4GmY5OJqAnAWuqDScxKVm/L5ppzYGeP6NQrpG', 'rgdfg@dsdf', 'Александр', 'Лапшин', 'Николаевич', '', 0, '', '', '', 1575825604),
+(34, 2, 'dfsujhsdfjlhsdf', '$2y$10$HhiaKhUm9XUJFcPknTfatewwQXIN/wYc6ZQK8l2uOxRSgMoDLTCNi', 'fdkjhbsdflkn@hjf', 'Тимур', 'Григорьев', 'Ярославович', '', 0, '', '', '', 1575830181),
+(35, 2, 'sfkjhgsdfgk', '$2y$10$MOPRXxDi4tUwXy9I9GRCTujJ1bc23KHmCBqxsBr01d6k6R9wEr8RW', 's@d', 'Таисия', 'Филатова', 'Марковна', '', 0, '', '', '', 1576773901),
+(36, 2, 'sfk', '$2y$10$DZc53gNIGdL3EUmI04/3CepW4RHyH1A2suba/p1plrq7WmjAACLfK', 's@dh', 'Елизавета', 'Максимова', 'Данииловна', '', 0, '', '', '', 1576774588),
+(37, 2, 'fdsfsf', '$2y$10$nP49Z7JiAyxSIHWLTKF7cuu0DbyoZBeghcG/CR7eKf./0kBXeIWCS', 'sd@asf', 'Иван', 'Трофимов', 'Артёмович', '', 0, '', '', '', 1576774705),
+(40, 2, 'fdsfsffdg', '$2y$10$CQJVddGT3VDNYOZQcU9.EuhNjCLQyHkKEIJ3hjaiouKA8hHkZGkv.', 'sd@asf.ds', 'Есения', 'Анохина', 'Вячеславовна', '', 0, '', '', '', 1576774913),
+(41, 2, 'fdsfsffdggfg', '$2y$10$jE2o5argpNKxiCjxnWEPheDCw5ooGCWG9tFE0Mfe4GSXMXu7OE4xO', 'sd@asf.ds.fg', 'Александр', 'Иванов', 'Игоревич', '', 0, '', '', '', 1576774960),
+(44, 2, 'dasfsdf', '$2y$10$/i0ywU7S/Usd2XpGypEBKOB91xUbOw/OJd6ert95THscY0Fr2gS2.', 'fdsf@dff.er', 'Дмитрий', 'Андреев', 'Павлович', '', 0, '', '', '', 1576775451),
+(45, 2, 'antonina.kzrta', '$2y$10$jNKBywD0l9iVGhAgJFuYbuZX13QnF9gxcngQed.vOc58CGogS64X2', '79023988868@gsgsgsg.trt', 'Артём', 'Волошин', 'Ильич', '', 0, '', '', '', 1594577359),
+(46, 2, 'test89', '$2y$10$HirQXNVEHIS08oWB5a5NdeKMY1At/RZPL8QxE/Z4fkTrt27yHT.Dq', 'test89@ya.ru', 'Софья', 'Родионова', 'Степановна', '', 0, '', '', '', 1614424404),
+(47, 2, 'GGWP', '$2y$10$P/l/EJEsIZa1l0nIHvZnzuIZVXg6Bg0e6o6ecqi8N6z5BA14B8y6q', 'fjsdl@fjdkls.ru', 'Сергей', 'Козлов', 'Антонович', '', 0, '', '', '', 1614437083),
+(55, 2, 'petrvas', '$2y$10$FEb1BMMUXzR0e4gRbBPPnuMzOHnT09yr.ECkqFagQHxooxSQ/BEIC', 'petr.vas@ya.ru', 'София', 'Киреева', 'Дмитриевна', '', 0, '', '', '', 1614446372),
+(56, 2, 'Vasya', '$2y$10$7fzPe0uS7lAQ4qlqlxqSQukgBXx5nUOnHJhs.Hn76JatJZnYb5Hy2', 'vasya@ya.ru', 'София', 'Федорова', 'Сергеевна', '', 0, '', '', 'uploads/avatars/foto_56.jpg', 1620918189),
+(60, 2, 'hgdfh', '$2y$10$k7wRFpW.I82i3gSi/R0nnexV4UL9AJSaHskkw49UCMpQvtCWFcwhO', 'bfsdg@hgfdh.tu', 'Валерия', 'Панкова', 'Егоровна', '', 0, '', '', '', 1635596797),
+(61, 3, 'regest', '$2y$10$W8fdzabN0lgIk1PvPjDYD.XVz7Nv1owxm6vCVsz8ELVygp5iQbg3K', 'regest@med.su', 'Марина', 'Гурова', 'Артёмовна', '', 0, '', '', '', 1636049916),
+(62, 2, 'ghfhd', '$2y$10$z5axPcPXq6Y/AoCuq6DhU.8vsdVibUvwm/OM8uqRD4XNoiZkCI4Vm', 'hdfgh@hgh.tr', 'Максим', 'Панин', 'Тимофеевич', '', 0, '', '', '', 1636051710),
+(63, 2, 'gfdgsdfgds', '$2y$10$GW7PXnNzffaqejx332BY4.bTUVO1fZiRv7G6UBkEl4yIVt4xLamhO', 'fgdsg@gfdg.tu', 'Егор', 'Соболев', 'Кириллович', '', 0, '', '', 'uploads/avatars/1636051813_аватарка гта оригинал.png', 1636051813),
+(68, 2, 'hgdfghf', '$2y$10$iwwZ2sK/v.OGuW2vcLW.xeftIC.wxl6NZ3dcykVFmXSNHQlngW7kW', 'fghdfg@gfdsg.tr', 'Анна', 'Кочеткова', 'Арсентьевна', '', 0, '', '', '', 1636121267),
+(69, 2, 'test_new', '$2y$10$Az5x/641xg8NJ.wqDaz70OT7CaTRQhivOOAYch8faZ7BsZsePF0dm', 'test.new@new.ru', 'Юрий', 'Королев', 'Максимович', '+7 (777) 777-77-77', 1637096400, 'male', 'г. Тестов', '', 1636291189),
+(70, 2, 'test_77', '$2y$10$D9t5kU3mNO9U3UVpC52VNuUxP8HD470VfQkca6o1FVIQB2rpBBtCO', 'test77@ya.ru', 'Андрей', 'Марков', 'Алексеевич', '+7 (921) 354-35-13', 1637874000, 'male', 'пваправп', '', 1636293512);
 
 -- --------------------------------------------------------
 
@@ -833,7 +836,11 @@ INSERT INTO `user_tokens` (`id`, `user_id`, `token`, `date`) VALUES
 (318, 12, '$2y$10$idnwqQa1FSCZiP99NxJZDO3kq2Cb5ISCUTNe3Lpo9wZqegSdlQpqO', 1643299227),
 (321, 12, '$2y$10$56R4EBXrCbHp7YJUWC4x4ereeXiMGWmwpURDRkwOIQ..aUC0cyFXi', 1643633304),
 (322, 12, '$2y$10$hdMquijjpg9aFdgke5Kd0ec.29qcz8A2rrWMRy2yiG9dDnoCCFxxO', 1643806937),
-(324, 12, '$2y$10$Ugjt4Blocr2zbn/2hQm9nuhB3U8bUiQG/HrHReVXTGJ1ZybDrKLXO', 1645963386);
+(324, 12, '$2y$10$Ugjt4Blocr2zbn/2hQm9nuhB3U8bUiQG/HrHReVXTGJ1ZybDrKLXO', 1645963386),
+(326, 12, '$2y$10$mLCTk8ncBHDCeUkblRW3EObGtZXiiZa64kkZXU.8IYr4cjiSzMGmy', 1647098029),
+(327, 12, '$2y$10$LunqqILqVTF35jGR5j2T5.dcQDvP4UrQxCdfMv.h1lin85yoTHBh.', 1647183776),
+(330, 12, '$2y$10$FhQuYijjfzyUfgyGZ2VFi.G35UVouSHH3LbUnloiBlu57ASB2btKu', 1647608422),
+(331, 12, '$2y$10$FNq2xaRyQ9Hai1Bj0pEMLeD9WzAMkLxDSgzX1ymls5mlUOrxztHiy', 1647624323);
 
 --
 -- Индексы сохранённых таблиц
@@ -927,7 +934,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT для таблицы `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT для таблицы `groups`
@@ -939,7 +946,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT для таблицы `lostpassword`
 --
 ALTER TABLE `lostpassword`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT для таблицы `news`
@@ -969,7 +976,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `user_tokens`
 --
 ALTER TABLE `user_tokens`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=325;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=332;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

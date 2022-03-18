@@ -3,17 +3,36 @@
     /* border-bottom: 2px solid #ddd;     */
 }
 
-.slides{
+.slider .slides{
     display: flex;
     transition:transform 1s ease;
 }
 
-.slide {
+.slider .slide {
+    position: relative;
     display: block;
     width: 100%;
+}
+
+.slider .slide-panel {
+    position: absolute;
+    padding: 7px 10px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #fff;
+    border-radius: 7px;
+    background: #1969ff;
+    bottom: 5px;
+    left: 5px;
 }
 
 .slider .slide img{
     display: block;
     width: 100%;
+}
+
+@media (max-width: 600px){
+    .slider .slide-panel {
+        font-size: 1rem;
+    }
 }

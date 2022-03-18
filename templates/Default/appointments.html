@@ -11,6 +11,9 @@
                 <div class="doctor-recdoc__item__text">
                     <div><b>Специальность: </b>{doctor.specialty}</div>
                     <div><b>Кабинет: </b>{doctor.kabinet}</div>
+                    [if doctor.qualification]
+                    <div><b>Ученая степень (категория): </b>{doctor.qualification}</div>
+                    [/if]
                 </div>
                 [if !USER]<div class="btn btn-recording login-link">Записаться на приём</div>[/if]
                 [if USER]<a href='{filter doctor.id | linkget "doctor"}' class="btn btn-recording">Записаться на приём</a>[/if]
@@ -31,6 +34,9 @@
                 <div class="doctor-recdoc__text">
                     <div><b>Специальность: </b>{doctor.specialty}</div>
                     <div><b>Кабинет: </b>{doctor.kabinet}</div>
+                    [if doctor.qualification]
+                    <div><b>Ученая степень (категория): </b>{doctor.qualification}</div>
+                    [/if]
                 </div>
             </div>            
         </div>        
