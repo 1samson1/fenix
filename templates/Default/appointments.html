@@ -10,10 +10,11 @@
                 <div class="doctor-recdoc__item__title">{doctor.name}</div>
                 <div class="doctor-recdoc__item__text">
                     <div><b>Специальность: </b>{doctor.specialty}</div>
-                    <div><b>Кабинет: </b>{doctor.kabinet}</div>
+                    <div><b>Стаж: </b>{doctor.experience}</div>
                     [if doctor.qualification]
                     <div><b>Ученая степень (категория): </b>{doctor.qualification}</div>
                     [/if]
+                    <div><b>Кабинет: </b>{doctor.kabinet}</div>
                 </div>
                 [if !USER]<div class="btn btn-recording login-link">Записаться на приём</div>[/if]
                 [if USER]<a href='{filter doctor.id | linkget "doctor"}' class="btn btn-recording">Записаться на приём</a>[/if]
@@ -33,10 +34,11 @@
                 <div class="doctor-recdoc__title">{doctor.name}</div>
                 <div class="doctor-recdoc__text">
                     <div><b>Специальность: </b>{doctor.specialty}</div>
-                    <div><b>Кабинет: </b>{doctor.kabinet}</div>
+                    <div><b>Стаж: </b>{doctor.experience}</div>
                     [if doctor.qualification]
                     <div><b>Ученая степень (категория): </b>{doctor.qualification}</div>
                     [/if]
+                    <div><b>Кабинет: </b>{doctor.kabinet}</div>
                 </div>
             </div>            
         </div>        
@@ -47,7 +49,7 @@
                 <input type="hidden" name="time" class="timerec"/>
             </div>
             <input class="btn btn-large" name="rec" type="submit" value="Записаться">     
-        </form>    
+        </form>        
     </div>
     {script} 
 </div>      

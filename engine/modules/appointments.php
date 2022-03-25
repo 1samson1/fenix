@@ -106,6 +106,7 @@
                 ->select('doctors.*', 'specialties.title as specialty')
                 ->join('specialties', 'doctors.specialty_id', '=', 'specialties.id')
                 ->where('doctors.specialty_id', '=', $_GET['specialty'])
+                ->orderBy('doctors.qualification', 'desc')
                 ->get()
         ]);
     }

@@ -43,6 +43,7 @@
                             'value' => $_POST['qualification']
                         ],
                         'kabinet' => $_POST['kabinet'],
+                        'experience' => $_POST['experience'],
                         'mon' => isset($_POST['mon']),
                         'tue' => isset($_POST['tue']),
                         'wed' => isset($_POST['wed']),
@@ -61,7 +62,7 @@
                             $foto->save();
                         }
 
-                        return showSuccess('Cпециальность изменина!','Успешно изменена специальность!', MODULE_URL);
+                        return showSuccess('Информация о враче','Успешно изменена информация о враче!', MODULE_URL);
                     
                     }
                     else $alerts->set_error('Ошибка изменения!', 'Неизвестная ошибка!', $db->error_num);
@@ -102,6 +103,7 @@
                         'html' => true,
                         'value' => $_POST['qualification']
                     ],
+                    'experience' => $_POST['experience'],
                     'mon' => isset($_POST['mon']),
                     'tue' => isset($_POST['tue']),
                     'wed' => isset($_POST['wed']),

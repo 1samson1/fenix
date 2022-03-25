@@ -1139,10 +1139,19 @@ main{
     background: url(../img/person.svg) no-repeat left center;
 }
 
+.news {
+    padding: 15px 20px;
+    padding-top: 0;
+}
+
 /* SHORT NEWS *************************************** */
 
 .short-news{
-    padding: 15px 20px;
+    margin-bottom: 15px;
+}
+
+.short-news:last-child{
+    margin-bottom: 0;
 }
 
 .title-short-news{

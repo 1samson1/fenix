@@ -4,12 +4,12 @@
         <div class="panel-body">
             <div class="form-groups-w20">
                 <div class="form-group">
-                    <label for="add_name">ФИО:</label>
-                    <input type="text" name="name" id="add_name" class="form-control form-control-large" required>
+                    <label for="name">ФИО:</label>
+                    <input type="text" name="name" id="name" class="form-control form-control-large" required>
                 </div>
                 <div class="form-group">
-                    <label for="add_specialty">Специальность:</label>
-                    <select name="specialty" class="right wide" id="add_specialty" required>
+                    <label for="specialty">Специальность:</label>
+                    <select name="specialty" class="right wide" id="specialty" required>
                         [for specialty in specialties]
                         <option value="{specialty.id}">{specialty.title}</option>
                         [/for]
@@ -20,84 +20,88 @@
                     <textarea name="qualification" id="qualification"></textarea>
                 </div>   
                 <div class="form-group">
-                    <label for="add_kabinet">Кабинет:</label>
-                    <input type="text" name="kabinet" id="add_kabinet" class="form-control form-control-large" required>
+                    <label for="experience">Стаж:</label>
+                    <input type="text" name="experience" id="experience" class="form-control form-control-large" required>
+                </div>   
+                <div class="form-group">
+                    <label for="kabinet">Кабинет:</label>
+                    <input type="text" name="kabinet" id="kabinet" class="form-control form-control-large" required>
                 </div>   
                 <div class="form-group">
                     <label>График работы:</label>
                     <div class="form-flex-wrap">
                         <div class="form-group">
-                            <label for="add_mon">Понедельник:</label>
+                            <label for="mon">Понедельник:</label>
                             <div class="form-control-large">
                                 <label class="checkbox">
-                                    <input type="checkbox" class="check-input" id="add_mon" name="mon" checked>
+                                    <input type="checkbox" class="check-input" id="mon" name="mon" checked>
                                     <span class="check"></span>    
                                     <span class="label-check"></span>                        
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="add_tue">Вторник:</label>
+                            <label for="tue">Вторник:</label>
                             <div class="form-control-large">
                                 <label class="checkbox">
-                                    <input type="checkbox" class="check-input" id="add_tue" name="tue" checked>
+                                    <input type="checkbox" class="check-input" id="tue" name="tue" checked>
                                     <span class="check"></span>  
                                     <span class="label-check"></span>                             
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="add_wed">Среда:</label>
+                            <label for="wed">Среда:</label>
                             <div class="form-control-large">
                                 <label class="checkbox">
-                                    <input type="checkbox" class="check-input" id="add_wed" name="wed" checked>
+                                    <input type="checkbox" class="check-input" id="wed" name="wed" checked>
                                     <span class="check"></span>
                                     <span class="label-check"></span>                               
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="add_thu">Четверг:</label>
+                            <label for="thu">Четверг:</label>
                             <div class="form-control-large">
                                 <label class="checkbox">
-                                    <input type="checkbox" class="check-input" id="add_thu" name="thu" checked>
+                                    <input type="checkbox" class="check-input" id="thu" name="thu" checked>
                                     <span class="check"></span>
                                     <span class="label-check"></span>                               
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="add_fri">Пятница:</label>
+                            <label for="fri">Пятница:</label>
                             <div class="form-control-large">
                                 <label class="checkbox">
-                                    <input type="checkbox" class="check-input" id="add_fri" name="fri" checked>
+                                    <input type="checkbox" class="check-input" id="fri" name="fri" checked>
                                     <span class="check"></span> 
                                     <span class="label-check"></span>                              
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="add_sat">Суббота:</label>
+                            <label for="sat">Суббота:</label>
                             <div class="form-control-large">
                                 <label class="checkbox">
-                                    <input type="checkbox" class="check-input" id="add_sat" name="sat">
+                                    <input type="checkbox" class="check-input" id="sat" name="sat">
                                     <span class="check"></span> 
                                     <span class="label-check"></span>                              
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="add_sun">Воскресенье:</label>
+                            <label for="sun">Воскресенье:</label>
                             <div class="form-control-large">
                                 <label class="checkbox">
-                                    <input type="checkbox" class="check-input" id="add_sun" name="sun">
+                                    <input type="checkbox" class="check-input" id="sun" name="sun">
                                     <span class="check"></span>
                                     <span class="label-check"></span>                               
                                 </label>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>               
                 <div class="form-group">   
                     <label>Фото:</label> 
                     <div class="wrapper">
