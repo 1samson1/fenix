@@ -110,12 +110,12 @@
 		Store::set('title', 'Личный кабинет '.$user['login']);
 
 		$appointments = $db->table('appointments')
-				->select('doctors.name as doctor', 'doctors.kabinet as kabinet' , 'specialties.title as specialty', 'appointments.*')
-				->join('doctors', 'doctors.id', '=', 'appointments.doctor_id')
-				->join('specialties', 'specialties.id', '=', 'doctors.specialty_id')
-				->where('appointments.user_id', '=', $user['id'])
-				->orderBy('appointments.time', 'desc')
-				->get();
+			->select('doctors.name as doctor', 'doctors.kabinet as kabinet' , 'specialties.title as specialty', 'appointments.*')
+			->join('doctors', 'doctors.id', '=', 'appointments.doctor_id')
+			->join('specialties', 'specialties.id', '=', 'doctors.specialty_id')
+			->where('appointments.user_id', '=', $user['id'])
+			->orderBy('appointments.time', 'desc')
+			->get();
 
 		foreach ($appointments as &$appointment){
 			if($appointment['time'] > time()){
