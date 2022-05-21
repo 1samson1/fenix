@@ -2,8 +2,8 @@
 -- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3307
--- Время создания: Мар 27 2022 г., 19:47
+-- Хост: 127.0.0.1:3306
+-- Время создания: Май 21 2022 г., 16:45
 -- Версия сервера: 10.3.13-MariaDB-log
 -- Версия PHP: 7.3.9
 
@@ -501,8 +501,9 @@ INSERT INTO `appointments` (`doctor_id`, `user_id`, `reg_time`, `time`, `number`
 (1, 29, 1645884000, 1645970400, '514638'),
 (3, 12, 1647094487, 1647406800, 'aaf21e'),
 (25, 71, 1648392878, 1648708200, 'a3e2ee'),
+(25, 71, 1648394561, 1648720800, 'd447ea'),
 (25, 71, 1648392854, 1648796400, 'd34184'),
-(25, 71, 1648394561, 1650524400, 'd447ea');
+(21, 12, 1649440148, 1650522600, '30546a');
 
 -- --------------------------------------------------------
 
@@ -524,9 +525,7 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `news_id`, `user_id`, `text`, `date`, `parent`) VALUES
-(1, 1, 12, '<p>Хорошая новость</p>', 1564163134, NULL),
-(2, 2, 56, '<p>Ну значит запишусь после каникул.</p>', 1651354654, NULL),
-(11, 2, 12, '<p><img src=\"https://drasler.ru/wp-content/uploads/2019/05/%D0%9A%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B0-%D0%BD%D0%B0-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9-%D1%81%D1%82%D0%BE%D0%BB-%D1%82%D0%B8%D0%B3%D1%80-5.jpg\" alt=\"\" /></p>', 1622133007, NULL);
+(2, 2, 56, '<p>Ну значит запишусь после каникул.</p>', 1651354654, NULL);
 
 -- --------------------------------------------------------
 
@@ -764,7 +763,7 @@ INSERT INTO `users` (`id`, `group_id`, `login`, `password`, `email`, `name`, `su
 (46, 2, 'test89', '$2y$10$HirQXNVEHIS08oWB5a5NdeKMY1At/RZPL8QxE/Z4fkTrt27yHT.Dq', 'test89@ya.ru', 'Софья', 'Родионова', 'Степановна', '', 0, '', '', '', 1614424404),
 (47, 2, 'GGWP', '$2y$10$P/l/EJEsIZa1l0nIHvZnzuIZVXg6Bg0e6o6ecqi8N6z5BA14B8y6q', 'fjsdl@fjdkls.ru', 'Сергей', 'Козлов', 'Антонович', '+7 (956) 453-43-43', 599605200, 'none', 'г. Тюмень ул. Ленина д. 5', 'uploads/avatars/foto_47.jpg', 1614437083),
 (55, 2, 'petrvas', '$2y$10$FEb1BMMUXzR0e4gRbBPPnuMzOHnT09yr.ECkqFagQHxooxSQ/BEIC', 'petr.vas@ya.ru', 'София', 'Киреева', 'Дмитриевна', '', 0, '', '', '', 1614446372),
-(56, 2, 'Vasya', '$2y$10$7fzPe0uS7lAQ4qlqlxqSQukgBXx5nUOnHJhs.Hn76JatJZnYb5Hy2', 'vasya@ya.ru', 'София', 'Федорова', 'Сергеевна', '', 0, '', '', 'uploads/avatars/foto_56.jpg', 1620918189),
+(56, 2, 'Vasya', '$2y$10$7fzPe0uS7lAQ4qlqlxqSQukgBXx5nUOnHJhs.Hn76JatJZnYb5Hy2', 'vasya@ya.ru', 'Василий', 'Уткин', 'Сергеевич', '+7 (777) 777-77-77', 169333200, 'none', '', 'uploads/avatars/foto_56.jpg', 1620918189),
 (60, 2, 'hgdfh', '$2y$10$k7wRFpW.I82i3gSi/R0nnexV4UL9AJSaHskkw49UCMpQvtCWFcwhO', 'bfsdg@hgfdh.tu', 'Валерия', 'Панкова', 'Егоровна', '', 0, '', '', '', 1635596797),
 (61, 3, 'regest', '$2y$10$W8fdzabN0lgIk1PvPjDYD.XVz7Nv1owxm6vCVsz8ELVygp5iQbg3K', 'regest@med.su', 'Марина', 'Гурова', 'Артёмовна', '', 0, '', '', '', 1636049916),
 (62, 2, 'ghfhd', '$2y$10$z5axPcPXq6Y/AoCuq6DhU.8vsdVibUvwm/OM8uqRD4XNoiZkCI4Vm', 'hdfgh@hgh.tr', 'Максим', 'Панин', 'Тимофеевич', '', 0, '', '', '', 1636051710),
@@ -849,7 +848,9 @@ INSERT INTO `user_tokens` (`id`, `user_id`, `token`, `date`) VALUES
 (331, 12, '$2y$10$FNq2xaRyQ9Hai1Bj0pEMLeD9WzAMkLxDSgzX1ymls5mlUOrxztHiy', 1647624323),
 (339, 47, '$2y$10$BXuk4YffeHvWJIcamq8zhuI5bfil4ZadpW2CkiiKSTRqu7eeHirsm', 1648217926),
 (340, 12, '$2y$10$1658i39sDro/YOw2Ua6i3OazIcXRAY9rMmAYZrDPEbQietipCRKpS', 1648233245),
-(345, 12, '$2y$10$o2.iIUC.H5waw0qf5l5FPe/54z8qdaLyQlEy7uZ2XUmUf2HjZTSra', 1648397982);
+(345, 12, '$2y$10$o2.iIUC.H5waw0qf5l5FPe/54z8qdaLyQlEy7uZ2XUmUf2HjZTSra', 1648397982),
+(347, 12, '$2y$10$ACPJCAY1K7HJNtZdIrHfOuomfCbvnT5dRPPOI2wXcTGA0a8reWueC', 1649440143),
+(349, 12, '$2y$10$uaIeHqkwUDzKWyQ3E.TwfuVp8tlJ39L44gzLv0uJ5dH9z2Rg6QXfy', 1653138197);
 
 --
 -- Индексы сохранённых таблиц
@@ -985,7 +986,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `user_tokens`
 --
 ALTER TABLE `user_tokens`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=346;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=350;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
