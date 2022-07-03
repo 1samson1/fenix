@@ -1,2 +1,2 @@
-# fenix
+# Fenix
 The thesis project
